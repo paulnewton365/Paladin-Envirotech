@@ -84,6 +84,44 @@ match on style-attribute substrings. If you re-export from Claude Design, the
 stylesheet will not come with it and some selectors may no longer match — the
 comments at the top of the file explain what to check.
 
+## Scroll motion
+
+Each page already shipped a small scroll runtime driving `data-reveal`,
+`data-stagger`, `data-countup`, `data-parallax` and `data-car`. Coverage was
+uneven: the homepage carried nine reveal hooks, most interior pages one to six,
+and contact and rare-earth-freedom-250 had no runtime at all.
+
+`motion.js` fills the gaps without touching anything the page runtime owns:
+
+- Untagged bands get a whole-band reveal using the same easing and distance as
+  the built-in one, so pages that mix both read as a single system.
+- Rows of sibling cards, stats and columns inside each band are staggered so
+  components arrive one after another rather than the band popping in at once.
+- Elements already carrying `data-reveal` are left alone.
+
+It drives its own elements with `IntersectionObserver` under the `data-mreveal`
+attribute. The hidden state is applied by JavaScript, never by CSS, so if the
+file fails to load or throws, everything stays visible. A six-second failsafe
+force-shows anything the observer never fires for.
+
+### The facility map
+
+The nine routes on `/network` fan out from Tampa. Three carry
+`stroke-dasharray` for the international styling, so a `stroke-dashoffset`
+draw would make the dashes march along the path rather than extend it.
+Instead the route group is clipped by a circle centred on Tampa whose radius
+grows outward over 1.5s, which reads as routes leaving headquarters and behaves
+identically for solid and dashed strokes. Cities fade in as the wave reaches
+them, staggered by their real distance from Tampa, so Dallas lights up well
+before Suwon. The clip is removed once the animation completes, so the finished
+state is byte-identical to the static map.
+
+### Reduced motion
+
+Users with `prefers-reduced-motion: reduce` get no animation at all. The
+built-in page runtime does not check that preference on its own, so
+`motion.js` pins its elements open on its behalf.
+
 ## Notes
 
 **Runtime dependency.** `support.js` loads React, ReactDOM and Babel from
