@@ -85,6 +85,15 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
     text-align: center !important;
   }
 
+  /* An image well with both aspect-ratio and a min-height derives a minimum
+     WIDTH from that height: 300px at 4/3 is 400px, wider than the phone. Let
+     the aspect ratio work from the available width instead. */
+  [style*="aspect-ratio: 4 / 3"][style*="min-height: 300px"],
+  [style*="aspect-ratio: 16 / 10"][style*="min-height: 300px"],
+  [style*="aspect-ratio: 21 / 9"][style*="min-height: 300px"] {
+    min-height: 0 !important;
+  }
+
   /* One CTA pair sits in a `flex: none` wrapper, so the buttons above can
      wrap but the wrapper still sizes to their combined max-content width.
      Serialised as `flex: 0 0 auto`, which is what this has to match. */
