@@ -33,8 +33,19 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
   }
 }
 
+/* The desktop nav is shown from about 1000px up, but between there and
+   roughly 1120px the seven items plus the language toggle and CTA no longer
+   share a line, so the sticky header doubles to 121px. Tighten it rather than
+   let it eat the viewport. The upper bound moved when Press was added. */
+@media (min-width: 901px) and (max-width: 1119px) {
+  header nav { gap: 12px !important; }
+  header nav a, header nav button { font-size: 12px !important; }
+  header nav + div { gap: 12px !important; }
+  header nav + div > span { display: none !important; }
+  header nav + div > a { padding: 11px 14px !important; font-size: 11px !important; }
+}
+
 @media (max-width: 760px) {
-  /* Statistic bands are a row of cells divided by vertical hairlines. Once
      they stack, every rule points the wrong way and leaves a stray line down
      the right edge of the screen. Turn the divider through 90 degrees and
      trim the padding, which is sized for a wide row, not a tall stack.

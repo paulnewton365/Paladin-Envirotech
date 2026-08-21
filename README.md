@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.6.1**
+**Build 1.7.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -152,6 +152,7 @@ say which build they are looking at. To cut a new build, run
 | 1.5.0 | Real logo, scroll-driven map, deeper reveals, case-study rebuild, /sitemap |
 | 1.6.0 | Article template with byline and share, CEO quote, copy and layout fixes |
 | 1.6.1 | Platform mega menu available on every page |
+| 1.7.0 | Press page and nav item, quote restyled, design export |
 
 ## Access gate
 
@@ -208,6 +209,19 @@ or add it ahead of the PNG in the sources list in `gate.js`.
 Stamps the version across every page, regenerates `/sitemap` from the pages on
 disk, and packages the site. Use this rather than the individual scripts, so
 the sitemap cannot drift from the actual page set.
+
+## Design handover
+
+`export-for-design.py` writes a clean copy of a page to
+`for-claude-design/`, stripped of the prototype's overlay layer, which belongs
+to the deployed build rather than to a design file: the access gate, the motion
+and nav-menu scripts, the responsive stylesheet, the build-version meta and the
+noindex tag.
+
+It keeps the Claude Design runtime, the `@font-face` block and the
+`style-hover` attributes the runtime reads, and ships the fonts and the one
+local image alongside. The export has been rendered standalone to confirm it
+works on its own.
 
 ## Platform mega menu
 
