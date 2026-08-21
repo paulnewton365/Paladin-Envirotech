@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.6.0**
+**Build 1.6.1**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -151,6 +151,7 @@ say which build they are looking at. To cut a new build, run
 | 1.4.0 | Gate restyled to match Antenna's Conscious Compass |
 | 1.5.0 | Real logo, scroll-driven map, deeper reveals, case-study rebuild, /sitemap |
 | 1.6.0 | Article template with byline and share, CEO quote, copy and layout fixes |
+| 1.6.1 | Platform mega menu available on every page |
 
 ## Access gate
 
@@ -207,6 +208,27 @@ or add it ahead of the PNG in the sources list in `gate.js`.
 Stamps the version across every page, regenerates `/sitemap` from the pages on
 disk, and packages the site. Use this rather than the individual scripts, so
 the sitemap cannot drift from the actual page set.
+
+## Platform mega menu
+
+`nav-menu.js` makes the Platform menu work everywhere. The homepage template
+builds its own panel bound to that page's React state; no other page had one,
+so Platform was a plain link and the menu was unreachable from twelve of
+thirteen pages.
+
+Rather than paste the panel into every template, where it would drift as soon
+as the menu changed, the script holds one definition:
+
+- The homepage keeps its own panel and only has its link targets reconciled
+  against that definition, so the two can never disagree.
+- Every other page gets the panel injected and its Platform item wired up.
+
+It closes on second click, Escape, outside click and link selection, and sets
+`aria-expanded`. Below the desktop breakpoint the nav collapses into the
+hamburger drawer, where Platform stays a normal link to the overview page.
+
+Nine of the eighteen menu entries still point at `#` because those pages do not
+exist yet. Editing `GROUPS` at the top of the file updates every page at once.
 
 ## Article template
 

@@ -57,6 +57,7 @@ NOTES = {
 COMPONENTS = [
     ("Sticky masthead", r'position: sticky;\s*top: 0', "Navigation"),
     ("Mobile menu drawer", r'data-nav-toggle', "Navigation"),
+    ("Platform mega menu", r'nav-menu\.js', "Navigation"),
     ("Global footer sitemap", r'<footer', "Navigation"),
     ("Persistent CTA bar", r'data-stickybar', "Conversion"),
     ("Gold-rule CTA block", r'border-left: 4px solid #A9832F', "Conversion"),
