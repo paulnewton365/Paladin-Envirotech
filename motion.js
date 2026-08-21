@@ -37,9 +37,22 @@
         el.style.transform = 'none';
       });
     };
+    var stampReduced = function () {
+      var meta = document.querySelector('meta[name="build-version"]');
+      var footer = document.querySelector('footer');
+      if (!meta || !footer || footer.querySelector('[data-build-stamp]')) return;
+      var dateMeta = document.querySelector('meta[name="build-date"]');
+      var el = document.createElement('div');
+      el.setAttribute('data-build-stamp', '');
+      el.style.cssText = 'text-align:right;padding:0 clamp(24px,5vw,72px) 20px;' +
+        'color:#5B7085;font-size:11px;letter-spacing:0.6px;';
+      el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
+      footer.appendChild(el);
+    };
     var n = 0;
     var poll = function () {
       settle();
+      stampReduced();
       if (n++ < 40) setTimeout(poll, 100);
     };
     if (document.readyState === 'loading') {
@@ -247,15 +260,127 @@
 
   function initMap() {
     var svg = document.querySelector('svg[aria-label*="facility network"]');
-    if (svg) animateMap(svg);
+    if (svg) { buildMobileNetwork(svg); animateMap(svg); }
+  }
+
+  /* ---- Mobile network view ----------------------------------------------
+     The map is a 1200x420 landscape diagram. On a portrait phone it scales
+     down to roughly a third of its design size and the city labels become
+     unreadable, so below 760px it is replaced with a vertical routing spine
+     built from the SVG's own labels. Desktop is untouched, and the two views
+     cannot drift apart because the list is derived from the same source. */
+
+  function buildMobileNetwork(svg) {
+    var wrap = svg.parentElement;
+    if (!wrap || wrap.querySelector('[data-mobile-network]')) return;
+
+    // International routes are the dashed ones. Their endpoints are the three
+    // furthest cities, so classify by matching each city to the dashed paths'
+    // end coordinates rather than hard-coding names.
+    var intl = [];
+    svg.querySelectorAll('path[stroke-dasharray]').forEach(function (p) {
+      var d = p.getAttribute('d') || '';
+      var nums = d.replace(/[^0-9.\- ]/g, ' ').trim().split(/\s+/).map(parseFloat);
+      if (nums.length >= 6) intl.push({ x: nums[nums.length - 2], y: nums[nums.length - 1] });
+    });
+
+    var cities = [];
+    svg.querySelectorAll('circle').forEach(function (c) {
+      var x = parseFloat(c.getAttribute('cx')), y = parseFloat(c.getAttribute('cy'));
+      if (isNaN(x) || isNaN(y)) return;
+      if (Math.abs(x - HQ_X) < 30 && Math.abs(y - HQ_Y) < 30) return; // HQ marker
+      // nearest text label to this dot
+      var best = null, bestD = 1e9;
+      svg.querySelectorAll('text').forEach(function (t) {
+        var tx = parseFloat(t.getAttribute('x')), ty = parseFloat(t.getAttribute('y'));
+        if (isNaN(tx) || isNaN(ty)) return;
+        var d = Math.pow(tx - x, 2) + Math.pow(ty - y, 2);
+        if (d < bestD) { bestD = d; best = t; }
+      });
+      if (!best) return;
+      var name = (best.textContent || '').trim();
+      if (!name || /Tampa/.test(name)) return;
+      var isIntl = intl.some(function (p) {
+        return Math.abs(p.x - x) < 12 && Math.abs(p.y - y) < 12;
+      });
+      if (cities.some(function (c2) { return c2.name === name; })) return;
+      cities.push({ name: name, intl: isIntl });
+    });
+    if (!cities.length) return;
+
+    var domestic = cities.filter(function (c) { return !c.intl; });
+    var international = cities.filter(function (c) { return c.intl; });
+
+    var el = document.createElement('div');
+    el.setAttribute('data-mobile-network', '');
+    el.style.display = 'none';
+
+    function group(label, list) {
+      if (!list.length) return '';
+      var names = list.map(function (c) { return c.name; }).join('  \u00b7  ');
+      return '<p style="color:#8FA6BA;font-size:12px;letter-spacing:1px;' +
+             'text-transform:uppercase;margin:0 0 8px;">' + label +
+             ' <span style="color:#A9832F;">' + list.length + '</span></p>' +
+             '<p style="color:#DDE3E9;font-size:15px;font-weight:300;line-height:1.6;' +
+             'margin:0 0 22px;padding-left:14px;' +
+             'border-left:1px solid rgba(255,255,255,0.16);">' + names + '</p>';
+    }
+
+    el.innerHTML =
+      '<div style="padding:4px 0 8px;">' +
+        '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#FFFFFF;' +
+          'font-size:17px;font-weight:500;">' +
+          '<span style="position:absolute;left:0;top:5px;width:13px;height:13px;' +
+            'border-radius:50%;background:#A9832F;"></span>' +
+          'Tampa, FL</p>' +
+        '<p style="color:#7F93A6;font-size:13px;font-weight:300;margin:0 0 24px;' +
+          'padding-left:26px;">Headquarters. Every route below runs through here.</p>' +
+        group('Domestic routing', domestic) +
+        group('International', international) +
+      '</div>';
+
+    wrap.insertBefore(el, svg.nextSibling);
+
+    var mq = window.matchMedia('(max-width: 760px)');
+    function apply() {
+      var small = mq.matches;
+      svg.style.display = small ? 'none' : 'block';
+      el.style.display = small ? 'block' : 'none';
+    }
+    if (mq.addEventListener) mq.addEventListener('change', apply);
+    else if (mq.addListener) mq.addListener(apply);
+    apply();
+  }
+
+  /* ---- Build stamp -------------------------------------------------------
+     Reads the version stamped into the page head and renders it discreetly at
+     the end of the footer so a reviewer can always say which build they are
+     looking at. */
+
+  function buildStamp() {
+    var meta = document.querySelector('meta[name="build-version"]');
+    if (!meta) return;
+    var footer = document.querySelector('footer');
+    if (!footer || footer.querySelector('[data-build-stamp]')) return;
+    var dateMeta = document.querySelector('meta[name="build-date"]');
+    var el = document.createElement('div');
+    el.setAttribute('data-build-stamp', '');
+    el.style.cssText = 'text-align:right;padding:0 clamp(24px,5vw,72px) 20px;' +
+      'color:#5B7085;font-size:11px;letter-spacing:0.6px;';
+    el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
+    footer.appendChild(el);
+    if (window.console && console.info) {
+      console.info('Paladin prototype build ' + meta.content);
+    }
   }
 
   // The page is React-rendered, so wait for content before measuring.
   var tries = 0;
   function init() {
-    if (!document.querySelector('section') && tries++ < 60) {
+    if (!document.querySelector('footer') && tries++ < 60) {
       return requestAnimationFrame(init);
     }
+    buildStamp();
     tagBlocks();
     armReveals();
     initMap();

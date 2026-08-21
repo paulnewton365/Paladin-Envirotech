@@ -1,5 +1,7 @@
 # Paladin EnviroTech — site prototype
 
+**Build 1.2.0**
+
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
 
@@ -122,6 +124,28 @@ Users with `prefers-reduced-motion: reduce` get no animation at all. The
 built-in page runtime does not check that preference on its own, so
 `motion.js` pins its elements open on its behalf.
 
+## Versioning
+
+Every build carries a `MAJOR.MINOR.PATCH` version:
+
+- **MAJOR** — new information architecture, or a rebuild from a fresh export
+- **MINOR** — new pages, new sections, reordered or rewritten content
+- **PATCH** — fixes and refinements with no content change
+
+It appears in three places: `version.json`, a `build-version` meta tag on every
+page, and a discreet stamp at the foot of every page so a reviewer can always
+say which build they are looking at. To cut a new build, run
+`stamp-version.py X.Y.Z "notes"` before packaging.
+
+### History
+
+| Version | Notes |
+| --- | --- |
+| 1.0.0 | Single-page homepage prototype, two directions |
+| 1.1.0 | Twelve-page site, deploy prep, responsive layer |
+| 1.1.1 | Scroll motion layer and animated facility map |
+| 1.2.0 | Card reorder, mobile stat bands, mobile network view, versioning |
+
 ## Notes
 
 **Runtime dependency.** `support.js` loads React, ReactDOM and Babel from
@@ -130,6 +154,12 @@ render from a `file://` URL. To preview locally, run `python3 -m http.server
 8000` in this folder and open `http://localhost:8000`. The script also honours
 a `window.__resources` override if you ever need to point those at local copies
 for an offline demo.
+
+**Stock imagery.** `assets/leadership.jpg` was an unlicensed Getty comp with
+a visible watermark, captioned as the Paladin leadership team. It has been
+removed from the repo and replaced with a labelled placeholder. Every other
+image in `assets/` was checked and is watermark-free, but their licences still
+need confirming before this goes public.
 
 **Remote images.** Photography and the Paladin wordmark load directly from
 `paladinenvirotech.com`. If those files are renamed or moved on the live site

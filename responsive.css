@@ -21,6 +21,39 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
   [style*="grid-template-columns: minmax(64px, 120px) 1fr"] {
     grid-template-columns: 1fr !important;
   }
+
+  /* Numbered process steps: once the number column stacks above the text it
+     inherits the grid's centred alignment. Pull it back to the left edge so
+     the number, heading and body read as one left-aligned block. */
+  [style*="grid-template-columns: minmax(48px, 90px)"] > *,
+  [style*="grid-template-columns: minmax(64px, 120px)"] > *,
+  [style*="grid-template-columns: minmax(140px, 220px)"] > * {
+    text-align: left !important;
+    justify-self: start !important;
+  }
+}
+
+@media (max-width: 760px) {
+  /* Statistic bands are a row of cells divided by vertical hairlines. Once
+     they stack, every rule points the wrong way and leaves a stray line down
+     the right edge of the screen. Turn the divider through 90 degrees and
+     trim the padding, which is sized for a wide row, not a tall stack.
+     Note the spacing inside rgba(): that is how the browser serialises it,
+     and the selector has to match the serialised form. */
+  [style*="border-right: 1px solid rgba(255, 255, 255, 0.16)"] {
+    border-right: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
+  }
+  /* The three cell paddings in these bands: left cell, middle cells, right
+     cell. Left and right carry an asymmetric inset for the vertical rules,
+     which is meaningless once stacked. */
+  [style*="padding: 40px 32px"],
+  [style*="padding: 40px 0px 40px 32px"] {
+    padding: 22px 0 !important;
+  }
+  [style*="border-right: 1px solid rgba(255, 255, 255, 0.16)"]:last-child {
+    border-bottom: 0 !important;
+  }
 }
 
 @media (max-width: 700px) {
