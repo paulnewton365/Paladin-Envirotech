@@ -30,7 +30,7 @@ GROUPS = OrderedDict([
     ("Critical materials", ["/critical-materials"]),
     ("Markets", ["/industries"]),
     ("Network", ["/network"]),
-    ("Company", ["/company", "/blog"]),
+    ("Company", ["/company", "/blog", "/insight-rare-earth-recovery"]),
     ("Conversion", ["/contact"]),
     ("Campaign", ["/rare-earth-freedom-250"]),
     ("Utility", ["/sitemap"]),
@@ -46,7 +46,8 @@ NOTES = {
     "/industries": "Sector hub: hyperscale, OEM, enterprise, government.",
     "/network": "Facility map, hub-and-satellite footprint, certifications by entity.",
     "/company": "Who Paladin is, leadership, operating standard.",
-    "/blog": "Newsroom index and article template.",
+    "/blog": "Newsroom index. Bylines link through to the article template.",
+    "/insight-rare-earth-recovery": "Article template. Byline, author panel, cross-links, share row.",
     "/contact": "Primary conversion point. Reachable from every page.",
     "/rare-earth-freedom-250": "Campaign takeover page. Template for sponsorship activations.",
     "/sitemap": "This page. Not linked in navigation.",
@@ -72,6 +73,10 @@ COMPONENTS = [
     ("Scroll parallax band", r'data-parallax', "Motion"),
     ("Campaign takeover motion", r'data-car', "Motion"),
     ("Scroll reveal", r'data-reveal', "Motion"),
+    ("Pull quote with attribution", r'<blockquote', "Editorial"),
+    ("Author byline", r'>6 min read<|min read', "Editorial"),
+    ("Author panel and cross-links", r'More by ', "Editorial"),
+    ("Social share row", r'shareArticle\?mini=true', "Editorial"),
 ]
 
 
