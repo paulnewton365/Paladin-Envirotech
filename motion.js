@@ -44,10 +44,17 @@
       var dateMeta = document.querySelector('meta[name="build-date"]');
       var el = document.createElement('div');
       el.setAttribute('data-build-stamp', '');
-      el.style.cssText = 'text-align:right;padding:0 clamp(24px,5vw,72px) 20px;' +
+      el.style.cssText = 'text-align:right;padding:8px clamp(24px,5vw,72px) 0;' +
         'color:#5B7085;font-size:11px;letter-spacing:0.6px;';
       el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
       footer.appendChild(el);
+      var bar = document.querySelector('[data-stickybar]');
+      if (bar && bar.offsetHeight && !document.getElementById('pal-bar-clearance')) {
+        var st = document.createElement('style');
+        st.id = 'pal-bar-clearance';
+        st.textContent = 'footer { padding-bottom: ' + (bar.offsetHeight + 52) + 'px !important; }';
+        document.head.appendChild(st);
+      }
     };
     var n = 0;
     var poll = function () {
@@ -365,22 +372,65 @@
     var dateMeta = document.querySelector('meta[name="build-date"]');
     var el = document.createElement('div');
     el.setAttribute('data-build-stamp', '');
-    el.style.cssText = 'text-align:right;padding:0 clamp(24px,5vw,72px) 20px;' +
+    el.style.cssText = 'text-align:right;padding:8px clamp(24px,5vw,72px) 0;' +
       'color:#5B7085;font-size:11px;letter-spacing:0.6px;';
     el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
     footer.appendChild(el);
+    clearStickyBar();
     if (window.console && console.info) {
       console.info('Paladin prototype build ' + meta.content);
     }
   }
 
+  /* The CTA bar is fixed to the bottom of the viewport, so it sits on top of
+     whatever the footer ends with once you reach the end of the page. Reserve
+     its height at the foot of the footer.
+
+     This goes in a stylesheet rule rather than an inline style: React owns the
+     footer's style attribute and rewrites it on re-render, which silently
+     undoes an inline padding set from here. An !important rule in a stylesheet
+     outranks the inline style and survives. */
+  function clearStickyBar() {
+    if (document.getElementById('pal-bar-clearance')) return;
+    var bar = document.querySelector('[data-stickybar]');
+    if (!bar) {
+      bar = Array.prototype.filter.call(
+        document.querySelectorAll('body div'),
+        function (e) {
+          var cs = getComputedStyle(e);
+          return cs.position === 'fixed' && cs.bottom === '0px' && e.offsetHeight > 20;
+        }
+      )[0];
+    }
+    if (!bar || !bar.offsetHeight) return;
+    var style = document.createElement('style');
+    style.id = 'pal-bar-clearance';
+    style.textContent = 'footer { padding-bottom: ' + (bar.offsetHeight + 52) + 'px !important; }';
+    document.head.appendChild(style);
+  }
+
   // The page is React-rendered, so wait for content before measuring.
   var tries = 0;
   function init() {
+    // While the access gate is up, the page is laid out but hidden. Intersection
+    // observers would fire behind it and spend every reveal before the visitor
+    // ever sees the page, so wait until the gate has been cleared.
+    if (document.documentElement.classList.contains('pal-locked')) {
+      return setTimeout(init, 120);
+    }
     if (!document.querySelector('footer') && tries++ < 60) {
       return requestAnimationFrame(init);
     }
     buildStamp();
+    // The sticky bar mounts a beat after the footer, so a single attempt here
+    // races it. Retry briefly until the bar has a measurable height.
+    var barTries = 0;
+    (function waitForBar() {
+      clearStickyBar();
+      if (!document.getElementById('pal-bar-clearance') && barTries++ < 20) {
+        setTimeout(waitForBar, 150);
+      }
+    })();
     tagBlocks();
     armReveals();
     initMap();

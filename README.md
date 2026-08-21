@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.2.0**
+**Build 1.4.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -145,8 +145,61 @@ say which build they are looking at. To cut a new build, run
 | 1.1.0 | Twelve-page site, deploy prep, responsive layer |
 | 1.1.1 | Scroll motion layer and animated facility map |
 | 1.2.0 | Card reorder, mobile stat bands, mobile network view, versioning |
+| 1.2.1 | Build stamp visible on homepage; sticky bar no longer covers the footer |
+| 1.3.0 | Access gate |
+| 1.3.1 | Leadership comp image restored for internal review |
+| 1.4.0 | Gate restyled to match Antenna's Conscious Compass |
 
-## Notes
+## Access gate
+
+`gate.js` puts a password screen in front of every page.
+
+- **Password:** `Paladin2026`
+- **Share link:** append `?client=b3zG4SPI8DiZEsLv` to any URL to open it
+  without typing anything. Access is remembered in that browser afterwards.
+
+Change both values at the top of `gate.js` before sharing. The password is
+stored as a SHA-256 hash, not in plain text; the file's header comment has the
+one-liners for generating a new one.
+
+### What this is and is not
+
+It is a front-end gate. It keeps casual visitors and search engines out, and it
+makes the prototype feel like a private preview.
+
+**It is not security.** The page HTML is served to the browser whether or not
+the gate is satisfied, so anyone who opens developer tools, disables
+JavaScript, or requests a page directly can read the content. Nothing
+confidential should go behind it.
+
+Real protection on Vercel is Password Protection, which runs at the edge before
+any content is served. It is included on Enterprise, and on Pro as the Advanced
+Deployment Protection add-on at $150/month. If the prototype needs to be
+genuinely private rather than merely non-public, that is the mechanism.
+
+### Styling
+
+The gate matches Antenna's Conscious Compass screen: cream ground `#F0EEE7`,
+near-black `#0E0E0E`, a white card with square corners, and a button that stays
+grey until something is typed. Colours and measurements were sampled from the
+reference screenshot rather than estimated.
+
+The headline is sized by script rather than CSS. Antenna's typeface is not
+available here, and every substitute sets at a different width, so a fixed
+font-size either wrapped onto extra lines or left the column short. The script
+measures the widest line and scales the type to fill the column, reproducing
+the proportions rather than the point size. It re-runs on resize.
+
+### Antenna logo
+
+`assets/antenna-logo.png` was extracted from the reference screenshot and
+background-keyed to transparency. It is 112x30, which is fine at the size it is
+displayed but has no headroom for retina. **Replace it with the real artwork
+when you can.** Drop an SVG at `assets/antenna-logo.svg` and the gate will
+prefer it automatically; the PNG is the fallback, and a plain wordmark is the
+fallback after that.
+
+## Notes## Notes
 
 **Runtime dependency.** `support.js` loads React, ReactDOM and Babel from
 unpkg.com at page load, so the site needs an internet connection and will not
@@ -155,11 +208,12 @@ render from a `file://` URL. To preview locally, run `python3 -m http.server
 a `window.__resources` override if you ever need to point those at local copies
 for an offline demo.
 
-**Stock imagery.** `assets/leadership.jpg` was an unlicensed Getty comp with
-a visible watermark, captioned as the Paladin leadership team. It has been
-removed from the repo and replaced with a labelled placeholder. Every other
-image in `assets/` was checked and is watermark-free, but their licences still
-need confirming before this goes public.
+**Stock imagery.** `assets/leadership.jpg` is a Getty comp with the watermark
+still visible, used on the Company page as the leadership photograph. It is in
+place deliberately for internal review. It must be replaced with a licensed or
+commissioned image before this is shown to the client or made public. Every
+other image in `assets/` is watermark-free, but their licences still need
+confirming.
 
 **Remote images.** Photography and the Paladin wordmark load directly from
 `paladinenvirotech.com`. If those files are renamed or moved on the live site
