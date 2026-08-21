@@ -44,6 +44,11 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
     border-right: 0 !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
   }
+  /* Same band pattern on light grounds. */
+  [style*="border-right: 1px solid rgb(231, 234, 238)"] {
+    border-right: 0 !important;
+    border-bottom: 1px solid rgb(231, 234, 238) !important;
+  }
   /* The three cell paddings in these bands: left cell, middle cells, right
      cell. Left and right carry an asymmetric inset for the vertical rules,
      which is meaningless once stacked. */
@@ -51,9 +56,12 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
   [style*="padding: 40px 0px 40px 32px"] {
     padding: 22px 0 !important;
   }
-  [style*="border-right: 1px solid rgba(255, 255, 255, 0.16)"]:last-child {
+  [style*="border-right: 1px solid rgba(255, 255, 255, 0.16)"]:last-child,
+  [style*="border-right: 1px solid rgb(231, 234, 238)"]:last-child {
     border-bottom: 0 !important;
   }
+  /* The last cell of a light band carries a left inset for its vertical rule. */
+  [style*="padding: 40px 0px 40px 32px"] { padding: 22px 0 !important; }
 }
 
 @media (max-width: 700px) {

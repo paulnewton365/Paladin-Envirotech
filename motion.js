@@ -101,25 +101,49 @@
     return safe(el);
   }
 
+  function contentParent(band) {
+    var node = band, guard = 0;
+    while (node && node.children.length === 1 && guard++ < 4) node = node.children[0];
+    return node || band;
+  }
+
+  function tagOne(el, delay) {
+    if (!taggable(el)) return false;
+    // Never nest a reveal inside another reveal: the child would fade in on top
+    // of a parent that is itself still fading, which reads as a stutter.
+    if (el.parentElement && el.parentElement.closest('[data-mreveal]')) return false;
+    el.setAttribute('data-mreveal', '');
+    el.setAttribute('data-mdelay', String(delay));
+    return true;
+  }
+
   function tagBlocks() {
     var tagged = 0;
 
     bands().forEach(function (band) {
-      var r = band.getBoundingClientRect();
+      var tag = band.tagName.toLowerCase();
+      if (tag === 'header' || tag === 'footer' || tag === 'script') return;
+      if (band.getBoundingClientRect().height < 60) return;
 
-      // Whole-band reveal for bands the page runtime does not already own.
-      // Uses the same treatment as the built-in runtime so pages that mix
-      // both read as one system.
-      if (r.height >= 80 && taggable(band)) {
-        band.setAttribute('data-mreveal', '');
-        band.setAttribute('data-mdelay', '0');
-        tagged++;
+      // Bands the page runtime already owns keep their own whole-band reveal;
+      // everything else reveals its content blocks individually so interior
+      // pages animate at the same granularity as the homepage.
+      if (!band.hasAttribute('data-reveal')) {
+        var holder = contentParent(band);
+        var blocks = Array.prototype.filter.call(holder.children, function (c) {
+          return c.getBoundingClientRect().height > 36;
+        });
+        if (blocks.length >= 2) {
+          var i = 0;
+          blocks.forEach(function (c) {
+            if (tagOne(c, Math.min(i, 6) * 80)) { i++; tagged++; }
+          });
+        } else if (tagOne(band, 0)) {
+          tagged++;
+        }
       }
 
       // Inside every band, stagger rows of sibling cards, stats or columns.
-      // This is the part that makes components arrive one after another
-      // rather than the whole band popping in at once.
-      if (band.tagName.toLowerCase() === 'header' || band.tagName.toLowerCase() === 'footer') return;
       band.querySelectorAll('div').forEach(function (row) {
         var cs = getComputedStyle(row);
         if (cs.display !== 'grid' && cs.display !== 'flex') return;
@@ -127,17 +151,9 @@
           return k.getBoundingClientRect().height > 48;
         });
         if (kids.length < 2 || kids.length > 8) return;
-        // Only rows that lay out side by side; a stacked flex column is
-        // usually a text block, not a set of components.
-        var tops = kids.map(function (k) { return Math.round(k.getBoundingClientRect().top); });
-        if (new Set(tops).size === kids.length) return;
-        var i = 0;
+        var j = 0;
         kids.forEach(function (k) {
-          if (!taggable(k)) return;
-          k.setAttribute('data-mreveal', '');
-          k.setAttribute('data-mdelay', String(90 + Math.min(i, 5) * 90));
-          i++;
-          tagged++;
+          if (tagOne(k, 90 + Math.min(j, 5) * 90)) { j++; tagged++; }
         });
       });
     });
@@ -146,9 +162,12 @@
   }
 
   function armReveals() {
-    var els = document.querySelectorAll('[data-mreveal]');
+    // Only ever arm an element once, so a second pass can pick up late
+    // content without resetting anything already revealed.
+    var els = document.querySelectorAll('[data-mreveal]:not([data-marmed])');
     if (!els.length) return;
     els.forEach(function (el) {
+      el.setAttribute('data-marmed', '');
       el.style.willChange = 'opacity, transform';
       el.style.opacity = '0';
       el.style.transform = 'translateY(22px)';
@@ -235,34 +254,53 @@
       el.style.transition = 'opacity 420ms ease-out';
     });
 
-    var start = null, DUR = 1500;
-    function frame(ts) {
-      if (start === null) start = ts;
-      var p = Math.min(1, (ts - start) / DUR);
-      var eased = 1 - Math.pow(1 - p, 3);
-      circle.setAttribute('r', String(eased * MAX_R));
-      var reached = eased * MAX_R;
-      cities.forEach(function (c) {
-        if (c.el.style.opacity === '0' && reached > c.d - 10) c.el.style.opacity = '1';
-      });
-      if (p < 1) {
-        requestAnimationFrame(frame);
-      } else {
-        // Drop the clip once complete so a later React re-render that removes
-        // the injected defs can never leave the routes clipped to nothing.
+    /* Scroll-driven rather than timed. A timed animation can finish before the
+       reader has scrolled the map into view, so the routes appear already
+       drawn. Tying the wipe radius to scroll position means the lines always
+       flow out of Tampa as the section moves up the screen, and rewind if the
+       reader scrolls back. */
+
+    var clipId2 = clipId;
+    function draw(p) {
+      // Guard: if a React re-render dropped the injected defs, the clip would
+      // point at nothing and hide every route. Detach rather than hide.
+      if (!document.getElementById(clipId2)) {
         routes.removeAttribute('clip-path');
         cities.forEach(function (c) { c.el.style.opacity = '1'; });
+        return;
       }
+      routes.setAttribute('clip-path', 'url(#' + clipId2 + ')');
+      var eased = Math.pow(p, 1.35);
+      var reached = eased * MAX_R;
+      circle.setAttribute('r', String(reached));
+      cities.forEach(function (c) {
+        c.el.style.opacity = reached > c.d - 12 ? '1' : '0';
+      });
     }
 
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        io.disconnect();
-        requestAnimationFrame(frame);
-      });
-    }, { threshold: 0.25 });
-    io.observe(svg);
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var r = svg.getBoundingClientRect();
+      if (!r.height) return;
+      var vh = window.innerHeight || 800;
+      // 0 when the top of the map reaches the bottom of the viewport,
+      // 1 by the time it has travelled to just above the middle.
+      var span = vh * 0.62;
+      var p = (vh - r.top) / span;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      draw(p);
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
   }
 
   function initMap() {
@@ -409,7 +447,23 @@
     document.head.appendChild(style);
   }
 
-  // The page is React-rendered, so wait for content before measuring.
+  /* The page is React-rendered and its bands measure zero until the browser
+     has laid them out. Firing at DOMContentLoaded therefore tags nothing at
+     all, which silently disables every reveal on the page. Wait for the load
+     event, then for the bands to report real heights, before measuring. */
+
+  function contentReady() {
+    var node = document.body && document.body.querySelector('div');
+    var guard = 0;
+    while (node && node.children.length === 1 && guard++ < 5) node = node.children[0];
+    if (!node || node.children.length < 2) return false;
+    var tallest = 0;
+    Array.prototype.forEach.call(node.children, function (c) {
+      tallest = Math.max(tallest, c.getBoundingClientRect().height);
+    });
+    return tallest > 80;
+  }
+
   var tries = 0;
   function init() {
     // While the access gate is up, the page is laid out but hidden. Intersection
@@ -418,8 +472,8 @@
     if (document.documentElement.classList.contains('pal-locked')) {
       return setTimeout(init, 120);
     }
-    if (!document.querySelector('footer') && tries++ < 60) {
-      return requestAnimationFrame(init);
+    if (!contentReady() && tries++ < 200) {
+      return setTimeout(init, 60);
     }
     buildStamp();
     // The sticky bar mounts a beat after the footer, so a single attempt here
@@ -434,11 +488,16 @@
     tagBlocks();
     armReveals();
     initMap();
+    // Second pass for anything that lands after first paint (images resolving,
+    // late layout). Both functions are idempotent.
+    setTimeout(function () { tagBlocks(); armReveals(); initMap(); }, 900);
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
+  if (document.readyState === 'complete') {
     init();
+  } else {
+    window.addEventListener('load', init);
+    // Fallback in case a stalled subresource delays the load event.
+    setTimeout(init, 2500);
   }
 })();

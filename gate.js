@@ -117,7 +117,7 @@
             'letter-spacing:-0.01em;margin:0 0 6px;">Paladin Envirotech</h2>' +
           '<p style="color:' + MUTED + ';font-size:14px;line-height:1.45;' +
             'margin:0 0 22px;">Website prototype. Enter the password you were given ' +
-            'to view this report.</p>' +
+            'to access.</p>' +
           '<label for="pal-gate-input" style="position:absolute;width:1px;height:1px;' +
             'overflow:hidden;clip:rect(0 0 0 0);">Password</label>' +
           '<input id="pal-gate-input" type="password" autocomplete="current-password" ' +
@@ -141,7 +141,9 @@
     // Antenna logo. Prefers an SVG; falls back to the PNG in assets, then to
     // a plain wordmark if neither is present.
     var logoBox = gate.querySelector('#pal-gate-logo');
-    var sources = ['/assets/antenna-logo.svg', '/assets/antenna-logo.png'];
+    // PNG is what ships. If vector artwork arrives later, save it over this
+    // path or add it ahead of the PNG here.
+    var sources = ['/assets/antenna-logo.png'];
     (function tryLogo(i) {
       if (i >= sources.length) {
         var fallback = document.createElement('div');
