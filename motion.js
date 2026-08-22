@@ -536,7 +536,9 @@
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
+    video.loop = true;
     video.setAttribute('muted', '');
+    video.setAttribute('loop', '');
 
     // Some templates mishandle a child <source>; point the element at the file
     // directly if nothing resolved.
@@ -575,6 +577,15 @@
     }
     video.addEventListener('playing', reveal);
     video.addEventListener('canplay', reveal);
+
+    /* Belt and braces on looping. The loop attribute is ignored in some cases
+       when the element is inserted after parse, and a server that handles range
+       requests poorly can fail the seek back to zero. Restart explicitly. */
+    video.addEventListener('ended', function () {
+      if (video.getAttribute('data-stilled') === '1') return;
+      try { video.currentTime = 0; } catch (e) {}
+      tryPlay();
+    });
 
     video.addEventListener('loadeddata', tryPlay);
     video.addEventListener('canplay', tryPlay);

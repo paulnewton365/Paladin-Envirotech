@@ -391,7 +391,13 @@ frame by frame:
 Below 700px and for reduced motion the `<source>` element is removed and the
 video reloaded, so no bytes are fetched at all rather than merely being hidden.
 
-Three traps worth recording. Autoplay is decided on the muted **property**,
+Four traps worth recording. `loop`, like `muted`, is unreliable as an
+attribute when the element is inserted after parse, and a server that handles
+range requests poorly can fail the seek back to zero. The property is set in
+script and an `ended` handler restarts playback explicitly. Verified by
+watching `currentTime` wrap on a short test file.
+
+Autoplay is decided on the muted **property**,
 not the attribute. `muted=""` in markup does not reliably set the property, and
 a video the browser considers unmuted is refused without a user gesture. The
 property is now set in script before playback is requested. This was verified
