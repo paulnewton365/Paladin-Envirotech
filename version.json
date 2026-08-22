@@ -1,5 +1,5 @@
 {
-  "version": "1.14.0",
+  "version": "1.15.0",
   "built": "2026-08-22",
-  "notes": "Leadership roster replaces the boxed grid; deep links fixed"
+  "notes": "Locations ledger replaces the two boxed location bands"
 }

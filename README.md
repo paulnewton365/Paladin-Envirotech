@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.14.0**
+**Build 1.15.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -160,6 +160,7 @@ say which build they are looking at. To cut a new build, run
 | 1.12.0 | Spotlight under the map, band grounds stepped, unbuilt nav links made inert |
 | 1.13.0 | Two-tone headline treatment extended to the capability pages |
 | 1.14.0 | Leadership roster replaces the boxed grid; deep links fixed |
+| 1.15.0 | Locations ledger replaces the two boxed location bands |
 
 ## Access gate
 
@@ -249,6 +250,23 @@ Two integration details that repeat for any future component of this kind. The
 generic reveal tagger has to skip anything that animates itself, or each part
 fades twice and stutters. And every scroll-driven piece needs a fail-visible
 timeout, so a wiring problem never leaves a diagram half-drawn.
+
+## Open question: how many facilities
+
+The site states its own footprint three different ways:
+
+| Where | Says |
+| --- | --- |
+| `/network` H1 | Ten facilities. Three continents. |
+| `/network` map | 10 markers, Duleek and Dublin combined as one |
+| `/network` ledger | Eleven sites, Duleek and Dublin listed separately |
+| `/network` stat band | 7 facilities across the United States, 3 countries outside the US |
+| `/company` stat band | 10 facilities operating under one standard |
+
+Seven US sites plus four international is eleven; ten holds only if Duleek and
+Dublin count as one facility. Whether they do is a question about the business,
+so the conflict is left visible rather than quietly resolved. Pick a number and
+it needs changing in four places.
 
 ## Deep links
 
