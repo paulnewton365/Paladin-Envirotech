@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.15.0**
+**Build 1.16.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -161,6 +161,7 @@ say which build they are looking at. To cut a new build, run
 | 1.13.0 | Two-tone headline treatment extended to the capability pages |
 | 1.14.0 | Leadership roster replaces the boxed grid; deep links fixed |
 | 1.15.0 | Locations ledger replaces the two boxed location bands |
+| 1.16.0 | Facility map inverted onto the light ground |
 
 ## Access gate
 
@@ -250,6 +251,30 @@ Two integration details that repeat for any future component of this kind. The
 generic reveal tagger has to skip anything that animates itself, or each part
 fades twice and stutters. And every scroll-driven piece needs a fail-visible
 timeout, so a wiring problem never leaves a diagram half-drawn.
+
+## Map on the light ground
+
+The facility map moved from `#14304C` to the paper ground, so every colour in
+it had to be remapped. Most were chosen for a dark background and fail on
+light: the city labels and node dots measured 2.33:1 against `#F5F6F7`, the
+white Tampa label 1.08:1.
+
+Remapped by role rather than by find-and-replace, because `#8FA6BA` was doing
+two jobs in the same file. Contrast against `#F5F6F7` in brackets:
+
+| Element | Was | Now |
+| --- | --- | --- |
+| City labels | `#8FA6BA` (2.33) | `#47586B` (6.75) |
+| Node dots | `#8FA6BA` (2.33) | `#5B7085` (4.73) |
+| Tampa label | `#FFFFFF` (1.08) | `#0B2138` (15.06) |
+| Grid lines | `rgba(255,255,255,0.07)` | `rgba(11,33,56,0.10)` |
+| HQ marker fill | `#14304C` | `#F5F6F7` |
+| Route arcs | `#A9832F` at 0.45 opacity | same colour at 0.75, 1.2px |
+| Legend text | `#5B7085` | unchanged (4.73) |
+
+The arcs needed the opacity lift separately: 0.45 reads on navy but goes faint
+on paper. The mobile routing list that replaces this map below 760px is built
+by `motion.js` and was inverted to match.
 
 ## Open question: how many facilities
 

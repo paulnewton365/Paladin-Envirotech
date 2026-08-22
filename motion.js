@@ -515,22 +515,22 @@
     function group(label, list) {
       if (!list.length) return '';
       var names = list.map(function (c) { return c.name; }).join('  \u00b7  ');
-      return '<p style="color:#8FA6BA;font-size:12px;letter-spacing:1px;' +
+      return '<p style="color:#5B7085;font-size:12px;letter-spacing:1px;' +
              'text-transform:uppercase;margin:0 0 8px;">' + label +
              ' <span style="color:#A9832F;">' + list.length + '</span></p>' +
-             '<p style="color:#DDE3E9;font-size:15px;font-weight:300;line-height:1.6;' +
+             '<p style="color:#47586B;font-size:15px;font-weight:300;line-height:1.6;' +
              'margin:0 0 22px;padding-left:14px;' +
-             'border-left:1px solid rgba(255,255,255,0.16);">' + names + '</p>';
+             'border-left:1px solid rgba(11,33,56,0.16);">' + names + '</p>';
     }
 
     el.innerHTML =
       '<div style="padding:4px 0 8px;">' +
-        '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#FFFFFF;' +
+        '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#0B2138;' +
           'font-size:17px;font-weight:500;">' +
           '<span style="position:absolute;left:0;top:5px;width:13px;height:13px;' +
             'border-radius:50%;background:#A9832F;"></span>' +
           'Tampa, FL</p>' +
-        '<p style="color:#7F93A6;font-size:13px;font-weight:300;margin:0 0 24px;' +
+        '<p style="color:#5B7085;font-size:13px;font-weight:300;margin:0 0 24px;' +
           'padding-left:26px;">Headquarters. Every route below runs through here.</p>' +
         group('Domestic routing', domestic) +
         group('International', international) +
