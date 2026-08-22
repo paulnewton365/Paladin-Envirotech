@@ -58,23 +58,52 @@ SPOTLIGHT = '''
 '''
 
 s = open(PAGE, encoding="utf-8").read()
-assert "Facility spotlight" not in s, "already applied"
 
-# insert after the International list, before the closing CTA band
-marker = s.find("International")
-assert marker > 0
-band_start = s.rfind('<div data-reveal="1"', 0, marker)
-depth, j = 0, band_start
-while j < len(s):
-    if s.startswith("<div", j):
-        depth += 1; j += 4
-    elif s.startswith("</div>", j):
-        depth -= 1; j += 6
-        if depth == 0:
-            break
-    else:
-        j += 1
+# Remove any earlier copy. A previous run anchored on the word "International",
+# which also occurs inside the header, so the block landed in the masthead.
+key = '<div data-reveal="1" style="background: #0B2138; padding: clamp(56px, 7vw, 104px) 0;">'
+while True:
+    at = s.find(key)
+    if at < 0 or "Facility spotlight" not in s[at:at + 900]:
+        break
+    depth, k = 0, at
+    while k < len(s):
+        if s.startswith("<div", k):
+            depth += 1; k += 4
+        elif s.startswith("</div>", k):
+            depth -= 1; k += 6
+            if depth == 0:
+                break
+        else:
+            k += 1
+    s = s[:at] + s[k:]
+    print("removed a misplaced copy")
 
-s = s[:j] + "\n\n" + SPOTLIGHT.strip() + "\n" + s[j:]
+# Walk the page's top-level bands, which begin after </header>, and find the one
+# holding the map. Anchoring on the element rather than on body text avoids the
+# header collision entirely.
+body_start = s.find("</header>") + len("</header>")
+pos, target_end = body_start, None
+while pos < len(s):
+    nxt = s.find("<div", pos)
+    if nxt < 0:
+        break
+    depth, k = 0, nxt
+    while k < len(s):
+        if s.startswith("<div", k):
+            depth += 1; k += 4
+        elif s.startswith("</div>", k):
+            depth -= 1; k += 6
+            if depth == 0:
+                break
+        else:
+            k += 1
+    if 'aria-label="Paladin facility network' in s[nxt:k]:
+        target_end = k
+        break
+    pos = k
+assert target_end, "map band not found"
+
+s = s[:target_end] + "\n\n" + SPOTLIGHT.strip() + "\n" + s[target_end:]
 open(PAGE, "w", encoding="utf-8").write(s)
-print("facility spotlight inserted after the international list")
+print("facility spotlight placed directly under the map")

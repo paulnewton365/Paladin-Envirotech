@@ -19,31 +19,37 @@
 (function () {
   'use strict';
 
+  /* Only items with a page of their own are links. The rest render as plain
+     text, dimmed and not clickable, so the menu never promises a destination
+     that does not exist. Three items previously pointed at an approximate page
+     (Chain-of-custody ERP and Neodymium & dysprosium at pages that cover them
+     only as a section) and now sit inactive until they have one. Give an item
+     a URL here and it becomes a link everywhere at once. */
   var GROUPS = [
     { label: 'Technology lifecycle', items: [
       ['How it works', '/platform'],
       ['Secure data destruction', '/secure-itad'],
-      ['Asset value recovery', '#'],
-      ['Global logistics', '#'],
-      ['Chain-of-custody ERP', '/platform']
+      ['Asset value recovery', null],
+      ['Global logistics', null],
+      ['Chain-of-custody ERP', null]
     ]},
     { label: 'Recycling', items: [
       ['Electronics recycling', '/electronics-recycling'],
       ['Paladin Local', '/paladin-local'],
-      ['Wind turbine & energy assets', '/critical-materials'],
-      ['Metallurgical lab', '#']
+      ['Wind turbine & energy assets', null],
+      ['Metallurgical lab', null]
     ]},
     { label: 'Critical materials', items: [
       ['REcapture magnet recovery', '/critical-materials'],
-      ['Neodymium & dysprosium', '/critical-materials'],
-      ['Domestic feedstock programs', '#'],
-      ['CMR joint venture', '#']
+      ['Neodymium & dysprosium', null],
+      ['Domestic feedstock programs', null],
+      ['CMR joint venture', null]
     ]},
     { label: 'Platform companies', items: [
-      ['IRT', '#'],
-      ['R&L Recycling B.V.', '#'],
-      ['CMR', '#'],
-      ['Daeheung', '#'],
+      ['IRT', null],
+      ['R&L Recycling B.V.', null],
+      ['CMR', null],
+      ['Daeheung', null],
       ['R2 / RIOS certificates by site', '/network']
     ]}
   ];
@@ -54,6 +60,9 @@
     g.items.forEach(function (it) { TARGETS[it[0].toLowerCase()] = it[1]; });
   });
 
+  var INACTIVE = 'color:#7F93A6;font-size:15px;font-weight:300;cursor:default;';
+  var ACTIVE = 'color:#FFFFFF;font-size:15px;font-weight:300;text-decoration:none;';
+
   var PANEL_ID = 'pal-mega';
 
   function esc(t) {
@@ -63,8 +72,11 @@
   function panelHTML() {
     var cols = GROUPS.map(function (g) {
       var links = g.items.map(function (it) {
-        return '<a href="' + it[1] + '" style="color:#FFFFFF;font-size:15px;font-weight:300;' +
-               'text-decoration:none;">' + esc(it[0]) + '</a>';
+        if (!it[1]) {
+          return '<span style="' + INACTIVE + '" title="Page not built yet">' +
+                 esc(it[0]) + '</span>';
+        }
+        return '<a href="' + it[1] + '" style="' + ACTIVE + '">' + esc(it[0]) + '</a>';
       }).join('');
       return '<div style="display:flex;flex-direction:column;gap:12px;">' +
              '<span style="font-size:13px;letter-spacing:1px;text-transform:uppercase;' +
@@ -93,7 +105,18 @@
   function reconcile(panel) {
     panel.querySelectorAll('a').forEach(function (a) {
       var key = (a.textContent || '').trim().toLowerCase();
-      if (TARGETS[key]) a.setAttribute('href', TARGETS[key]);
+      if (!(key in TARGETS)) return;
+      var target = TARGETS[key];
+      if (target) {
+        a.setAttribute('href', target);
+        return;
+      }
+      // No page yet: swap the anchor for inert text so it cannot be clicked.
+      var span = document.createElement('span');
+      span.textContent = a.textContent;
+      span.setAttribute('style', INACTIVE);
+      span.title = 'Page not built yet';
+      a.parentNode.replaceChild(span, a);
     });
   }
 

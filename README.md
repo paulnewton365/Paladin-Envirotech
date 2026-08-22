@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.11.0**
+**Build 1.14.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -157,6 +157,9 @@ say which build they are looking at. To cut a new build, run
 | 1.9.0 | Copy pass removing machine-written rhetorical patterns |
 | 1.10.0 | Favicon set, timeline rail replaces a statistic grid |
 | 1.11.0 | Chain comparison rebuilt, press and facility spotlights added |
+| 1.12.0 | Spotlight under the map, band grounds stepped, unbuilt nav links made inert |
+| 1.13.0 | Two-tone headline treatment extended to the capability pages |
+| 1.14.0 | Leadership roster replaces the boxed grid; deep links fixed |
 
 ## Access gate
 
@@ -246,6 +249,78 @@ Two integration details that repeat for any future component of this kind. The
 generic reveal tagger has to skip anything that animates itself, or each part
 fades twice and stutters. And every scroll-driven piece needs a fail-visible
 timeout, so a wiring problem never leaves a diagram half-drawn.
+
+## Deep links
+
+Arriving at `/company#leadership` used to leave you at the top of the page. The
+browser acts on the URL hash while the document is still empty, because content
+is React-rendered a beat later, so there is nothing to scroll to yet. Thirteen
+links across the site point at that anchor from the footer, and every one of
+them was landing in the wrong place.
+
+`motion.js` now re-applies the hash once content exists, offsetting by the
+sticky header's height so the target is not tucked underneath it. Pages opened
+without a hash are left alone.
+
+## Headline accent
+
+The homepage sets part of a headline in copper against white. It now appears on
+the hero headline of the seven capability and story pages as well, one accented
+clause each, so it reads as part of the system.
+
+Deliberately not everywhere. Contact, press and blog stay plain because they
+are utility pages, the two articles stay plain because editorial headlines are
+already doing their own work, and the company page has a four-word headline
+with nothing worth splitting. The accent stops meaning anything if every
+headline carries one.
+
+The accented clause is the differentiating half, not simply the last few words:
+`national security`, `One system`, `highest risk`, `Processed domestically`.
+
+Two things to watch when adding more. Avoid starting the accent on an article
+or preposition, since a wrap can leave it orphaned in copper at the end of a
+line, which is what happened first on secure-itad before it was tightened from
+"the highest risk" to "highest risk". And copper measures 4.64:1 on navy and
+3.51:1 on white, both clearing the 3:1 large-text threshold, but only 2.91:1 on
+the paper-shade ground, so keep the treatment off `#E7EAEE` bands.
+
+`accent-headlines.py` records what was applied where.
+
+## Band grounds
+
+No two touching bands share a background. Adjacent sections on the same ground
+read as one long section with an unexplained gap, which is what made the
+company-page quote look broken.
+
+`normalise-bands.py` enforces it. Fixing collisions one at a time just moves
+them down the page, so the script walks each page's bands in order and resolves
+the whole sequence: where a band matches the one above, it steps to another
+value in the same family that also differs from the band below. Light bands
+step through `#FFFFFF`, `#F5F6F7`, `#E7EAEE`; dark through `#0B2138`, `#14304C`.
+The fixed CTA bar is skipped, since it floats over the stack rather than
+sitting in it.
+
+Run it after adding or reordering any band. It reports what it changed and is
+safe to run repeatedly.
+
+## Navigation link states
+
+Only mega-menu items with a page of their own are links. The rest render as
+dimmed, unclickable text, so the menu never promises a destination that does
+not exist. Six of the eighteen are live.
+
+Three previously pointed at an approximate page: Chain-of-custody ERP and
+Neodymium & dysprosium went to pages that cover them only as a section, and
+Wind turbine & energy assets to the critical materials page. Those now sit
+inactive until they have somewhere real to go.
+
+The rule lives in `GROUPS` at the top of `nav-menu.js`: give an item a URL and
+it becomes a link on every page at once, including the homepage's own
+React-owned panel, whose anchors are swapped for inert text when they have no
+target.
+
+Still outstanding elsewhere: Privacy, Terms, the language switcher, and two
+press-kit download links are placeholders pointing at `#`.
 
 ## Favicon
 

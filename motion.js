@@ -60,6 +60,17 @@
         'color:#5B7085;font-size:11px;letter-spacing:0.6px;';
       el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
       footer.appendChild(el);
+      if (window.location.hash && window.location.hash.length > 1) {
+        try {
+          var t = document.querySelector(window.location.hash);
+          if (t && window.scrollY < 40) {
+            var h = document.querySelector('header');
+            var off = h ? h.getBoundingClientRect().height : 0;
+            var yy = t.getBoundingClientRect().top + window.scrollY - off - 8;
+            window.scrollTo(0, yy < 0 ? 0 : yy);
+          }
+        } catch (e) {}
+      }
       var bar = document.querySelector('[data-stickybar]');
       if (bar && bar.offsetHeight && !document.getElementById('pal-bar-clearance')) {
         var st = document.createElement('style');
@@ -422,6 +433,28 @@
     setTimeout(showAll, 6000);
   }
 
+  /* ---- Deep links --------------------------------------------------------
+     The browser acts on the URL hash while the page is still empty, because
+     content is React-rendered a beat later, so arriving at /company#leadership
+     leaves you at the top. Once content exists, jump to the target and clear
+     the sticky header's height so the section is not tucked underneath it. */
+
+  function honourHash() {
+    if (!window.location.hash || window.location.hash.length < 2) return;
+    var target;
+    try {
+      target = document.querySelector(window.location.hash);
+    } catch (e) {
+      return;
+    }
+    if (!target) return;
+    if (Math.abs(window.scrollY - (target.getBoundingClientRect().top + window.scrollY)) < 80) return;
+    var header = document.querySelector('header');
+    var offset = header ? header.getBoundingClientRect().height : 0;
+    var y = target.getBoundingClientRect().top + window.scrollY - offset - 8;
+    window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'auto' });
+  }
+
   function initMap() {
     var svg = document.querySelector('svg[aria-label*="facility network"]');
     if (svg) { buildMobileNetwork(svg); animateMap(svg); }
@@ -609,9 +642,10 @@
     initMap();
     initTimeline();
     initChain();
+    honourHash();
     // Second pass for anything that lands after first paint (images resolving,
     // late layout). Both functions are idempotent.
-    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); initChain(); }, 900);
+    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); initChain(); honourHash(); }, 900);
   }
 
   if (document.readyState === 'complete') {
