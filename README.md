@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.17.0**
+**Build 1.18.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -163,6 +163,7 @@ say which build they are looking at. To cut a new build, run
 | 1.15.0 | Locations ledger replaces the two boxed location bands |
 | 1.16.0 | Facility map inverted onto the light ground |
 | 1.17.0 | /secure-itad rebuilt as static HTML; root discovery generalised |
+| 1.18.0 | /paladin-local and /electronics-recycling rebuilt on the same pattern |
 
 ## Access gate
 
@@ -252,6 +253,36 @@ Two integration details that repeat for any future component of this kind. The
 generic reveal tagger has to skip anything that animates itself, or each part
 fades twice and stutters. And every scroll-driven piece needs a fail-visible
 timeout, so a wiring problem never leaves a diagram half-drawn.
+
+## Capability page pattern
+
+/secure-itad, /paladin-local and /electronics-recycling now share one layout,
+built by `rebuild-pages.py`. Five sections in a fixed rhythm:
+
+| Section | Ground | Shape |
+| --- | --- | --- |
+| Hero | navy | eyebrow, accented h1, lead, image |
+| Split | white | head grid, then two rules under a gold top border |
+| List | paper | sticky intro column against a numbered ruled list |
+| Proof | navy | intro column against a white fact card |
+| CTA | paper | gold-ruled band |
+
+The shell comes from secure-itad, so the head, header, footer, hover-class CSS
+and inline runtime are the real ones and cannot drift between pages. Only the
+five sections are authored, from a small data structure at the bottom of the
+script. Adding a fourth capability page is a matter of adding one entry.
+
+All body copy was carried over verbatim from the pages being replaced, and the
+script's output was checked against the originals to confirm nothing was
+dropped: six copy blocks on each page, six carried across. Where the new layout
+needed a label the old page did not have, it reuses an existing heading rather
+than inventing a claim.
+
+One detail worth keeping: the list section's intro column is `position: sticky`
+so it tracks the list instead of stranding at the top of a long column. The
+page's own reveal runtime puts a transform on that element, which does not
+break sticky on the element itself, but would if it were ever moved to an
+ancestor.
 
 ## Two page shapes
 
