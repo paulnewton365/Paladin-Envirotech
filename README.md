@@ -409,6 +409,20 @@ And `motion.js` returns early for reduced-motion visitors, so
 be stopped separately inside that early branch, or it would autoplay for
 exactly the people who asked it not to.
 
+### Starting without a swap
+
+The poster was a different photograph from the footage, so the hero showed one
+image and then cut to another. There is now no poster on desktop: the well is
+navy, the video fades in over 400ms once it can play, and the photograph is
+applied as a background only for mobile and reduced motion, where a still is
+actually wanted. `preconnect`, `dns-prefetch` and a `rel=preload` hint start
+the fetch as early as the parser allows.
+
+The real determinant of how fast it starts is file size and origin. The file
+comes from their WordPress on a different host, which costs a DNS lookup, a TLS
+handshake and whatever that server gives. **A compressed copy in `assets/`,
+served from the same edge as the page, would do more than any markup change.**
+
 **Unverified:** the sandbox this was built in cannot reach paladinenvirotech.com,
 so the footage itself has never been seen. What it depicts, its file size and
 whether it loops cleanly all need checking in a browser.

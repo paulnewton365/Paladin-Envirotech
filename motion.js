@@ -41,8 +41,9 @@
       var src = v.querySelector('source');
       if (src) src.parentNode.removeChild(src);
       v.load();
-      var poster = v.getAttribute('poster');
+      var poster = v.getAttribute('data-still');
       if (poster) v.style.background = 'url("' + poster + '") center / cover no-repeat';
+      v.style.opacity = '1';
     };
 
     var settle = function () {
@@ -497,7 +498,7 @@
   function initHeroVideo() {
     var video = document.querySelector('[data-hero-video]');
     if (!video) return;
-    var poster = video.getAttribute('poster');
+    var poster = video.getAttribute('data-still');
 
     function useStill() {
       if (video.getAttribute('data-stilled') === '1') return;
@@ -511,6 +512,7 @@
       if (poster) {
         video.style.background = 'url("' + poster + '") center / cover no-repeat';
       }
+      video.style.opacity = '1';
     }
 
     var small = window.matchMedia('(max-width: 700px)');
@@ -565,6 +567,15 @@
         });
       }
     }
+    // Reveal only once there are frames to show, so the hero never flashes an
+    // empty box or a half-decoded frame.
+    function reveal() {
+      if (video.getAttribute('data-stilled') === '1') return;
+      video.style.opacity = '1';
+    }
+    video.addEventListener('playing', reveal);
+    video.addEventListener('canplay', reveal);
+
     video.addEventListener('loadeddata', tryPlay);
     video.addEventListener('canplay', tryPlay);
     // Some browsers pause background video on tab switch and do not resume.
