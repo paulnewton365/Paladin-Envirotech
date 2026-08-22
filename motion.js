@@ -523,6 +523,25 @@
     if (small.addEventListener) small.addEventListener('change', function (e) { if (e.matches) useStill(); });
     else if (small.addListener) small.addListener(function (e) { if (e.matches) useStill(); });
 
+    /* The autoplay attribute is evaluated when the element enters the DOM.
+       These pages are React-rendered, so the element is inserted after parse
+       and the browser often skips it, which is why the video appeared only
+       sometimes. Ask for playback explicitly, and again once data arrives. */
+    function tryPlay() {
+      if (video.getAttribute('data-stilled') === '1') return;
+      var p = video.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(function () { /* blocked; the poster is already showing */ });
+      }
+    }
+    video.addEventListener('loadeddata', tryPlay);
+    video.addEventListener('canplay', tryPlay);
+    // Some browsers pause background video on tab switch and do not resume.
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden) tryPlay();
+    });
+    tryPlay();
+
     // If the remote file fails, the poster is already showing underneath.
     video.addEventListener('error', useStill);
   }

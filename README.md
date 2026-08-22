@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.20.0**
+**Build 1.20.1**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -168,6 +168,7 @@ say which build they are looking at. To cut a new build, run
 | 1.18.2 | New featured image on /blog |
 | 1.19.0 | Homepage hero rewritten to introduce the company |
 | 1.20.0 | Hero video from Paladin's own site, with still fallbacks |
+| 1.20.1 | Hero video plays reliably; hero well widened 12% |
 
 ## Access gate
 
@@ -389,8 +390,15 @@ frame by frame:
 Below 700px and for reduced motion the `<source>` element is removed and the
 video reloaded, so no bytes are fetched at all rather than merely being hidden.
 
-One trap worth recording: `motion.js` returns early for reduced-motion
-visitors, so `initHeroVideo()` never runs for them. The video therefore has to
+Two traps worth recording. The `autoplay` attribute is evaluated when an
+element enters the DOM, and these pages are React-rendered, so the video is
+inserted after parse and the browser frequently skips it. That is why it played
+only sometimes. `play()` is now called explicitly and again on `loadeddata`,
+`canplay` and when the tab regains focus, with `preload="auto"` so the data is
+actually there to play.
+
+And `motion.js` returns early for reduced-motion visitors, so
+`initHeroVideo()` never runs for them. The video therefore has to
 be stopped separately inside that early branch, or it would autoplay for
 exactly the people who asked it not to.
 

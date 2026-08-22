@@ -1,5 +1,5 @@
 {
-  "version": "1.20.0",
+  "version": "1.20.1",
   "built": "2026-08-22",
-  "notes": "Hero video from Paladin's own site with still fallbacks"
+  "notes": "Hero video plays reliably; hero well widened 12%"
 }
