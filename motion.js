@@ -523,15 +523,46 @@
     if (small.addEventListener) small.addEventListener('change', function (e) { if (e.matches) useStill(); });
     else if (small.addListener) small.addListener(function (e) { if (e.matches) useStill(); });
 
-    /* The autoplay attribute is evaluated when the element enters the DOM.
-       These pages are React-rendered, so the element is inserted after parse
-       and the browser often skips it, which is why the video appeared only
-       sometimes. Ask for playback explicitly, and again once data arrives. */
+    /* Autoplay is decided on the muted PROPERTY, not the attribute. Setting
+       muted="" in markup does not reliably set the property, and a video the
+       browser considers unmuted is refused without a user gesture. Set the
+       properties directly before asking to play.
+
+       The attribute is also only evaluated as the element enters the DOM, and
+       these pages are React-rendered, so it is inserted after parse and often
+       skipped entirely. */
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+
+    // Some templates mishandle a child <source>; point the element at the file
+    // directly if nothing resolved.
+    var source = video.querySelector('source');
+    if (!video.currentSrc && !video.getAttribute('src') && source) {
+      video.setAttribute('src', source.getAttribute('src'));
+      video.load();
+    }
+
+    var attempts = 0;
     function tryPlay() {
       if (video.getAttribute('data-stilled') === '1') return;
+      video.muted = true;
       var p = video.play();
       if (p && typeof p.catch === 'function') {
-        p.catch(function () { /* blocked; the poster is already showing */ });
+        p.catch(function (err) {
+          attempts++;
+          // Report once, so a blank hero can be diagnosed from the console
+          // rather than guessed at.
+          if (attempts === 1 && window.console) {
+            console.warn('[paladin] hero video did not autoplay:',
+                         err && err.name, err && err.message,
+                         '| networkState', video.networkState,
+                         '| readyState', video.readyState,
+                         '| currentSrc', video.currentSrc || '(none)');
+          }
+          if (attempts >= 4) useStill();
+        });
       }
     }
     video.addEventListener('loadeddata', tryPlay);

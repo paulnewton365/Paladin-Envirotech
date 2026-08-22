@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.20.1**
+**Build 1.20.2**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -169,6 +169,7 @@ say which build they are looking at. To cut a new build, run
 | 1.19.0 | Homepage hero rewritten to introduce the company |
 | 1.20.0 | Hero video from Paladin's own site, with still fallbacks |
 | 1.20.1 | Hero video plays reliably; hero well widened 12% |
+| 1.20.2 | Autoplay fixed via the muted property; failure now reported to console |
 
 ## Access gate
 
@@ -390,7 +391,13 @@ frame by frame:
 Below 700px and for reduced motion the `<source>` element is removed and the
 video reloaded, so no bytes are fetched at all rather than merely being hidden.
 
-Two traps worth recording. The `autoplay` attribute is evaluated when an
+Three traps worth recording. Autoplay is decided on the muted **property**,
+not the attribute. `muted=""` in markup does not reliably set the property, and
+a video the browser considers unmuted is refused without a user gesture. The
+property is now set in script before playback is requested. This was verified
+against a real video file rather than reasoned about.
+
+The `autoplay` attribute is evaluated when an
 element enters the DOM, and these pages are React-rendered, so the video is
 inserted after parse and the browser frequently skips it. That is why it played
 only sometimes. `play()` is now called explicitly and again on `loadeddata`,
