@@ -5,9 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Paladin EnviroTech | Paladin EnviroTech</title>
 <meta name="description" content="Secure technology lifecycle management and critical materials recovery.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0B2138">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.8.0">
-<meta name="build-date" content="2026-08-21">
+<meta name="build-version" content="1.10.0">
+<meta name="build-date" content="2026-08-22">
 <meta property="og:title" content="Paladin EnviroTech | Paladin EnviroTech">
 <meta property="og:description" content="Secure technology lifecycle management and critical materials recovery.">
 <meta property="og:image" content="/assets/preview.webp">
@@ -31,11 +36,34 @@ html, body { margin: 0; padding: 0; background: #F5F6F7; font-family: "Restart H
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: 0.75; }
 input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-serif; }
+
+/* Timeline rail: an alternative to the outlined statistic grid, which was
+   carrying too much of the site on its own. Beats reveal in sequence and a
+   gold progress line tracks scroll down the rail. */
+.pal-rail { position: relative; }
+.pal-rail-track { position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: rgba(255,255,255,0.16); }
+.pal-rail-progress { position: absolute; left: 0; top: 0; width: 1px; height: 0; background: #A9832F; }
+.pal-beats { display: flex; flex-direction: column; }
+.pal-beat { display: flex; gap: clamp(16px, 2vw, 32px); padding-bottom: clamp(32px, 4vw, 52px); opacity: 0.001; transform: translateY(20px); transition: opacity 480ms cubic-bezier(0.2,0.7,0.1,1), transform 480ms cubic-bezier(0.2,0.7,0.1,1); }
+.pal-beat:last-child { padding-bottom: 0; }
+.pal-beat.is-in { opacity: 1; transform: none; }
+.pal-beat-num { display: flex; align-items: center; min-width: clamp(84px, 9vw, 132px); }
+.pal-tick { width: clamp(24px, 3vw, 40px); height: 1px; background: #A9832F; transform: scaleX(0); transform-origin: left center; transition: transform 480ms cubic-bezier(0.2,0.7,0.1,1) 80ms; }
+.pal-beat.is-in .pal-tick { transform: scaleX(1); }
+.pal-num { font-size: clamp(40px, 4.4vw, 64px); line-height: 1; font-weight: 300; color: #A9832F; padding-left: clamp(14px, 1.6vw, 24px); }
+.pal-beat-body { padding-top: clamp(12px, 1.6vw, 20px); }
+.pal-beat-time { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #8FA6BA; }
+.pal-beat-text { margin-top: 10px; font-size: 16px; line-height: 1.6; font-weight: 300; color: #DDE3E9; max-width: 340px; }
+@media (prefers-reduced-motion: reduce) {
+  .pal-beat { opacity: 1; transform: none; transition: none; }
+  .pal-tick { transform: scaleX(1); transition: none; }
+}
+
 </style>
 </helmet>
 
 <div data-stickybar="1" style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 1100; background: #0B2138; color: #FFFFFF; transform: translateY(100%); transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1); display: flex; align-items: center; justify-content: flex-end; gap: 32px; padding: 14px clamp(24px, 5vw, 72px); border-top: 1px solid #FFFFFF; flex-wrap: wrap;">
-  <span style="font-size: 15px; font-weight: 300;">Retiring infrastructure this quarter? Speak to a Paladin engineer, not a broker.</span>
+  <span style="font-size: 15px; font-weight: 300;">Retiring infrastructure this quarter? Speak to one of our engineers.</span>
   <a href="/contact" style="background: #FFFFFF; color: #0B2138; padding: 12px 22px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500;">Talk to an expert</a>
 </div>
 
@@ -77,7 +105,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
         <div style="width: 8px; height: 8px; background: #A9832F;"></div>
         <span style="color: #8FA6BA; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Technology lifecycle &amp; critical materials</span>
       </div>
-      <h1 data-stagger="1" style="color: #FFFFFF; font-size: clamp(38px, 5vw, 72px); line-height: 1.02; letter-spacing: -1px; font-weight: 300; margin: 0 0 24px; text-wrap: balance;">End-to-end control, <span style="color: #A9832F; text-wrap: balance;">not patchwork recycling.</span></h1>
+      <h1 data-stagger="1" style="color: #FFFFFF; font-size: clamp(38px, 5vw, 72px); line-height: 1.02; letter-spacing: -1px; font-weight: 300; margin: 0 0 24px; text-wrap: balance;">End-to-end control, <span style="color: #A9832F; text-wrap: balance;">from pickup to final disposition.</span></h1>
       <p data-stagger="2" style="color: #DDE3E9; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; max-width: 640px; margin: 0 0 32px;">Most ITAD and recycling programs run on broker chains and opaque hand-offs. Paladin operates a single, integrated system from pickup through destruction, processing and final disposition, giving you one accountable partner, full chain-of-custody, and high-value materials kept onshore and in circulation.</p>
       <div data-stagger="3" style="display: flex; gap: 16px; padding-bottom: 48px; flex-wrap: wrap;">
         <a href="/contact" style="display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B2138; background-image: linear-gradient(to right, #9FB4C7 50%, #FFFFFF 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
@@ -143,7 +171,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
     <div>
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;"><div style="width: 8px; height: 8px; background: #A9832F;"></div><span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">In plain terms</span></div>
       <h2 style="font-size: clamp(30px, 3.8vw, 56px); line-height: 1.1; letter-spacing: -0.4px; font-weight: 500; margin: 16px 0 20px; text-wrap: balance;">Old technology goes in. Secure domestic supply comes out.</h2>
-      <p style="font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 0; color: #47586B;">When an organization retires servers, laptops, drives or turbines, two things have to happen: the data has to be destroyed beyond recovery, and the materials inside have to be recovered rather than shipped away. Paladin does both, under one contract, and hands you the paperwork that proves it.</p>
+      <p style="font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 0; color: #47586B;">When an organization retires servers, laptops, drives or turbines, two things have to happen: the data has to be destroyed beyond recovery, and the materials inside have to be recovered and kept in domestic supply. Paladin does both, under one contract, and hands you the paperwork that proves it.</p>
     </div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
       <div style="background: #FFFFFF; border-top: 3px solid #A9832F; padding: 32px 24px; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="transform: translateY(-4px);"><span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">For compliance teams</span><p style="font-size: 16px; line-height: 26px; margin: 12px 0 0; color: #0B2138;">NIST 800-88 destruction, serial-level chain of custody, certificates that survive an audit.</p></div>
@@ -158,7 +186,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(36px, 4vw, 64px); margin-bottom: 80px;">
 <h2 style="font-size: clamp(34px, 4.4vw, 64px); line-height: 1.06; letter-spacing: -0.4px; font-weight: 500; margin: 0; text-wrap: balance;">Trust is the scarcest <span style="color: #A9832F;">commodity</span> in this market.</h2>
-      <p style="font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 0; align-self: end; color: #47586B;">The recycling and ITAD market is still highly fragmented and broker-driven, with long, opaque hand-offs that make true accountability difficult, and a reputation for heavy marketing and uneven execution. Paladin is the counter-example: a compliance-led operator built around provable processes, not resale margins or downstream promises. For recycling to work it has to be treated as critical infrastructure, not a loose network or a bolt-on.</p>
+      <p style="font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 0; align-self: end; color: #47586B;">The recycling and ITAD market is still highly fragmented and broker-driven, with long, opaque hand-offs that make true accountability difficult, and a reputation for heavy marketing and uneven execution. Paladin is the counter-example: a compliance-led operator whose processes can be proven at every step. Recycling only works when it is run as critical infrastructure.</p>
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 24px;">
       <div style="border-top: 1px solid #C7CFD7; padding: 28px 0 0;">
@@ -217,7 +245,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
         <div style="padding: 24px; display: flex; flex-direction: column; flex: 1;">
           <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">03</span>
           <h3 style="font-size: 24px; line-height: 30px; font-weight: 500; margin: 10px 0 12px;">Chain-of-custody ERP</h3>
-          <p style="font-size: 15px; line-height: 24px; margin: 0 0 24px; color: #47586B;">Serial-level tracking, certificates of destruction and recycling, automated settlement reporting, built for audit, not retrofitted from logistics software.</p>
+          <p style="font-size: 15px; line-height: 24px; margin: 0 0 24px; color: #47586B;">Serial-level tracking, certificates of destruction and recycling, automated settlement reporting, all built for audit from the start.</p>
           <a href="/platform" style="margin-top: auto; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid #0B2138; padding-bottom: 4px; align-self: flex-start; transition: color 200ms, border-color 200ms;" style-hover="color: #A9832F; border-bottom-color: #A9832F;">Explore</a>
         </div>
       </div>
@@ -226,7 +254,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
         <div style="padding: 24px; display: flex; flex-direction: column; flex: 1;">
           <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">04</span>
           <h3 style="font-size: 24px; line-height: 30px; font-weight: 500; margin: 10px 0 12px;">Paladin Local</h3>
-          <p style="font-size: 15px; line-height: 24px; margin: 0 0 24px; color: #47586B;">Secure ITAD and recycling close to where assets are generated. A hub-and-satellite model that reaches regional and mid-market organizations, not only large metros.</p>
+          <p style="font-size: 15px; line-height: 24px; margin: 0 0 24px; color: #47586B;">Secure ITAD and recycling close to where assets are generated. A hub-and-satellite model that reaches regional and mid-market organizations as well as large metros.</p>
           <a href="/platform" style="margin-top: auto; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid #0B2138; padding-bottom: 4px; align-self: flex-start; transition: color 200ms, border-color 200ms;" style-hover="color: #A9832F; border-bottom-color: #A9832F;">Explore</a>
         </div>
       </div></div>
@@ -261,14 +289,9 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
       <span style="color: #A9832F; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">A night in the life of the platform</span>
       <h2 style="color: #FFFFFF; font-size: clamp(30px, 3.8vw, 52px); line-height: 1.14; font-weight: 300; margin: 16px 0 20px; max-width: 560px; text-wrap: balance;">11 p.m., one hyperscale campus, forty racks going dark.</h2>
       <p style="color: #DDE3E9; font-weight: 300; font-size: 17px; line-height: 27px; margin: 0 0 18px;">The migration window is four hours. Forty racks of drives come offline, get scanned into custody one by one, and leave on trucks before the campus wakes back up. Nothing sits, nothing gets skipped, nothing goes dark on the record even though the racks did.</p>
-      <p style="color: #DDE3E9; font-weight: 300; font-size: 17px; line-height: 27px; margin: 0;">By the time the sun is up, the drives that once held customer workloads are on their way to certified destruction. The magnets inside them are on their way to REcapture. And the operations team has a report, not a guess, about where every one of them went.</p>
+      <p style="color: #DDE3E9; font-weight: 300; font-size: 17px; line-height: 27px; margin: 0;">By the time the sun is up, the drives that once held customer workloads are on their way to certified destruction. The magnets inside them are on their way to REcapture. The operations team starts the day with a report showing where every one of them went.</p>
     </div>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px;">
-      <div style="background: #0B2138; outline: 1px solid rgba(255,255,255,0.16); padding: 40px;"><div style="color: #A9832F; font-size: clamp(36px, 3.6vw, 52px); line-height: 1.08; font-weight: 300;">0</div><p style="color: #DDE3E9; font-weight: 300; font-size: 15px; line-height: 24px; margin: 14px 0 0;">minutes of downtime to the live environment during the swap</p></div>
-      <div style="background: #0B2138; outline: 1px solid rgba(255,255,255,0.16); padding: 40px;"><div style="color: #A9832F; font-size: clamp(36px, 3.6vw, 52px); line-height: 1.08; font-weight: 300;">1</div><p style="color: #DDE3E9; font-weight: 300; font-size: 15px; line-height: 24px; margin: 14px 0 0;">serial-level record, generated automatically as each drive is scanned</p></div>
-      <div style="background: #0B2138; outline: 1px solid rgba(255,255,255,0.16); padding: 40px;"><div style="color: #A9832F; font-size: clamp(36px, 3.6vw, 52px); line-height: 1.08; font-weight: 300;">2</div><p style="color: #DDE3E9; font-weight: 300; font-size: 15px; line-height: 24px; margin: 14px 0 0;">outcomes from one shipment, certified destruction, and recovered magnet feedstock</p></div>
-      <div style="background: #0B2138; outline: 1px solid rgba(255,255,255,0.16); padding: 40px;"><div style="color: #A9832F; font-size: clamp(36px, 3.6vw, 52px); line-height: 1.08; font-weight: 300;">1</div><p style="color: #DDE3E9; font-weight: 300; font-size: 15px; line-height: 24px; margin: 14px 0 0;">morning debrief, backed by a report instead of an assumption</p></div>
-    </div>
+    <div class="pal-rail" data-timeline-rail><div class="pal-rail-track"></div><div class="pal-rail-progress" data-timeline-progress></div><div class="pal-beats"><div class="pal-beat" data-timeline-beat><div class="pal-beat-num"><div class="pal-tick"></div><div class="pal-num">0</div></div><div class="pal-beat-body"><div class="pal-beat-time">23:00, window opens</div><div class="pal-beat-text">minutes of downtime to the live environment during the swap</div></div></div><div class="pal-beat" data-timeline-beat><div class="pal-beat-num"><div class="pal-tick"></div><div class="pal-num">1</div></div><div class="pal-beat-body"><div class="pal-beat-time">01:00, custody</div><div class="pal-beat-text">serial-level record, generated automatically as each drive is scanned</div></div></div><div class="pal-beat" data-timeline-beat><div class="pal-beat-num"><div class="pal-tick"></div><div class="pal-num">2</div></div><div class="pal-beat-body"><div class="pal-beat-time">03:00, on the trucks</div><div class="pal-beat-text">outcomes from one shipment, certified destruction and recovered magnet feedstock</div></div></div><div class="pal-beat" data-timeline-beat><div class="pal-beat-num"><div class="pal-tick"></div><div class="pal-num">1</div></div><div class="pal-beat-body"><div class="pal-beat-time">07:00, sun up</div><div class="pal-beat-text">morning debrief, backed by a report</div></div></div></div></div>
   </div>
 </div>
 

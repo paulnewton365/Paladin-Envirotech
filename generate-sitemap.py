@@ -63,6 +63,7 @@ COMPONENTS = [
     ("Persistent CTA bar", r'data-stickybar', "Conversion"),
     ("Gold-rule CTA block", r'border-left: 4px solid #A9832F', "Conversion"),
     ("Inline lead form", r'<input', "Conversion"),
+    ("Timeline rail (scroll-driven)", r'data-timeline-rail', "Proof"),
     ("Statistic band", r'border-right: 1px solid rgba\(255,255,255,0\.16\)|border-right: 1px solid #E7EAEE', "Proof"),
     ("Animated count-up", r'data-countup', "Proof"),
     ("Logo / credential strip", r'Client marks are placeholders|WORKING WITH|Working with', "Proof"),
@@ -191,6 +192,10 @@ def build():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Site structure | Paladin EnviroTech</title>
 <meta name="description" content="Information architecture and component inventory for the Paladin EnviroTech prototype.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0B2138">
 <meta name="robots" content="noindex, nofollow">
 <meta name="build-version" content="{version}">
 <meta name="build-date" content="{date.today().isoformat()}">

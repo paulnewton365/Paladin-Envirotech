@@ -30,6 +30,9 @@
     // pin its elements open on its behalf. Setting dataset.shown stops its
     // scroll handler from hiding them again.
     var settle = function () {
+      document.querySelectorAll('[data-timeline-beat]').forEach(function (el) {
+        el.classList.add('is-in');
+      });
       document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function (el) {
         el.dataset.shown = '1';
         el.style.transition = 'none';
@@ -112,6 +115,8 @@
     // Never nest a reveal inside another reveal: the child would fade in on top
     // of a parent that is itself still fading, which reads as a stutter.
     if (el.parentElement && el.parentElement.closest('[data-mreveal]')) return false;
+    // The timeline rail runs its own sequence; a second fade on top stutters.
+    if (el.closest('[data-timeline-rail]')) return false;
     el.setAttribute('data-mreveal', '');
     el.setAttribute('data-mdelay', String(delay));
     return true;
@@ -303,6 +308,57 @@
     update();
   }
 
+  /* ---- Timeline rail -----------------------------------------------------
+     Beats reveal in sequence and a gold progress line follows scroll down the
+     rail. This lives here rather than in a script tag on the page because the
+     page is React-rendered and a tag inside the template never executes. */
+
+  function initTimeline() {
+    var rail = document.querySelector('[data-timeline-rail]');
+    if (!rail || rail.getAttribute('data-timeline-ready') === '1') return;
+    rail.setAttribute('data-timeline-ready', '1');
+
+    var progress = rail.querySelector('[data-timeline-progress]');
+    var beats = Array.prototype.slice.call(rail.querySelectorAll('[data-timeline-beat]'));
+    if (!beats.length) return;
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var i = beats.indexOf(entry.target);
+        setTimeout(function () { entry.target.classList.add('is-in'); }, Math.max(0, i) * 90);
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.4 });
+    beats.forEach(function (b) { io.observe(b); });
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      if (!progress) return;
+      var r = rail.getBoundingClientRect();
+      if (!r.height) return;
+      var line = window.innerHeight * 0.62;
+      var p = (line - r.top) / r.height;
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      progress.style.height = (p * 100).toFixed(2) + '%';
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+
+    // Failsafe: if the observer never fires, show the beats anyway.
+    setTimeout(function () {
+      beats.forEach(function (b) { b.classList.add('is-in'); });
+    }, 6000);
+  }
+
   function initMap() {
     var svg = document.querySelector('svg[aria-label*="facility network"]');
     if (svg) { buildMobileNetwork(svg); animateMap(svg); }
@@ -488,9 +544,10 @@
     tagBlocks();
     armReveals();
     initMap();
+    initTimeline();
     // Second pass for anything that lands after first paint (images resolving,
     // late layout). Both functions are idempotent.
-    setTimeout(function () { tagBlocks(); armReveals(); initMap(); }, 900);
+    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); }, 900);
   }
 
   if (document.readyState === 'complete') {

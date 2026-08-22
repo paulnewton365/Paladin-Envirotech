@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.8.0**
+**Build 1.10.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -154,6 +154,8 @@ say which build they are looking at. To cut a new build, run
 | 1.6.1 | Platform mega menu available on every page |
 | 1.7.0 | Press page and nav item, quote restyled, design export |
 | 1.8.0 | Refined article page integrated from Claude Design |
+| 1.9.0 | Copy pass removing machine-written rhetorical patterns |
+| 1.10.0 | Favicon set, timeline rail replaces a statistic grid |
 
 ## Access gate
 
@@ -210,6 +212,72 @@ or add it ahead of the PNG in the sources list in `gate.js`.
 Stamps the version across every page, regenerates `/sitemap` from the pages on
 disk, and packages the site. Use this rather than the individual scripts, so
 the sitemap cannot drift from the actual page set.
+
+## Component variety
+
+The outlined statistic grid was carrying too much of the site. The homepage's
+"night in the life" section is now a scroll-driven timeline rail: beats reveal
+in sequence, a tick draws out from the rail, and a gold progress line follows
+scroll position down the track.
+
+The supplied component was reconciled to the site rather than dropped in as-is.
+Roboto and its Google Fonts links were removed, its palette mapped onto the
+site tokens, and its fixed 88/96px padding replaced with the site's clamp()
+gutters. Its inline `<script>` was dropped and the behaviour moved into
+`motion.js`, because the pages are React-rendered and a script tag inside the
+template never executes. Hooks are named `data-timeline-*` since `data-rail`
+was already taken by the horizontal rails on /platform and the article page.
+
+Two integration details worth knowing. The generic reveal tagger skips anything
+inside `[data-timeline-rail]`, otherwise each beat would fade twice and stutter.
+And the copy that arrived with the component had reverted two fixes from the
+copy pass, so the corrected wording was kept.
+
+## Favicon
+
+`favicon.ico`, `favicon-16.png`, `favicon-32.png` and `apple-touch-icon.png`
+are generated from the supplied shield, trimmed to its ink and padded onto the
+brand navy so it reads against light browser chrome. A `theme-color` of
+`#0B2138` is set for mobile browser UI.
+
+**The source artwork is 23x29 pixels.** That is enough for the 16 and 32px
+favicons, which is where the icon actually lives, but the 180px Apple touch
+icon is an upscale and looks soft on a home screen. Vector or a large PNG of
+the shield would fix it. I tried sharpening the upscale and it distorted the
+geometry, so the honest soft version is what ships.
+
+## Copy conventions
+
+A sweep removed the rhetorical patterns that made the writing read as
+machine-generated. The dominant one was antithesis, "X, not Y", which appeared
+25 times: it sounds persuasive but carries almost no information, since the
+reader learns what something is not, which they were not wondering about.
+
+Removed across the site:
+
+| Pattern | Count |
+| --- | --- |
+| "X, not Y" | 25 |
+| "rather than Y" | 7 |
+| "instead of Y" | 6 |
+| "different X, same Y" | 1 |
+| "the honest answer is" | 1 |
+| "is what makes", "matters more than", "before it is a" | 4 |
+| sentence-initial "And" for rhythm | 1 |
+
+Two instances were kept on purpose. The turbine line compares kilograms with
+grams, which is a real measurement contrast, and the "1 consolidated report
+instead of a dozen mismatched vendor files" caption is the point of that
+statistic.
+
+The passes are `copy-pass.py`, `copy-pass2.py` and `copy-pass3.py`. Each pair
+is asserted against an expected occurrence count, so a miss fails loudly rather
+than silently skipping. They are one-time scripts, kept as a record of what
+changed.
+
+Worth watching in future rounds: a redesign or a new page from Claude Design
+will reintroduce these shapes, since they are a default of the medium. The
+grep patterns in those scripts are the quickest way to check.
 
 ## Design handover and re-import
 
