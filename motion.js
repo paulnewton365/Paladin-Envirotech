@@ -33,6 +33,15 @@
       document.querySelectorAll('[data-timeline-beat]').forEach(function (el) {
         el.classList.add('is-in');
       });
+      document.querySelectorAll('[data-chain-paladin]').forEach(function (el) {
+        el.classList.add('is-in');
+      });
+      document.querySelectorAll('[data-chain-node]').forEach(function (el) {
+        el.style.opacity = '1';
+      });
+      document.querySelectorAll('[data-chain-tangle]').forEach(function (el) {
+        el.style.clipPath = 'none';
+      });
       document.querySelectorAll('[data-reveal],[data-stagger]').forEach(function (el) {
         el.dataset.shown = '1';
         el.style.transition = 'none';
@@ -117,6 +126,7 @@
     if (el.parentElement && el.parentElement.closest('[data-mreveal]')) return false;
     // The timeline rail runs its own sequence; a second fade on top stutters.
     if (el.closest('[data-timeline-rail]')) return false;
+    if (el.closest('[data-chain-paladin]')) return false;
     el.setAttribute('data-mreveal', '');
     el.setAttribute('data-mdelay', String(delay));
     return true;
@@ -359,6 +369,59 @@
     }, 6000);
   }
 
+  /* ---- Chain comparison --------------------------------------------------
+     The tangled multi-vendor path draws in with scroll progress and its four
+     nodes appear as the line reaches them. The Paladin line plays once when it
+     comes into view. Again in motion.js rather than a page script tag. */
+
+  function initChain() {
+    var tangle = document.querySelector('[data-chain-tangle]');
+    var paladin = document.querySelector('[data-chain-paladin]');
+    if (!tangle || !paladin) return;
+    if (tangle.getAttribute('data-chain-ready') === '1') return;
+    tangle.setAttribute('data-chain-ready', '1');
+
+    var nodes = Array.prototype.slice.call(document.querySelectorAll('[data-chain-node]'));
+    var NODE_AT = [0.2, 0.42, 0.63, 0.84];
+
+    function showAll() {
+      paladin.classList.add('is-in');
+      nodes.forEach(function (n) { n.style.opacity = '1'; });
+      tangle.style.clipPath = 'none';
+    }
+
+    if (reduce) { showAll(); return; }
+
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var svg = tangle.ownerSVGElement;
+      if (!svg) return;
+      var r = svg.getBoundingClientRect();
+      var vh = window.innerHeight || 800;
+      var p = (vh * 0.85 - r.top) / (r.height + vh * 0.2);
+      if (p < 0) p = 0;
+      if (p > 1) p = 1;
+      tangle.style.clipPath = 'inset(0 ' + ((1 - p) * 100).toFixed(2) + '% 0 0)';
+      nodes.forEach(function (n) {
+        if (p >= NODE_AT[parseInt(n.getAttribute('data-chain-node'), 10)]) n.style.opacity = '1';
+      });
+      var pr = paladin.getBoundingClientRect();
+      if (pr.top < vh * 0.85 && pr.bottom > 0) paladin.classList.add('is-in');
+    }
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
+
+    // Fail visible: never leave the diagram half-drawn.
+    setTimeout(showAll, 6000);
+  }
+
   function initMap() {
     var svg = document.querySelector('svg[aria-label*="facility network"]');
     if (svg) { buildMobileNetwork(svg); animateMap(svg); }
@@ -545,9 +608,10 @@
     armReveals();
     initMap();
     initTimeline();
+    initChain();
     // Second pass for anything that lands after first paint (images resolving,
     // late layout). Both functions are idempotent.
-    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); }, 900);
+    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); initChain(); }, 900);
   }
 
   if (document.readyState === 'complete') {

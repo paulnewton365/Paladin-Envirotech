@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.10.0**
+**Build 1.11.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -156,6 +156,7 @@ say which build they are looking at. To cut a new build, run
 | 1.8.0 | Refined article page integrated from Claude Design |
 | 1.9.0 | Copy pass removing machine-written rhetorical patterns |
 | 1.10.0 | Favicon set, timeline rail replaces a statistic grid |
+| 1.11.0 | Chain comparison rebuilt, press and facility spotlights added |
 
 ## Access gate
 
@@ -215,23 +216,36 @@ the sitemap cannot drift from the actual page set.
 
 ## Component variety
 
-The outlined statistic grid was carrying too much of the site. The homepage's
-"night in the life" section is now a scroll-driven timeline rail: beats reveal
+The outlined box and the statistic grid were carrying too much of the site.
+Three components now break that up.
+
+**Timeline rail** on the homepage, replacing a 2x2 statistic grid. Beats reveal
 in sequence, a tick draws out from the rail, and a gold progress line follows
-scroll position down the track.
+scroll down the track.
 
-The supplied component was reconciled to the site rather than dropped in as-is.
-Roboto and its Google Fonts links were removed, its palette mapped onto the
-site tokens, and its fixed 88/96px padding replaced with the site's clamp()
-gutters. Its inline `<script>` was dropped and the behaviour moved into
-`motion.js`, because the pages are React-rendered and a script tag inside the
-template never executes. Hooks are named `data-timeline-*` since `data-rail`
-was already taken by the horizontal rails on /platform and the article page.
+**Chain comparison** on /platform, replacing a row of outlined boxes. A tangled
+multi-vendor path draws in with scroll progress and its four nodes appear as the
+line reaches them, set against one straight Paladin line that plays once in
+view.
 
-Two integration details worth knowing. The generic reveal tagger skips anything
-inside `[data-timeline-rail]`, otherwise each beat would fade twice and stutter.
-And the copy that arrived with the component had reverted two fixes from the
-copy pass, so the corrected wording was kept.
+**Spotlights** on /press and /network. The press page opens on the announcement
+being pushed, with a dated badge, a pull quote and two calls to action, before
+the undifferentiated release list. The network page pulls Helmond forward and
+signposts the newsroom piece about it, which also gives the blog a route in
+from a page buyers actually visit.
+
+Both supplied components were reconciled to the site rather than dropped in
+as-is: Roboto and its Google Fonts links removed, palette mapped onto the site
+tokens, fixed 88/96px padding replaced with the site's clamp() gutters. Their
+inline `<script>` tags were dropped and the behaviour moved into `motion.js`,
+because the pages are React-rendered and a script tag inside the template never
+executes. Hooks are namespaced `data-timeline-*` and `data-chain-*` since
+`data-rail` was already taken.
+
+Two integration details that repeat for any future component of this kind. The
+generic reveal tagger has to skip anything that animates itself, or each part
+fades twice and stutters. And every scroll-driven piece needs a fail-visible
+timeout, so a wiring problem never leaves a diagram half-drawn.
 
 ## Favicon
 

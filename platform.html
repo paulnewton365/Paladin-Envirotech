@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B2138">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.10.0">
+<meta name="build-version" content="1.11.0">
 <meta name="build-date" content="2026-08-22">
 <meta property="og:title" content="The Paladin Platform | Paladin EnviroTech">
 <meta property="og:description" content="One integrated system from pickup through final disposition.">
@@ -35,6 +35,27 @@ html, body { margin: 0; padding: 0; background: #F5F6F7; font-family: "Restart H
 * { box-sizing: border-box; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: 0.75; }
+
+/* Chain comparison: a tangled multi-vendor path that draws in with scroll,
+   against one straight Paladin line. Replaces a row of outlined boxes. */
+.pal-chain-svg { width: 100%; margin-top: 20px; display: block; }
+.pal-chain-label { font-size: 11px; letter-spacing: 1.4px; text-transform: uppercase; color: #8FA6BA; }
+.pal-chain-label.is-amber { color: #A9832F; }
+.pal-chain-caption { font-size: 14px; line-height: 1.6; font-weight: 300; color: #8FA6BA; margin-top: 8px; }
+.pal-chain-divider { height: 1px; background: rgba(255,255,255,0.16); margin: clamp(28px, 3.5vw, 40px) 0; }
+.pal-chain-node { opacity: 0; transition: opacity 400ms ease; }
+.pal-line-a { opacity: 0; transition: opacity 400ms ease; }
+.pal-line-b { opacity: 0; transition: opacity 400ms ease 900ms; }
+.pal-line-c { opacity: 0; transition: opacity 500ms ease 1100ms; }
+.pal-chain-caption.is-pal { color: #DDE3E9; margin-top: 16px; opacity: 0; transition: opacity 500ms ease 1300ms; }
+.pal-straight { transform: scaleX(0); transform-origin: 0 35px; transition: transform 900ms cubic-bezier(0.2,0.7,0.1,1); }
+.is-in .pal-line-a, .is-in .pal-line-b, .is-in .pal-line-c, .is-in .pal-chain-caption.is-pal { opacity: 1; }
+.is-in .pal-straight { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .pal-chain-node, .pal-line-a, .pal-line-b, .pal-line-c, .pal-chain-caption.is-pal { opacity: 1 !important; transition: none !important; }
+  .pal-straight { transform: none !important; transition: none !important; }
+  .pal-tangle { clip-path: none !important; }
+}
 </style>
 </helmet>
 
@@ -82,22 +103,26 @@ a:hover { opacity: 0.75; }
       <p style="color: #DDE3E9; font-weight: 300; font-size: 16px; line-height: 26px; margin: 0;">A typical disposition chain passes your assets through four or more companies. Each one issues its own paperwork, and none of it reconciles into a single record. Fragmented models increase leakage, cost stacking and exposure, especially as hyperscale volumes and regulatory scrutiny rise together. When an auditor asks what happened to drive serial 7F2-0441, the answer usually depends on who you ask.</p>
     </div>
     <div>
-      <div style="padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.16); margin-bottom: 20px;">
-        <span style="color: #5B7085; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">The typical chain</span>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; align-items: center;">
-          <span style="color: #7F93A6; font-size: 14px; font-weight: 300; border: 1px solid rgba(255,255,255,0.2); padding: 8px 14px;">Broker</span><span style="color: #5B7085;">→</span>
-          <span style="color: #7F93A6; font-size: 14px; font-weight: 300; border: 1px solid rgba(255,255,255,0.2); padding: 8px 14px;">Transport</span><span style="color: #5B7085;">→</span>
-          <span style="color: #7F93A6; font-size: 14px; font-weight: 300; border: 1px solid rgba(255,255,255,0.2); padding: 8px 14px;">Processor</span><span style="color: #5B7085;">→</span>
-          <span style="color: #7F93A6; font-size: 14px; font-weight: 300; border: 1px solid rgba(255,255,255,0.2); padding: 8px 14px;">Downstream exporter</span>
-        </div>
-        <p style="color: #5B7085; font-size: 13px; margin: 12px 0 0;">Four companies, four sets of paperwork, three points where custody changes hands.</p>
-      </div>
-      <div>
-        <span style="color: #A9832F; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Paladin</span>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; align-items: center;">
-          <span style="color: #FFFFFF; font-size: 14px; font-weight: 400; border: 1px solid #A9832F; padding: 8px 14px;">One platform, pickup to final disposition</span>
-        </div>
-        <p style="color: #8FA6BA; font-size: 13px; margin: 12px 0 0;">One company, one record, zero custody transfers outside the system.</p>
+      <div class="pal-chain-label">The typical chain</div>
+      <svg class="pal-chain-svg" viewBox="0 0 640 190" role="img" aria-label="A tangled path through Broker, Transport, Processor and Downstream exporter">
+        <path class="pal-tangle" data-chain-tangle d="M0 95 C 60 30, 90 30, 128 78 S 200 175, 262 108 S 330 15, 396 82 S 470 178, 528 100 S 600 40, 640 95" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="7 7"></path>
+        <circle class="pal-chain-node" data-chain-node="0" cx="128" cy="78" r="4" fill="#14304C" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"></circle><circle class="pal-chain-node" data-chain-node="1" cx="262" cy="108" r="4" fill="#14304C" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"></circle><circle class="pal-chain-node" data-chain-node="2" cx="396" cy="82" r="4" fill="#14304C" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"></circle><circle class="pal-chain-node" data-chain-node="3" cx="528" cy="100" r="4" fill="#14304C" stroke="rgba(255,255,255,0.55)" stroke-width="1.5"></circle><text class="pal-chain-node" data-chain-node="0" x="128" y="52" text-anchor="middle" font-size="14" font-weight="300" fill="#DDE3E9">Broker</text><text class="pal-chain-node" data-chain-node="1" x="262" y="140" text-anchor="middle" font-size="14" font-weight="300" fill="#DDE3E9">Transport</text><text class="pal-chain-node" data-chain-node="2" x="396" y="54" text-anchor="middle" font-size="14" font-weight="300" fill="#DDE3E9">Processor</text><text class="pal-chain-node" data-chain-node="3" x="528" y="132" text-anchor="middle" font-size="14" font-weight="300" fill="#DDE3E9">Downstream exporter</text>
+      </svg>
+      <div class="pal-chain-caption">Four companies, four sets of paperwork, three points where custody changes hands.</div>
+
+      <div class="pal-chain-divider"></div>
+
+      <div class="pal-chain-label is-amber">Paladin</div>
+      <div data-chain-paladin>
+        <svg class="pal-chain-svg" viewBox="0 0 640 70" role="img" aria-label="One straight line from pickup to final disposition">
+          <line class="pal-straight" x1="0" y1="35" x2="640" y2="35" stroke="#A9832F" stroke-width="2"></line>
+          <circle class="pal-line-a" cx="8" cy="35" r="5" fill="#A9832F"></circle>
+          <circle class="pal-line-b" cx="632" cy="35" r="5" fill="#A9832F"></circle>
+          <text class="pal-line-a" x="8" y="14" font-size="13" font-weight="300" fill="#DDE3E9">Pickup</text>
+          <text class="pal-line-b" x="632" y="14" text-anchor="end" font-size="13" font-weight="300" fill="#DDE3E9">Final disposition</text>
+          <text class="pal-line-c" x="320" y="62" text-anchor="middle" font-size="16" font-weight="400" fill="#FFFFFF">One platform, pickup to final disposition</text>
+        </svg>
+        <div class="pal-chain-caption is-pal">One company, one record, zero custody transfers outside the system.</div>
       </div>
     </div>
   </div>
