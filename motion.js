@@ -108,16 +108,33 @@
   // Pages have no <section> elements. They are a stack of full-width band
   // divs under one container, so walk past single-child wrappers to find the
   // element that actually holds the bands.
+  /* Two page shapes exist. React-rendered pages wrap everything in a single
+     div; /secure-itad is static HTML with <section> elements straight under
+     <body>. Find whichever holds the bands. */
+  function pageRoot() {
+    var wrapper = document.body.querySelector(':scope > div');
+    if (wrapper) {
+      // React page. Mid-render the tree is briefly a chain of single children,
+      // so return null rather than guessing; the caller retries. Falling back
+      // to <body> here tagged the whole page as one band about half the time.
+      var node = wrapper, guard = 0;
+      while (node && node.children.length === 1 && guard++ < 5) node = node.children[0];
+      return (node && node.children.length >= 2) ? node : null;
+    }
+    // Static page: the bands sit directly on <body>.
+    return document.body;
+  }
+
   function bands() {
-    var node = document.body.querySelector('div');
-    var guard = 0;
-    while (node && node.children.length === 1 && guard++ < 5) node = node.children[0];
+    var node = pageRoot();
     return node ? Array.prototype.slice.call(node.children) : [];
   }
 
   function taggable(el) {
     if (el.hasAttribute('data-reveal') || el.hasAttribute('data-mreveal')) return false;
     if (el.hasAttribute('data-stagger') || el.hasAttribute('data-countup')) return false;
+    // /secure-itad ships its own reveal runtime for these hooks.
+    if (el.hasAttribute('data-fact') || el.hasAttribute('data-method')) return false;
     var tag = el.tagName.toLowerCase();
     if (tag === 'header' || tag === 'footer' || tag === 'script' || tag === 'style') return false;
     if (el.closest('header') || el.closest('footer')) return false;
@@ -605,9 +622,8 @@
      event, then for the bands to report real heights, before measuring. */
 
   function contentReady() {
-    var node = document.body && document.body.querySelector('div');
-    var guard = 0;
-    while (node && node.children.length === 1 && guard++ < 5) node = node.children[0];
+    if (!document.body) return false;
+    var node = pageRoot();
     if (!node || node.children.length < 2) return false;
     var tallest = 0;
     Array.prototype.forEach.call(node.children, function (c) {

@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.16.0**
+**Build 1.17.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -162,6 +162,7 @@ say which build they are looking at. To cut a new build, run
 | 1.14.0 | Leadership roster replaces the boxed grid; deep links fixed |
 | 1.15.0 | Locations ledger replaces the two boxed location bands |
 | 1.16.0 | Facility map inverted onto the light ground |
+| 1.17.0 | /secure-itad rebuilt as static HTML; root discovery generalised |
 
 ## Access gate
 
@@ -251,6 +252,33 @@ Two integration details that repeat for any future component of this kind. The
 generic reveal tagger has to skip anything that animates itself, or each part
 fades twice and stutters. And every scroll-driven piece needs a fail-visible
 timeout, so a wiring problem never leaves a diagram half-drawn.
+
+## Two page shapes
+
+/secure-itad is now plain static HTML. It does not use `support.js` at all and
+carries its own nav toggle and scroll-reveal runtime for `[data-reveal]`,
+`[data-fact]` and `[data-method]`. That is lighter than the React-templated
+pages and was kept as-is; it just needed the shared layers linked
+(`nav-menu.js`, `motion.js`), since `gate.js`, `responsive.css`, the favicons
+and the build meta were already in place.
+
+This means the site now has two page shapes, and anything that walks the page
+structure has to handle both. The React pages wrap everything in a single
+`div`; the static page puts `<section>` elements straight under `<body>`.
+`motion.js`, `normalise-bands.py` and the background audit were all updated.
+
+Two traps worth knowing if a third shape ever appears:
+
+**Never fall back to `<body>` when a wrapper exists.** Mid-render, a React tree
+is briefly a chain of single-child elements. An earlier version of `pageRoot()`
+gave up and returned `<body>`, which made the whole page look like one band and
+armed a single reveal instead of a dozen. It failed about half the time, so it
+looked like flakiness rather than a bug. `pageRoot()` now returns null until
+the tree has settled and the caller retries.
+
+**Skip hooks the page animates itself.** `motion.js` ignores anything carrying
+`data-fact` or `data-method` for the same reason it ignores `data-reveal`:
+two runtimes fading the same element produces a stutter.
 
 ## Map on the light ground
 
