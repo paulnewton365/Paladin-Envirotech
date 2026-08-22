@@ -409,6 +409,22 @@ And `motion.js` returns early for reduced-motion visitors, so
 be stopped separately inside that early branch, or it would autoplay for
 exactly the people who asked it not to.
 
+### Layout
+
+The lead ran to five wrapped lines and pushed the calls to action toward the
+fold. The closing sentence, "One company, one record, from pickup to proof",
+now sits on its own line in copper directly above the buttons, which takes the
+paragraph to four lines and reads as a strapline rather than a trailing clause.
+
+The two columns are centred against each other. That required removing two
+pieces of spacing left over from when the row was bottom-aligned: 48px of
+bottom padding on the button row and 48px of bottom margin on the video well.
+Each was dragging one column's centre 24px out of true. The hero band now
+carries its own bottom padding instead, which applies to both columns equally.
+
+Calls to action sit above the fold at 1440x900, 1440x800, 1600x900 and on
+mobile.
+
 ### Starting without a swap
 
 The poster was a different photograph from the footage, so the hero showed one
