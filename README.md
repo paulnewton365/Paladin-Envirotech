@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.18.2**
+**Build 1.19.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -166,6 +166,7 @@ say which build they are looking at. To cut a new build, run
 | 1.18.0 | /paladin-local and /electronics-recycling rebuilt on the same pattern |
 | 1.18.1 | New hero image on /paladin-local |
 | 1.18.2 | New featured image on /blog |
+| 1.19.0 | Homepage hero rewritten to introduce the company |
 
 ## Access gate
 
@@ -365,6 +366,26 @@ them was landing in the wrong place.
 `motion.js` now re-applies the hash once content exists, offsetting by the
 sticky header's height so the target is not tucked underneath it. Pages opened
 without a hash are left alone.
+
+## Homepage hero
+
+The hero used to open with a property claim, "End-to-end control", and a lead
+paragraph that began with what is wrong with the category. A first-time visitor
+could read the whole first screen without learning what Paladin is.
+
+It now names the company in the first three words of the lead, says what it
+does in plain language, names who it does it for, and reaches the supply
+argument above the fold. "From pickup to proof" survives as the closing beat of
+the lead.
+
+Every claim traces to an existing page: the sectors to /industries, destruction
+to /secure-itad, domestic processing to /electronics-recycling, magnet recovery
+and the supply argument to /critical-materials.
+
+One judgement worth revisiting: the headline leads on rare-earth recovery,
+which the brand review asked for, while secure ITAD is the larger business. The
+lead paragraph carries the full scope immediately after, so the scale of the
+company is not misrepresented, but the emphasis is deliberate.
 
 ## Headline accent
 
