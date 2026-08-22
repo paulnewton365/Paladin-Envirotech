@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.18.0**
+**Build 1.18.2**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -164,6 +164,8 @@ say which build they are looking at. To cut a new build, run
 | 1.16.0 | Facility map inverted onto the light ground |
 | 1.17.0 | /secure-itad rebuilt as static HTML; root discovery generalised |
 | 1.18.0 | /paladin-local and /electronics-recycling rebuilt on the same pattern |
+| 1.18.1 | New hero image on /paladin-local |
+| 1.18.2 | New featured image on /blog |
 
 ## Access gate
 
