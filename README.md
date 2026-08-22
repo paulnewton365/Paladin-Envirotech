@@ -431,13 +431,19 @@ carries its own bottom padding instead, which applies to both columns equally.
 Calls to action sit above the fold at 1440x900, 1440x800, 1600x900 and on
 mobile.
 
-### Starting without a swap
+### Holding image
 
-The poster was a different photograph from the footage, so the hero showed one
-image and then cut to another. There is now no poster on desktop: the well is
-navy, the video fades in over 400ms once it can play, and the photograph is
-applied as a background only for mobile and reduced motion, where a still is
-actually wanted. `preconnect`, `dns-prefetch` and a `rel=preload` hint start
+`assets/hero-holding.webp` is the poster. It is abstract circuitry on navy with
+copper accents, so it sits inside the palette and the handoff to video is a
+change of state rather than a cut between two different photographs, which is
+what made the earlier stock poster jar.
+
+It is also the permanent still for mobile and reduced motion, so those visitors
+get a deliberate image rather than an empty navy box. 16KB.
+
+The fade that had been covering the earlier poster problem is gone: with a real
+poster set, starting at zero opacity would have hidden the holding image too,
+which is the opposite of what it is for. `preconnect`, `dns-prefetch` and a `rel=preload` hint start
 the fetch as early as the parser allows.
 
 The real determinant of how fast it starts is file size and origin. The file
