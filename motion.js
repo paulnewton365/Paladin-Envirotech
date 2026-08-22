@@ -29,6 +29,22 @@
     // The per-page runtime does not check the reduced-motion preference, so
     // pin its elements open on its behalf. Setting dataset.shown stops its
     // scroll handler from hiding them again.
+    // The early return below means initHeroVideo() never runs for these
+    // visitors, so the hero video has to be stopped here or it would autoplay
+    // for exactly the people who asked it not to.
+    var stopHeroVideo = function () {
+      var v = document.querySelector('[data-hero-video]');
+      if (!v || v.getAttribute('data-stilled') === '1') return;
+      v.setAttribute('data-stilled', '1');
+      try { v.pause(); } catch (e) {}
+      v.removeAttribute('autoplay');
+      var src = v.querySelector('source');
+      if (src) src.parentNode.removeChild(src);
+      v.load();
+      var poster = v.getAttribute('poster');
+      if (poster) v.style.background = 'url("' + poster + '") center / cover no-repeat';
+    };
+
     var settle = function () {
       document.querySelectorAll('[data-timeline-beat]').forEach(function (el) {
         el.classList.add('is-in');
@@ -82,6 +98,7 @@
     var n = 0;
     var poll = function () {
       settle();
+      stopHeroVideo();
       stampReduced();
       if (n++ < 40) setTimeout(poll, 100);
     };
@@ -472,6 +489,44 @@
     window.scrollTo({ top: y < 0 ? 0 : y, behavior: 'auto' });
   }
 
+  /* ---- Hero video --------------------------------------------------------
+     Below 700px, and for anyone who asked for reduced motion, drop back to the
+     poster frame. A hero video is not worth several megabytes of a phone's
+     data allowance, and the poster carries the same image either way. */
+
+  function initHeroVideo() {
+    var video = document.querySelector('[data-hero-video]');
+    if (!video) return;
+    var poster = video.getAttribute('poster');
+
+    function useStill() {
+      if (video.getAttribute('data-stilled') === '1') return;
+      video.setAttribute('data-stilled', '1');
+      try { video.pause(); } catch (e) {}
+      video.removeAttribute('autoplay');
+      // Drop the source so no bytes are fetched at all.
+      var src = video.querySelector('source');
+      if (src) src.parentNode.removeChild(src);
+      video.load();
+      if (poster) {
+        video.style.background = 'url("' + poster + '") center / cover no-repeat';
+      }
+    }
+
+    var small = window.matchMedia('(max-width: 700px)');
+    if (reduce || small.matches) {
+      useStill();
+      return;
+    }
+    // Only downgrade on resize; upgrading mid-session would start a download
+    // the visitor did not ask for.
+    if (small.addEventListener) small.addEventListener('change', function (e) { if (e.matches) useStill(); });
+    else if (small.addListener) small.addListener(function (e) { if (e.matches) useStill(); });
+
+    // If the remote file fails, the poster is already showing underneath.
+    video.addEventListener('error', useStill);
+  }
+
   function initMap() {
     var svg = document.querySelector('svg[aria-label*="facility network"]');
     if (svg) { buildMobileNetwork(svg); animateMap(svg); }
@@ -655,6 +710,7 @@
     })();
     tagBlocks();
     armReveals();
+    initHeroVideo();
     initMap();
     initTimeline();
     initChain();

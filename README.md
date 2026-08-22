@@ -1,6 +1,6 @@
 # Paladin EnviroTech — site prototype
 
-**Build 1.19.0**
+**Build 1.20.0**
 
 Twelve-page static prototype of the paladinenvirotech.com redesign, exported
 from Claude Design and prepared for deployment.
@@ -167,6 +167,7 @@ say which build they are looking at. To cut a new build, run
 | 1.18.1 | New hero image on /paladin-local |
 | 1.18.2 | New featured image on /blog |
 | 1.19.0 | Homepage hero rewritten to introduce the company |
+| 1.20.0 | Hero video from Paladin's own site, with still fallbacks |
 
 ## Access gate
 
@@ -366,6 +367,36 @@ them was landing in the wrong place.
 `motion.js` now re-applies the hash once content exists, offsetting by the
 sticky header's height so the target is not tucked underneath it. Pages opened
 without a hash are left alone.
+
+## Hero video
+
+The hero uses Paladin's own header video from their WordPress rather than a
+stock still. It is their footage, so there is no licensing question and it
+answers the authenticity gap the brand review scored lowest.
+
+It is wired defensively, because the file is remote and was never verified
+frame by frame:
+
+| Guard | Why |
+| --- | --- |
+| `poster` set to the previous hero still | Something shows before it buffers, and the hero degrades to today's state if the remote file is renamed |
+| `muted`, `loop`, `playsinline`, `autoplay` | The only combination browsers will start without a user gesture |
+| `preload="metadata"` | A phone does not pull the whole file to paint the first screen |
+| Navy gradient scrim over the footage | The headline is white with a copper accent, and copper will not hold contrast over unpredictable video |
+| Poster only below 700px | Several megabytes is not a fair ask of a phone |
+| Poster under `prefers-reduced-motion` | Consistent with the rest of the motion layer |
+
+Below 700px and for reduced motion the `<source>` element is removed and the
+video reloaded, so no bytes are fetched at all rather than merely being hidden.
+
+One trap worth recording: `motion.js` returns early for reduced-motion
+visitors, so `initHeroVideo()` never runs for them. The video therefore has to
+be stopped separately inside that early branch, or it would autoplay for
+exactly the people who asked it not to.
+
+**Unverified:** the sandbox this was built in cannot reach paladinenvirotech.com,
+so the footage itself has never been seen. What it depicts, its file size and
+whether it loops cleanly all need checking in a browser.
 
 ## Homepage hero
 

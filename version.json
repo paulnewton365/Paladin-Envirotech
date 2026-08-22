@@ -1,5 +1,5 @@
 {
-  "version": "1.19.0",
+  "version": "1.20.0",
   "built": "2026-08-22",
-  "notes": "Homepage hero rewritten to introduce the company"
+  "notes": "Hero video from Paladin's own site with still fallbacks"
 }
