@@ -143,7 +143,7 @@
     var logoBox = gate.querySelector('#pal-gate-logo');
     // PNG is what ships. If vector artwork arrives later, save it over this
     // path or add it ahead of the PNG here.
-    var sources = ['/assets/antenna-logo.png'];
+    var sources = ['/assets/antenna-logo.de7012a5.png'];
     (function tryLogo(i) {
       if (i >= sources.length) {
         var fallback = document.createElement('div');

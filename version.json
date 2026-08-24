@@ -1,5 +1,5 @@
 {
-  "version": "1.30.1",
+  "version": "1.31.0",
   "built": "2026-08-24",
-  "notes": "Logo 20% larger and re-encoded lossless"
+  "notes": "Content-hashed asset filenames so cached files cannot go stale"
 }
