@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1E31">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.29.0">
+<meta name="build-version" content="1.30.0">
 <meta name="build-date" content="2026-08-24">
 <meta property="og:title" content="Industries We Serve | Paladin EnviroTech">
 <meta property="og:description" content="Hyperscale, OEM, enterprise and government programmes.">
@@ -66,6 +66,11 @@ a:hover { opacity: 0.75; }
   .pal-ind { grid-template-columns: 1fr; gap: 40px; }
 }
 @media (prefers-reduced-motion: reduce) { .pal-ind-copy { animation: none; } }
+
+.pal-ind-head-block { margin-bottom: clamp(32px, 4vw, 48px); }
+.pal-ind-head-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #8A6A26; }
+.pal-ind-head-eyebrow::before { content: ""; width: 10px; height: 10px; background: #C79A45; flex: none; }
+.pal-ind-head-title { margin: 18px 0 0; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; letter-spacing: -0.5px; font-weight: 400; color: #0B1E31; text-wrap: balance; }
 </style>
 </helmet>
 
@@ -105,6 +110,7 @@ a:hover { opacity: 0.75; }
 
 <div style="background: #F5F6F7; padding: clamp(64px, 8vw, 112px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
+    <div class="pal-ind-head-block"><div class="pal-ind-head-eyebrow">Industries we serve</div><h2 class="pal-ind-head-title">Start with your sector.</h2></div>
     <div class="pal-ind" data-ind-root>
       <div class="pal-ind-list" role="tablist" aria-label="Industries" data-ind-list></div>
       <div class="pal-ind-panel">

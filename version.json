@@ -1,5 +1,5 @@
 {
-  "version": "1.29.0",
+  "version": "1.30.0",
   "built": "2026-08-24",
-  "notes": "Real Paladin lockup installed locally; crop hack removed"
+  "notes": "Updated lockup; industries selector given a section title"
 }
