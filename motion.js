@@ -599,6 +599,75 @@
     video.addEventListener('error', useStill);
   }
 
+  /* ---- Industries selector ----------------------------------------------
+     One sector at a time: index on the left, detail panel on the right.
+     Lives here rather than in a page script tag because /industries is
+     React-rendered and a tag inside the template never executes. */
+
+  function initIndustries() {
+    var root = document.querySelector('[data-ind-root]');
+    if (!root || root.getAttribute('data-ind-ready') === '1') return;
+    root.setAttribute('data-ind-ready', '1');
+
+    var ROWS = [
+      { num: "01", name: "Hyperscale & data centers", head: "A live facility can come down without going dark", body: "Racks, networking gear and backup generators come out on your schedule. Zero downtime, full hazardous-materials handling, every asset accounted for the moment it leaves the floor." },
+      { num: "02", name: "Government & public sector", head: "Taxpayer resources, accounted for to the last unit", body: "Federal security standards, met without slowing the refresh down, and an audit trail that holds up when someone outside your agency asks to see it." },
+      { num: "03", name: "Healthcare", head: "Patient trust doesn\u2019t end when the hardware does", body: "Every retired workstation, server and medical device is HIPAA-compliant destroyed and certified, from a single clinic to a multi-hospital system." },
+      { num: "04", name: "Financial services", head: "The audit you\u2019re dreading becomes routine", body: "PCI DSS-compliant destruction across trading-floor systems and branch computers, documented in a way that satisfies the examiner the first time." },
+      { num: "05", name: "Fortune 500 enterprise", head: "One refresh, fifty sites, one point of contact", body: "A single-point project manages the coordination across every location, so the coordination sits with us." },
+      { num: "06", name: "OEMs & VARs", head: "Returned equipment becomes a managed program", body: "Take-back and warranty returns run through component harvesting and refurbishment, with recovery metrics you can put in front of customers." },
+      { num: "07", name: "Manufacturing & industrial", head: "The office and the shop floor stop being two problems", body: "Corporate IT refreshes and industrial control equipment come down under the same security protocol, at facilities built to handle both." },
+      { num: "08", name: "Wind & renewable energy", head: "Retiring a turbine pays for itself", body: "Steel, copper and rare-earth magnets recovered from a single turbine or an entire wind farm turn a decommissioning cost into a recovery return." }
+    ];
+
+    var list  = root.querySelector('[data-ind-list]');
+    var ghost = root.querySelector('[data-ind-ghost]');
+    var label = root.querySelector('[data-ind-label]');
+    var copy  = root.querySelector('[data-ind-copy]');
+    var head  = root.querySelector('[data-ind-head]');
+    var text  = root.querySelector('[data-ind-text]');
+    var count = root.querySelector('[data-ind-count]');
+    if (!list || !ghost) return;
+
+    ROWS.forEach(function (r, i) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'pal-ind-item';
+      b.setAttribute('role', 'tab');
+      b.innerHTML = '<span class="pal-ind-dot"></span><span class="pal-ind-num"></span>' +
+                    '<span class="pal-ind-name"></span>';
+      b.querySelector('.pal-ind-num').textContent = r.num;
+      b.querySelector('.pal-ind-name').textContent = r.name;
+      b.addEventListener('click', function () { go(i); });
+      list.appendChild(b);
+    });
+
+    var items = list.querySelectorAll('.pal-ind-item');
+    var active = 0;
+
+    function go(i) {
+      active = (i + ROWS.length) % ROWS.length;
+      var r = ROWS[active];
+      Array.prototype.forEach.call(items, function (el, n) {
+        el.setAttribute('aria-selected', n === active ? 'true' : 'false');
+      });
+      ghost.textContent = r.num;
+      label.textContent = r.name;
+      head.textContent = r.head;
+      text.textContent = r.body;
+      count.textContent = r.num + ' / ' + ROWS[ROWS.length - 1].num;
+      if (!reduce) {
+        copy.style.animation = 'none';
+        void copy.offsetWidth;
+        copy.style.animation = '';
+      }
+    }
+
+    root.querySelector('[data-ind-prev]').addEventListener('click', function () { go(active - 1); });
+    root.querySelector('[data-ind-next]').addEventListener('click', function () { go(active + 1); });
+    go(0);
+  }
+
   function initMap() {
     var svg = document.querySelector('svg[aria-label*="facility network"]');
     if (svg) { buildMobileNetwork(svg); animateMap(svg); }
@@ -783,13 +852,14 @@
     tagBlocks();
     armReveals();
     initHeroVideo();
+    initIndustries();
     initMap();
     initTimeline();
     initChain();
     honourHash();
     // Second pass for anything that lands after first paint (images resolving,
     // late layout). Both functions are idempotent.
-    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); initChain(); honourHash(); }, 900);
+    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); initChain(); initIndustries(); honourHash(); }, 900);
   }
 
   if (document.readyState === 'complete') {

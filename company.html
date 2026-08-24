@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1E31">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.26.0">
+<meta name="build-version" content="1.28.0">
 <meta name="build-date" content="2026-08-24">
 <meta property="og:title" content="Company | Paladin EnviroTech">
 <meta property="og:description" content="Who Paladin is and the people who run it.">
@@ -54,6 +54,28 @@ a:hover { opacity: 0.75; }
 @media (max-width: 560px) {
   .pal-lead-role { grid-template-columns: 1fr; gap: 6px; }
 }
+
+/* Partnership network: two groups under gold rules, entities with tags. */
+.pal-pn { display: flex; flex-direction: column; gap: clamp(26px, 3vw, 36px); }
+.pal-pn-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #C79A45; }
+.pal-pn-eyebrow::before { content: ""; width: 10px; height: 10px; background: #C79A45; flex: none; }
+.pal-pn-title { margin: 0; max-width: 620px; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.22; letter-spacing: -0.6px; font-weight: 300; color: #FFFFFF; text-wrap: balance; }
+.pal-pn-intro { margin: 0; max-width: 620px; font-size: 16px; line-height: 27px; font-weight: 300; color: rgba(255,255,255,0.66); text-wrap: pretty; }
+.pal-pn-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(32px, 4vw, 56px); margin-top: 12px; }
+.pal-pn-group { display: flex; flex-direction: column; }
+.pal-pn-grouphead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #C79A45; }
+.pal-pn-grouplabel { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #C79A45; }
+.pal-pn-groupcount { font-size: 11px; letter-spacing: 0.8px; color: rgba(255,255,255,0.45); font-variant-numeric: tabular-nums; }
+.pal-pn-entity { display: grid; gap: 8px; padding: 24px 0 26px; border-bottom: 1px solid rgba(255,255,255,0.16); transition: padding-left 220ms cubic-bezier(0.2,0.7,0.1,1); }
+.pal-pn-entity:hover { padding-left: 10px; }
+.pal-pn-entityhead { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.pal-pn-name { font-size: clamp(19px, 1.9vw, 21px); line-height: 28px; letter-spacing: -0.2px; font-weight: 500; color: #FFFFFF; }
+.pal-pn-tag { font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: #C79A45; border: 1px solid rgba(199,154,69,0.5); padding: 3px 8px; }
+.pal-pn-text { margin: 0; font-size: 15px; line-height: 24px; font-weight: 300; color: rgba(255,255,255,0.7); max-width: 42ch; text-wrap: pretty; }
+@media (max-width: 1000px) {
+  .pal-pn-groups { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+}
+@media (prefers-reduced-motion: reduce) { .pal-pn-entity { transition: none; } }
 </style>
 </helmet>
 
@@ -168,17 +190,16 @@ a:hover { opacity: 0.75; }
   </div>
 </div>
 
-<div data-reveal="1" style="background: #102B43; padding: clamp(64px, 8vw, 128px) 0;">
+<div data-reveal="1" style="background: #0B1E31; padding: clamp(64px, 8vw, 128px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
-    <span style="color: #8FA6BA; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Platform companies &amp; partners</span>
-    <h2 style="color: #FFFFFF; font-size: clamp(30px, 3.8vw, 56px); line-height: 1.14; font-weight: 300; margin: 16px 0 40px; max-width: 800px;">One joined-up partnership network</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 1px;">
-      <div style="background: #102B43; outline: 1px solid rgba(255,255,255,0.16); padding: 28px; display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 18px; font-weight: 500; color: #FFFFFF;">IRT</span><span style="font-size: 14px; line-height: 22px; color: #DDE3E9;">Integrated Recycling Technologies, Paladin's Midwest electronics recycling and ITAD platform.</span></div>
-      <div style="background: #102B43; outline: 1px solid rgba(255,255,255,0.16); padding: 28px; display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 18px; font-weight: 500; color: #FFFFFF;">R&amp;L Recycling B.V.</span><span style="font-size: 14px; line-height: 22px; color: #DDE3E9;">Paladin's European ITAD and e-recycling platform, based in Helmond.</span></div>
-      <div style="background: #102B43; outline: 1px solid rgba(255,255,255,0.16); padding: 28px; display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 18px; font-weight: 500; color: #FFFFFF;">CMR</span><span style="font-size: 14px; line-height: 22px; color: #DDE3E9;">Critical Materials Recycling, REcapture's technology partner for rare-earth recovery.</span></div>
-      <div style="background: #102B43; outline: 1px solid rgba(255,255,255,0.16); padding: 28px; display: flex; flex-direction: column; gap: 10px;"><span style="font-size: 18px; font-weight: 500; color: #FFFFFF;">Daeheung</span><span style="font-size: 14px; line-height: 22px; color: #DDE3E9;">REcapture's technology partner in South Korea for rare-earth recovery.</span></div>
+    <div class="pal-pn">
+      <div class="pal-pn-eyebrow">Platform companies &amp; partners</div>
+      <h2 class="pal-pn-title">One joined-up partnership network</h2>
+      <p class="pal-pn-intro">REcapture is a joint venture between Paladin EnviroTech and Critical Materials Recycling. Each acquired company keeps its own certificate and legal identity until integration completes.</p>
+      <div class="pal-pn-groups">
+        <div class="pal-pn-group"><div class="pal-pn-grouphead"><span class="pal-pn-grouplabel">Paladin platform companies</span><span class="pal-pn-groupcount">02</span></div><div class="pal-pn-entity"><div class="pal-pn-entityhead"><span class="pal-pn-name">IRT</span><span class="pal-pn-tag">Midwest, US</span></div><p class="pal-pn-text">Integrated Recycling Technologies, Paladin's Midwest electronics recycling and ITAD platform.</p></div><div class="pal-pn-entity"><div class="pal-pn-entityhead"><span class="pal-pn-name">R&amp;L Recycling B.V.</span><span class="pal-pn-tag">Helmond, NL</span></div><p class="pal-pn-text">Paladin's European ITAD and e-recycling platform, based in Helmond.</p></div></div><div class="pal-pn-group"><div class="pal-pn-grouphead"><span class="pal-pn-grouplabel">REcapture technology partners</span><span class="pal-pn-groupcount">02</span></div><div class="pal-pn-entity"><div class="pal-pn-entityhead"><span class="pal-pn-name">CMR</span><span class="pal-pn-tag">Rare-earth recovery</span></div><p class="pal-pn-text">Critical Materials Recycling, REcapture's technology partner for rare-earth recovery.</p></div><div class="pal-pn-entity"><div class="pal-pn-entityhead"><span class="pal-pn-name">Daeheung</span><span class="pal-pn-tag">South Korea</span></div><p class="pal-pn-text">REcapture's technology partner in South Korea for rare-earth recovery.</p></div></div>
+      </div>
     </div>
-    <p style="color: #7F93A6; font-weight: 300; font-size: 14px; line-height: 22px; margin: 24px 0 0; max-width: 700px;">REcapture is a joint venture between Paladin EnviroTech and Critical Materials Recycling. Each acquired company keeps its own certificate and legal identity until integration completes.</p>
   </div>
 </div>
 

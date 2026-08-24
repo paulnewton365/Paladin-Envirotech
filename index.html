@@ -14,7 +14,7 @@
 <link rel="dns-prefetch" href="https://paladinenvirotech.com">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.26.0">
+<meta name="build-version" content="1.28.0">
 <meta name="build-date" content="2026-08-24">
 <meta property="og:title" content="Paladin EnviroTech | Paladin EnviroTech">
 <meta property="og:description" content="Secure technology lifecycle management and critical materials recovery.">
@@ -62,6 +62,29 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
   .pal-tick { transform: scaleX(1); transition: none; }
 }
 
+
+/* Working with: client types beside partner marks, split by a vertical rule. */
+.pal-ww { display: flex; flex-direction: column; gap: clamp(28px, 3.5vw, 40px); }
+.pal-ww-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #A9832F; }
+.pal-ww-eyebrow::before { content: ""; width: 10px; height: 10px; background: #C79A45; flex: none; }
+.pal-ww-cols { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); gap: clamp(32px, 4vw, 64px); align-items: start; }
+.pal-ww-label { font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085; padding-bottom: 18px; }
+.pal-ww-clients { border-right: 1px solid rgba(11, 30, 49, 0.14); padding-right: clamp(24px, 3.5vw, 56px); }
+.pal-ww-sectors { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px; }
+.pal-ww-sector { display: flex; flex-direction: column; gap: 8px; padding-top: 16px; border-top: 1px solid rgba(11, 30, 49, 0.14); }
+.pal-ww-num { font-size: 11px; letter-spacing: 0.6px; color: #A9832F; font-variant-numeric: tabular-nums; }
+.pal-ww-name { font-size: clamp(17px, 1.7vw, 20px); line-height: 27px; letter-spacing: -0.2px; font-weight: 300; text-wrap: balance; }
+.pal-ww-partners { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.pal-ww-partner { display: flex; flex-direction: column; gap: 12px; }
+.pal-ww-mark { background: #FFFFFF; height: 96px; display: flex; align-items: center; justify-content: center; padding: 18px; }
+.pal-ww-mark img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+.pal-ww-caption { font-size: 12px; line-height: 18px; color: #5B7085; }
+.pal-ww-note { margin: 0; font-size: 13px; line-height: 21px; color: #6E7883; max-width: 70ch; }
+@media (max-width: 1000px) {
+  .pal-ww-cols { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .pal-ww-clients { border-right: 0; padding-right: 0; }
+  .pal-ww-sectors { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 24px; }
+}
 </style>
 </helmet>
 
@@ -140,7 +163,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
   </div>
 </div>
 
-<div data-reveal="1" style="background: #E7EAEE; border-top: 1px solid rgba(11, 30, 49,0.16); padding: clamp(64px, 8vw, 128px) 0;">
+<div data-reveal="1" style="background: #E7EAEE; border-top: 1px solid rgba(11, 30, 49, 0.22); padding: clamp(64px, 8vw, 128px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(36px, 4vw, 64px); align-items: start; margin-bottom: 88px;">
       <div>
@@ -149,19 +172,19 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
       </div>
       <div>
         <p style="color: #47586B; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 0 0 20px;">Scrap is collected locally, but where it goes, and who controls it, determines who controls manufacturing, innovation and long-term competitiveness. We cannot recycle our way out of the problems facing supply chains, but recycling is the only near-term lever that matches the urgency of defense, AI infrastructure and energy-transition demand. The U.S. has almost no heavy rare earths in its mines, which makes recovery from existing equipment essential for near-term access.</p>
-        <a href="/critical-materials" style="color: #0B1E31; font-size: 15px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid #FFFFFF; padding-bottom: 4px;">Explore critical materials</a>
+        <a href="/critical-materials" style="color: #0B1E31; font-size: 15px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid rgba(11, 30, 49, 0.22); padding-bottom: 4px;">Explore critical materials</a>
       </div>
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: clamp(32px, 4vw, 64px);">
-      <div style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 28px;">
+      <div style="border-top: 1px solid rgba(11, 30, 49, 0.22); padding-top: 28px;">
         <div data-countup="1" data-target="70" data-suffix="%" style="color: #8A6A26; font-size: clamp(64px, 8.5vw, 136px); line-height: 1; letter-spacing: -2px; font-weight: 300;">0%</div>
         <p style="color: #47586B; font-weight: 300; font-size: 16px; line-height: 26px; margin: 18px 0 0; max-width: 340px;">of global rare earth mining is controlled by China</p>
       </div>
-      <div style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 28px;">
+      <div style="border-top: 1px solid rgba(11, 30, 49, 0.22); padding-top: 28px;">
         <div data-countup="1" data-target="90" data-suffix="%" style="color: #8A6A26; font-size: clamp(64px, 8.5vw, 136px); line-height: 1; letter-spacing: -2px; font-weight: 300;">0%</div>
         <p style="color: #47586B; font-weight: 300; font-size: 16px; line-height: 26px; margin: 18px 0 0; max-width: 340px;">of global rare earth refining, the input to magnets and advanced tech</p>
       </div>
-      <div style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 28px;">
+      <div style="border-top: 1px solid rgba(11, 30, 49, 0.22); padding-top: 28px;">
         <div data-countup="1" data-target="29" style="color: #8A6A26; font-size: clamp(64px, 8.5vw, 136px); line-height: 1; letter-spacing: -2px; font-weight: 300;">0</div>
         <p style="color: #47586B; font-weight: 300; font-size: 16px; line-height: 26px; margin: 18px 0 0; max-width: 340px;">years, on average, to develop a new U.S. mine, permitting alone takes nearly a decade</p>
       </div>
@@ -337,16 +360,24 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
 
 <div data-reveal="1" style="background: #F5F6F7; padding: clamp(56px, 7vw, 96px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
-    <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">Working with</span>
-    <div style="margin-top: 32px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(130px, 100%), 1fr)); gap: 1px;">
-      <div style="background: #F5F6F7; outline: 1px solid #C7CFD7; height: 96px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">Hyperscaler</span></div>
-      <div style="background: #F5F6F7; outline: 1px solid #C7CFD7; height: 96px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">Gov agency</span></div>
-      <div style="background: #F5F6F7; outline: 1px solid #C7CFD7; height: 96px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">OEM</span></div>
-      <div style="background: #F5F6F7; outline: 1px solid #C7CFD7; height: 96px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5B7085;">Enterprise</span></div>
-      <div style="background: #F5F6F7; outline: 1px solid #C7CFD7; height: 96px; display: flex; align-items: center; justify-content: center;"><img src="https://paladinenvirotech.com/wp-content/uploads/2026/05/EERA-Logo-with-words-PNG.png" alt="EERA" style="max-height: 44px; max-width: 76%; object-fit: contain; filter: grayscale(1); opacity: 0.6; transition: filter 200ms, opacity 200ms;" style-hover="filter: none; opacity: 1;" /></div>
-      <div style="background: #F5F6F7; outline: 1px solid #C7CFD7; height: 96px; display: flex; align-items: center; justify-content: center;"><img src="https://paladinenvirotech.com/wp-content/uploads/2026/06/PSV-Paladin-Logo.jpg" alt="PSV Eindhoven" style="max-height: 52px; max-width: 82%; object-fit: contain; filter: grayscale(1); opacity: 0.6; transition: filter 200ms, opacity 200ms;" style-hover="filter: none; opacity: 1;" /></div>
+    <div class="pal-ww">
+      <div class="pal-ww-eyebrow">Working with</div>
+      <div class="pal-ww-cols">
+        <div class="pal-ww-clients">
+          <div class="pal-ww-label">Client types served</div>
+          <div class="pal-ww-sectors">
+            <div class="pal-ww-sector"><span class="pal-ww-num">01</span><span class="pal-ww-name">Hyperscaler</span></div><div class="pal-ww-sector"><span class="pal-ww-num">02</span><span class="pal-ww-name">Gov agency</span></div><div class="pal-ww-sector"><span class="pal-ww-num">03</span><span class="pal-ww-name">OEM</span></div><div class="pal-ww-sector"><span class="pal-ww-num">04</span><span class="pal-ww-name">Enterprise</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="pal-ww-label">Partners &amp; accreditations</div>
+          <div class="pal-ww-partners">
+            <div class="pal-ww-partner"><div class="pal-ww-mark"><img src="https://paladinenvirotech.com/wp-content/uploads/2026/05/EERA-Logo-with-words-PNG.png" alt="European Electronics Recyclers Association" /></div><span class="pal-ww-caption">EERA member</span></div><div class="pal-ww-partner"><div class="pal-ww-mark"><img src="https://paladinenvirotech.com/wp-content/uploads/2026/06/PSV-Paladin-Logo.jpg" alt="Paladin EnviroTech &amp; PSV Eindhoven" /></div><span class="pal-ww-caption">PSV Eindhoven partnership</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="pal-ww-note">Client marks are placeholders; partner marks are live assets pulled from paladinenvirotech.com.</p>
     </div>
-    <p style="margin: 20px 0 0; font-size: 13px; color: #5B7085;">Client marks are placeholders; partner marks are live assets pulled from paladinenvirotech.com.</p>
   </div>
 </div>
 
