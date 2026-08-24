@@ -155,7 +155,7 @@
 
     var panel = document.createElement('div');
     panel.id = PANEL_ID;
-    panel.style.cssText = 'display:none;background:#14304C;' +
+    panel.style.cssText = 'display:none;background:#102B43;' +
       'border-top:1px solid rgba(255,255,255,0.16);';
     panel.innerHTML = panelHTML();
     header.appendChild(panel);

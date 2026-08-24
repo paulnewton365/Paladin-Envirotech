@@ -664,12 +664,12 @@
              ' <span style="color:#A9832F;">' + list.length + '</span></p>' +
              '<p style="color:#47586B;font-size:15px;font-weight:300;line-height:1.6;' +
              'margin:0 0 22px;padding-left:14px;' +
-             'border-left:1px solid rgba(11,33,56,0.16);">' + names + '</p>';
+             'border-left:1px solid rgba(11, 30, 49,0.16);">' + names + '</p>';
     }
 
     el.innerHTML =
       '<div style="padding:4px 0 8px;">' +
-        '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#0B2138;' +
+        '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#0B1E31;' +
           'font-size:17px;font-weight:500;">' +
           '<span style="position:absolute;left:0;top:5px;width:13px;height:13px;' +
             'border-radius:50%;background:#A9832F;"></span>' +
