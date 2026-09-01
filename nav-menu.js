@@ -35,7 +35,7 @@
     ]},
     { label: 'Recycling', items: [
       ['Electronics recycling', '/electronics-recycling'],
-      ['Paladin Local', '/paladin-local'],
+      ['Regional coverage', '/paladin-local'],
       ['Wind turbine & energy assets', null],
       ['Metallurgical lab', null]
     ]},
@@ -124,9 +124,17 @@
     var nav = header.querySelector('nav');
     if (!nav) return null;
     var candidates = nav.querySelectorAll('a, button');
+    // Match on the destination first. The label has already been renamed once,
+    // from "Platform" to "One system", and matching on text meant the menu
+    // silently stopped appearing on twelve pages.
+    for (var i = 0; i < candidates.length; i++) {
+      if (candidates[i].getAttribute('href') === '/platform') return candidates[i];
+    }
     for (var i = 0; i < candidates.length; i++) {
       var t = (candidates[i].textContent || '').trim().toLowerCase();
-      if (t === 'platform' || t.indexOf('platform') === 0) return candidates[i];
+      if (t === 'one system' || t.indexOf('one system') === 0 || t.indexOf('platform') === 0) {
+        return candidates[i];
+      }
     }
     return null;
   }
