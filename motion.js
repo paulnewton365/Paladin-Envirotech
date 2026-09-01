@@ -74,7 +74,7 @@
       var el = document.createElement('div');
       el.setAttribute('data-build-stamp', '');
       el.style.cssText = 'text-align:right;padding:8px clamp(24px,5vw,72px) 0;' +
-        'color:#5B7085;font-size:11px;letter-spacing:0.6px;';
+        'color:#8CA0B3;font-size:11px;letter-spacing:0.6px;';
       el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
       footer.appendChild(el);
       if (window.location.hash && window.location.hash.length > 1) {
@@ -728,9 +728,9 @@
     function group(label, list) {
       if (!list.length) return '';
       var names = list.map(function (c) { return c.name; }).join('  \u00b7  ');
-      return '<p style="color:#5B7085;font-size:12px;letter-spacing:1px;' +
+      return '<p style="color:#47586B;font-size:12px;letter-spacing:1px;' +
              'text-transform:uppercase;margin:0 0 8px;">' + label +
-             ' <span style="color:#A9832F;">' + list.length + '</span></p>' +
+             ' <span style="color:#7D6023;">' + list.length + '</span></p>' +
              '<p style="color:#47586B;font-size:15px;font-weight:300;line-height:1.6;' +
              'margin:0 0 22px;padding-left:14px;' +
              'border-left:1px solid rgba(11, 30, 49,0.16);">' + names + '</p>';
@@ -741,9 +741,9 @@
         '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#0B1E31;' +
           'font-size:17px;font-weight:500;">' +
           '<span style="position:absolute;left:0;top:5px;width:13px;height:13px;' +
-            'border-radius:50%;background:#A9832F;"></span>' +
+            'border-radius:50%;background:#C08F3C;"></span>' +
           'Tampa, FL</p>' +
-        '<p style="color:#5B7085;font-size:13px;font-weight:300;margin:0 0 24px;' +
+        '<p style="color:#47586B;font-size:13px;font-weight:300;margin:0 0 24px;' +
           'padding-left:26px;">Headquarters. Every route below runs through here.</p>' +
         group('Domestic routing', domestic) +
         group('International', international) +
@@ -776,7 +776,7 @@
     var el = document.createElement('div');
     el.setAttribute('data-build-stamp', '');
     el.style.cssText = 'text-align:right;padding:8px clamp(24px,5vw,72px) 0;' +
-      'color:#5B7085;font-size:11px;letter-spacing:0.6px;';
+      'color:#8CA0B3;font-size:11px;letter-spacing:0.6px;';
     el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
     footer.appendChild(el);
     clearStickyBar();

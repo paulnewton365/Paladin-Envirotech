@@ -60,7 +60,7 @@
     g.items.forEach(function (it) { TARGETS[it[0].toLowerCase()] = it[1]; });
   });
 
-  var INACTIVE = 'color:#7F93A6;font-size:15px;font-weight:300;cursor:default;';
+  var INACTIVE = 'color:#8CA0B3;font-size:15px;font-weight:300;cursor:default;';
   var ACTIVE = 'color:#FFFFFF;font-size:15px;font-weight:300;text-decoration:none;';
 
   var PANEL_ID = 'pal-mega';
@@ -80,7 +80,7 @@
       }).join('');
       return '<div style="display:flex;flex-direction:column;gap:12px;">' +
              '<span style="font-size:13px;letter-spacing:1px;text-transform:uppercase;' +
-             'color:#8FA6BA;">' + esc(g.label) + '</span>' + links + '</div>';
+             'color:#8CA0B3;">' + esc(g.label) + '</span>' + links + '</div>';
     }).join('');
     return '<div style="max-width:1600px;margin:0 auto;padding:40px clamp(24px,5vw,72px) 44px;' +
            'display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));' +
@@ -163,7 +163,7 @@
 
     var panel = document.createElement('div');
     panel.id = PANEL_ID;
-    panel.style.cssText = 'display:none;background:#102B43;' +
+    panel.style.cssText = 'display:none;background:#12293F;' +
       'border-top:1px solid rgba(255,255,255,0.16);';
     panel.innerHTML = panelHTML();
     header.appendChild(panel);

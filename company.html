@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1E31">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.32.0">
+<meta name="build-version" content="1.33.1">
 <meta name="build-date" content="2026-09-01">
 <meta property="og:title" content="Company | Paladin EnviroTech">
 <meta property="og:description" content="Who Paladin is and the people who run it.">
@@ -31,20 +31,20 @@
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
-html, body { margin: 0; padding: 0; background: #F5F6F7; font-family: "Restart Hard", system-ui, sans-serif; color: #0B1E31; -webkit-font-smoothing: antialiased; }
+html, body { margin: 0; padding: 0; background: #E8EDF2; font-family: "Restart Hard", system-ui, sans-serif; color: #0B1E31; -webkit-font-smoothing: antialiased; }
 * { box-sizing: border-box; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: 0.75; }
 
 /* Leadership roster: a ruled two-column list, replacing a grid of boxes. */
 .pal-lead-head { border-bottom: 1px solid #0B1E31; padding-bottom: clamp(28px, 3.5vw, 44px); }
-.pal-lead-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #5B7085; }
+.pal-lead-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #47586B; }
 .pal-lead-headgrid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 96px); align-items: end; margin-top: 24px; }
 .pal-lead-headgrid h2 { margin: 0; font-size: clamp(32px, 4.2vw, 58px); line-height: 1.05; font-weight: 500; letter-spacing: -0.5px; color: #0B1E31; text-wrap: pretty; }
 .pal-lead-intro { margin: 0 0 8px; font-size: 17px; line-height: 1.65; font-weight: 300; color: #47586B; text-wrap: pretty; }
 .pal-lead-roster { display: grid; grid-template-columns: repeat(2, 1fr); column-gap: clamp(32px, 5vw, 96px); }
 .pal-lead-col { display: flex; flex-direction: column; }
-.pal-lead-role { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 24px; padding: clamp(22px, 2.4vw, 30px) 0; border-bottom: 1px solid #C7CFD7; }
+.pal-lead-role { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 24px; padding: clamp(22px, 2.4vw, 30px) 0; border-bottom: 1px solid #D3DBE3; }
 .pal-lead-title { font-size: 13px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: #0B1E31; }
 .pal-lead-name { font-size: clamp(19px, 1.8vw, 24px); line-height: 1.2; font-weight: 300; color: #47586B; }
 @media (max-width: 1024px) {
@@ -57,20 +57,20 @@ a:hover { opacity: 0.75; }
 
 /* Partnership network: two groups under gold rules, entities with tags. */
 .pal-pn { display: flex; flex-direction: column; gap: clamp(26px, 3vw, 36px); }
-.pal-pn-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #C79A45; }
-.pal-pn-eyebrow::before { content: ""; width: 10px; height: 10px; background: #C79A45; flex: none; }
+.pal-pn-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #D9A441; }
+.pal-pn-eyebrow::before { content: ""; width: 10px; height: 10px; background: #D9A441; flex: none; }
 .pal-pn-title { margin: 0; max-width: 620px; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.22; letter-spacing: -0.6px; font-weight: 300; color: #FFFFFF; text-wrap: balance; }
 .pal-pn-intro { margin: 0; max-width: 620px; font-size: 16px; line-height: 27px; font-weight: 300; color: rgba(255,255,255,0.66); text-wrap: pretty; }
 .pal-pn-groups { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(32px, 4vw, 56px); margin-top: 12px; }
 .pal-pn-group { display: flex; flex-direction: column; }
-.pal-pn-grouphead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #C79A45; }
-.pal-pn-grouplabel { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #C79A45; }
+.pal-pn-grouphead { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid #D9A441; }
+.pal-pn-grouplabel { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #D9A441; }
 .pal-pn-groupcount { font-size: 11px; letter-spacing: 0.8px; color: rgba(255,255,255,0.45); font-variant-numeric: tabular-nums; }
-.pal-pn-entity { display: grid; gap: 8px; padding: 24px 0 26px; border-bottom: 1px solid rgba(255,255,255,0.16); transition: padding-left 220ms cubic-bezier(0.2,0.7,0.1,1); }
+.pal-pn-entity { display: grid; gap: 8px; padding: 24px 0 26px; border-bottom: 1px solid #1B3850; transition: padding-left 220ms cubic-bezier(0.2,0.7,0.1,1); }
 .pal-pn-entity:hover { padding-left: 10px; }
 .pal-pn-entityhead { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
 .pal-pn-name { font-size: clamp(19px, 1.9vw, 21px); line-height: 28px; letter-spacing: -0.2px; font-weight: 500; color: #FFFFFF; }
-.pal-pn-tag { font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: #C79A45; border: 1px solid rgba(199,154,69,0.5); padding: 3px 8px; }
+.pal-pn-tag { font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; color: #D9A441; border: 1px solid rgba(199,154,69,0.5); padding: 3px 8px; }
 .pal-pn-text { margin: 0; font-size: 15px; line-height: 24px; font-weight: 300; color: rgba(255,255,255,0.7); max-width: 42ch; text-wrap: pretty; }
 @media (max-width: 1000px) {
   .pal-pn-groups { grid-template-columns: minmax(0, 1fr); gap: 40px; }
@@ -83,15 +83,15 @@ a:hover { opacity: 0.75; }
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); min-height: 84px; padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
     <a href="/" style="display: flex; align-items: center; gap: 11px;"><img src="/assets/paladin-lockup-white.fc8f2032.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
     <nav data-nav="1" style="display: flex; align-items: center; gap: clamp(14px, 1.8vw, 34px); flex-wrap: wrap;">
-      <a href="/platform" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #A9832F;">One system</a>
-      <a href="/critical-materials" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #A9832F;">Critical materials</a>
-      <a href="/industries" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #A9832F;">Industries</a>
-      <a href="/network" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #A9832F;">Network</a>
-      <a href="/company" style="color: #FFFFFF; font-size: 14px; font-weight: 500; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid #A9832F; transition: border-color 200ms;" style-hover="border-bottom-color: #A9832F;">Company</a>
-      <a href="/blog" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #A9832F;">Blog</a><a href="/press" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #A9832F;">Press</a>
+      <a href="/platform" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #C08F3C;">One system</a>
+      <a href="/critical-materials" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #C08F3C;">Critical materials</a>
+      <a href="/industries" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #C08F3C;">Industries</a>
+      <a href="/network" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #C08F3C;">Network</a>
+      <a href="/company" style="color: #FFFFFF; font-size: 14px; font-weight: 500; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid #C08F3C; transition: border-color 200ms;" style-hover="border-bottom-color: #C08F3C;">Company</a>
+      <a href="/blog" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #C08F3C;">Blog</a><a href="/press" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms;" style-hover="border-bottom-color: #C08F3C;">Press</a>
     </nav>
     <div style="display: flex; align-items: center; gap: 20px;">
-      <span style="color: #7F93A6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</span>
+      <span style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</span>
       <a href="/contact" style="display: inline-block; padding: 14px 22px; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; background-image: linear-gradient(to right, #9FB4C7 50%, #FFFFFF 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
       <button data-nav-toggle="1" aria-label="Menu" style="display: none; border: 0; background: transparent; cursor: pointer; width: 26px; height: 20px; flex-direction: column; justify-content: space-between; padding: 0;">
         <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
@@ -105,30 +105,30 @@ a:hover { opacity: 0.75; }
 <div style="background: #0B1E31; padding: clamp(40px, 5vw, 72px) 0 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(40px, 5vw, 72px); align-items: center; padding-bottom: clamp(40px, 5vw, 72px);">
     <div>
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;"><div style="width: 8px; height: 8px; background: #A9832F;"></div><span style="color: #8FA6BA; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Company</span></div>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;"><div style="width: 8px; height: 8px; background: #C08F3C;"></div><span style="color: #8CA0B3; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Company</span></div>
       <h1 style="color: #FFFFFF; font-size: clamp(38px, 6vw, 84px); line-height: 1.04; letter-spacing: -1px; font-weight: 300; margin: 0 0 28px; text-wrap: balance;">We know this work.</h1>
-      <p style="color: #DDE3E9; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; max-width: 640px; margin: 0;">Paladin Envirotech is a secure technology-lifecycle and critical-materials recovery company helping organizations of all sizes retire end-of-life technology safely, compliantly and at scale. IT asset disposition, certified data destruction, domestic electronics recycling and rare-earth magnet recovery run as one end-to-end system, on proprietary software that tracks, reports and secures the lifecycle of hundreds of thousands of assets. The people who built it have spent their careers in recycling operations, hyperscale asset management, reverse logistics and compliance.</p>
+      <p style="color: #CBD5DE; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; max-width: 640px; margin: 0;">Paladin Envirotech is a secure technology-lifecycle and critical-materials recovery company helping organizations of all sizes retire end-of-life technology safely, compliantly and at scale. IT asset disposition, certified data destruction, domestic electronics recycling and rare-earth magnet recovery run as one end-to-end system, on proprietary software that tracks, reports and secures the lifecycle of hundreds of thousands of assets. The people who built it have spent their careers in recycling operations, hyperscale asset management, reverse logistics and compliance.</p>
     </div>
-    <div style="aspect-ratio: 4 / 3; max-height: 460px; background: #102B43; position: relative; overflow: hidden;"><img src="assets/leadership.75dd8385.jpg" alt="Paladin Envirotech leadership team" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;" /></div>
+    <div style="aspect-ratio: 4 / 3; max-height: 460px; background: #12293F; position: relative; overflow: hidden;"><img src="assets/leadership.75dd8385.jpg" alt="Paladin Envirotech leadership team" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 30%;" /></div>
   </div>
 
-  <div style="border-top: 1px solid rgba(255,255,255,0.16);">
+  <div style="border-top: 1px solid #1B3850;">
     <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));">
-      <div style="padding: 40px 32px 40px 0; border-right: 1px solid rgba(255,255,255,0.16);">
-        <div style="color: #A9832F; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">10</div>
-        <p style="color: #7F93A6; font-size: 14px; font-weight: 300; margin: 10px 0 0;">operating standard, applied at every facility</p>
+      <div style="background: #12293F; padding: 40px 32px 40px 0; border-right: 1px solid #1B3850;">
+        <div style="color: #C08F3C; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">10</div>
+        <p style="color: #8CA0B3; font-size: 14px; font-weight: 300; margin: 10px 0 0;">operating standard, applied at every facility</p>
       </div>
-      <div style="padding: 40px 32px; border-right: 1px solid rgba(255,255,255,0.16);">
-        <div style="color: #A9832F; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">4</div>
-        <p style="color: #7F93A6; font-size: 14px; font-weight: 300; margin: 10px 0 0;">acquired businesses, each holding its own certificates until roll-up completes</p>
+      <div style="background: #12293F; padding: 40px 32px; border-right: 1px solid #1B3850;">
+        <div style="color: #C08F3C; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">4</div>
+        <p style="color: #8CA0B3; font-size: 14px; font-weight: 300; margin: 10px 0 0;">acquired businesses, each holding its own certificates until roll-up completes</p>
       </div>
-      <div style="padding: 40px 32px; border-right: 1px solid rgba(255,255,255,0.16);">
-        <div style="color: #A9832F; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">R2 / RIOS</div>
-        <p style="color: #7F93A6; font-size: 14px; font-weight: 300; margin: 10px 0 0;">certified site by site, verifiable per entity</p>
+      <div style="background: #12293F; padding: 40px 32px; border-right: 1px solid #1B3850;">
+        <div style="color: #C08F3C; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">R2 / RIOS</div>
+        <p style="color: #8CA0B3; font-size: 14px; font-weight: 300; margin: 10px 0 0;">certified site by site, verifiable per entity</p>
       </div>
-      <div style="padding: 40px 0 40px 32px;">
-        <div style="color: #A9832F; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">SER</div>
-        <p style="color: #7F93A6; font-size: 14px; font-weight: 300; margin: 10px 0 0;">Capital Partners, institutional backing for expansion</p>
+      <div style="background: #12293F; padding: 40px 0 40px 32px;">
+        <div style="color: #C08F3C; font-size: clamp(32px, 3vw, 48px); line-height: 1.05; font-weight: 300;">SER</div>
+        <p style="color: #8CA0B3; font-size: 14px; font-weight: 300; margin: 10px 0 0;">Capital Partners, institutional backing for expansion</p>
       </div>
     </div>
   </div>
@@ -138,7 +138,7 @@ a:hover { opacity: 0.75; }
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(36px, 4vw, 64px); align-items: start; margin-bottom: clamp(40px, 5vw, 72px);">
       <div>
-        <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #A9832F;">How we operate</span>
+        <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #7D6023;">How we operate</span>
         <h2 style="font-size: clamp(30px, 3.8vw, 56px); line-height: 1.1; font-weight: 500; margin: 16px 0 0; text-wrap: balance;">Credibility has to be auditable.</h2>
       </div>
       <p style="font-size: 17px; line-height: 27px; margin: 0; color: #47586B;">This industry markets heavily and documents lightly. Everything below is something a customer or auditor can check independently, which is the only standard that matters when the assets are already gone.</p>
@@ -162,19 +162,19 @@ a:hover { opacity: 0.75; }
 
 <div data-reveal="1" style="background: #0B1E31; padding: clamp(56px, 7vw, 96px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
-    <figure style="margin: 0; max-width: 1300px; border-left: 4px solid #A9832F; padding-left: clamp(24px, 3vw, 48px);">
+    <figure style="margin: 0; max-width: 1300px; border-left: 4px solid #C08F3C; padding-left: clamp(24px, 3vw, 48px);">
       <blockquote style="margin: 0; font-size: clamp(22px, 2.6vw, 36px); line-height: 1.28; font-weight: 300; color: #FFFFFF;">&ldquo;At Paladin EnviroTech, we support organizations where data security, compliance, and material recovery are critical to their mission.&rdquo;</blockquote>
       <figcaption style="margin-top: clamp(20px, 2.5vw, 32px); display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
         <span style="font-size: 16px; font-weight: 500; color: #FFFFFF;">Brian Diesselhorst</span>
         <span style="width: 1px; height: 14px; background: rgba(255,255,255,0.28);"></span>
-        <span style="font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase; color: #8FA6BA;">Chief Executive Officer</span>
+        <span style="font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase; color: #8CA0B3;">Chief Executive Officer</span>
       </figcaption>
     </figure>
   </div>
 </div>
 
 
-<div id="leadership" data-reveal="1" style="background: #E7EAEE; padding: clamp(56px, 7vw, 104px) 0;">
+<div id="leadership" data-reveal="1" style="background: #E8EDF2; padding: clamp(56px, 7vw, 104px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div class="pal-lead-head">
       <div class="pal-lead-eyebrow">Leadership</div>
@@ -207,29 +207,29 @@ a:hover { opacity: 0.75; }
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(36px, 4vw, 64px); align-items: start; margin-bottom: clamp(32px, 4vw, 48px);">
       <div>
-        <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #A9832F;">Certifications &amp; standards</span>
+        <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #7D6023;">Certifications &amp; standards</span>
         <h2 style="font-size: clamp(30px, 3.8vw, 56px); line-height: 1.1; font-weight: 500; margin: 16px 0 0; text-wrap: balance;">What we are audited against.</h2>
       </div>
       <p style="font-size: 17px; line-height: 27px; margin: 0; color: #47586B;">Scope matters as much as the certificate. Activities at non-certified facilities, such as transfer, storage or consolidation, are managed under downstream vendor controls and are stated as outside certification scope.</p>
     </div>
-    <div style="border-top: 1px solid #E7EAEE;">
-      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E7EAEE; align-items: baseline;">
+    <div style="border-top: 1px solid #E8EDF2;">
+      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E8EDF2; align-items: baseline;">
         <span style="font-size: clamp(18px, 1.8vw, 22px); font-weight: 500;">R2</span>
         <p style="font-size: 15px; line-height: 25px; margin: 0; color: #47586B;">Responsible Recycling standard for data security, environmental and worker-safety practices in electronics reuse and recycling.</p>
       </div>
-      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E7EAEE; align-items: baseline;">
+      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E8EDF2; align-items: baseline;">
         <span style="font-size: clamp(18px, 1.8vw, 22px); font-weight: 500;">RIOS</span>
         <p style="font-size: 15px; line-height: 25px; margin: 0; color: #47586B;">Integrated quality, environmental and health-and-safety management system certification for recycling operations.</p>
       </div>
-      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E7EAEE; align-items: baseline;">
+      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E8EDF2; align-items: baseline;">
         <span style="font-size: clamp(18px, 1.8vw, 22px); font-weight: 500;">ISO 9001 / 14001 / 45001</span>
         <p style="font-size: 15px; line-height: 25px; margin: 0; color: #47586B;">Quality, environmental and occupational health-and-safety management systems, held at the sites where they apply.</p>
       </div>
-      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E7EAEE; align-items: baseline;">
+      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E8EDF2; align-items: baseline;">
         <span style="font-size: clamp(18px, 1.8vw, 22px); font-weight: 500;">WEEELABEX</span>
         <p style="font-size: 15px; line-height: 25px; margin: 0; color: #47586B;">European standard for the collection, logistics and treatment of waste electrical and electronic equipment.</p>
       </div>
-      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E7EAEE; align-items: baseline;">
+      <div style="display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: clamp(16px, 3vw, 48px); padding: 24px 0; border-bottom: 1px solid #E8EDF2; align-items: baseline;">
         <span style="font-size: clamp(18px, 1.8vw, 22px); font-weight: 500;">NIST 800-88</span>
         <p style="font-size: 15px; line-height: 25px; margin: 0; color: #47586B;">Media sanitization guidelines governing how data-bearing assets are destroyed and documented at serial level.</p>
       </div>
@@ -241,36 +241,36 @@ a:hover { opacity: 0.75; }
 <div data-reveal="1" style="background: #0B1E31; padding: clamp(64px, 8vw, 112px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(40px, 5vw, 72px); align-items: center;">
     <div>
-      <span style="color: #A9832F; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Backing</span>
+      <span style="color: #C08F3C; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Backing</span>
       <h2 style="color: #FFFFFF; font-size: clamp(28px, 3.4vw, 48px); line-height: 1.12; font-weight: 300; margin: 16px 0 20px; text-wrap: balance;">Institutional capital behind an operating thesis.</h2>
-      <p style="color: #DDE3E9; font-weight: 300; font-size: 17px; line-height: 27px; margin: 0 0 20px;">SER Capital Partners backs Paladin's expansion and acquisition program, alongside a partnership with Daeheung Recycling in South Korea. The thesis is straightforward: a fragmented, broker-heavy industry consolidates around whoever can prove custody at scale, and the same infrastructure that proves it also recovers the materials the country is short of. Working with hyperscalers, government agencies and enterprises across North America and Europe, Paladin keeps sensitive data protected and high-value materials in circulation.</p>
+      <p style="color: #CBD5DE; font-weight: 300; font-size: 17px; line-height: 27px; margin: 0 0 20px;">SER Capital Partners backs Paladin's expansion and acquisition program, alongside a partnership with Daeheung Recycling in South Korea. The thesis is straightforward: a fragmented, broker-heavy industry consolidates around whoever can prove custody at scale, and the same infrastructure that proves it also recovers the materials the country is short of. Working with hyperscalers, government agencies and enterprises across North America and Europe, Paladin keeps sensitive data protected and high-value materials in circulation.</p>
       <a href="/contact" style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; border-bottom: 1px solid #FFFFFF; padding-bottom: 4px;">Investor and partnership enquiries</a>
     </div>
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1px;">
-      <div style="outline: 1px solid rgba(255,255,255,0.16); padding: 32px;"><span style="color: #8FA6BA; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Growth</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Acquisitions integrated onto one system</p></div>
-      <div style="outline: 1px solid rgba(255,255,255,0.16); padding: 32px;"><span style="color: #8FA6BA; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Moat</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Proprietary chain-of-custody software and certified domestic processing capacity</p></div>
-      <div style="outline: 1px solid rgba(255,255,255,0.16); padding: 32px;"><span style="color: #8FA6BA; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Demand</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Hyperscale refresh cycles, wind decommissioning and government asset programs</p></div>
-      <div style="outline: 1px solid rgba(255,255,255,0.16); padding: 32px;"><span style="color: #8FA6BA; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Upside</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Rare-earth recovery through REcapture, priced against a supply chain concentrated abroad</p></div>
+      <div style="outline: 1px solid #1B3850; padding: 32px;"><span style="color: #8CA0B3; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Growth</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Acquisitions integrated onto one system</p></div>
+      <div style="outline: 1px solid #1B3850; padding: 32px;"><span style="color: #8CA0B3; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Moat</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Proprietary chain-of-custody software and certified domestic processing capacity</p></div>
+      <div style="outline: 1px solid #1B3850; padding: 32px;"><span style="color: #8CA0B3; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Demand</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Hyperscale refresh cycles, wind decommissioning and government asset programs</p></div>
+      <div style="outline: 1px solid #1B3850; padding: 32px;"><span style="color: #8CA0B3; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Upside</span><p style="color: #FFFFFF; font-weight: 300; font-size: 15px; line-height: 25px; margin: 12px 0 0;">Rare-earth recovery through REcapture, priced against a supply chain concentrated abroad</p></div>
     </div>
   </div>
 </div>
 
-<div data-reveal="1" style="background: #F5F6F7; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);">
-  <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); background: #FFFFFF; border-left: 4px solid #A9832F; padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+<div data-reveal="1" style="background: #E8EDF2; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);">
+  <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); background: #FFFFFF; border-left: 4px solid #C08F3C; padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
     <p style="font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; font-weight: 500; margin: 0; max-width: 1180px; color: #0B1E31;">Want to see the network, or talk through a program? Both are one message away.</p>
     <div style="flex: none; display: flex; gap: 16px; flex-wrap: wrap;">
-      <a href="/network" style="display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; border: 1px solid #C7CFD7; transition: border-color 220ms;" style-hover="border-color: #0B1E31;">See the network</a>
-      <a href="/contact" style="display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #102B43 50%, #0B1E31 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
+      <a href="/network" style="display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; border: 1px solid #D3DBE3; transition: border-color 220ms;" style-hover="border-color: #0B1E31;">See the network</a>
+      <a href="/contact" style="display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #12293F 50%, #0B1E31 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
     </div>
   </div>
 </div>
 
-<footer style="background: #0B1E31; padding: clamp(56px, 7vw, 96px) 0 40px;">
+<footer style="background: #071624; padding: clamp(56px, 7vw, 96px) 0 40px;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.16);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid #1B3850;">
       <div>
         <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 20px;"><img src="/assets/paladin-lockup-white.fc8f2032.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></div>
-        <p style="color: #7F93A6; font-weight: 300; font-size: 15px; line-height: 25px; margin: 0 0 24px; max-width: 340px;">Secure technology lifecycle and critical-materials recovery, on one system.</p>
+        <p style="color: #8CA0B3; font-weight: 300; font-size: 15px; line-height: 25px; margin: 0 0 24px; max-width: 340px;">Secure technology lifecycle and critical-materials recovery, on one system.</p>
         <div style="display: flex; gap: 10px;">
           <input type="email" placeholder="Email for updates" style="flex: 1; min-width: 0; border: 0; border-bottom: 1px solid rgba(255,255,255,0.3); background: transparent; padding: 10px 0; font-size: 14px; color: #FFFFFF;" />
           <button style="border: 0; background: transparent; color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #FFFFFF; cursor: pointer; padding: 10px 0;">Sign up</button>
@@ -278,40 +278,40 @@ a:hover { opacity: 0.75; }
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Company</span>
-        <a href="/company" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">About</a>
-        <a href="/company#leadership" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Leadership</a>
-        <a href="/blog" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Newsroom</a>
-        <a href="/contact" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Contact</a>
+        <a href="/company" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">About</a>
+        <a href="/company#leadership" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Leadership</a>
+        <a href="/blog" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Newsroom</a>
+        <a href="/contact" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Contact</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">One system</span>
-        <a href="/platform" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">How it works</a>
-        <a href="/critical-materials" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Critical materials</a>
-        <a href="/paladin-local" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Regional coverage</a>
-        <a href="/secure-itad" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Secure ITAD</a>
-        <a href="/electronics-recycling" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Electronics recycling</a>
-        <a href="/network" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Network</a>
+        <a href="/platform" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">How it works</a>
+        <a href="/critical-materials" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Critical materials</a>
+        <a href="/paladin-local" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Regional coverage</a>
+        <a href="/secure-itad" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Secure ITAD</a>
+        <a href="/electronics-recycling" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Electronics recycling</a>
+        <a href="/network" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Network</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Certifications &amp; entities</span>
-        <a href="/network" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">R2 / RIOS by site</a>
-        <a href="#" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">IRT</a>
-        <a href="#" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">R&amp;L Recycling B.V.</a>
-        <a href="/critical-materials" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">CMR</a>
-        <a href="#" style="color: #7F93A6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #A9832F;">Daeheung</a>
+        <a href="/network" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">R2 / RIOS by site</a>
+        <a href="#" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">IRT</a>
+        <a href="#" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">R&amp;L Recycling B.V.</a>
+        <a href="/critical-materials" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">CMR</a>
+        <a href="#" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #C08F3C;">Daeheung</a>
       </div>
     </div>
     <div style="padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
       <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <span style="color: #5B7085; font-size: 13px;">© 2026 Paladin Envirotech. All rights reserved.</span>
-        <a href="#" style="color: #5B7085; font-size: 13px;">Privacy</a>
-        <a href="#" style="color: #5B7085; font-size: 13px;">Terms</a>
+        <span style="color: #8CA0B3; font-size: 13px;">© 2026 Paladin Envirotech. All rights reserved.</span>
+        <a href="#" style="color: #8CA0B3; font-size: 13px;">Privacy</a>
+        <a href="#" style="color: #8CA0B3; font-size: 13px;">Terms</a>
       </div>
       <div style="display: flex; gap: 20px;">
         <a href="#" style="color: #FFFFFF; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</a>
-        <a href="#" style="color: #5B7085; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">NL</a>
-        <a href="#" style="color: #5B7085; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">DE</a>
-        <a href="#" style="color: #5B7085; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">KO</a>
+        <a href="#" style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">NL</a>
+        <a href="#" style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">DE</a>
+        <a href="#" style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">KO</a>
       </div>
     </div>
   </div>
@@ -330,7 +330,7 @@ class Component extends DCLogic {
         nav.dataset.open = '';
         Object.assign(nav.style, { position: 'static', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 'clamp(14px, 1.8vw, 34px)', background: 'transparent', padding: '0', borderTop: 'none' });
       } else if (nav.dataset.open === '1') {
-        Object.assign(nav.style, { position: 'absolute', left: '0', right: '0', top: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '18px', background: '#0B1E31', padding: '24px clamp(24px,5vw,72px)', zIndex: '900', borderTop: '1px solid rgba(255,255,255,0.16)' });
+        Object.assign(nav.style, { position: 'absolute', left: '0', right: '0', top: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '18px', background: '#0B1E31', padding: '24px clamp(24px,5vw,72px)', zIndex: '900', borderTop: '1px solid #1B3850' });
       } else {
         nav.style.display = 'none';
       }
