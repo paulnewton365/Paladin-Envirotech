@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#0B1E31">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.36.0">
+<meta name="build-version" content="1.38.0">
 <meta name="build-date" content="2026-09-01">
 <meta property="og:title" content="Our Network | Paladin EnviroTech">
 <meta property="og:description" content="A hub-and-satellite footprint built for security and scale.">
@@ -46,7 +46,7 @@ a:hover { opacity: 0.75; }
 .pal-loc-region-name { font-size: 12px; font-weight: 500; letter-spacing: 1.4px; text-transform: uppercase; color: #0B1E31; }
 .pal-loc-region-count { font-size: 12px; font-weight: 400; letter-spacing: 0.6px; color: #47586B; }
 .pal-loc-site { display: grid; grid-template-columns: 32px 1fr; column-gap: 20px; align-items: baseline; padding: clamp(18px, 2vw, 24px) 0; border-bottom: 1px solid #DDD6CC; }
-.pal-loc-num { font-size: 12px; color: #8A6529; }
+.pal-loc-num { font-size: 20px; font-weight: 500; color: #27707F; }
 .pal-loc-name { font-size: clamp(19px, 1.7vw, 22px); line-height: 1.3; font-weight: 400; color: #0B1E31; }
 .pal-loc-desc { margin-top: 8px; font-size: 15px; line-height: 1.6; font-weight: 300; color: #47586B; text-wrap: pretty; }
 .pal-loc-note { margin-top: clamp(32px, 4vw, 40px); border-left: 2px solid #C08F3C; padding: 4px 0 4px 20px; }
@@ -70,7 +70,7 @@ a:hover { opacity: 0.75; }
     </nav>
     <div style="display: flex; align-items: center; gap: 20px;">
       <span style="color: #CBD5DE; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</span>
-      <a href="/contact" style="display: inline-block; padding: 14px 22px; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; background-image: linear-gradient(to right, #9FB4C7 50%, #FFFFFF 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
+      <a href="/contact" style="display: inline-block; padding: 14px 22px; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; background-image: linear-gradient(to right, #D9A441 50%, #C08F3C 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
       <button data-nav-toggle="1" aria-label="Menu" style="display: none; border: 0; background: transparent; cursor: pointer; width: 26px; height: 20px; flex-direction: column; justify-content: space-between; padding: 0;">
         <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
         <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
@@ -92,15 +92,15 @@ a:hover { opacity: 0.75; }
   <div style="border-top: 1px solid #1B3850;">
     <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));">
       <div style="background: #12293F; padding: 40px 32px 40px 0; border-right: 1px solid #1B3850;">
-        <div style="color: #C08F3C; font-size: clamp(32px, 3vw, 44px); line-height: 1.1; font-weight: 300;">7</div>
+        <div style="color: #4FB3C8; font-size: clamp(48px, 5vw, 72px); line-height: 1.05; font-weight: 300;">7</div>
         <p style="color: #8CA0B3; font-size: 14px; font-weight: 300; margin: 10px 0 0;">facilities across the United States</p>
       </div>
       <div style="background: #12293F; padding: 40px 32px; border-right: 1px solid #1B3850;">
-        <div style="color: #C08F3C; font-size: clamp(32px, 3vw, 44px); line-height: 1.1; font-weight: 300;">3</div>
+        <div style="color: #6FC39B; font-size: clamp(48px, 5vw, 72px); line-height: 1.05; font-weight: 300;">3</div>
         <p style="color: #8CA0B3; font-size: 14px; font-weight: 300; margin: 10px 0 0;">countries outside the US, Ireland, Netherlands, South Korea</p>
       </div>
       <div style="background: #12293F; padding: 40px 0 40px 32px;">
-        <div style="color: #C08F3C; font-size: clamp(32px, 3vw, 44px); line-height: 1.1; font-weight: 300;">1</div>
+        <div style="color: #C08F3C; font-size: clamp(48px, 5vw, 72px); line-height: 1.05; font-weight: 300;">1</div>
         <p style="color: #8CA0B3; font-size: 14px; font-weight: 300; margin: 10px 0 0;">operating standard, applied at every site</p>
       </div>
     </div>
@@ -201,22 +201,22 @@ a:hover { opacity: 0.75; }
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div class="pal-loc-head">
       <div class="pal-loc-eyebrow">Footprint</div>
-      <h2>Every site, one chain of custody.</h2>
+      <h2>Every site, <span style="color: #7D6023;">one chain of custody.</span></h2>
     </div>
     <div class="pal-loc-cols">
       <div>
         <div class="pal-loc-region">
-          <div class="pal-loc-region-name">United States</div>
+          <div class="pal-loc-region-name" style="color: #27707F;">United States</div>
           <div class="pal-loc-region-count">7 sites</div>
         </div>
         <div class="pal-loc-site"><div class="pal-loc-num">01</div><div><div class="pal-loc-name">Tampa, Florida</div><div class="pal-loc-desc">Headquarters. Downstream vendor management, data sanitization, testing, repair and materials recovery.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">02</div><div><div class="pal-loc-name">St. Cloud, Minnesota</div><div class="pal-loc-desc">Collection, dismantling and circuit-board processing, physical and logical data sanitization.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">03</div><div><div class="pal-loc-name">Laurel, Maryland</div><div class="pal-loc-desc">DC / Baltimore region intake and processing.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">04</div><div><div class="pal-loc-name">Columbus, Ohio</div><div class="pal-loc-desc">Midwest intake and processing.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">05</div><div><div class="pal-loc-name">Olympia, Washington</div><div class="pal-loc-desc">Pacific Northwest intake and processing.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">06</div><div><div class="pal-loc-name">Dallas / Fort Worth, Texas</div><div class="pal-loc-desc">South-central intake and processing.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">07</div><div><div class="pal-loc-name">Phoenix, Arizona</div><div class="pal-loc-desc">Southwest intake and processing.</div></div></div>
       </div>
       <div>
         <div class="pal-loc-region">
-          <div class="pal-loc-region-name">International</div>
+          <div class="pal-loc-region-name" style="color: #357A5B;">International</div>
           <div class="pal-loc-region-count">4 sites</div>
         </div>
-        <div class="pal-loc-site"><div class="pal-loc-num">08</div><div><div class="pal-loc-name">Duleek, Ireland</div><div class="pal-loc-desc">Collection, dismantling and circuit-board processing, data sanitization and materials recovery.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">09</div><div><div class="pal-loc-name">Dublin, Ireland</div><div class="pal-loc-desc">Logistics and intake.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">10</div><div><div class="pal-loc-name">Helmond, Netherlands</div><div class="pal-loc-desc">R&amp;L Recycling B.V., European ITAD and e-recycling platform.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num">11</div><div><div class="pal-loc-name">Suwon, South Korea</div><div class="pal-loc-desc">Daeheung M&amp;T, collection, processing and materials recovery.</div></div></div>
+        <div class="pal-loc-site"><div class="pal-loc-num" style="color: #357A5B;">08</div><div><div class="pal-loc-name">Duleek, Ireland</div><div class="pal-loc-desc">Collection, dismantling and circuit-board processing, data sanitization and materials recovery.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num" style="color: #357A5B;">09</div><div><div class="pal-loc-name">Dublin, Ireland</div><div class="pal-loc-desc">Logistics and intake.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num" style="color: #357A5B;">10</div><div><div class="pal-loc-name">Helmond, Netherlands</div><div class="pal-loc-desc">R&amp;L Recycling B.V., European ITAD and e-recycling platform.</div></div></div><div class="pal-loc-site"><div class="pal-loc-num" style="color: #357A5B;">11</div><div><div class="pal-loc-name">Suwon, South Korea</div><div class="pal-loc-desc">Daeheung M&amp;T, collection, processing and materials recovery.</div></div></div>
         <div class="pal-loc-note"><p>Certifications (R2, RIOS, ISO 9001/14001/45001, WEEELABEX) are held per site and per legal entity. Acquired businesses keep their own certificates until integration completes, so an auditor can verify the exact entity that handled an asset. Activities at non-certified facilities, transfer, storage or consolidation, are managed under downstream vendor controls and are not included in a site's certification scope.</p></div>
       </div>
     </div>
@@ -226,7 +226,7 @@ a:hover { opacity: 0.75; }
 <div data-reveal="1" style="background: #FFFFFF; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); background: #0B1E31; border-left: 4px solid #C08F3C; padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
     <p style="color: #FFFFFF; font-weight: 300; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; margin: 0; max-width: 1180px;">Have volume outside these regions? Tell us where, and we'll scope the nearest route.</p>
-    <a href="/contact" style="flex: none; display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; background-image: linear-gradient(to right, #9FB4C7 50%, #FFFFFF 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
+    <a href="/contact" style="flex: none; display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; background-image: linear-gradient(to right, #D9A441 50%, #C08F3C 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
   </div>
 </div>
 

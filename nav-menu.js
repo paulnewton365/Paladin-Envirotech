@@ -105,8 +105,8 @@
     var st = document.createElement('style');
     st.id = 'pal-mega-style';
     st.textContent =
-      '#' + PANEL_ID + ' a { transition: color 180ms cubic-bezier(0.2,0.7,0.1,1); }' +
-      '#' + PANEL_ID + ' a:hover { color: #D9A441 !important; }' +
+      '.pal-mega-panel a { transition: color 180ms cubic-bezier(0.2,0.7,0.1,1); }' +
+      '.pal-mega-panel a:hover { color: #D9A441 !important; }' +
       'header nav a, header nav button { transition: color 180ms cubic-bezier(0.2,0.7,0.1,1), border-color 200ms; }' +
       'header nav a:hover, header nav button:hover { color: #D9A441 !important; }';
     document.head.appendChild(st);
@@ -197,6 +197,7 @@
     ensureLogoHover();
     var existing = existingPanel(header);
     if (existing) {
+      existing.classList.add('pal-mega-panel');
       reconcile(existing);
       return true; // homepage: template owns the menu
     }
@@ -208,6 +209,7 @@
 
     var panel = document.createElement('div');
     panel.id = PANEL_ID;
+    panel.className = 'pal-mega-panel';
     panel.style.cssText = 'display:none;background:#12293F;' +
       'border-top:1px solid rgba(255,255,255,0.16);';
     panel.innerHTML = panelHTML();
