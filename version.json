@@ -1,5 +1,5 @@
 {
-  "version": "1.38.0",
+  "version": "1.38.1",
   "built": "2026-09-01",
-  "notes": "Component-level accent and gold placements"
+  "notes": "Ember replaces cyan on the paired panels; platform numbers cyan"
 }
