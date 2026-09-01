@@ -1,5 +1,5 @@
 {
-  "version": "1.38.1",
+  "version": "1.39.0",
   "built": "2026-09-01",
-  "notes": "Ember replaces cyan on the paired panels; platform numbers cyan"
+  "notes": "Revised network hero; platform lifecycle back to ember"
 }
