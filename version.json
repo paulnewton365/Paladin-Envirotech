@@ -1,5 +1,5 @@
 {
-  "version": "1.35.0",
+  "version": "1.36.0",
   "built": "2026-09-01",
-  "notes": "Accent tier extended site-wide; nav and mega-menu hover matched to footer"
+  "notes": "Logo hover state"
 }

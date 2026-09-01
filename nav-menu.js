@@ -73,6 +73,33 @@
   /* The panel is built here rather than living in the markup, so its hover
      has to be a real stylesheet rule. Inline styles cannot express :hover.
      Matches the footer, where links go to gold-400. */
+
+  /* Logo hover: the gold lockup sits behind the white one as a background and
+     is revealed by fading the white image out. Same artwork, same pixel
+     dimensions, so nothing shifts. Swapping the src instead would flash on
+     first hover while the second file downloads. */
+  function ensureLogoHover() {
+    if (!document.getElementById('pal-logo-hover')) {
+      var st = document.createElement('style');
+      st.id = 'pal-logo-hover';
+      st.textContent =
+        '.pal-logo-link { display: inline-block; position: relative; ' +
+          'background-image: url("/assets/paladin-lockup-gold.440d6b2f.webp"); ' +
+          'background-size: contain; background-repeat: no-repeat; ' +
+          'background-position: left center; }' +
+        '.pal-logo-link img[data-logo] { transition: opacity 180ms cubic-bezier(0.2,0.7,0.1,1); }' +
+        '.pal-logo-link:hover img[data-logo] { opacity: 0; }' +
+        '@media (prefers-reduced-motion: reduce) { .pal-logo-link img[data-logo] { transition: none; } }';
+      document.head.appendChild(st);
+    }
+    // Class the parent link rather than relying on :has(), whose support is
+    // still uneven and which would fail silently.
+    document.querySelectorAll('img[data-logo]').forEach(function (img) {
+      var a = img.closest('a');
+      if (a) a.classList.add('pal-logo-link');
+    });
+  }
+
   function ensureHoverRule() {
     if (document.getElementById('pal-mega-style')) return;
     var st = document.createElement('style');
@@ -167,6 +194,7 @@
     if (!nav) return false;
 
     ensureHoverRule();
+    ensureLogoHover();
     var existing = existingPanel(header);
     if (existing) {
       reconcile(existing);
