@@ -69,6 +69,22 @@
     return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   }
 
+
+  /* The panel is built here rather than living in the markup, so its hover
+     has to be a real stylesheet rule. Inline styles cannot express :hover.
+     Matches the footer, where links go to gold-400. */
+  function ensureHoverRule() {
+    if (document.getElementById('pal-mega-style')) return;
+    var st = document.createElement('style');
+    st.id = 'pal-mega-style';
+    st.textContent =
+      '#' + PANEL_ID + ' a { transition: color 180ms cubic-bezier(0.2,0.7,0.1,1); }' +
+      '#' + PANEL_ID + ' a:hover { color: #D9A441 !important; }' +
+      'header nav a, header nav button { transition: color 180ms cubic-bezier(0.2,0.7,0.1,1), border-color 200ms; }' +
+      'header nav a:hover, header nav button:hover { color: #D9A441 !important; }';
+    document.head.appendChild(st);
+  }
+
   function panelHTML() {
     var cols = GROUPS.map(function (g) {
       var links = g.items.map(function (it) {
@@ -150,6 +166,7 @@
     var nav = header.querySelector('nav');
     if (!nav) return false;
 
+    ensureHoverRule();
     var existing = existingPanel(header);
     if (existing) {
       reconcile(existing);
