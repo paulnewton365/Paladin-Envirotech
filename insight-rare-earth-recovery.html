@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.58.0">
+<meta name="build-version" content="1.59.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Why 1.5 million hard drives equal one ton of rare earths">
 <meta property="og:description" content="The math behind domestic magnet recovery, and why only hyperscale volume makes the economics work.">
@@ -169,10 +169,14 @@
     .sec { padding-top: 64px; padding-bottom: 64px; }
 
     
-  [data-reveal] { opacity: 0; transform: translateY(24px);
+  /* Content is visible by default. The hiding only applies once the reveal
+     script has run and put its flag on <html>, so if that script never runs,
+     or runs before the runtime has rendered, nothing is left invisible. A
+     blank page is a far worse failure than a missing animation. */
+  html.js-reveal [data-reveal] { opacity: 0; transform: translateY(24px);
                   transition: opacity 620ms cubic-bezier(0.2,0.7,0.1,1),
                               transform 620ms cubic-bezier(0.2,0.7,0.1,1); }
-  [data-reveal].is-in { opacity: 1; transform: none; }
+  html.js-reveal [data-reveal].is-in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
   }
@@ -579,38 +583,58 @@ class Component extends DCLogic {
 </script>
 
 <script>
-/* Scroll reveal. Sections fade up once as they enter, and never re-hide, so
-   nothing can be left invisible if the observer misses a frame. */
+/* Scroll reveal.
+
+   The previous version read [data-reveal] once and bailed if nothing was there
+   yet. On the pages whose content is rendered by the runtime, the script ran
+   first, found nothing, and stopped, so the content arrived with the CSS's
+   opacity 0 and nothing ever revealed it. That is why those pages looked blank
+   below the header until a scroll woke a different observer up.
+
+   This re-scans whenever the DOM changes, marks what it has handled, and
+   reveals anything already at or above the fold immediately. */
 (function () {
-  var items = document.querySelectorAll('[data-reveal]');
-  if (!items.length) return;
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    for (var i = 0; i < items.length; i++) items[i].classList.add('is-in');
-    return;
+  document.documentElement.classList.add('js-reveal');
+  var SEEN = 'data-revealed';
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var io = null;
+  if (!reduce && 'IntersectionObserver' in window) {
+    io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
   }
-  if (!('IntersectionObserver' in window)) {
-    for (var j = 0; j < items.length; j++) items[j].classList.add('is-in');
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
-    });
-  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
-  items.forEach(function (el) {
-    /* Anything already at or above the fold is shown at once. An element the
-       page loads scrolled past would otherwise never intersect and would stay
-       invisible for good. */
-    if (el.getBoundingClientRect().top < window.innerHeight) {
-      el.classList.add('is-in');
-    } else {
-      io.observe(el);
+  function scan() {
+    var items = document.querySelectorAll('[data-reveal]:not([' + SEEN + '])');
+    for (var i = 0; i < items.length; i++) {
+      var el = items[i];
+      el.setAttribute(SEEN, '');
+      if (!io) { el.classList.add('is-in'); continue; }
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-in');
+      else io.observe(el);
     }
-  });
-  /* Last resort: nothing stays hidden, whatever the observer does. */
+  }
+  function revealAll() {
+    var items = document.querySelectorAll('[data-reveal]');
+    for (var i = 0; i < items.length; i++) items[i].classList.add('is-in');
+  }
+  scan();
+  document.addEventListener('DOMContentLoaded', scan);
+  window.addEventListener('load', scan);
+  if (window.MutationObserver) {
+    var pending = false;
+    new MutationObserver(function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () { pending = false; scan(); });
+    }).observe(document.documentElement, { childList: true, subtree: true });
+  }
+  /* Nothing stays hidden, whatever the observer does. */
   setTimeout(function () {
-    for (var k = 0; k < items.length; k++) items[k].classList.add('is-in');
-  }, 6000);
+    revealAll();
+    document.documentElement.classList.remove('js-reveal');
+  }, 5000);
 })();
 </script>
 
