@@ -1,5 +1,5 @@
 {
-  "version": "1.39.0",
-  "built": "2026-09-01",
-  "notes": "Revised network hero; platform lifecycle back to ember"
+  "version": "1.40.0",
+  "built": "2026-09-04",
+  "notes": "Palette page rebuilt from colours in use; near-duplicates consolidated"
 }

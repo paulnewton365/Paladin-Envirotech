@@ -84,7 +84,7 @@
       st.id = 'pal-logo-hover';
       st.textContent =
         '.pal-logo-link { display: inline-block; position: relative; ' +
-          'background-image: url("/assets/paladin-lockup-gold.440d6b2f.webp"); ' +
+          'background-image: url("/assets/paladin-lockup-gold.434c33df.svg"); ' +
           'background-size: contain; background-repeat: no-repeat; ' +
           'background-position: left center; }' +
         '.pal-logo-link img[data-logo] { transition: opacity 180ms cubic-bezier(0.2,0.7,0.1,1); }' +
