@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.56.0">
+<meta name="build-version" content="1.57.1">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Why 1.5 million hard drives equal one ton of rare earths">
 <meta property="og:description" content="The math behind domestic magnet recovery, and why only hyperscale volume makes the economics work.">
@@ -212,10 +212,17 @@ a:hover { opacity: 0.75; }
   .hero-band > div { padding-top: 0 !important; }
   .hero-band > div > div { padding-top: 0 !important; }
   .hero-band .kicker:first-of-type { margin-top: 0 !important; }
-  .hero-band > div > div { margin-top: 0 !important; align-items: start !important; }
+  /* only the wrapper directly above the eyebrow, not every grid in the band */
+  .hero-band > div > div { margin-top: 0 !important; }
+  .hero-band > div > div:has(> .kicker:first-child) { align-items: start !important; }
   .hero-band .hero-split { align-items: start !important; }
 
   @media (max-width: 900px) { .hero-band { padding-top: 56px !important; } }
+
+  /* The runtime gives its root a viewport height while the content overflows,
+     which caps the body at one screen and leaves a sticky header only that
+     much to stick against. Let both size to their content. */
+  html, body, #dc-root, .sc-host { height: auto !important; min-height: 0 !important; }
 </style>
 </helmet>
 
@@ -599,6 +606,28 @@ class Component extends DCLogic {
   setTimeout(function () {
     for (var k = 0; k < items.length; k++) items[k].classList.add('is-in');
   }, 6000);
+})();
+</script>
+
+<script>
+/* The page runtime wraps content in a host div roughly one viewport tall.
+   A sticky header inside it only sticks for that height and then scrolls away,
+   which is why the masthead held on the static pages and not the rendered ones.
+   Moving the header to be a direct child of body gives it the whole document
+   to stick against. Re-run on mutation, since the runtime re-renders. */
+(function () {
+  function lift() {
+    var h = document.querySelector('header');
+    if (!h || h.parentElement === document.body) return;
+    document.body.insertBefore(h, document.body.firstChild);
+  }
+  lift();
+  if (window.MutationObserver) {
+    var mo = new MutationObserver(lift);
+    mo.observe(document.body, { childList: true, subtree: false });
+    setTimeout(function () { mo.disconnect(); lift(); }, 4000);
+  }
+  window.addEventListener('load', lift);
 })();
 </script>
 </body></html>
