@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.48.0">
+<meta name="build-version" content="1.49.1">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -122,6 +122,15 @@
   @media (prefers-reduced-motion: reduce) {
     .car { transform: translate(22%, 0) !important; }
     .track-ticks, .track-dashes { transform: none !important; }
+  }
+
+
+  [data-reveal] { opacity: 0; transform: translateY(24px);
+                  transition: opacity 620ms cubic-bezier(0.2,0.7,0.1,1),
+                              transform 620ms cubic-bezier(0.2,0.7,0.1,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
   }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
@@ -236,7 +245,7 @@
 </header>
 
 <!-- HERO -->
-<section class="sec sec-navy">
+<section class="sec sec-navy" data-reveal>
   <div class="wrap hero">
     <div class="hero-text">
       <p class="kicker k-navy">Secure technology lifecycle</p>
@@ -259,7 +268,7 @@
 </section>
 
 <!-- WHY THIS MATTERS + STAT ROW -->
-<section class="sec sec-white">
+<section class="sec sec-white" data-reveal>
   <div class="wrap">
     <p class="kicker k-white">Why this matters</p>
     <h2 class="h2" style="margin-top: 22px;">The paperwork outlives the hardware</h2>
@@ -285,7 +294,7 @@
 </section>
 
 <!-- CAPABILITY / PROCESS -->
-<section class="sec sec-navy">
+<section class="sec sec-navy" data-reveal>
   <div class="wrap">
     <p class="kicker k-navy">How the work runs</p>
     <h2 class="h2" style="margin-top: 22px;">One chain, three checkpoints</h2>
@@ -315,7 +324,7 @@
 </section>
 
 <!-- INDUSTRIES -->
-<section class="sec sec-white">
+<section class="sec sec-white" data-reveal>
   <div class="wrap">
     <p class="kicker k-white">Who we work with</p>
     <h2 class="h2" style="margin-top: 22px;">What counts as proof changes by sector</h2>
@@ -362,7 +371,7 @@
 </section>
 
 <!-- PROOF / CERTIFICATION -->
-<section class="sec sec-alt">
+<section class="sec sec-alt" data-reveal>
   <div class="wrap">
     <p class="kicker k-alt">Held per site, per legal entity</p>
     <h2 class="h2" style="margin-top: 22px;">Certification you can check</h2>
@@ -392,7 +401,7 @@
 
 
 <!-- CAMPAIGN TAKEOVER -->
-<section class="sec sec-navy" style="padding-bottom: 0;">
+<section class="sec sec-navy" style="padding-bottom: 0;" data-reveal>
   <div class="wrap">
     <div class="takeover-text">
       <p class="kicker k-navy">Campaign takeover &middot; Freedom 250</p>
@@ -421,15 +430,15 @@
 </section>
 
 <!-- CLOSING CTA -->
-<section class="sec sec-navy">
+<section class="sec sec-alt" data-reveal>
   <div class="wrap closing">
     <div style="max-width: 620px; display: flex; flex-direction: column; gap: 22px;">
-      <p class="kicker k-navy">Start here</p>
-      <h2 class="h2">Tell us what you are retiring</h2>
-      <p class="body" style="color: var(--mist);">We will map coverage against your sites and show you
+      <p class="kicker k-alt">Start here</p>
+      <h2 class="h2" style="color: var(--navy);">Tell us what you are retiring</h2>
+      <p class="body" style="color: var(--slate);">We will map coverage against your sites and show you
         the documentation you would receive, before anything is committed.</p>
     </div>
-    <a class="btn btn-on-navy" href="/contact">Talk to an expert</a>
+    <a class="btn btn-on-white" href="/contact">Talk to an expert</a>
   </div>
 </section>
 
@@ -597,6 +606,42 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll);
   tick();
+})();
+</script>
+
+<script>
+/* Scroll reveal. Sections fade up once as they enter, and never re-hide, so
+   nothing can be left invisible if the observer misses a frame. */
+(function () {
+  var items = document.querySelectorAll('[data-reveal]');
+  if (!items.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('is-in');
+    return;
+  }
+  if (!('IntersectionObserver' in window)) {
+    for (var j = 0; j < items.length; j++) items[j].classList.add('is-in');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
+  items.forEach(function (el) {
+    /* Anything already at or above the fold is shown at once. An element the
+       page loads scrolled past would otherwise never intersect and would stay
+       invisible for good. */
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.classList.add('is-in');
+    } else {
+      io.observe(el);
+    }
+  });
+  /* Last resort: nothing stays hidden, whatever the observer does. */
+  setTimeout(function () {
+    for (var k = 0; k < items.length; k++) items[k].classList.add('is-in');
+  }, 6000);
 })();
 </script>
 </body>

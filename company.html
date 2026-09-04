@@ -15,10 +15,9 @@
 <meta property="og:image" content="/assets/preview.f2a82a9e.webp">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.48.0">
+<meta name="build-version" content="1.49.1">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
-<script defer src="/nav-menu.js"></script>
 <script defer src="/motion.js"></script>
 <link rel="stylesheet" href="/responsive.css">
 <script src="./support.js"></script>
@@ -33,6 +32,139 @@
          -webkit-font-smoothing: antialiased; }
   h1, h2 { font-weight: 300; letter-spacing: -1.4px; line-height: 1.06; }
   h3 { font-weight: 300; letter-spacing: -0.6px; }
+</style>
+<style>
+  :root {
+    --navy: #1E3547; --navy-deep: #162836;
+    --ember: #B8541F; --ember-hover: #8F3F14; --ember-light: #E08B52;
+    --slate: #5A6874; --mist: #C3CDD6; --hairline: #D5DBE0;
+    --surface: #FFFFFF; --surface-alt: #F5F6F7;
+  }
+
+  html, body { margin: 0; padding: 0; }
+
+
+  .pal-logo-link { display: inline-block; background-image: url("/assets/paladin-lockup-emberlight.dcaa325d.webp"); background-size: contain; background-repeat: no-repeat; background-position: left center; }
+
+  .pal-logo-link img { transition: opacity 180ms ease; }
+
+  .pal-logo-link:hover img { opacity: 0; }
+ .pal-logo-link img { transition: none; }
+
+
+
+  .megatrigger { display: inline-flex; align-items: center; gap: 7px; font-size: 15px;
+                 color: var(--surface); background: none; border: 0; padding: 0;
+                 font-family: inherit; cursor: pointer; }
+
+  .megatrigger .plus { color: var(--ember-light); font-size: 13px; line-height: 1; }
+
+  .mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--navy-deep);
+          border-top: 1px solid rgba(195,205,214,0.2); display: none; z-index: 880; }
+
+  .mega[data-open="1"] { display: block; }
+
+  .mega-inner { max-width: 1180px; margin: 0 auto; padding: 44px 40px 48px;
+                display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 48px; }
+
+  .mega-col { display: flex; flex-direction: column; gap: 14px; }
+
+  .mega-col h3 { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px;
+                 text-transform: uppercase; color: var(--ember-light); margin: 0; }
+
+  .mega-col a { font-size: 15px; line-height: 1.45; color: var(--surface); }
+
+  .mega-col a:hover { color: var(--ember-light); }
+
+  .mega-col span.off { font-size: 15px; line-height: 1.45; color: var(--mist); opacity: 0.55; }
+ .mega { display: none !important; }
+
+  .takeover-text .btn { align-self: flex-start; }
+
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
+
+  .sec { padding-top: 84px; padding-bottom: 84px; }
+
+  .sec-navy { background: var(--navy); color: var(--surface); }
+
+  .sec-white { background: var(--surface); }
+
+  .sec-alt { background: var(--surface-alt); }
+
+
+  /* type */
+  .display { font-weight: 300; font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; margin: 0; }
+
+  .h2 { font-weight: 300; font-size: 52px; line-height: 1.06; letter-spacing: -1.4px; margin: 0; }
+
+  .lead { font-weight: 300; font-size: 22px; line-height: 1.5; max-width: 780px; margin: 0; }
+
+  .body { font-weight: 400; font-size: 17px; line-height: 1.6; max-width: 620px; margin: 0; }
+
+  .body-w { font-weight: 400; font-size: 17px; line-height: 1.6; max-width: 620px; margin: 0; color: var(--slate); }
+
+  .kicker { font-weight: 600; font-size: 12px; letter-spacing: 1.7px; text-transform: uppercase; margin: 0; }
+
+  .k-white { color: var(--ember); }
+
+  .k-navy { color: var(--ember-light); }
+
+  .k-alt { color: var(--ember-hover); }
+
+  .figure { font-weight: 300; font-size: 68px; letter-spacing: -2px; line-height: 1; margin: 0; }
+
+  .caption { font-weight: 400; font-size: 14.5px; line-height: 1.6; max-width: 260px; margin: 0; color: var(--slate); }
+
+  .caption-navy { color: var(--mist); }
+
+
+  /* buttons */
+  .btn { display: inline-block; font-weight: 600; font-size: 12px; letter-spacing: 1.1px;
+         text-transform: uppercase; padding: 15px 26px; transition: background-color 180ms ease; }
+
+  .btn-on-white { background: var(--ember); color: var(--surface); }
+
+  .btn-on-white:hover { background: var(--ember-hover); }
+
+  .btn-on-navy { background: var(--ember-light); color: var(--navy); }
+
+  .btn-on-navy:hover { background: var(--surface); }
+
+  .btn-ghost { border: 1px solid var(--mist); color: var(--surface); }
+
+  .btn-ghost:hover { background: var(--navy-deep); }
+
+
+  /* hero */
+  .mainnav { display: flex; align-items: center; gap: 28px; }
+ .mainnav { display: none; }
+
+  .stat .figure { color: var(--navy); }
+
+  .stat-accent .figure { color: var(--ember); }
+
+    .mainnav { display: flex; align-items: center; gap: 28px; }
+ .mainnav { display: none; }
+
+    .display { font-size: 40px; letter-spacing: -1px; }
+
+    .h2 { font-size: 34px; letter-spacing: -0.8px; }
+
+    .lead { font-size: 19px; }
+
+    .figure { font-size: 54px; letter-spacing: -1.4px; }
+
+    .sec { padding-top: 64px; padding-bottom: 64px; }
+
+    .wrap { padding-left: 24px; padding-right: 24px; }
+  [data-reveal] { opacity: 0; transform: translateY(24px);
+                  transition: opacity 620ms cubic-bezier(0.2,0.7,0.1,1),
+                              transform 620ms cubic-bezier(0.2,0.7,0.1,1); }
+  [data-reveal].is-in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -91,30 +223,24 @@ a:hover { opacity: 0.75; }
 </style>
 </helmet>
 
-<header style="position: sticky; top: 0; z-index: 800; background: #1E3547;">
-  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; min-height: 84px; padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
-    <a href="/" style="display: flex; align-items: center; gap: 11px;"><img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
-    <nav data-nav="1" style="display: flex; align-items: center; gap: clamp(14px, 1.8vw, 34px); flex-wrap: wrap;">
-      <a href="/platform" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">One system</a>
-      <a href="/critical-materials" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Critical materials</a>
-      <a href="/industries" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Industries</a>
-      <a href="/network" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Network</a>
-      <a href="/company" style="color: #FFFFFF; font-size: 14px; font-weight: 500; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid #E08B52; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Company</a>
-      <a href="/blog" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Blog</a><a href="/press" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Press</a>
+<header style="background: var(--navy); position: sticky; top: 0; z-index: 900; position: -webkit-sticky;">
+  <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-top: 20px; padding-bottom: 20px;">
+    <a class="pal-logo-link" href="/"><img data-logo src="/assets/paladin-lockup-colordark.ece3d353.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
+    <nav class="mainnav">
+      <button class="megatrigger" type="button" data-mega-trigger aria-expanded="false" aria-controls="pal-mega">One system <span class="plus">+</span></button>
+      <a href="/critical-materials" style="font-size: 15px; color: var(--surface);">Critical materials</a>
+      <a href="/industries" style="font-size: 15px; color: var(--surface);">Industries</a>
+      <a href="/network" style="font-size: 15px; color: var(--surface);">Network</a>
+      <a href="/company" style="font-size: 15px; color: var(--surface);">Company</a>
+      <a href="/blog" style="font-size: 15px; color: var(--surface);">Blog</a>
+      <a href="/press" style="font-size: 15px; color: var(--surface);">Press</a>
     </nav>
-    <div style="display: flex; align-items: center; gap: 20px;">
-      <span style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</span>
-      <a href="/contact" style="display: inline-block; padding: 14px 22px; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #1E3547; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
-      <button data-nav-toggle="1" aria-label="Menu" style="display: none; border: 0; background: transparent; cursor: pointer; width: 26px; height: 20px; flex-direction: column; justify-content: space-between; padding: 0;">
-        <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
-        <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
-        <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
-      </button>
-    </div>
+    <a class="btn btn-on-navy" href="/contact">Talk to an expert</a>
   </div>
+<div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><span class="off">IT asset management</span><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Security</h3><a href="/secure-itad">Secure data destruction</a><a href="/platform">Chain of custody</a><span class="off">On-site services</span><span class="off">On-site asset management</span><span class="off">On-site destruction</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div></div></div></div>
 </header>
 
-<div style="background: #1E3547; padding: clamp(40px, 5vw, 72px) 0 0;">
+<div style="background: #1E3547; padding: clamp(40px, 5vw, 72px) 0 0;" data-reveal>
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(40px, 5vw, 72px); align-items: center; padding-bottom: clamp(40px, 5vw, 72px);">
     <div>
       <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;"><div style="width: 8px; height: 8px; background: #E08B52;"></div><span style="color: #C3CDD6; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Company</span></div>
@@ -313,53 +439,46 @@ a:hover { opacity: 0.75; }
   </div>
 </div>
 
-<footer style="background: #162836; padding: clamp(56px, 7vw, 96px) 0 40px;">
-  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(195,205,214,0.24);">
-      <div>
-        <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 20px;"><img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></div>
-        <p style="color: #C3CDD6; font-weight: 300; font-size: 15px; line-height: 25px; margin: 0 0 24px; max-width: 340px;">Secure technology lifecycle and critical-materials recovery, on one system.</p>
-        <div style="display: flex; gap: 10px;">
-          <input type="email" placeholder="Email for updates" style="flex: 1; min-width: 0; border: 0; border-bottom: 1px solid rgba(195,205,214,0.24); background: transparent; padding: 10px 0; font-size: 14px; color: #FFFFFF;" />
-          <button style="border: 0; background: transparent; color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #FFFFFF; cursor: pointer; padding: 10px 0;">Sign up</button>
-        </div>
+<footer style="background: var(--navy-deep); color: var(--surface);">
+  <div class="wrap" style="padding-top: 64px; padding-bottom: 64px; display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap;">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 18px; max-width: 320px;">
+      <img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" />
+      <p class="body" style="color: var(--mist); font-size: 15px;">Secure technology lifecycle and
+        critical-materials recovery, on one system.</p>
+    </div>
+    <div style="display: flex; gap: 64px; flex-wrap: wrap;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <p class="kicker k-navy">Company</p>
+        <a href="/company" style="font-size: 15px; color: var(--mist);">About</a>
+        <a href="/blog" style="font-size: 15px; color: var(--mist);">Newsroom</a>
+        <a href="/contact" style="font-size: 15px; color: var(--mist);">Contact</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
-        <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Company</span>
-        <a href="/company" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">About</a>
-        <a href="/company#leadership" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Leadership</a>
-        <a href="/blog" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Newsroom</a>
-        <a href="/contact" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Contact</a>
+        <p class="kicker k-navy">Follow</p>
+        <a href="https://www.linkedin.com/company/paladin-envirotech/"
+           style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--surface);">
+          <span aria-hidden="true" style="width: 22px; height: 22px; flex: none; background: var(--ember-light);
+                display: inline-flex; align-items: center; justify-content: center;
+                font-weight: 600; font-size: 11px; color: var(--navy);">in</span>
+          LinkedIn
+        </a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
-        <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">One system</span>
-        <a href="/platform" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">How it works</a>
-        <a href="/critical-materials" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Critical materials</a>
-        <a href="/paladin-local" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Regional coverage</a>
-        <a href="/secure-itad" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Secure ITAD</a>
-        <a href="/electronics-recycling" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Electronics recycling</a>
-        <a href="/network" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Network</a>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Certifications &amp; entities</span>
-        <a href="/network" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">R2 / RIOS by site</a>
-        <a href="#" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">IRT</a>
-        <a href="#" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">R&amp;L Recycling B.V.</a>
-        <a href="/critical-materials" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">CMR</a>
-        <a href="#" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Daeheung</a>
+        <p class="kicker k-navy">One system</p>
+        <a href="/platform" style="font-size: 15px; color: var(--mist);">How it works</a>
+        <a href="/secure-itad" style="font-size: 15px; color: var(--mist);">Secure destruction</a>
+        <a href="/network" style="font-size: 15px; color: var(--mist);">Network</a>
       </div>
     </div>
-    <div style="padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-      <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <span style="color: #C3CDD6; font-size: 13px;">© 2026 Paladin Envirotech. All rights reserved.</span>
-        <a href="#" style="color: #C3CDD6; font-size: 13px;">Privacy</a>
-        <a href="#" style="color: #C3CDD6; font-size: 13px;">Terms</a>
-      </div>
-      <div style="display: flex; gap: 20px;">
-        <a href="#" style="color: #FFFFFF; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</a>
-        <a href="#" style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">NL</a>
-        <a href="#" style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">DE</a>
-        <a href="#" style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">KO</a>
+  </div>
+  <div class="wrap" style="padding-top: 24px; padding-bottom: 32px; border-top: 1px solid rgba(195,205,214,0.2);">
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+      <p style="font-size: 13px; color: var(--mist); margin: 0;">&copy; 2026 Paladin EnviroTech. All rights reserved.</p>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--surface);">EN</span>
+        <span style="font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mist);">FR</span>
+        <span style="font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mist);">DE</span>
+        <span style="font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mist);">NL</span>
       </div>
     </div>
   </div>
@@ -409,6 +528,62 @@ class Component extends DCLogic {
     });
   }
 }
+</script>
+<script>
+(function () {
+  var trigger = document.querySelector('[data-mega-trigger]');
+  var panel = document.getElementById('pal-mega');
+  if (!trigger || !panel) return;
+  function set(open) {
+    panel.setAttribute('data-open', open ? '1' : '0');
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  trigger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    set(panel.getAttribute('data-open') !== '1');
+  });
+  document.addEventListener('click', function (e) {
+    if (!panel.contains(e.target) && e.target !== trigger) set(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') set(false); });
+})();
+</script>
+
+<script>
+/* Scroll reveal. Sections fade up once as they enter, and never re-hide, so
+   nothing can be left invisible if the observer misses a frame. */
+(function () {
+  var items = document.querySelectorAll('[data-reveal]');
+  if (!items.length) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    for (var i = 0; i < items.length; i++) items[i].classList.add('is-in');
+    return;
+  }
+  if (!('IntersectionObserver' in window)) {
+    for (var j = 0; j < items.length; j++) items[j].classList.add('is-in');
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '0px 0px -12% 0px', threshold: 0.06 });
+  items.forEach(function (el) {
+    /* Anything already at or above the fold is shown at once. An element the
+       page loads scrolled past would otherwise never intersect and would stay
+       invisible for good. */
+    if (el.getBoundingClientRect().top < window.innerHeight) {
+      el.classList.add('is-in');
+    } else {
+      io.observe(el);
+    }
+  });
+  /* Last resort: nothing stays hidden, whatever the observer does. */
+  setTimeout(function () {
+    for (var k = 0; k < items.length; k++) items[k].classList.add('is-in');
+  }, 6000);
+})();
 </script>
 </body>
 </html>
