@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.46.0">
+<meta name="build-version" content="1.47.0">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -59,19 +59,47 @@
   .mega-col span.off { font-size: 15px; line-height: 1.45; color: var(--mist); opacity: 0.55; }
   @media (max-width: 1080px) { .mega { display: none !important; } }
 
-  .takeover { max-width: 1180px; margin: 0 auto; padding: 0 40px;
-              display: grid; grid-template-columns: minmax(0,1fr) minmax(0,52%);
-              gap: 56px; align-items: center; }
-  .takeover-text { display: flex; flex-direction: column; gap: 22px;
-                   max-width: 620px; padding: 84px 0; }
+
+
+  /* the slot clips; the wrapper moves */
+
+
+  @media (prefers-reduced-motion: reduce) {
+    .car-track img { transform: translate(0, -50%) !important; left: 40px; }
+  }
+
+
+  .takeover-text { display: flex; flex-direction: column; gap: 22px; max-width: 620px; }
   .takeover-text .btn { align-self: flex-start; }
-  .takeover-slot { aspect-ratio: 16 / 10; position: relative; overflow: hidden;
-                   background: var(--navy-deep); }
-  .takeover-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+  .track { position: relative; width: 100%; height: clamp(220px, 26vw, 340px);
+          overflow: hidden; margin-top: 64px; }
+  .track-horizon { position: absolute; left: 0; right: 0; top: 30%; height: 1px;
+                   background: rgba(195,205,214,0.24); }
+  .track-road { position: absolute; left: 0; right: 0; bottom: 0; height: 32%;
+                background: var(--navy-deep); border-top: 1px solid rgba(195,205,214,0.24); }
+  .track-dashes { position: absolute; left: -30%; right: -30%; bottom: 14%; height: 2px;
+                  will-change: transform;
+                  background-image: repeating-linear-gradient(to right,
+                    rgba(195,205,214,0.34) 0 48px, transparent 48px 132px); }
+  .car { position: absolute; bottom: 30%; left: 0; transform: translate(-100%, 0);
+         display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 24px;
+         will-change: transform; }
+  .car img { display: block; width: clamp(200px, 26vw, 330px); height: auto; }
+  .car-label { display: flex; flex-direction: column; gap: 6px;
+               align-items: flex-start; padding-bottom: 14px; }
+  .car-kicker { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px;
+                text-transform: uppercase; color: var(--ember-light); white-space: nowrap; }
+  .car-name { font-size: 14.5px; line-height: 1.4; color: var(--mist); white-space: nowrap; }
+
   @media (max-width: 900px) {
-    .takeover { grid-template-columns: minmax(0,1fr); gap: 0; padding: 0 24px; }
-    .takeover-text { padding: 64px 0 40px; }
-    .takeover-slot { margin-bottom: 64px; }
+    .track { height: 200px; margin-top: 48px; }
+    .car img { width: 200px; }
+    .car-label { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .car { transform: translate(28%, 0) !important; }
+    .track-dashes { transform: none !important; }
   }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
@@ -333,9 +361,12 @@
 </section>
 
 
+
+
+
 <!-- CAMPAIGN TAKEOVER -->
-<section class="sec sec-navy" style="padding-top: 0; padding-bottom: 0;">
-  <div class="takeover">
+<section class="sec sec-navy" style="padding-bottom: 0;">
+  <div class="wrap">
     <div class="takeover-text">
       <p class="kicker k-navy">Campaign takeover &middot; Freedom 250</p>
       <h2 class="h2">Rare Earth Freedom 250</h2>
@@ -344,7 +375,19 @@
         onto the grid.</p>
       <a class="btn btn-on-navy" href="/rare-earth-freedom-250">View the livery</a>
     </div>
-    <div class="takeover-slot"><img src="/assets/freedom-250-car.1b6ba609.webp" alt="Juncos Hollinger Racing livery" /></div>
+  </div>
+  <!-- full-bleed so the car has the whole screen to cross -->
+  <div class="track" data-track>
+    <div class="track-horizon"></div>
+    <div class="track-road"></div>
+    <div class="track-dashes" data-parallax="0.85"></div>
+    <div class="car" data-car>
+      <img src="/assets/freedom-250-car.1b6ba609.webp" alt="Juncos Hollinger Racing livery" />
+      <div class="car-label">
+        <span class="car-kicker">Official partner</span>
+        <span class="car-name">REcapture &times; Juncos Hollinger Racing</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -407,6 +450,106 @@
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
   panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') set(false); });
+})();
+</script>
+
+<script>
+(function () {
+  var slot = document.querySelector('.takeover-slot');
+  var car = document.querySelector('.takeover-car');
+  if (!slot || !car) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  // Travel is expressed as a percentage of the slot width, so the distance
+  // scales with the viewport instead of being a fixed pixel figure.
+  var FROM = -9, TO = 9;
+  var ticking = false;
+
+  function update() {
+    ticking = false;
+    var r = slot.getBoundingClientRect();
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    // 0 when the band first enters the viewport, 1 when it has fully left
+    var span = vh + r.height;
+    var p = (vh - r.top) / span;
+    if (p < 0) p = 0;
+    if (p > 1) p = 1;
+    slot.style.setProperty('--car-travel', (FROM + (TO - FROM) * p).toFixed(2));
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(update);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();
+</script>
+
+<script>
+/* Scroll-driven car. Progress is the track's travel through the viewport,
+   smoothstepped so it eases in and out. The span is the track width plus the
+   car's own width, so it starts and finishes fully off-screen. */
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var track = document.querySelector('[data-car-track]');
+  var car = track && track.querySelector('[data-car]');
+  if (!car || reduce.matches) return;
+
+  var ticking = false;
+  function place() {
+    ticking = false;
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    var r = track.getBoundingClientRect();
+    if (r.height === 0) return;
+    var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+    var eased = p * p * (3 - 2 * p);
+    var span = r.width + car.offsetWidth;
+    car.style.transform = 'translate(' + (r.width - eased * span) + 'px, -50%)';
+  }
+  function onScroll() {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(place); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  if (car.complete) place(); else car.addEventListener('load', place);
+  place();
+})();
+</script>
+
+<script>
+/* Scroll-driven car. Same easing as the original page runtime: the track's
+   progress through the viewport, smoothstepped, moving the car across the
+   track width plus its own width so it clears both edges. */
+(function () {
+  var track = document.querySelector('[data-track]');
+  var car = document.querySelector('[data-car]');
+  var dashes = document.querySelector('[data-parallax]');
+  if (!track || !car) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var queued = false;
+  function tick() {
+    queued = false;
+    var vh = window.innerHeight;
+    var r = track.getBoundingClientRect();
+    if (r.height === 0) return;
+    var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
+    var eased = p * p * (3 - 2 * p);
+    car.style.transform = 'translate(' + (r.width - eased * (r.width + car.offsetWidth)) + 'px, 0)';
+    if (dashes) {
+      var k = parseFloat(dashes.dataset.parallax) || 0.4;
+      dashes.style.transform = 'translateX(' + (240 - p * 480 * k) + 'px)';
+    }
+  }
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    window.requestAnimationFrame(tick);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  tick();
 })();
 </script>
 </body>

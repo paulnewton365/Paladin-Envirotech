@@ -125,7 +125,7 @@
              '<span style="font-size:13px;letter-spacing:1px;text-transform:uppercase;' +
              'color:#C3CDD6;">' + esc(g.label) + '</span>' + links + '</div>';
     }).join('');
-    return '<div style="max-width:1600px;margin:0 auto;padding:40px clamp(24px,5vw,72px) 44px;' +
+    return '<div style="max-width:1180px;margin:0 auto;padding:44px 40px 48px;' +
            'display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));' +
            'gap:40px;">' + cols + '</div>';
   }

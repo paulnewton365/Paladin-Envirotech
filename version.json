@@ -1,5 +1,5 @@
 {
-  "version": "1.46.0",
+  "version": "1.47.0",
   "built": "2026-09-04",
-  "notes": "New palette rolled out site-wide; mega menu and takeover restored"
+  "notes": "Scrolling car restored; content width unified at 1180px"
 }
