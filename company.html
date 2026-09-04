@@ -15,7 +15,7 @@
 <meta property="og:image" content="/assets/preview.f2a82a9e.webp">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.57.1">
+<meta name="build-version" content="1.57.2">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -653,24 +653,40 @@ class Component extends DCLogic {
 </script>
 
 <script>
-/* The page runtime wraps content in a host div roughly one viewport tall.
-   A sticky header inside it only sticks for that height and then scrolls away,
-   which is why the masthead held on the static pages and not the rendered ones.
-   Moving the header to be a direct child of body gives it the whole document
-   to stick against. Re-run on mutation, since the runtime re-renders. */
+/* The page runtime re-renders the document and can emit a second header. The
+   earlier version of this only moved the first one it found and stopped
+   watching after a few seconds, so a late re-render left two navs stacked.
+   This keeps exactly one: the copy on body, and removes any other, for as long
+   as the page is open. */
 (function () {
-  function lift() {
-    var h = document.querySelector('header');
-    if (!h || h.parentElement === document.body) return;
-    document.body.insertBefore(h, document.body.firstChild);
+  function keepOne() {
+    var all = document.querySelectorAll('header');
+    if (!all.length) return;
+    var keep = null;
+    for (var i = 0; i < all.length; i++) {
+      if (all[i].parentElement === document.body) { keep = all[i]; break; }
+    }
+    if (!keep) {
+      keep = all[0];
+      document.body.insertBefore(keep, document.body.firstChild);
+    }
+    for (var j = 0; j < all.length; j++) {
+      if (all[j] !== keep && all[j].parentElement) {
+        all[j].parentElement.removeChild(all[j]);
+      }
+    }
   }
-  lift();
+  keepOne();
   if (window.MutationObserver) {
-    var mo = new MutationObserver(lift);
-    mo.observe(document.body, { childList: true, subtree: false });
-    setTimeout(function () { mo.disconnect(); lift(); }, 4000);
+    var pending = false;
+    var mo = new MutationObserver(function () {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(function () { pending = false; keepOne(); });
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
   }
-  window.addEventListener('load', lift);
+  window.addEventListener('load', keepOne);
 })();
 </script>
 </body>
