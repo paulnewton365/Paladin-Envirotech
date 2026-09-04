@@ -74,7 +74,7 @@
       var el = document.createElement('div');
       el.setAttribute('data-build-stamp', '');
       el.style.cssText = 'text-align:right;padding:8px clamp(24px,5vw,72px) 0;' +
-        'color:#8CA0B3;font-size:11px;letter-spacing:0.6px;';
+        'color:#C3CDD6;font-size:11px;letter-spacing:0.6px;';
       el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
       footer.appendChild(el);
       if (window.location.hash && window.location.hash.length > 1) {
@@ -776,7 +776,7 @@
     var el = document.createElement('div');
     el.setAttribute('data-build-stamp', '');
     el.style.cssText = 'text-align:right;padding:8px clamp(24px,5vw,72px) 0;' +
-      'color:#8CA0B3;font-size:11px;letter-spacing:0.6px;';
+      'color:#C3CDD6;font-size:11px;letter-spacing:0.6px;';
     el.textContent = 'Build ' + meta.content + (dateMeta ? ' \u00b7 ' + dateMeta.content : '');
     footer.appendChild(el);
     clearStickyBar();
