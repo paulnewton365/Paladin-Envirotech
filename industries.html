@@ -9,9 +9,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-<meta name="theme-color" content="#0B1E31">
+<meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.45.1">
+<meta name="build-version" content="1.46.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Industries We Serve | Paladin EnviroTech">
 <meta property="og:description" content="Hyperscale, OEM, enterprise and government programmes.">
@@ -22,6 +22,18 @@
 <script defer src="/motion.js"></script>
 <link rel="stylesheet" href="/responsive.css">
 <script src="./support.js"></script>
+<style>
+  :root {
+    --navy: #1E3547; --navy-deep: #162836;
+    --ember: #B8541F; --ember-hover: #8F3F14; --ember-light: #E08B52;
+    --slate: #5A6874; --mist: #C3CDD6; --hairline: #D5DBE0;
+    --surface: #FFFFFF; --surface-alt: #F5F6F7;
+  }
+  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+         -webkit-font-smoothing: antialiased; }
+  h1, h2 { font-weight: 300; letter-spacing: -1.4px; line-height: 1.06; }
+  h3 { font-weight: 300; letter-spacing: -0.6px; }
+</style>
 </head>
 <body>
 <x-dc>
@@ -31,7 +43,7 @@
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
-html, body { margin: 0; padding: 0; background: #FAF8F5; font-family: "Restart Hard", system-ui, sans-serif; color: #0B1E31; -webkit-font-smoothing: antialiased; }
+html, body { margin: 0; padding: 0; background: #FFFFFF; font-family: "Restart Hard", system-ui, sans-serif; color: #1E3547; -webkit-font-smoothing: antialiased; }
 * { box-sizing: border-box; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: 0.75; }
@@ -41,53 +53,53 @@ a:hover { opacity: 0.75; }
 .pal-ind-list { display: flex; flex-direction: column; border-top: 1px solid rgba(11, 30, 49, 0.14); }
 .pal-ind-item { display: grid; grid-template-columns: 8px 34px 1fr; align-items: center; gap: 12px; padding: 17px 0; border: 0; border-bottom: 1px solid rgba(11, 30, 49, 0.14); background: none; cursor: pointer; font: inherit; text-align: left; color: inherit; width: 100%; }
 .pal-ind-dot { width: 8px; height: 8px; background: transparent; transition: background 140ms cubic-bezier(0.2,0.7,0.1,1); }
-.pal-ind-num { font-size: 12px; letter-spacing: 0.6px; color: #B04A24; font-variant-numeric: tabular-nums; }
+.pal-ind-num { font-size: 12px; letter-spacing: 0.6px; color: #8F3F14; font-variant-numeric: tabular-nums; }
 .pal-ind-name { font-size: clamp(17px, 1.6vw, 19px); line-height: 25px; letter-spacing: -0.1px; opacity: 0.5; transition: opacity 140ms cubic-bezier(0.2,0.7,0.1,1); }
-.pal-ind-item[aria-selected="true"] .pal-ind-dot { background: #4FB3C8; }
+.pal-ind-item[aria-selected="true"] .pal-ind-dot { background: #B8541F; }
 .pal-ind-item[aria-selected="true"] .pal-ind-name { opacity: 1; }
 .pal-ind-item:hover .pal-ind-name { opacity: 0.8; }
-.pal-ind-panel { background: #0B1E31; color: #FFFFFF; overflow: hidden; display: flex; flex-direction: column; }
+.pal-ind-panel { background: #1E3547; color: #FFFFFF; overflow: hidden; display: flex; flex-direction: column; }
 .pal-ind-body { position: relative; flex: 1; padding: clamp(32px, 3.6vw, 52px) clamp(28px, 3.6vw, 52px) clamp(28px, 3vw, 40px); }
 .pal-ind-ghost { position: absolute; top: 18px; right: clamp(20px, 3vw, 44px); font-size: clamp(88px, 9vw, 132px); line-height: 1; font-weight: 500; color: rgba(255,255,255,0.06); font-variant-numeric: tabular-nums; pointer-events: none; }
 .pal-ind-stack { position: relative; display: flex; flex-direction: column; gap: 22px; }
-.pal-ind-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #E8875C; }
-.pal-ind-eyebrow::before { content: ""; width: 10px; height: 10px; background: #E8875C; flex: none; }
+.pal-ind-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #E08B52; }
+.pal-ind-eyebrow::before { content: ""; width: 10px; height: 10px; background: #E08B52; flex: none; }
 .pal-ind-copy { display: flex; flex-direction: column; gap: 18px; animation: palIndRise 480ms cubic-bezier(0.2,0.7,0.1,1) both; }
 .pal-ind-head { margin: 0; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.24; letter-spacing: -0.3px; font-weight: 400; text-wrap: balance; }
 .pal-ind-text { margin: 0; font-size: 16px; line-height: 27px; font-weight: 300; color: rgba(255,255,255,0.75); max-width: 50ch; text-wrap: pretty; }
 @keyframes palIndRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.pal-ind-bar { display: flex; align-items: stretch; border-top: 1px solid #1B3850; margin-top: auto; }
+.pal-ind-bar { display: flex; align-items: stretch; border-top: 1px solid rgba(195,205,214,0.24); margin-top: auto; }
 .pal-ind-count { flex: 1; padding: 22px clamp(28px, 3.6vw, 52px); font-size: 12px; letter-spacing: 0.8px; text-transform: uppercase; color: rgba(255,255,255,0.6); display: flex; align-items: center; font-variant-numeric: tabular-nums; }
-.pal-ind-nav { width: 62px; display: flex; align-items: center; justify-content: center; border: 0; border-left: 1px solid #1B3850; cursor: pointer; font-size: 17px; font-family: inherit; background: transparent; color: #FFFFFF; transition: background 140ms cubic-bezier(0.2,0.7,0.1,1); }
+.pal-ind-nav { width: 62px; display: flex; align-items: center; justify-content: center; border: 0; border-left: 1px solid rgba(195,205,214,0.24); cursor: pointer; font-size: 17px; font-family: inherit; background: transparent; color: #FFFFFF; transition: background 140ms cubic-bezier(0.2,0.7,0.1,1); }
 .pal-ind-nav:hover { background: rgba(255,255,255,0.08); }
-.pal-ind-nav.is-next { background: #E8875C; color: #0B1E31; }
-.pal-ind-nav.is-next:hover { background: #E0BC77; }
+.pal-ind-nav.is-next { background: #E08B52; color: #1E3547; }
+.pal-ind-nav.is-next:hover { background: #FFFFFF; }
 @media (max-width: 960px) {
   .pal-ind { grid-template-columns: 1fr; gap: 40px; }
 }
 @media (prefers-reduced-motion: reduce) { .pal-ind-copy { animation: none; } }
 
 .pal-ind-head-block { margin-bottom: clamp(32px, 4vw, 48px); }
-.pal-ind-head-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #B04A24; }
-.pal-ind-head-eyebrow::before { content: ""; width: 10px; height: 10px; background: #E8875C; flex: none; }
-.pal-ind-head-title { margin: 18px 0 0; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; letter-spacing: -0.5px; font-weight: 400; color: #0B1E31; text-wrap: balance; }
+.pal-ind-head-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #8F3F14; }
+.pal-ind-head-eyebrow::before { content: ""; width: 10px; height: 10px; background: #B8541F; flex: none; }
+.pal-ind-head-title { margin: 18px 0 0; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; letter-spacing: -0.5px; font-weight: 400; color: #1E3547; text-wrap: balance; }
 </style>
 </helmet>
 
-<header style="position: sticky; top: 0; z-index: 800; background: #0B1E31;">
+<header style="position: sticky; top: 0; z-index: 800; background: #1E3547;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); min-height: 84px; padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
     <a href="/" style="display: flex; align-items: center; gap: 11px;"><img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
     <nav data-nav="1" style="display: flex; align-items: center; gap: clamp(14px, 1.8vw, 34px); flex-wrap: wrap;">
-      <a href="/platform" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #DE7247; color: #E8875C;">One system</a>
-      <a href="/critical-materials" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #DE7247; color: #E8875C;">Critical materials</a>
-      <a href="/industries" style="color: #FFFFFF; font-size: 14px; font-weight: 500; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid #DE7247; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #DE7247; color: #E8875C;">Industries</a>
-      <a href="/network" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #DE7247; color: #E8875C;">Network</a>
-      <a href="/company" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #DE7247; color: #E8875C;">Company</a>
-      <a href="/blog" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #DE7247; color: #E8875C;">Blog</a><a href="/press" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #DE7247; color: #E8875C;">Press</a>
+      <a href="/platform" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">One system</a>
+      <a href="/critical-materials" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Critical materials</a>
+      <a href="/industries" style="color: #FFFFFF; font-size: 14px; font-weight: 500; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid #E08B52; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Industries</a>
+      <a href="/network" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Network</a>
+      <a href="/company" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Company</a>
+      <a href="/blog" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Blog</a><a href="/press" style="color: #FFFFFF; font-size: 14px; font-weight: 300; letter-spacing: 0.4px; padding-bottom: 4px; border-bottom: 1px solid transparent; transition: border-color 200ms, color 200ms;" style-hover="border-bottom-color: #E08B52; color: #E08B52;">Press</a>
     </nav>
     <div style="display: flex; align-items: center; gap: 20px;">
-      <span style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</span>
-      <a href="/contact" style="display: inline-block; padding: 14px 22px; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0B1E31; background-image: linear-gradient(to right, #E8875C 50%, #DE7247 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
+      <span style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</span>
+      <a href="/contact" style="display: inline-block; padding: 14px 22px; white-space: nowrap; font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #1E3547; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
       <button data-nav-toggle="1" aria-label="Menu" style="display: none; border: 0; background: transparent; cursor: pointer; width: 26px; height: 20px; flex-direction: column; justify-content: space-between; padding: 0;">
         <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
         <span style="display: block; width: 100%; height: 2px; background: #FFFFFF;"></span>
@@ -97,18 +109,18 @@ a:hover { opacity: 0.75; }
   </div>
 </header>
 
-<div style="background: #2E4C66; padding: clamp(56px, 7vw, 104px) 0 clamp(56px, 7vw, 104px);">
+<div style="background: #1E3547; padding: clamp(56px, 7vw, 104px) 0 clamp(56px, 7vw, 104px);">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: clamp(40px, 5vw, 80px); align-items: center;">
     <div>
-      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;"><div style="width: 8px; height: 8px; background: #C4562C;"></div><span style="color: #CBD5DE; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Industries</span></div>
-      <h1 style="color: #FFFFFF; font-size: clamp(38px, 6vw, 84px); line-height: 1.06; letter-spacing: -0.8px; font-weight: 300; margin: 0 0 28px;">What you retire says something about <span style="color: #E8875C; text-wrap: balance;">how you operate.</span></h1>
-      <p style="color: #CBD5DE; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; max-width: 640px; margin: 0;">A hospital protecting patient records, a bank satisfying an auditor and a hyperscaler closing a data center all have to prove where equipment went and what happened to it. What counts as proof varies by sector, so we work sector by sector.</p>
+      <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;"><div style="width: 8px; height: 8px; background: #E08B52;"></div><span style="color: #C3CDD6; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Industries</span></div>
+      <h1 style="color: #FFFFFF; font-size: clamp(38px, 6vw, 84px); line-height: 1.06; letter-spacing: -0.8px; font-weight: 300; margin: 0 0 28px;">What you retire says something about <span style="color: #E08B52; text-wrap: balance;">how you operate.</span></h1>
+      <p style="color: #C3CDD6; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; max-width: 640px; margin: 0;">A hospital protecting patient records, a bank satisfying an auditor and a hyperscaler closing a data center all have to prove where equipment went and what happened to it. What counts as proof varies by sector, so we work sector by sector.</p>
     </div>
-    <div style="aspect-ratio: 4 / 3; background: #2E4C66; position: relative; overflow: hidden;"><img src="assets/recycling-rare.62bf3d81.jpeg" alt="Paladin technicians processing retired equipment" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /><div style="position: absolute; left: 0; bottom: 0; background: #2E4C66; padding: 14px 20px; display: flex; align-items: center; gap: 10px;"><div style="width: 8px; height: 8px; background: #DE7247;"></div><span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Eight sectors, one standard</span></div></div>
+    <div style="aspect-ratio: 4 / 3; background: #1E3547; position: relative; overflow: hidden;"><img src="assets/recycling-rare.62bf3d81.jpeg" alt="Paladin technicians processing retired equipment" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /><div style="position: absolute; left: 0; bottom: 0; background: #1E3547; padding: 14px 20px; display: flex; align-items: center; gap: 10px;"><div style="width: 8px; height: 8px; background: #E08B52;"></div><span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Eight sectors, one standard</span></div></div>
   </div>
 </div>
 
-<div style="background: #EDE9E3; padding: clamp(64px, 8vw, 112px) 0;">
+<div style="background: #F5F6F7; padding: clamp(64px, 8vw, 112px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div class="pal-ind-head-block"><div class="pal-ind-head-eyebrow">Industries we serve</div><h2 class="pal-ind-head-title">Start with your sector.</h2></div>
     <div class="pal-ind" data-ind-root>
@@ -138,44 +150,44 @@ a:hover { opacity: 0.75; }
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(36px, 4vw, 72px); align-items: start;">
       <div>
-        <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #B04A24;">What this looks like in practice</span>
+        <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">What this looks like in practice</span>
         <h2 style="font-size: clamp(28px, 3.4vw, 44px); line-height: 1.18; font-weight: 500; margin: 16px 0 0; max-width: 520px;">A regional hospital system, a Friday afternoon, and 400 retired workstations.</h2>
       </div>
       <div>
-        <p style="font-size: 16px; line-height: 26px; margin: 0 0 16px; color: #47586B;">A multi-site healthcare provider refreshing its clinics doesn't have one intake, it has a dozen, each with patient data, each on its own timeline. Fragmented pickup meant fragmented paperwork, and paperwork gaps are exactly where compliance officers lose sleep.</p>
-        <p style="font-size: 16px; line-height: 26px; margin: 0; color: #47586B;">Routed through one system, every clinic gets the same NIST 800-88 destruction, the same serial-level record, and one report at the end that an auditor can review in an afternoon.</p>
+        <p style="font-size: 16px; line-height: 26px; margin: 0 0 16px; color: #5A6874;">A multi-site healthcare provider refreshing its clinics doesn't have one intake, it has a dozen, each with patient data, each on its own timeline. Fragmented pickup meant fragmented paperwork, and paperwork gaps are exactly where compliance officers lose sleep.</p>
+        <p style="font-size: 16px; line-height: 26px; margin: 0; color: #5A6874;">Routed through one system, every clinic gets the same NIST 800-88 destruction, the same serial-level record, and one report at the end that an auditor can review in an afternoon.</p>
       </div>
     </div>
-    <div style="margin-top: clamp(40px, 5vw, 72px); border-top: 1px solid #DDD6CC; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));">
-      <div style="padding: 40px 32px 40px 0; border-right: 1px solid #DDD6CC;"><div style="color: #27707F; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">400</div><p style="color: #47586B; font-size: 14px; font-weight: 300; margin: 10px 0 0;">workstations retired across the refresh</p></div><div style="padding: 40px 32px; border-right: 1px solid #DDD6CC;"><div style="color: #357A5B; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">12</div><p style="color: #47586B; font-size: 14px; font-weight: 300; margin: 10px 0 0;">clinic sites collected under one manifest</p></div><div style="padding: 40px 32px; border-right: 1px solid #DDD6CC;"><div style="color: #B04A24; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">1</div><p style="color: #47586B; font-size: 14px; font-weight: 300; margin: 10px 0 0;">consolidated report instead of a dozen mismatched vendor files</p></div><div style="padding: 40px 0 40px 32px; "><div style="color: #C4562C; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">0</div><p style="color: #47586B; font-size: 14px; font-weight: 300; margin: 10px 0 0;">gaps in the chain of custody between pickup and certificate</p></div>
+    <div style="margin-top: clamp(40px, 5vw, 72px); border-top: 1px solid #D5DBE0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));">
+      <div style="padding: 40px 32px 40px 0; border-right: 1px solid #D5DBE0;"><div style="color: #5A6874; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">400</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">workstations retired across the refresh</p></div><div style="padding: 40px 32px; border-right: 1px solid #D5DBE0;"><div style="color: #5A6874; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">12</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">clinic sites collected under one manifest</p></div><div style="padding: 40px 32px; border-right: 1px solid #D5DBE0;"><div style="color: #B8541F; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">1</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">consolidated report instead of a dozen mismatched vendor files</p></div><div style="padding: 40px 0 40px 32px; "><div style="color: #B8541F; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">0</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">gaps in the chain of custody between pickup and certificate</p></div>
     </div>
   </div>
 </div>
 
-<div data-reveal="1" style="background: #2E4C66; padding: clamp(56px, 7vw, 96px) 0;">
+<div data-reveal="1" style="background: #1E3547; padding: clamp(56px, 7vw, 96px) 0;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(36px, 4vw, 64px); align-items: center;">
     <div>
-      <span style="color: #CBD5DE; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Also part of the system</span>
-      <h2 style="color: #FFFFFF; font-size: clamp(28px, 3.4vw, 48px); line-height: 1.16; font-weight: 300; margin: 16px 0 16px;"><span style="color: #E8875C;">Data center</span> backup generator recycling</h2>
-      <p style="color: #CBD5DE; font-weight: 300; font-size: 16px; line-height: 26px; margin: 0;">Fuel purging, battery removal and disconnection from automatic transfer switches, handled to EPA and local air-district compliance, with crane and rigging teams for physical removal. Units under ten years old with low runtime hours are resold into construction, telecom and agriculture; end-of-life units still recover copper windings, aluminum housings, rare-earth magnets and steel frames.</p>
+      <span style="color: #C3CDD6; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Also part of the system</span>
+      <h2 style="color: #FFFFFF; font-size: clamp(28px, 3.4vw, 48px); line-height: 1.16; font-weight: 300; margin: 16px 0 16px;"><span style="color: #E08B52;">Data center</span> backup generator recycling</h2>
+      <p style="color: #C3CDD6; font-weight: 300; font-size: 16px; line-height: 26px; margin: 0;">Fuel purging, battery removal and disconnection from automatic transfer switches, handled to EPA and local air-district compliance, with crane and rigging teams for physical removal. Units under ten years old with low runtime hours are resold into construction, telecom and agriculture; end-of-life units still recover copper windings, aluminum housings, rare-earth magnets and steel frames.</p>
     </div>
-    <div style="aspect-ratio: 4 / 3; background: #2E4C66; position: relative; overflow: hidden;"><img src="https://paladinenvirotech.com/wp-content/uploads/2026/05/IT-Asset-Disposition.jpg" alt="Generator decommissioning" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></div>
+    <div style="aspect-ratio: 4 / 3; background: #1E3547; position: relative; overflow: hidden;"><img src="https://paladinenvirotech.com/wp-content/uploads/2026/05/IT-Asset-Disposition.jpg" alt="Generator decommissioning" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></div>
   </div>
 </div>
 
-<div data-reveal="1" style="background: #FAF8F5; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);">
-  <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); background: #2E4C66; border-left: 4px solid #DE7247; padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+<div data-reveal="1" style="background: #FFFFFF; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);">
+  <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px); background: #1E3547; border-left: 4px solid #B8541F; padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
     <p style="color: #FFFFFF; font-weight: 300; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; margin: 0; max-width: 1180px;">Don't see your sector? The controls are the same everywhere, tell us what you run and we'll tailor the documentation.</p>
-    <a href="/contact" style="flex: none; display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #E8875C 50%, #DE7247 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
+    <a href="/contact" style="flex: none; display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
   </div>
 </div>
 
-<footer style="background: #071624; padding: clamp(56px, 7vw, 96px) 0 40px;">
+<footer style="background: #162836; padding: clamp(56px, 7vw, 96px) 0 40px;">
   <div style="max-width: 1600px; margin: 0 auto; padding: 0 clamp(24px, 5vw, 72px);">
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid #1B3850;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(195,205,214,0.24);">
       <div>
         <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 20px;"><img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></div>
-        <p style="color: #8CA0B3; font-weight: 300; font-size: 15px; line-height: 25px; margin: 0 0 24px; max-width: 340px;">Secure technology lifecycle and critical-materials recovery, on one system.</p>
+        <p style="color: #C3CDD6; font-weight: 300; font-size: 15px; line-height: 25px; margin: 0 0 24px; max-width: 340px;">Secure technology lifecycle and critical-materials recovery, on one system.</p>
         <div style="display: flex; gap: 10px;">
           <input type="email" placeholder="Email for updates" style="flex: 1; min-width: 0; border: 0; border-bottom: 1px solid rgba(255,255,255,0.3); background: transparent; padding: 10px 0; font-size: 14px; color: #FFFFFF;" />
           <button style="border: 0; background: transparent; color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #FFFFFF; cursor: pointer; padding: 10px 0;">Sign up</button>
@@ -183,40 +195,40 @@ a:hover { opacity: 0.75; }
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Company</span>
-        <a href="/company" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">About</a>
-        <a href="/company#leadership" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Leadership</a>
-        <a href="/blog" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Newsroom</a>
-        <a href="/contact" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Contact</a>
+        <a href="/company" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">About</a>
+        <a href="/company#leadership" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Leadership</a>
+        <a href="/blog" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Newsroom</a>
+        <a href="/contact" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Contact</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">One system</span>
-        <a href="/platform" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">How it works</a>
-        <a href="/critical-materials" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Critical materials</a>
-        <a href="/paladin-local" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Regional coverage</a>
-        <a href="/secure-itad" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Secure ITAD</a>
-        <a href="/electronics-recycling" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Electronics recycling</a>
-        <a href="/network" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Network</a>
+        <a href="/platform" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">How it works</a>
+        <a href="/critical-materials" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Critical materials</a>
+        <a href="/paladin-local" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Regional coverage</a>
+        <a href="/secure-itad" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Secure ITAD</a>
+        <a href="/electronics-recycling" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Electronics recycling</a>
+        <a href="/network" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Network</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
         <span style="color: #FFFFFF; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Certifications &amp; entities</span>
-        <a href="/network" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">R2 / RIOS by site</a>
-        <a href="#" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">IRT</a>
-        <a href="#" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">R&amp;L Recycling B.V.</a>
-        <a href="/critical-materials" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">CMR</a>
-        <a href="#" style="color: #8CA0B3; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #DE7247;">Daeheung</a>
+        <a href="/network" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">R2 / RIOS by site</a>
+        <a href="#" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">IRT</a>
+        <a href="#" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">R&amp;L Recycling B.V.</a>
+        <a href="/critical-materials" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">CMR</a>
+        <a href="#" style="color: #C3CDD6; font-size: 15px; font-weight: 300; transition: color 200ms;" style-hover="color: #E08B52;">Daeheung</a>
       </div>
     </div>
     <div style="padding-top: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
       <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-        <span style="color: #8CA0B3; font-size: 13px;">© 2026 Paladin Envirotech. All rights reserved.</span>
-        <a href="#" style="color: #8CA0B3; font-size: 13px;">Privacy</a>
-        <a href="#" style="color: #8CA0B3; font-size: 13px;">Terms</a>
+        <span style="color: #C3CDD6; font-size: 13px;">© 2026 Paladin Envirotech. All rights reserved.</span>
+        <a href="#" style="color: #C3CDD6; font-size: 13px;">Privacy</a>
+        <a href="#" style="color: #C3CDD6; font-size: 13px;">Terms</a>
       </div>
       <div style="display: flex; gap: 20px;">
         <a href="#" style="color: #FFFFFF; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">EN</a>
-        <a href="#" style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">NL</a>
-        <a href="#" style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">DE</a>
-        <a href="#" style="color: #8CA0B3; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">KO</a>
+        <a href="#" style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">NL</a>
+        <a href="#" style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">DE</a>
+        <a href="#" style="color: #C3CDD6; font-size: 13px; letter-spacing: 0.6px; text-transform: uppercase;">KO</a>
       </div>
     </div>
   </div>
@@ -235,7 +247,7 @@ class Component extends DCLogic {
         nav.dataset.open = '';
         Object.assign(nav.style, { position: 'static', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 'clamp(14px, 1.8vw, 34px)', background: 'transparent', padding: '0', borderTop: 'none' });
       } else if (nav.dataset.open === '1') {
-        Object.assign(nav.style, { position: 'absolute', left: '0', right: '0', top: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '18px', background: '#0B1E31', padding: '24px clamp(24px,5vw,72px)', zIndex: '900', borderTop: '1px solid #1B3850' });
+        Object.assign(nav.style, { position: 'absolute', left: '0', right: '0', top: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '18px', background: '#1E3547', padding: '24px clamp(24px,5vw,72px)', zIndex: '900', borderTop: '1px solid rgba(195,205,214,0.24)' });
       } else {
         nav.style.display = 'none';
       }

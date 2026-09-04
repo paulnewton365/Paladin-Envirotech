@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.45.1">
+<meta name="build-version" content="1.46.0">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -40,6 +40,39 @@
   .pal-logo-link img { transition: opacity 180ms ease; }
   .pal-logo-link:hover img { opacity: 0; }
   @media (prefers-reduced-motion: reduce) { .pal-logo-link img { transition: none; } }
+
+
+  .megatrigger { display: inline-flex; align-items: center; gap: 7px; font-size: 15px;
+                 color: var(--surface); background: none; border: 0; padding: 0;
+                 font-family: inherit; cursor: pointer; }
+  .megatrigger .plus { color: var(--ember-light); font-size: 13px; line-height: 1; }
+  .mega { position: absolute; left: 0; right: 0; top: 100%; background: var(--navy-deep);
+          border-top: 1px solid rgba(195,205,214,0.2); display: none; z-index: 880; }
+  .mega[data-open="1"] { display: block; }
+  .mega-inner { max-width: 1180px; margin: 0 auto; padding: 44px 40px 48px;
+                display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 48px; }
+  .mega-col { display: flex; flex-direction: column; gap: 14px; }
+  .mega-col h3 { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px;
+                 text-transform: uppercase; color: var(--ember-light); margin: 0; }
+  .mega-col a { font-size: 15px; line-height: 1.45; color: var(--surface); }
+  .mega-col a:hover { color: var(--ember-light); }
+  .mega-col span.off { font-size: 15px; line-height: 1.45; color: var(--mist); opacity: 0.55; }
+  @media (max-width: 1080px) { .mega { display: none !important; } }
+
+  .takeover { max-width: 1180px; margin: 0 auto; padding: 0 40px;
+              display: grid; grid-template-columns: minmax(0,1fr) minmax(0,52%);
+              gap: 56px; align-items: center; }
+  .takeover-text { display: flex; flex-direction: column; gap: 22px;
+                   max-width: 620px; padding: 84px 0; }
+  .takeover-text .btn { align-self: flex-start; }
+  .takeover-slot { aspect-ratio: 16 / 10; position: relative; overflow: hidden;
+                   background: var(--navy-deep); }
+  .takeover-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  @media (max-width: 900px) {
+    .takeover { grid-template-columns: minmax(0,1fr); gap: 0; padding: 0 24px; }
+    .takeover-text { padding: 64px 0 40px; }
+    .takeover-slot { margin-bottom: 64px; }
+  }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
   .sec { padding-top: 84px; padding-bottom: 84px; }
@@ -135,11 +168,11 @@
 </head>
 <body>
 
-<header style="background: var(--navy); position: sticky; top: 0; z-index: 900;">
+<header style="background: var(--navy); position: sticky; top: 0; z-index: 900; position: -webkit-sticky;">
   <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-top: 20px; padding-bottom: 20px;">
     <a class="pal-logo-link" href="/"><img data-logo src="/assets/paladin-lockup-colordark.ece3d353.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
     <nav class="mainnav">
-      <a href="/platform" style="font-size: 15px; color: var(--surface);">One system</a>
+      <button class="megatrigger" type="button" data-mega-trigger aria-expanded="false" aria-controls="pal-mega">One system <span class="plus">+</span></button>
       <a href="/critical-materials" style="font-size: 15px; color: var(--surface);">Critical materials</a>
       <a href="/industries" style="font-size: 15px; color: var(--surface);">Industries</a>
       <a href="/network" style="font-size: 15px; color: var(--surface);">Network</a>
@@ -149,6 +182,7 @@
     </nav>
     <a class="btn btn-on-navy" href="/contact">Talk to an expert</a>
   </div>
+<div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><a href="/secure-itad">Secure data destruction</a><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div><div class="mega-col"><h3>Certifications & entities</h3><a href="/network">R2 / RIOS by site</a><span class="off">IRT</span><span class="off">R&L Recycling B.V.</span><span class="off">CMR</span><span class="off">Daeheung</span></div></div></div>
 </header>
 
 <!-- HERO -->
@@ -298,6 +332,22 @@
   </div>
 </section>
 
+
+<!-- CAMPAIGN TAKEOVER -->
+<section class="sec sec-navy" style="padding-top: 0; padding-bottom: 0;">
+  <div class="takeover">
+    <div class="takeover-text">
+      <p class="kicker k-navy">Campaign takeover &middot; Freedom 250</p>
+      <h2 class="h2">Rare Earth Freedom 250</h2>
+      <p class="body" style="color: var(--mist);">Through REcapture, Paladin backs Juncos Hollinger
+        Racing at the Freedom 250 Grand Prix, carrying the case for domestic rare-earth recovery
+        onto the grid.</p>
+      <a class="btn btn-on-navy" href="/rare-earth-freedom-250">View the livery</a>
+    </div>
+    <div class="takeover-slot"><img src="/assets/freedom-250-car.1b6ba609.webp" alt="Juncos Hollinger Racing livery" /></div>
+  </div>
+</section>
+
 <!-- CLOSING CTA -->
 <section class="sec sec-navy">
   <div class="wrap closing">
@@ -338,5 +388,26 @@
     <p style="font-size: 13px; color: var(--mist); margin: 0;">&copy; 2026 Paladin EnviroTech. All rights reserved.</p>
   </div>
 </footer>
+
+<script>
+(function () {
+  var trigger = document.querySelector('[data-mega-trigger]');
+  var panel = document.getElementById('pal-mega');
+  if (!trigger || !panel) return;
+  function set(open) {
+    panel.setAttribute('data-open', open ? '1' : '0');
+    trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  trigger.addEventListener('click', function (e) {
+    e.stopPropagation();
+    set(panel.getAttribute('data-open') !== '1');
+  });
+  document.addEventListener('click', function (e) {
+    if (!panel.contains(e.target) && e.target !== trigger) set(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  panel.addEventListener('click', function (e) { if (e.target.tagName === 'A') set(false); });
+})();
+</script>
 </body>
 </html>
