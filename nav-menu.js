@@ -84,7 +84,7 @@
       st.id = 'pal-logo-hover';
       st.textContent =
         '.pal-logo-link { display: inline-block; position: relative; ' +
-          'background-image: url("/assets/paladin-lockup-gold.434c33df.svg"); ' +
+          'background-image: url("/assets/paladin-lockup-ember.2fb7027d.svg"); ' +
           'background-size: contain; background-repeat: no-repeat; ' +
           'background-position: left center; }' +
         '.pal-logo-link img[data-logo] { transition: opacity 180ms cubic-bezier(0.2,0.7,0.1,1); }' +
@@ -106,9 +106,9 @@
     st.id = 'pal-mega-style';
     st.textContent =
       '.pal-mega-panel a { transition: color 180ms cubic-bezier(0.2,0.7,0.1,1); }' +
-      '.pal-mega-panel a:hover { color: #D9A441 !important; }' +
+      '.pal-mega-panel a:hover { color: #E8875C !important; }' +
       'header nav a, header nav button { transition: color 180ms cubic-bezier(0.2,0.7,0.1,1), border-color 200ms; }' +
-      'header nav a:hover, header nav button:hover { color: #D9A441 !important; }';
+      'header nav a:hover, header nav button:hover { color: #E8875C !important; }';
     document.head.appendChild(st);
   }
 

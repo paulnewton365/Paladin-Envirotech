@@ -730,7 +730,7 @@
       var names = list.map(function (c) { return c.name; }).join('  \u00b7  ');
       return '<p style="color:#47586B;font-size:12px;letter-spacing:1px;' +
              'text-transform:uppercase;margin:0 0 8px;">' + label +
-             ' <span style="color:#7D6023;">' + list.length + '</span></p>' +
+             ' <span style="color:#B04A24;">' + list.length + '</span></p>' +
              '<p style="color:#47586B;font-size:15px;font-weight:300;line-height:1.6;' +
              'margin:0 0 22px;padding-left:14px;' +
              'border-left:1px solid rgba(11, 30, 49,0.16);">' + names + '</p>';
@@ -741,7 +741,7 @@
         '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#0B1E31;' +
           'font-size:17px;font-weight:500;">' +
           '<span style="position:absolute;left:0;top:5px;width:13px;height:13px;' +
-            'border-radius:50%;background:#C08F3C;"></span>' +
+            'border-radius:50%;background:#DE7247;"></span>' +
           'Tampa, FL</p>' +
         '<p style="color:#47586B;font-size:13px;font-weight:300;margin:0 0 24px;' +
           'padding-left:26px;">Headquarters. Every route below runs through here.</p>' +

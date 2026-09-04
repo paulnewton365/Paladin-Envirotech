@@ -1,5 +1,5 @@
 {
-  "version": "1.40.0",
+  "version": "1.41.1",
   "built": "2026-09-04",
-  "notes": "Palette page rebuilt from colours in use; near-duplicates consolidated"
+  "notes": "Generators swapped to ember"
 }
