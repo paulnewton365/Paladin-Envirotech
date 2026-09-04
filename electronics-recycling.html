@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.57.2">
+<meta name="build-version" content="1.58.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Electronics Recycling | Paladin EnviroTech">
 <meta property="og:description" content="Domestic electronics processing with controlled downstream handling.">
@@ -244,7 +244,12 @@ a:hover { opacity: 0.75; }
   /* The runtime gives its root a viewport height while the content overflows,
      which caps the body at one screen and leaves a sticky header only that
      much to stick against. Let both size to their content. */
-  html, body, #dc-root, .sc-host { height: auto !important; min-height: 0 !important; }
+  /* The runtime sizes its own wrappers. Overriding those heights to make a
+     sticky header work collapsed the page, so the header is fixed instead
+     and the body carries the offset. */
+  header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 900; }
+  body { padding-top: 84px; }
+  @media (max-width: 1080px) { body { padding-top: 84px; } }
 </style>
 </head>
 <body>
