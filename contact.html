@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.50.0">
+<meta name="build-version" content="1.52.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Talk to an Expert | Paladin EnviroTech">
 <meta property="og:description" content="Speak to a Paladin engineer about your programme.">
@@ -138,7 +138,7 @@
 
   .btn-on-white:hover { background: var(--ember-hover); }
 
-  .btn-on-navy { background: var(--ember-light); color: var(--navy); }
+  .btn-on-navy { background: var(--ember-light); color: var(--navy-deep); }
 
   .btn-on-navy:hover { background: var(--surface); }
 
@@ -168,7 +168,7 @@
 
     .sec { padding-top: 64px; padding-bottom: 64px; }
 
-    .wrap { padding-left: 24px; padding-right: 24px; }
+    
   [data-reveal] { opacity: 0; transform: translateY(24px);
                   transition: opacity 620ms cubic-bezier(0.2,0.7,0.1,1),
                               transform 620ms cubic-bezier(0.2,0.7,0.1,1); }
@@ -194,6 +194,15 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
 
   /* seven items plus a button will not fit below this */
   @media (max-width: 1080px) { .mainnav { display: none; } .mega { display: none !important; } }
+
+  /* the mobile gutter, back inside its query */
+  @media (max-width: 900px) { .wrap { padding-left: 24px; padding-right: 24px; } }
+
+  /* the display size is a desktop size; phones need a smaller step */
+  @media (max-width: 900px) {
+    h1, .display { font-size: 38px !important; letter-spacing: -1px !important; }
+    .h2 { font-size: 32px !important; letter-spacing: -0.8px !important; }
+  }
 </style>
 </helmet>
 
@@ -217,7 +226,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
 <div style="max-width: 1180px; margin: 0 auto; padding: clamp(48px, 6vw, 88px) 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(40px, 4.5vw, 72px); align-items: start;">
   <div>
     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;"><div style="width: 8px; height: 8px; background: #B8541F;"></div><span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;">Get in touch</span></div>
-    <h1 style="font-size: clamp(36px, 5vw, 72px); line-height: 1.08; letter-spacing: -0.6px; font-weight: 500; margin: 16px 0 24px; color: #1E3547;">Talk to an expert.</h1>
+    <h1 style="font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 300; margin: 16px 0 24px; color: #1E3547;">Talk to an expert.</h1>
     <p style="font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 0 0 40px; color: #1E3547; max-width: 480px;">Tell us what you are retiring and where it sits. You will speak with someone who runs the process.</p>
     <div style="display: flex; flex-direction: column; gap: 10px; color: #1E3547; margin-bottom: 40px;">
       <span style="font-size: 16px;">(888) 770-4733</span>
@@ -271,9 +280,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
         <p class="kicker k-navy">Follow</p>
         <a href="https://www.linkedin.com/company/paladin-envirotech/"
            style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--surface);">
-          <span aria-hidden="true" style="width: 22px; height: 22px; flex: none; background: var(--ember-light);
-                display: inline-flex; align-items: center; justify-content: center;
-                font-weight: 600; font-size: 11px; color: var(--navy);">in</span>
+          <img src="/assets/linkedin-white.c258f40a.webp" alt="" aria-hidden="true" style="width: 22px; height: 22px; flex: none; display: block;" />
           LinkedIn
         </a>
       </div>

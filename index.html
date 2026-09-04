@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.50.0">
+<meta name="build-version" content="1.52.0">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -169,7 +169,7 @@
          text-transform: uppercase; padding: 15px 26px; transition: background-color 180ms ease; }
   .btn-on-white { background: var(--ember); color: var(--surface); }
   .btn-on-white:hover { background: var(--ember-hover); }
-  .btn-on-navy { background: var(--ember-light); color: var(--navy); }
+  .btn-on-navy { background: var(--ember-light); color: var(--navy-deep); }
   .btn-on-navy:hover { background: var(--surface); }
   .btn-ghost { border: 1px solid var(--mist); color: var(--surface); }
   .btn-ghost:hover { background: var(--navy-deep); }
@@ -232,11 +232,20 @@
     .lead { font-size: 19px; }
     .figure { font-size: 54px; letter-spacing: -1.4px; }
     .sec { padding-top: 64px; padding-bottom: 64px; }
-    .wrap { padding-left: 24px; padding-right: 24px; }
+    
   }
 
   /* seven items plus a button will not fit below this */
   @media (max-width: 1080px) { .mainnav { display: none; } .mega { display: none !important; } }
+
+  /* the mobile gutter, back inside its query */
+  @media (max-width: 900px) { .wrap { padding-left: 24px; padding-right: 24px; } }
+
+  /* the display size is a desktop size; phones need a smaller step */
+  @media (max-width: 900px) {
+    h1, .display { font-size: 38px !important; letter-spacing: -1px !important; }
+    .h2 { font-size: 32px !important; letter-spacing: -0.8px !important; }
+  }
 </style>
 </head>
 <body>
@@ -475,9 +484,7 @@
         <p class="kicker k-navy">Follow</p>
         <a href="https://www.linkedin.com/company/paladin-envirotech/"
            style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--surface);">
-          <span aria-hidden="true" style="width: 22px; height: 22px; flex: none; background: var(--ember-light);
-                display: inline-flex; align-items: center; justify-content: center;
-                font-weight: 600; font-size: 11px; color: var(--navy);">in</span>
+          <img src="/assets/linkedin-white.c258f40a.webp" alt="" aria-hidden="true" style="width: 22px; height: 22px; flex: none; display: block;" />
           LinkedIn
         </a>
       </div>
