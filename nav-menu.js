@@ -28,10 +28,17 @@
   var GROUPS = [
     { label: 'Technology lifecycle', items: [
       ['How it works', '/platform'],
-      ['Secure data destruction', '/secure-itad'],
+      ['IT asset management', null],
       ['Asset value recovery', null],
       ['Global logistics', null],
       ['Chain-of-custody ERP', null]
+    ]},
+    { label: 'Security', items: [
+      ['Secure data destruction', '/secure-itad'],
+      ['Chain of custody', '/platform'],
+      ['On-site services', null],
+      ['On-site asset management', null],
+      ['On-site destruction', null]
     ]},
     { label: 'Recycling', items: [
       ['Electronics recycling', '/electronics-recycling'],
@@ -44,13 +51,6 @@
       ['Neodymium & dysprosium', null],
       ['Domestic feedstock programs', null],
       ['CMR joint venture', null]
-    ]},
-    { label: 'Platform companies', items: [
-      ['IRT', null],
-      ['R&L Recycling B.V.', null],
-      ['CMR', null],
-      ['Daeheung', null],
-      ['R2 / RIOS certificates by site', '/network']
     ]}
   ];
 

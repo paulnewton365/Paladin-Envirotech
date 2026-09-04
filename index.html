@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.47.0">
+<meta name="build-version" content="1.48.0">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -69,37 +69,59 @@
   }
 
 
-  .takeover-text { display: flex; flex-direction: column; gap: 22px; max-width: 620px; }
-  .takeover-text .btn { align-self: flex-start; }
 
-  .track { position: relative; width: 100%; height: clamp(220px, 26vw, 340px);
-          overflow: hidden; margin-top: 64px; }
-  .track-horizon { position: absolute; left: 0; right: 0; top: 30%; height: 1px;
-                   background: rgba(195,205,214,0.24); }
-  .track-road { position: absolute; left: 0; right: 0; bottom: 0; height: 32%;
-                background: var(--navy-deep); border-top: 1px solid rgba(195,205,214,0.24); }
-  .track-dashes { position: absolute; left: -30%; right: -30%; bottom: 14%; height: 2px;
-                  will-change: transform;
-                  background-image: repeating-linear-gradient(to right,
-                    rgba(195,205,214,0.34) 0 48px, transparent 48px 132px); }
-  .car { position: absolute; bottom: 30%; left: 0; transform: translate(-100%, 0);
-         display: flex; flex-direction: row-reverse; align-items: flex-end; gap: 24px;
-         will-change: transform; }
-  .car img { display: block; width: clamp(200px, 26vw, 330px); height: auto; }
-  .car-label { display: flex; flex-direction: column; gap: 6px;
-               align-items: flex-start; padding-bottom: 14px; }
-  .car-kicker { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px;
-                text-transform: uppercase; color: var(--ember-light); white-space: nowrap; }
-  .car-name { font-size: 14.5px; line-height: 1.4; color: var(--mist); white-space: nowrap; }
 
-  @media (max-width: 900px) {
-    .track { height: 200px; margin-top: 48px; }
-    .car img { width: 200px; }
     .car-label { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .car { transform: translate(28%, 0) !important; }
     .track-dashes { transform: none !important; }
+  }
+
+
+  .takeover-text { display: flex; flex-direction: column; gap: 22px; max-width: 620px; }
+  .takeover-text .btn { align-self: flex-start; }
+
+  .track { position: relative; width: 100%; margin-top: 44px; overflow: hidden;
+           display: flex; flex-direction: column; }
+  .track-ticks { height: 46px; flex: none; will-change: transform;
+                 background-image: repeating-linear-gradient(to right,
+                   rgba(195,205,214,0.28) 0 1px, transparent 1px 66px);
+                 background-position: 0 center; background-size: auto 30px;
+                 background-repeat: repeat-x; }
+  .track-band { position: relative; height: clamp(86px, 8vw, 108px); flex: none;
+                background: var(--navy-deep);
+                border-top: 1px solid rgba(195,205,214,0.14);
+                border-bottom: 1px solid rgba(195,205,214,0.14); }
+  .track-dashes { height: 74px; flex: none; will-change: transform;
+                  background-image: repeating-linear-gradient(to right,
+                    rgba(195,205,214,0.34) 0 44px, transparent 44px 128px);
+                  background-position: 0 center; background-size: auto 2px;
+                  background-repeat: repeat-x; }
+
+  /* the car leads and the label trails, because travel is right to left */
+  .car { position: absolute; left: 0; bottom: -6px; transform: translate(-100%, 0);
+         display: flex; flex-direction: row; align-items: flex-end; gap: 28px;
+         will-change: transform; }
+  .car img { display: block; width: clamp(280px, 39vw, 560px); height: auto; }
+  .car-label { display: flex; flex-direction: column; gap: 5px; align-items: flex-start;
+               padding-bottom: 18px; }
+  .car-kicker { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px;
+                text-transform: uppercase; color: var(--ember-light); white-space: nowrap; }
+  .car-name { font-weight: 600; font-size: 15px; line-height: 1.4;
+              color: var(--surface); white-space: nowrap; }
+
+  @media (max-width: 900px) {
+    .track { margin-top: 40px; }
+    .track-ticks { height: 40px; }
+    .track-band { height: 74px; }
+    .track-dashes { height: 52px; }
+    .car img { width: 260px; margin-bottom: -8px; }
+    .car-label { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .car { transform: translate(22%, 0) !important; }
+    .track-ticks, .track-dashes { transform: none !important; }
   }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
@@ -210,7 +232,7 @@
     </nav>
     <a class="btn btn-on-navy" href="/contact">Talk to an expert</a>
   </div>
-<div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><a href="/secure-itad">Secure data destruction</a><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div><div class="mega-col"><h3>Certifications & entities</h3><a href="/network">R2 / RIOS by site</a><span class="off">IRT</span><span class="off">R&L Recycling B.V.</span><span class="off">CMR</span><span class="off">Daeheung</span></div></div></div>
+<div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><span class="off">IT asset management</span><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Security</h3><a href="/secure-itad">Secure data destruction</a><a href="/platform">Chain of custody</a><span class="off">On-site services</span><span class="off">On-site asset management</span><span class="off">On-site destruction</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div></div></div></div>
 </header>
 
 <!-- HERO -->
@@ -246,17 +268,17 @@
       for years. Most disposal chains cannot answer that question because the asset changed hands
       four times before it was processed.</p>
     <div class="stats" style="margin-top: 64px;">
+      <div class="stat">
+        <p class="figure" data-placeholder>00m</p>
+        <p class="caption">Pounds of material recycled and returned to domestic supply.</p>
+      </div>
       <div class="stat stat-accent">
-        <p class="figure">0</p>
-        <p class="caption">Brokers between collection and final disposition, so the record never breaks.</p>
+        <p class="figure" data-placeholder>00t</p>
+        <p class="caption">Rare-earth material recovered from retired equipment.</p>
       </div>
       <div class="stat">
-        <p class="figure">11</p>
-        <p class="caption">Processing sites across North America, Europe and Asia.</p>
-      </div>
-      <div class="stat">
-        <p class="figure">4</p>
-        <p class="caption">Service lines running on a single operating standard.</p>
+        <p class="figure" data-placeholder>00k</p>
+        <p class="caption">Hard drives destroyed and certified at serial level.</p>
       </div>
     </div>
   </div>
@@ -326,6 +348,11 @@
           protocol, at sites built for both.</p>
       </div>
       <div class="cell">
+        <h3>Defense and aerospace</h3>
+        <p class="body-w">Programme hardware retired to federal standards, with the documentation
+          an auditor outside the agency will accept.</p>
+      </div>
+      <div class="cell">
         <h3>Wind and renewable energy</h3>
         <p class="body-w">Steel, copper and rare-earth magnets recovered from a single turbine or a
           whole farm.</p>
@@ -376,18 +403,20 @@
       <a class="btn btn-on-navy" href="/rare-earth-freedom-250">View the livery</a>
     </div>
   </div>
-  <!-- full-bleed so the car has the whole screen to cross -->
+
+  <!-- full-bleed, so the car has the whole screen to cross -->
   <div class="track" data-track>
-    <div class="track-horizon"></div>
-    <div class="track-road"></div>
-    <div class="track-dashes" data-parallax="0.85"></div>
-    <div class="car" data-car>
-      <img src="/assets/freedom-250-car.1b6ba609.webp" alt="Juncos Hollinger Racing livery" />
-      <div class="car-label">
-        <span class="car-kicker">Official partner</span>
-        <span class="car-name">REcapture &times; Juncos Hollinger Racing</span>
+    <div class="track-ticks" data-parallax="0.55"></div>
+    <div class="track-band">
+      <div class="car" data-car>
+        <img src="/assets/freedom-250-car.e06cbec2.webp" alt="Juncos Hollinger Racing livery" />
+        <div class="car-label">
+          <span class="car-kicker">Official partner</span>
+          <span class="car-name">REcapture &times; Juncos Hollinger Racing</span>
+        </div>
       </div>
     </div>
+    <div class="track-dashes" data-parallax="0.85"></div>
   </div>
 </section>
 
@@ -420,6 +449,16 @@
         <a href="/contact" style="font-size: 15px; color: var(--mist);">Contact</a>
       </div>
       <div style="display: flex; flex-direction: column; gap: 12px;">
+        <p class="kicker k-navy">Follow</p>
+        <a href="https://www.linkedin.com/company/paladin-envirotech/"
+           style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--surface);">
+          <span aria-hidden="true" style="width: 22px; height: 22px; flex: none; background: var(--ember-light);
+                display: inline-flex; align-items: center; justify-content: center;
+                font-weight: 600; font-size: 11px; color: var(--navy);">in</span>
+          LinkedIn
+        </a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px;">
         <p class="kicker k-navy">One system</p>
         <a href="/platform" style="font-size: 15px; color: var(--mist);">How it works</a>
         <a href="/secure-itad" style="font-size: 15px; color: var(--mist);">Secure destruction</a>
@@ -428,7 +467,15 @@
     </div>
   </div>
   <div class="wrap" style="padding-top: 24px; padding-bottom: 32px; border-top: 1px solid rgba(195,205,214,0.2);">
-    <p style="font-size: 13px; color: var(--mist); margin: 0;">&copy; 2026 Paladin EnviroTech. All rights reserved.</p>
+    <div style="display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;">
+      <p style="font-size: 13px; color: var(--mist); margin: 0;">&copy; 2026 Paladin EnviroTech. All rights reserved.</p>
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <span style="font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--surface);">EN</span>
+        <span style="font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mist);">FR</span>
+        <span style="font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mist);">DE</span>
+        <span style="font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase; color: var(--mist);">NL</span>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -525,7 +572,7 @@
 (function () {
   var track = document.querySelector('[data-track]');
   var car = document.querySelector('[data-car]');
-  var dashes = document.querySelector('[data-parallax]');
+  var layers = document.querySelectorAll('[data-parallax]');
   if (!track || !car) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   var queued = false;
@@ -537,9 +584,9 @@
     var p = Math.max(0, Math.min(1, (vh - r.top) / (vh + r.height)));
     var eased = p * p * (3 - 2 * p);
     car.style.transform = 'translate(' + (r.width - eased * (r.width + car.offsetWidth)) + 'px, 0)';
-    if (dashes) {
-      var k = parseFloat(dashes.dataset.parallax) || 0.4;
-      dashes.style.transform = 'translateX(' + (240 - p * 480 * k) + 'px)';
+    for (var i = 0; i < layers.length; i++) {
+      var k = parseFloat(layers[i].dataset.parallax) || 0.4;
+      layers[i].style.transform = 'translateX(' + (240 - p * 480 * k) + 'px)';
     }
   }
   function onScroll() {

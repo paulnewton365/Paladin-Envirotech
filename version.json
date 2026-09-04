@@ -1,5 +1,5 @@
 {
-  "version": "1.47.0",
+  "version": "1.48.0",
   "built": "2026-09-04",
-  "notes": "Scrolling car restored; content width unified at 1180px"
+  "notes": "Car band rebuilt; mega nav and session changes applied"
 }
