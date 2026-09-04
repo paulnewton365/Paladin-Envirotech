@@ -1,5 +1,5 @@
 {
-  "version": "1.59.0",
+  "version": "1.60.0",
   "built": "2026-09-04",
-  "notes": "Reveal fails visible: content is never hidden by CSS if scripts stall"
+  "notes": "Header guard no longer reparents during render; reveal observer bounded"
 }

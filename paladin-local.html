@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.59.0">
+<meta name="build-version" content="1.60.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Regional coverage | Paladin EnviroTech">
 <meta property="og:description" content="Secure ITAD and recycling closer to where assets are generated.">
@@ -572,11 +572,16 @@ a:hover { opacity: 0.75; }
   window.addEventListener('load', scan);
   if (window.MutationObserver) {
     var pending = false;
-    new MutationObserver(function () {
+    /* Bounded. Watching the whole document for the life of the page means
+       running on every frame the runtime renders, which is work the largest
+       pages do not need. Six seconds covers any render. */
+    var mo = new MutationObserver(function () {
       if (pending) return;
       pending = true;
       requestAnimationFrame(function () { pending = false; scan(); });
-    }).observe(document.documentElement, { childList: true, subtree: true });
+    });
+    mo.observe(document.documentElement, { childList: true, subtree: true });
+    setTimeout(function () { mo.disconnect(); scan(); }, 6000);
   }
   /* Nothing stays hidden, whatever the observer does. */
   setTimeout(function () {
@@ -587,40 +592,26 @@ a:hover { opacity: 0.75; }
 </script>
 
 <script>
-/* The page runtime re-renders the document and can emit a second header. The
-   earlier version of this only moved the first one it found and stopped
-   watching after a few seconds, so a late re-render left two navs stacked.
-   This keeps exactly one: the copy on body, and removes any other, for as long
-   as the page is open. */
+/* Keep one header.
+
+   An earlier version also moved the header to be a child of body on every DOM
+   mutation. That was needed when the header was sticky, but it meant this
+   script was reparenting nodes while the page runtime was rendering, and on
+   the largest page that fight left the document blank. The header is fixed
+   now, which does not care what its parent is, so this only removes a
+   duplicate and never moves anything. */
 (function () {
-  function keepOne() {
-    var all = document.querySelectorAll('header');
-    if (!all.length) return;
-    var keep = null;
-    for (var i = 0; i < all.length; i++) {
-      if (all[i].parentElement === document.body) { keep = all[i]; break; }
-    }
-    if (!keep) {
-      keep = all[0];
-      document.body.insertBefore(keep, document.body.firstChild);
-    }
-    for (var j = 0; j < all.length; j++) {
-      if (all[j] !== keep && all[j].parentElement) {
-        all[j].parentElement.removeChild(all[j]);
-      }
+  function dedupe() {
+    var all = document.getElementsByTagName('header');
+    if (all.length < 2) return;
+    for (var i = all.length - 1; i > 0; i--) {
+      if (all[i] && all[i].parentElement) all[i].parentElement.removeChild(all[i]);
     }
   }
-  keepOne();
-  if (window.MutationObserver) {
-    var pending = false;
-    var mo = new MutationObserver(function () {
-      if (pending) return;
-      pending = true;
-      requestAnimationFrame(function () { pending = false; keepOne(); });
-    });
-    mo.observe(document.documentElement, { childList: true, subtree: true });
-  }
-  window.addEventListener('load', keepOne);
+  dedupe();
+  window.addEventListener('load', dedupe);
+  setTimeout(dedupe, 1500);
+  setTimeout(dedupe, 4000);
 })();
 </script>
 </body>
