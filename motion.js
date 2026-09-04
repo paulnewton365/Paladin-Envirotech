@@ -179,6 +179,12 @@
   }
 
   function tagBlocks() {
+    /* The pages now ship their own reveal, tagging each band with
+       [data-reveal]. Auto-tagging inner content on top of that gives two
+       animations running at different offsets on the same hero, which reads
+       as a bounce on load. If the page has its own reveal, leave it alone. */
+    if (document.querySelector('[data-reveal]')) return;
+
     var tagged = 0;
 
     bands().forEach(function (band) {
