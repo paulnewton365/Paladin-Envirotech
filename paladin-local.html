@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.54.0">
+<meta name="build-version" content="1.56.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Regional coverage | Paladin EnviroTech">
 <meta property="og:description" content="Secure ITAD and recycling closer to where assets are generated.">
@@ -226,6 +226,18 @@ a:hover { opacity: 0.75; }
     h1, .display { font-size: 38px !important; letter-spacing: -1px !important; }
     .h2 { font-size: 32px !important; letter-spacing: -0.8px !important; }
   }
+
+  /* One hero start position across the site. The band owns the top space; the
+     wrappers inside it contribute none, which is what made the eyebrow land
+     anywhere between 168px and 222px depending on the page's nesting. */
+  .hero-band { padding-top: 84px !important; }
+  .hero-band > div { padding-top: 0 !important; }
+  .hero-band > div > div { padding-top: 0 !important; }
+  .hero-band .kicker:first-of-type { margin-top: 0 !important; }
+  .hero-band > div > div { margin-top: 0 !important; align-items: start !important; }
+  .hero-band .hero-split { align-items: start !important; }
+
+  @media (max-width: 900px) { .hero-band { padding-top: 56px !important; } }
 </style>
 </head>
 <body>
@@ -247,13 +259,10 @@ a:hover { opacity: 0.75; }
 <div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-title"><span>One Paladin</span></div><div class="mega-cols"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><span class="off">IT asset management</span><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Security</h3><a href="/secure-itad">Secure data destruction</a><a href="/platform">Chain of custody</a><span class="off">On-site services</span><span class="off">On-site asset management</span><span class="off">On-site destruction</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div></div></div></div></div>
 </header>
 
-<section data-screen-label="Hero" style="background: #1E3547; padding: clamp(56px, 7vw, 104px) 0 clamp(48px, 6vw, 88px);" data-reveal>
+<section data-screen-label="Hero" style="background: #1E3547; padding: 84px 0 84px;" data-reveal class="hero-band">
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(32px, 4vw, 72px); align-items: center;">
     <div data-reveal="1">
-      <div style="display: flex; align-items: center; gap: 12px;">
-        <span style="width: 8px; height: 8px; background: #E08B52;"></span>
-        <span style="color: #C3CDD6; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">One system &middot; Regional coverage</span>
-      </div>
+      <p class="kicker k-navy" style="margin: 0 0 26px;">One system &middot; Regional coverage</p>
       <h1 style="color: #FFFFFF; font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 300; margin: 22px 0 20px; text-wrap: balance;">The hub-and-satellite model, <span style="color: #E08B52;">wherever you generate assets.</span></h1>
       <p style="color: #C3CDD6; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; margin: 0; max-width: 620px; text-wrap: pretty;">Clinics, campuses, branch offices and regional facilities generate retired technology too, usually in volumes too small for a national ITAD provider to serve well. Paladin brings the same controls, the same reporting and the same chain of custody to those locations.</p>
     </div>

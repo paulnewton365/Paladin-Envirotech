@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.54.0">
+<meta name="build-version" content="1.56.0">
 <meta name="build-date" content="2026-09-04">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -142,6 +142,46 @@
   [data-reveal].is-in { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
+  }
+
+
+  .btn-outline { border: 1px solid var(--hairline); color: var(--navy); }
+  .btn-outline:hover { border-color: var(--ember); color: var(--ember); }
+
+  .scale-head { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,44%);
+                gap: 56px; align-items: start; }
+  .strip { display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+           gap: 1px; background: var(--hairline); border: 1px solid var(--hairline);
+           margin-top: 56px; }
+  .strip-cell { background: var(--surface); padding: 30px 28px 34px;
+                display: flex; flex-direction: column; gap: 14px; }
+  .strip-figure { font-weight: 300; font-size: 46px; line-height: 1; letter-spacing: -1.4px;
+                  margin: 0; color: var(--navy); }
+  .strip-accent .strip-figure { color: var(--ember); }
+
+  .press-head { display: flex; align-items: baseline; justify-content: space-between; gap: 32px; }
+  .press-all { font-weight: 600; font-size: 12px; letter-spacing: 1.1px; text-transform: uppercase;
+               color: var(--ember); border-bottom: 1px solid var(--ember); padding-bottom: 3px; }
+  .press-all:hover { color: var(--ember-hover); border-bottom-color: var(--ember-hover); }
+  .press-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+                gap: 32px; margin-top: 48px; }
+  .press-card { background: var(--surface-alt); padding: 30px 28px 32px;
+                display: flex; flex-direction: column; gap: 14px; }
+  .press-kicker { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase;
+                  color: var(--slate); margin: 0; }
+  .press-card h3 { font-weight: 400; font-size: 19px; line-height: 1.42; letter-spacing: -0.2px;
+                   margin: 0; color: var(--navy); }
+  /* the card is --surface-alt, where --ember measures 4.49 */
+  .press-read { margin-top: auto; align-self: flex-start; font-weight: 600; font-size: 12px;
+                letter-spacing: 1.1px; text-transform: uppercase; color: var(--ember-hover);
+                border-bottom: 1px solid var(--ember-hover); padding-bottom: 3px; }
+  .press-read:hover { color: var(--navy); border-bottom-color: var(--navy); }
+
+  @media (max-width: 900px) {
+    .scale-head { grid-template-columns: minmax(0,1fr); gap: 26px; }
+    .strip { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .press-grid { grid-template-columns: minmax(0,1fr); gap: 20px; }
+    .press-head { flex-direction: column; align-items: flex-start; gap: 16px; }
   }
 
   .wrap { max-width: 1180px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
@@ -346,6 +386,44 @@
   </div>
 </section>
 
+<!-- SCALE -->
+<section class="sec sec-alt" data-reveal>
+  <div class="wrap">
+    <div class="scale-head">
+      <div>
+        <p class="kicker k-alt">Scale</p>
+        <h2 class="h2" style="margin-top: 22px;">Built for the volumes nobody else will take</h2>
+      </div>
+      <p class="body-w">Exacerbated by data center demand, AI and hyperscaler growth, this is the
+        fastest-growing waste stream in the world, and much of it still ends up in landfill or
+        low-value export channels. Hyperscale decommissioning, wind assets, government refresh
+        cycles and regional mid-market intake all run on the same system and the same controls.</p>
+    </div>
+    <div class="strip">
+      <div class="strip-cell strip-accent">
+        <p class="strip-figure">#1</p>
+        <p class="caption">Wind turbine recycler in North America.</p>
+      </div>
+      <div class="strip-cell">
+        <p class="strip-figure">Millions</p>
+        <p class="caption">Of pounds processed monthly across our facilities.</p>
+      </div>
+      <div class="strip-cell">
+        <p class="strip-figure">1</p>
+        <p class="caption">Operating standard, applied at every site.</p>
+      </div>
+      <div class="strip-cell">
+        <p class="strip-figure">3</p>
+        <p class="caption">Continents, and growing with demand.</p>
+      </div>
+    </div>
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 40px;">
+      <a class="btn btn-on-white" href="/contact">Scope a program</a>
+      <a class="btn btn-outline" href="/network">See the footprint</a>
+    </div>
+  </div>
+</section>
+
 <!-- INDUSTRIES -->
 <section class="sec sec-white" data-reveal>
   <div class="wrap">
@@ -422,6 +500,33 @@
 
 
 
+
+<!-- IN THE PRESS -->
+<section class="sec sec-white" data-reveal>
+  <div class="wrap">
+    <div class="press-head">
+      <h2 class="h2">In the press</h2>
+      <a class="press-all" href="/press">All coverage</a>
+    </div>
+    <div class="press-grid">
+      <article class="press-card">
+        <p class="press-kicker">Coverage slot, national business title</p>
+        <h3>The domestic case for pulling rare earths out of retired hardware.</h3>
+        <a class="press-read" href="/press">Read</a>
+      </article>
+      <article class="press-card">
+        <p class="press-kicker">Coverage slot, national daily</p>
+        <h3>Inside the decommissioning economy behind the AI build-out.</h3>
+        <a class="press-read" href="/press">Read</a>
+      </article>
+      <article class="press-card">
+        <p class="press-kicker">Announcement</p>
+        <h3>Paladin and CMR expand REcapture magnet recovery capacity.</h3>
+        <a class="press-read" href="/press">Read</a>
+      </article>
+    </div>
+  </div>
+</section>
 
 <!-- CAMPAIGN TAKEOVER -->
 <section class="sec sec-navy" style="padding-bottom: 0;" data-reveal>

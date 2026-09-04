@@ -1,5 +1,5 @@
 {
-  "version": "1.54.0",
+  "version": "1.56.0",
   "built": "2026-09-04",
-  "notes": "Mega menu opens on all pages; duplicate stats removed; hero bounce fixed"
+  "notes": "Hero eyebrow style and position unified across all pages"
 }

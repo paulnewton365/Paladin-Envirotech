@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.54.0">
+<meta name="build-version" content="1.56.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Rare Earth Freedom 250 | Paladin EnviroTech">
 <meta property="og:description" content="Paladin and REcapture at the Freedom 250 Grand Prix.">
@@ -202,6 +202,20 @@ a:hover { opacity: 0.75; }
     h1, .display { font-size: 38px !important; letter-spacing: -1px !important; }
     .h2 { font-size: 32px !important; letter-spacing: -0.8px !important; }
   }
+
+  /* One hero start position across the site. The band owns the top space; the
+     wrappers inside it contribute none, which is what made the eyebrow land
+     anywhere between 168px and 222px depending on the page's nesting. */
+  /* this page carries a back link above the eyebrow, so the band takes
+     less top padding to keep the eyebrow on the site-wide start line */
+  .hero-band { padding-top: 66px !important; }
+  .hero-band > div { padding-top: 0 !important; }
+  .hero-band > div > div { padding-top: 0 !important; }
+  .hero-band .kicker:first-of-type { margin-top: 0 !important; }
+  .hero-band > div > div { margin-top: 0 !important; align-items: start !important; }
+  .hero-band .hero-split { align-items: start !important; }
+
+  @media (max-width: 900px) { .hero-band { padding-top: 56px !important; } }
 </style>
 </helmet>
 
@@ -222,16 +236,16 @@ a:hover { opacity: 0.75; }
 <div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-title"><span>One Paladin</span></div><div class="mega-cols"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><span class="off">IT asset management</span><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Security</h3><a href="/secure-itad">Secure data destruction</a><a href="/platform">Chain of custody</a><span class="off">On-site services</span><span class="off">On-site asset management</span><span class="off">On-site destruction</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div></div></div></div></div>
 </header>
 
-<div style="max-width: 760px; margin: 0 auto; padding: clamp(56px, 7vw, 96px) clamp(24px, 5vw, 32px) 0;">
+<div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;" class="hero-band">
   <a href="/blog" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874; border-bottom: 1px solid #D5DBE0;">← Blog</a>
-  <div style="display: flex; align-items: center; gap: 10px; margin: 32px 0 20px;"><div style="width: 8px; height: 8px; background: #B8541F;"></div><span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;">Critical materials · August 2026</span></div>
+  <p class="kicker k-white" style="margin: 0 0 26px;">Critical materials · August 2026</p>
   <h1 style="font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 300; margin: 0 0 24px;">Why 1.5 million hard drives equal one ton of rare earths</h1>
   <p style="font-size: clamp(18px, 1.6vw, 22px); line-height: 1.5; font-weight: 300; color: #5A6874; margin: 0 0 40px;">The economics of domestic magnet recovery only work at a scale most of the industry has never had to reckon with.</p>
 </div>
 
-<div style="max-width: 900px; margin: 0 auto; aspect-ratio: 16 / 8; background: #1E3547; position: relative; overflow: hidden;" data-reveal><img src="assets/rare-earth-magnet.bc46b442.png" alt="Hard drives sorted for magnet recovery" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></div>
+<div style="max-width: 900px;  aspect-ratio: 16 / 8; background: #1E3547; position: relative; overflow: hidden;" data-reveal><img src="assets/rare-earth-magnet.bc46b442.png" alt="Hard drives sorted for magnet recovery" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></div>
 
-<div style="max-width: 680px; margin: 0 auto; padding: clamp(48px, 6vw, 72px) clamp(24px, 5vw, 32px) clamp(80px, 9vw, 128px);">
+<div style="max-width: 680px;  padding: clamp(48px, 6vw, 72px) clamp(24px, 5vw, 32px) clamp(80px, 9vw, 128px);">
   <p style="font-size: 18px; line-height: 30px; color: #1E3547; margin: 0 0 26px;">China controls roughly 70% of global rare-earth mining and nearly 90% of refining, the step that turns ore into the oxides used in magnets. The United States has almost no heavy rare earths in its own mines, and developing a new one takes close to three decades on average, nearly a decade of that in permitting alone. None of that timeline matches the pace at which defense systems, AI infrastructure and the energy transition are consuming these materials.</p>
 
   <p style="font-size: 18px; line-height: 30px; color: #1E3547; margin: 0 0 26px;">Recycling is the one lever that moves fast enough to matter in the near term. Neodymium, dysprosium, praseodymium and terbium do not disappear when a hard drive or a wind turbine reaches end of life. They sit inside the magnet, recoverable at usable quality when the equipment is processed for recovery. Shredding, export and landfill lose them.</p>

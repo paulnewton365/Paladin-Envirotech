@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.54.0">
+<meta name="build-version" content="1.56.0">
 <meta name="build-date" content="2026-09-04">
 <meta property="og:title" content="Why 1.5 million hard drives equal one ton of rare earths">
 <meta property="og:description" content="The math behind domestic magnet recovery, and why only hyperscale volume makes the economics work.">
@@ -202,6 +202,20 @@ a:hover { opacity: 0.75; }
     h1, .display { font-size: 38px !important; letter-spacing: -1px !important; }
     .h2 { font-size: 32px !important; letter-spacing: -0.8px !important; }
   }
+
+  /* One hero start position across the site. The band owns the top space; the
+     wrappers inside it contribute none, which is what made the eyebrow land
+     anywhere between 168px and 222px depending on the page's nesting. */
+  /* this page carries a back link above the eyebrow, so the band takes
+     less top padding to keep the eyebrow on the site-wide start line */
+  .hero-band { padding-top: 66px !important; }
+  .hero-band > div { padding-top: 0 !important; }
+  .hero-band > div > div { padding-top: 0 !important; }
+  .hero-band .kicker:first-of-type { margin-top: 0 !important; }
+  .hero-band > div > div { margin-top: 0 !important; align-items: start !important; }
+  .hero-band .hero-split { align-items: start !important; }
+
+  @media (max-width: 900px) { .hero-band { padding-top: 56px !important; } }
 </style>
 </helmet>
 
@@ -222,12 +236,12 @@ a:hover { opacity: 0.75; }
 <div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-title"><span>One Paladin</span></div><div class="mega-cols"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><span class="off">IT asset management</span><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Security</h3><a href="/secure-itad">Secure data destruction</a><a href="/platform">Chain of custody</a><span class="off">On-site services</span><span class="off">On-site asset management</span><span class="off">On-site destruction</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div></div></div></div></div>
 </header>
 
-<div style="background: #1E3547; padding: clamp(40px, 5vw, 72px) 0 0;" data-reveal>
+<div style="background: #1E3547; padding: 84px 0 0;" data-reveal class="hero-band">
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
     <a href="/blog" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #C3CDD6;">← Newsroom</a>
     <div data-hero="1" style="margin-top: clamp(24px, 3vw, 36px); display: grid; grid-template-columns: 1fr; gap: clamp(28px, 3.5vw, 48px); align-items: center;">
       <div style="padding-bottom: clamp(28px, 3.5vw, 48px);">
-        <span style="display: inline-flex; align-items: center; gap: 12px; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #E08B52;"><span style="width: 8px; height: 8px; background: #E08B52; flex: none;"></span>Critical materials</span>
+        <p class="kicker k-navy" style="margin: 0 0 26px;">Critical materials</p>
         <h1 style="color: #FFFFFF; font-size: 56px; line-height: 1.06; font-weight: 300; margin: 18px 0 0; text-wrap: balance;">Why 1.5 million hard drives equal one ton of rare earths</h1>
         <p style="color: #C3CDD6; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 22px 0 0; max-width: 560px;">The math behind domestic magnet recovery, and why only hyperscale volume makes the economics work.</p>
         <div style="margin-top: clamp(28px, 3vw, 40px); display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
