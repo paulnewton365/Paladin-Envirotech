@@ -1,5 +1,5 @@
 {
-  "version": "1.61.1",
+  "version": "1.62.0",
   "built": "2026-09-07",
-  "notes": "Mobile menu clones rather than moves; One system becomes a link"
+  "notes": "Mobile nav: One system last, expands the One Paladin groups beneath it"
 }

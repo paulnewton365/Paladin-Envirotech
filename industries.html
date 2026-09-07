@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.61.1">
+<meta name="build-version" content="1.62.0">
 <meta name="build-date" content="2026-09-07">
 <meta property="og:title" content="Industries We Serve | Paladin EnviroTech">
 <meta property="og:description" content="Hyperscale, OEM, enterprise and government programmes.">
@@ -290,21 +290,26 @@ a:hover { opacity: 0.75; }
                  overflow-y: auto; -webkit-overflow-scrolling: touch;
                  display: none; z-index: 890; }
     .mobilenav[data-open="1"] { display: block; }
-    .mobilenav-inner { padding: 28px 24px 56px; display: flex; flex-direction: column; gap: 30px; }
-    .mobilenav .mainnav { display: flex !important; flex-direction: column;
-                          align-items: stretch; gap: 0; }
-    .mobilenav .mainnav > a, .mobilenav .mainnav > button {
-      display: flex; align-items: center; min-height: 52px; font-size: 17px;
-      color: var(--surface); border-bottom: 1px solid rgba(195,205,214,0.16); }
-    /* the plus is a desktop affordance; the groups are listed below here */
-    .mobilenav .megatrigger .plus { display: none; }
-    .mobilenav .mega-inner { max-width: none; padding: 0; margin: 0; }
-    .mobilenav .mega { position: static; display: block; background: none; border: 0; }
-    .mobilenav .mega-title { padding-bottom: 14px; margin-bottom: 22px; }
-    .mobilenav .mega-title span { font-size: 22px; }
-    .mobilenav .mega-cols { display: grid; grid-template-columns: minmax(0,1fr); gap: 26px; }
-    .mobilenav .mega-col a, .mobilenav .mega-col span.off {
+    .mnav-list { display: flex; flex-direction: column; }
+    .mnav-list > a, .mnav-list > button {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; min-height: 52px; font-size: 17px; text-align: left;
+      color: var(--surface); background: none; border: 0; border-bottom: 1px solid rgba(195,205,214,0.16);
+      font-family: inherit; padding: 0; cursor: pointer; }
+    .mnav-sub[aria-expanded="true"] { color: var(--ember-light); }
+    .mnav-plus { font-size: 20px; line-height: 1; color: var(--ember-light); }
+    .mnav-sub[aria-expanded="true"] .mnav-plus { transform: rotate(45deg); }
+    .mnav-drawer { display: none; padding-top: 22px; }
+    .mnav-drawer[data-open="1"] { display: block; }
+    .mnav-drawer .mega-inner { max-width: none; padding: 0; margin: 0; }
+    /* the drawer carries the same title as the desktop panel */
+    .mnav-drawer .mega-title { padding-bottom: 12px; margin-bottom: 20px; }
+    .mnav-drawer .mega-title span { font-size: 20px; }
+    .mnav-drawer .mega-cols { display: grid; grid-template-columns: minmax(0,1fr); gap: 24px; }
+    .mnav-drawer .mega-col a, .mnav-drawer .mega-col span.off {
       display: flex; align-items: center; min-height: 44px; }
+    .mobilenav-inner { padding: 28px 24px 56px; display: flex; flex-direction: column; gap: 30px; }
+    /* the plus is a desktop affordance; the groups are listed below here */
     .mobilenav .btn { display: inline-flex; align-items: center; justify-content: center;
                       min-height: 48px; }
     body.nav-open { overflow: hidden; }
@@ -634,15 +639,13 @@ class Component extends DCLogic {
 <script>
 /* Mobile menu.
 
-   The panel is built by cloning the nav and the One Paladin groups each time it
-   opens, so the originals stay in the header. An earlier version moved those
-   nodes instead: the desktop nav then vanished if the window was widened again,
-   and the mega panel was left empty.
+   The seven sections list in order, with One system last, because it is the
+   one that expands rather than navigates. Tapping it opens the One Paladin
+   groups directly beneath it instead of leaving them stranded at the foot of
+   the panel.
 
-   The desktop "One system" control is a button that opens the mega panel. In
-   the mobile panel the groups are already listed underneath, so the clone
-   becomes a plain link to that section rather than a control that does
-   nothing. */
+   Everything is cloned on open, so the header keeps its own nav and mega
+   panel and the desktop menu still works if the window is widened. */
 (function () {
   var BP = window.matchMedia('(max-width: 1080px)');
   var panel;
@@ -668,19 +671,33 @@ class Component extends DCLogic {
     var inner = document.createElement('div');
     inner.className = 'mobilenav-inner';
 
+    var list = document.createElement('div');
+    list.className = 'mnav-list';
     if (nav) {
-      var navCopy = nav.cloneNode(true);
-      /* the trigger has no panel to open here, so it becomes a link */
-      var trigger = navCopy.querySelector('.megatrigger');
-      if (trigger) {
-        var link = document.createElement('a');
-        link.href = '/platform';
-        link.textContent = 'One system';
-        trigger.parentNode.replaceChild(link, trigger);
+      var items = nav.querySelectorAll('a, button');
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].classList.contains('megatrigger')) continue;
+        list.appendChild(items[i].cloneNode(true));
       }
-      inner.appendChild(navCopy);
     }
-    if (mega) inner.appendChild(mega.cloneNode(true));
+
+    /* One system goes last: it expands rather than navigates */
+    var sub = document.createElement('button');
+    sub.type = 'button';
+    sub.className = 'mnav-sub';
+    sub.setAttribute('data-msub', '');
+    sub.setAttribute('aria-expanded', 'false');
+    sub.innerHTML = '<span>One system</span><span class="mnav-plus" aria-hidden="true">+</span>';
+    list.appendChild(sub);
+    inner.appendChild(list);
+
+    if (mega) {
+      var drawer = document.createElement('div');
+      drawer.className = 'mnav-drawer';
+      drawer.setAttribute('data-msub-panel', '');
+      drawer.appendChild(mega.cloneNode(true));
+      inner.appendChild(drawer);
+    }
 
     var cta = document.createElement('a');
     cta.className = 'btn btn-on-navy';
@@ -701,7 +718,8 @@ class Component extends DCLogic {
   }
 
   document.addEventListener('click', function (e) {
-    var t = e.target.closest && e.target.closest('[data-mnav-toggle]');
+    if (!e.target.closest) return;
+    var t = e.target.closest('[data-mnav-toggle]');
     if (t) {
       e.preventDefault();
       if (!BP.matches) return;
@@ -709,7 +727,16 @@ class Component extends DCLogic {
       set(!p || p.getAttribute('data-open') !== '1');
       return;
     }
-    if (panel && e.target.closest && e.target.closest('#pal-mobile a')) set(false);
+    var sub = e.target.closest('[data-msub]');
+    if (sub) {
+      e.preventDefault();
+      var openNow = sub.getAttribute('aria-expanded') !== 'true';
+      sub.setAttribute('aria-expanded', openNow ? 'true' : 'false');
+      var drawer = document.querySelector('[data-msub-panel]');
+      if (drawer) drawer.setAttribute('data-open', openNow ? '1' : '0');
+      return;
+    }
+    if (panel && e.target.closest('#pal-mobile a')) set(false);
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
   BP.addEventListener('change', function (e) { if (!e.matches) set(false); });
