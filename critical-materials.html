@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.61.0">
+<meta name="build-version" content="1.61.1">
 <meta name="build-date" content="2026-09-07">
 <meta property="og:title" content="Critical Materials & REcapture | Paladin EnviroTech">
 <meta property="og:description" content="Domestic rare-earth recovery from retired technology.">
@@ -640,43 +640,69 @@ class Component extends DCLogic {
 })();
 </script>
 <script>
-/* Mobile menu. The panel holds the same nav and the same One Paladin groups as
-   the desktop menu; it is moved into place once rather than duplicated, so the
-   two can never drift apart. */
+/* Mobile menu.
+
+   The panel is built by cloning the nav and the One Paladin groups each time it
+   opens, so the originals stay in the header. An earlier version moved those
+   nodes instead: the desktop nav then vanished if the window was widened again,
+   and the mega panel was left empty.
+
+   The desktop "One system" control is a button that opens the mega panel. In
+   the mobile panel the groups are already listed underneath, so the clone
+   becomes a plain link to that section rather than a control that does
+   nothing. */
 (function () {
   var BP = window.matchMedia('(max-width: 1080px)');
-  var panel, built = false;
+  var panel;
 
-  function build() {
-    if (built) return;
+  function ensurePanel() {
+    if (panel && panel.isConnected) return panel;
     var header = document.querySelector('header');
-    var nav = header && header.querySelector('.mainnav');
-    var mega = document.getElementById('pal-mega');
-    if (!header || !nav) return;
+    if (!header) return null;
     panel = document.createElement('div');
     panel.className = 'mobilenav';
     panel.id = 'pal-mobile';
     panel.setAttribute('data-open', '0');
+    header.parentNode.insertBefore(panel, header.nextSibling);
+    return panel;
+  }
+
+  function fill() {
+    var p = ensurePanel();
+    if (!p) return;
+    var nav = document.querySelector('header .mainnav');
+    var mega = document.querySelector('#pal-mega .mega-inner');
+    p.innerHTML = '';
     var inner = document.createElement('div');
     inner.className = 'mobilenav-inner';
-    inner.appendChild(nav);
-    if (mega) {
-      var cols = mega.querySelector('.mega-inner');
-      if (cols) inner.appendChild(cols);
+
+    if (nav) {
+      var navCopy = nav.cloneNode(true);
+      /* the trigger has no panel to open here, so it becomes a link */
+      var trigger = navCopy.querySelector('.megatrigger');
+      if (trigger) {
+        var link = document.createElement('a');
+        link.href = '/platform';
+        link.textContent = 'One system';
+        trigger.parentNode.replaceChild(link, trigger);
+      }
+      inner.appendChild(navCopy);
     }
+    if (mega) inner.appendChild(mega.cloneNode(true));
+
     var cta = document.createElement('a');
     cta.className = 'btn btn-on-navy';
     cta.href = '/contact';
     cta.textContent = 'Talk to an expert';
     inner.appendChild(cta);
-    panel.appendChild(inner);
-    header.parentNode.insertBefore(panel, header.nextSibling);
-    built = true;
+    p.appendChild(inner);
   }
 
   function set(open) {
-    if (!panel) return;
-    panel.setAttribute('data-open', open ? '1' : '0');
+    var p = ensurePanel();
+    if (!p) return;
+    if (open) fill();
+    p.setAttribute('data-open', open ? '1' : '0');
     document.body.classList.toggle('nav-open', open);
     var t = document.querySelector('[data-mnav-toggle]');
     if (t) t.setAttribute('aria-expanded', open ? 'true' : 'false');
@@ -687,8 +713,8 @@ class Component extends DCLogic {
     if (t) {
       e.preventDefault();
       if (!BP.matches) return;
-      build();
-      set(panel.getAttribute('data-open') !== '1');
+      var p = ensurePanel();
+      set(!p || p.getAttribute('data-open') !== '1');
       return;
     }
     if (panel && e.target.closest && e.target.closest('#pal-mobile a')) set(false);
