@@ -1,5 +1,5 @@
 {
-  "version": "1.60.0",
-  "built": "2026-09-04",
-  "notes": "Header guard no longer reparents during render; reveal observer bounded"
+  "version": "1.61.0",
+  "built": "2026-09-07",
+  "notes": "Mobile navigation added; code cleanup"
 }

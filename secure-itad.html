@@ -11,8 +11,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.60.0">
-<meta name="build-date" content="2026-09-04">
+<meta name="build-version" content="1.61.0">
+<meta name="build-date" content="2026-09-07">
 <meta property="og:title" content="Secure ITAD &amp; Data Destruction | Paladin EnviroTech">
 <meta property="og:description" content="Certified destruction and serial-level chain of custody.">
 <meta property="og:image" content="/assets/preview.f2a82a9e.webp">
@@ -254,6 +254,55 @@ a:hover { opacity: 0.75; }
   header { position: fixed !important; top: 0; left: 0; right: 0; z-index: 900; }
   body { padding-top: 84px; }
   @media (max-width: 1080px) { body { padding-top: 84px; } }
+
+  /* --- mobile navigation ------------------------------------------------ */
+  /* the button's own styling sits outside the query, so it never falls back
+     to the browser default grey and black */
+  .navtoggle { display: none; background: none; border: 0; padding: 0;
+               color: var(--surface); cursor: pointer; }
+  @media (max-width: 1080px) {
+    .navtoggle { display: inline-flex; flex-direction: column; justify-content: center;
+                 gap: 5px; width: 44px; height: 44px; padding: 0 10px; margin-left: auto;
+                 background: none; border: 0; cursor: pointer; }
+    .navtoggle span { display: block; height: 2px; background: var(--surface);
+                      transition: transform 200ms ease, opacity 200ms ease; }
+    .navtoggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .navtoggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .navtoggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* the header CTA is the one thing the toggle replaces, to keep the bar clear */
+    header .btn { display: none; }
+
+    /* the panel is the desktop nav and mega columns, restacked */
+    .mobilenav { position: fixed; inset: 84px 0 0; background: var(--navy-deep);
+                 overflow-y: auto; -webkit-overflow-scrolling: touch;
+                 display: none; z-index: 890; }
+    .mobilenav[data-open="1"] { display: block; }
+    .mobilenav-inner { padding: 28px 24px 56px; display: flex; flex-direction: column; gap: 30px; }
+    .mobilenav .mainnav { display: flex !important; flex-direction: column;
+                          align-items: stretch; gap: 0; }
+    .mobilenav .mainnav > a, .mobilenav .mainnav > button {
+      display: flex; align-items: center; min-height: 52px; font-size: 17px;
+      color: var(--surface); border-bottom: 1px solid rgba(195,205,214,0.16); }
+    /* the plus is a desktop affordance; the groups are listed below here */
+    .mobilenav .megatrigger .plus { display: none; }
+    .mobilenav .mega-inner { max-width: none; padding: 0; margin: 0; }
+    .mobilenav .mega { position: static; display: block; background: none; border: 0; }
+    .mobilenav .mega-title { padding-bottom: 14px; margin-bottom: 22px; }
+    .mobilenav .mega-title span { font-size: 22px; }
+    .mobilenav .mega-cols { display: grid; grid-template-columns: minmax(0,1fr); gap: 26px; }
+    .mobilenav .mega-col a, .mobilenav .mega-col span.off {
+      display: flex; align-items: center; min-height: 44px; }
+    .mobilenav .btn { display: inline-flex; align-items: center; justify-content: center;
+                      min-height: 48px; }
+    body.nav-open { overflow: hidden; }
+  }
+  @media (min-width: 1081px) { .mobilenav { display: none !important; } }
+
+  /* touch targets */
+  @media (max-width: 1080px) {
+    footer a, footer button { min-height: 44px; display: inline-flex; align-items: center; }
+  }
 </style>
 </head>
 <body>
@@ -271,6 +320,10 @@ a:hover { opacity: 0.75; }
       <a href="/press" style="font-size: 15px; color: var(--surface);">Press</a>
     </nav>
     <a class="btn btn-on-navy" href="/contact">Talk to an expert</a>
+    <button class="navtoggle" type="button" data-mnav-toggle aria-expanded="false"
+        aria-controls="pal-mobile" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
   </div>
 <div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-title"><span>One Paladin</span></div><div class="mega-cols"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><span class="off">IT asset management</span><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Security</h3><a href="/secure-itad">Secure data destruction</a><a href="/platform">Chain of custody</a><span class="off">On-site services</span><span class="off">On-site asset management</span><span class="off">On-site destruction</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div></div></div></div></div>
 </header>
@@ -656,6 +709,64 @@ a:hover { opacity: 0.75; }
   window.addEventListener('load', dedupe);
   setTimeout(dedupe, 1500);
   setTimeout(dedupe, 4000);
+})();
+</script>
+<script>
+/* Mobile menu. The panel holds the same nav and the same One Paladin groups as
+   the desktop menu; it is moved into place once rather than duplicated, so the
+   two can never drift apart. */
+(function () {
+  var BP = window.matchMedia('(max-width: 1080px)');
+  var panel, built = false;
+
+  function build() {
+    if (built) return;
+    var header = document.querySelector('header');
+    var nav = header && header.querySelector('.mainnav');
+    var mega = document.getElementById('pal-mega');
+    if (!header || !nav) return;
+    panel = document.createElement('div');
+    panel.className = 'mobilenav';
+    panel.id = 'pal-mobile';
+    panel.setAttribute('data-open', '0');
+    var inner = document.createElement('div');
+    inner.className = 'mobilenav-inner';
+    inner.appendChild(nav);
+    if (mega) {
+      var cols = mega.querySelector('.mega-inner');
+      if (cols) inner.appendChild(cols);
+    }
+    var cta = document.createElement('a');
+    cta.className = 'btn btn-on-navy';
+    cta.href = '/contact';
+    cta.textContent = 'Talk to an expert';
+    inner.appendChild(cta);
+    panel.appendChild(inner);
+    header.parentNode.insertBefore(panel, header.nextSibling);
+    built = true;
+  }
+
+  function set(open) {
+    if (!panel) return;
+    panel.setAttribute('data-open', open ? '1' : '0');
+    document.body.classList.toggle('nav-open', open);
+    var t = document.querySelector('[data-mnav-toggle]');
+    if (t) t.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  document.addEventListener('click', function (e) {
+    var t = e.target.closest && e.target.closest('[data-mnav-toggle]');
+    if (t) {
+      e.preventDefault();
+      if (!BP.matches) return;
+      build();
+      set(panel.getAttribute('data-open') !== '1');
+      return;
+    }
+    if (panel && e.target.closest && e.target.closest('#pal-mobile a')) set(false);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
+  BP.addEventListener('change', function (e) { if (!e.matches) set(false); });
 })();
 </script>
 </body>
