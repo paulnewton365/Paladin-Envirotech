@@ -18,8 +18,8 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.62.0">
-<meta name="build-date" content="2026-09-07">
+<meta name="build-version" content="1.63.0">
+<meta name="build-date" content="2026-09-14">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
 <link rel="stylesheet" href="/responsive.css">
@@ -208,7 +208,7 @@
   .caption-navy { color: var(--mist); }
 
   /* buttons */
-  .btn { display: inline-block; font-weight: 600; font-size: 12px; letter-spacing: 1.1px;
+  .btn { display: inline-block; white-space: nowrap; font-weight: 600; font-size: 12px; letter-spacing: 1.1px;
          text-transform: uppercase; padding: 15px 26px; transition: background-color 180ms ease; }
   .btn-on-white { background: var(--ember); color: var(--surface); }
   .btn-on-white:hover { background: var(--ember-hover); }
@@ -218,7 +218,10 @@
   .btn-ghost:hover { background: var(--navy-deep); }
 
   /* hero */
-  .mainnav { display: flex; align-items: center; gap: 28px; }
+  /* the labels are longer now, so the row holds them on one line and the
+     gap tightens rather than letting them wrap to two */
+  .mainnav { display: flex; align-items: center; gap: 22px; white-space: nowrap; }
+  @media (max-width: 1320px) { .mainnav { gap: 16px; } .mainnav a, .megatrigger { font-size: 14px !important; } }
   /* seven items plus a button will not fit below this */
 
   .hero { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,44%); gap: 56px;
@@ -358,22 +361,14 @@
 <header style="background: var(--navy); position: sticky; top: 0; z-index: 900;">
   <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-top: 20px; padding-bottom: 20px;">
     <a class="pal-logo-link" href="/"><img data-logo src="/assets/paladin-lockup-colordark.ece3d353.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
-    <nav class="mainnav">
-      <button class="megatrigger" type="button" data-mega-trigger aria-expanded="false" aria-controls="pal-mega">One system <span class="plus">+</span></button>
-      <a href="/critical-materials" style="font-size: 15px; color: var(--surface);">Critical materials</a>
-      <a href="/industries" style="font-size: 15px; color: var(--surface);">Industries</a>
-      <a href="/network" style="font-size: 15px; color: var(--surface);">Network</a>
-      <a href="/company" style="font-size: 15px; color: var(--surface);">Company</a>
-      <a href="/blog" style="font-size: 15px; color: var(--surface);">Blog</a>
-      <a href="/press" style="font-size: 15px; color: var(--surface);">Press</a>
-    </nav>
+    <nav class="mainnav"><button class="megatrigger" type="button" data-mega-trigger aria-expanded="false" aria-controls="pal-mega">One System <span class="plus">+</span></button><a href="/critical-materials" style="font-size: 15px; color: var(--surface);">Critical Materials</a><a href="/industries" style="font-size: 15px; color: var(--surface);">Industries Served</a><a href="/network" style="font-size: 15px; color: var(--surface);">Global Network</a><a href="/company" style="font-size: 15px; color: var(--surface);">Company</a><a href="/blog" style="font-size: 15px; color: var(--surface);">Blog</a><a href="/press" style="font-size: 15px; color: var(--surface);">Press</a></nav>
     <a class="btn btn-on-navy" href="/contact">Talk to an expert</a>
     <button class="navtoggle" type="button" data-mnav-toggle aria-expanded="false"
         aria-controls="pal-mobile" aria-label="Menu">
   <span></span><span></span><span></span>
 </button>
   </div>
-<div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-title"><span>One Paladin</span></div><div class="mega-cols"><div class="mega-col"><h3>Technology lifecycle</h3><a href="/platform">How it works</a><span class="off">IT asset management</span><span class="off">Asset value recovery</span><span class="off">Global logistics</span><span class="off">Chain-of-custody ERP</span></div><div class="mega-col"><h3>Security</h3><a href="/secure-itad">Secure data destruction</a><a href="/platform">Chain of custody</a><span class="off">On-site services</span><span class="off">On-site asset management</span><span class="off">On-site destruction</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">Electronics recycling</a><a href="/paladin-local">Regional coverage</a><span class="off">Wind turbine & energy assets</span><span class="off">Metallurgical lab</span></div><div class="mega-col"><h3>Critical materials</h3><a href="/critical-materials">REcapture magnet recovery</a><span class="off">Neodymium & dysprosium</span><span class="off">Domestic feedstock programs</span><span class="off">CMR joint venture</span></div></div></div></div></div>
+<div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-title"><span>One Paladin</span></div><div class="mega-cols"><div class="mega-col"><h3>Technology Lifecycle</h3><a href="/platform">How It Works</a><span class="off">ShieldVera Software Solution</span><span class="off">Max Value Recovery</span><span class="off">Global Logistics</span></div><div class="mega-col"><h3>Security</h3><a href="/platform">Chain of Custody</a><a href="/secure-itad">Data Destruction / Sanitization</a><span class="off">On-Site Services</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">End-of-Life IT Asset Management</a><span class="off">Value Recovery</span><span class="off">Metallurgical Lab</span><span class="off">EH&amp;S Compliance</span></div><div class="mega-col"><h3>Critical Materials &amp; Defense</h3><a href="/critical-materials">Rare Earth Magnet Recovery</a><span class="off">CMR Joint Venture</span><span class="off">Strategic Partners</span><span class="off">Wind Turbines</span></div></div></div></div></div>
 </header>
 
 <!-- HERO -->
