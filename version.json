@@ -1,5 +1,5 @@
 {
-  "version": "1.63.0",
+  "version": "1.63.1",
   "built": "2026-09-14",
-  "notes": "Client nav and mega menu revisions"
+  "notes": "Primary nav hover restored"
 }

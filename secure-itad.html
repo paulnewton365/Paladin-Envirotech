@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.63.0">
+<meta name="build-version" content="1.63.1">
 <meta name="build-date" content="2026-09-14">
 <meta property="og:title" content="Secure ITAD &amp; Data Destruction | Paladin EnviroTech">
 <meta property="og:description" content="Certified destruction and serial-level chain of custody.">
@@ -189,6 +189,11 @@ a:hover { opacity: 0.75; }
   /* the labels are longer now, so the row holds them on one line and the
      gap tightens rather than letting them wrap to two */
   .mainnav { display: flex; align-items: center; gap: 22px; white-space: nowrap; }
+  /* the colour lives here rather than inline, so a hover rule can reach it */
+  .mainnav a, .mainnav .megatrigger { font-size: 15px; color: var(--surface);
+                                      transition: color 180ms ease; }
+  .mainnav a:hover, .mainnav .megatrigger:hover { color: var(--ember-light); }
+  .mainnav .megatrigger:hover .plus { color: var(--ember-light); }
   @media (max-width: 1320px) { .mainnav { gap: 16px; } .mainnav a, .megatrigger { font-size: 14px !important; } }
  
 
@@ -318,7 +323,7 @@ a:hover { opacity: 0.75; }
 <header style="background: var(--navy); position: sticky; top: 0; z-index: 900;">
   <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-top: 20px; padding-bottom: 20px;">
     <a class="pal-logo-link" href="/"><img data-logo src="/assets/paladin-lockup-colordark.ece3d353.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
-    <nav class="mainnav"><button class="megatrigger" type="button" data-mega-trigger aria-expanded="false" aria-controls="pal-mega">One System <span class="plus">+</span></button><a href="/critical-materials" style="font-size: 15px; color: var(--surface);">Critical Materials</a><a href="/industries" style="font-size: 15px; color: var(--surface);">Industries Served</a><a href="/network" style="font-size: 15px; color: var(--surface);">Global Network</a><a href="/company" style="font-size: 15px; color: var(--surface);">Company</a><a href="/blog" style="font-size: 15px; color: var(--surface);">Blog</a><a href="/press" style="font-size: 15px; color: var(--surface);">Press</a></nav>
+    <nav class="mainnav"><button class="megatrigger" type="button" data-mega-trigger aria-expanded="false" aria-controls="pal-mega">One System <span class="plus">+</span></button><a href="/critical-materials">Critical Materials</a><a href="/industries">Industries Served</a><a href="/network">Global Network</a><a href="/company">Company</a><a href="/blog">Blog</a><a href="/press">Press</a></nav>
     <a class="btn btn-on-navy" href="/contact">Talk to an expert</a>
     <button class="navtoggle" type="button" data-mnav-toggle aria-expanded="false"
         aria-controls="pal-mobile" aria-label="Menu">
