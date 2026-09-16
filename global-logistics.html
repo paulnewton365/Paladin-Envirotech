@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Electronics Recycling | Paladin EnviroTech</title>
-<meta name="description" content="Domestic electronics processing with controlled downstream handling.">
+<title>Global logistics | Paladin EnviroTech</title>
+<meta name="description" content="White glove pickup, compliant transport and full chain of custody, from your facility to ours.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
@@ -316,10 +316,43 @@ a:hover { opacity: 0.75; }
   @media (max-width: 1080px) {
     footer a, footer button { min-height: 44px; display: inline-flex; align-items: center; }
   }
+
+  .hero-split { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,44%);
+                gap: 56px; align-items: start; }
+  .hero-split > div:first-child { max-width: 620px; }
+  .hero-slot { aspect-ratio: 4 / 3; background: var(--navy-deep);
+               position: relative; overflow: hidden; }
+  .hero-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* a slot with no image is a holding shape, not a gap */
+  .hero-slot.is-holding { border: 1px solid rgba(195,205,214,0.18); display: flex;
+                          align-items: flex-end; padding: 22px; }
+  .hero-slot.is-holding span { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px;
+                               text-transform: uppercase; color: var(--mist); }
+  @media (max-width: 900px) { .hero-split { grid-template-columns: minmax(0,1fr); gap: 32px; } }
+
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 48px; }
+  .step { border-top: 1px solid rgba(195,205,214,0.34); padding-top: 26px;
+          display: flex; flex-direction: column; gap: 12px; }
+  .step-accent { border-top: 2px solid var(--ember-light); padding-top: 25px; }
+  .step-n { font-weight: 600; font-size: 11.5px; letter-spacing: 1.6px; text-transform: uppercase;
+            color: var(--mist); margin: 0; }
+  .step-accent .step-n { color: var(--ember-light); }
+  .step h3 { font-weight: 300; font-size: 26px; line-height: 1.2; letter-spacing: -0.6px; margin: 0; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 48px; }
+  .cell { border-top: 1px solid var(--hairline); padding-top: 26px;
+          display: flex; flex-direction: column; gap: 10px; }
+  .cell-accent { border-top: 2px solid var(--ember); padding-top: 25px; }
+  .cell h3 { font-weight: 300; font-size: 24px; line-height: 1.2; letter-spacing: -0.6px;
+             margin: 0; color: var(--navy); }
+  .closing { display: flex; align-items: flex-end; justify-content: space-between;
+             gap: 56px; flex-wrap: wrap; }
+  @media (max-width: 900px) {
+    .steps, .grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
+    .closing { flex-direction: column; align-items: flex-start; }
+  }
 </style>
 </head>
 <body>
-
 <header style="background: var(--navy); position: sticky; top: 0; z-index: 900;">
   <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-top: 20px; padding-bottom: 20px;">
     <a class="pal-logo-link" href="/"><img data-logo src="/assets/paladin-lockup-colordark.ece3d353.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" /></a>
@@ -332,120 +365,85 @@ a:hover { opacity: 0.75; }
   </div>
 <div class="mega" id="pal-mega" data-open="0"><div class="mega-inner"><div class="mega-title"><span>One Paladin</span></div><div class="mega-cols"><div class="mega-col"><h3>Technology Lifecycle</h3><a href="/platform">How It Works</a><span class="off">ShieldVera Software Solution</span><a href="/max-value-recovery">Max Value Recovery</a><a href="/global-logistics">Global Logistics</a></div><div class="mega-col"><h3>Security</h3><a href="/platform">Chain of Custody</a><a href="/secure-itad">Data Destruction / Sanitization</a><span class="off">On-Site Services</span></div><div class="mega-col"><h3>Recycling</h3><a href="/electronics-recycling">End-of-Life IT Asset Management</a><span class="off">Value Recovery</span><a href="/metallurgical-lab">Metallurgical Lab</a><span class="off">EH&amp;S Compliance</span></div><div class="mega-col"><h3>Critical Materials &amp; Defense</h3><a href="/critical-materials">Rare Earth Magnet Recovery</a><a href="/cmr-joint-venture">CMR Joint Venture</a><span class="off">Strategic Partners</span><a href="/wind-turbines">Wind Turbines</a></div></div></div></div></div>
 </header>
-
-<section data-screen-label="Hero" style="background: #1E3547; padding: 84px 0 84px;" data-reveal class="hero-band">
-  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(32px, 4vw, 72px); align-items: center;">
-    <div data-reveal="1">
-      <p class="kicker k-navy" style="margin: 0 0 26px;">One system &middot; Electronics recycling</p>
-      <h1 style="color: #FFFFFF; font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 300; margin: 22px 0 20px; text-wrap: balance;"><span style="color: #E08B52;">Processed domestically,</span> with every downstream step recorded.</h1>
-      <p style="color: #C3CDD6; font-weight: 300; font-size: clamp(17px, 1.4vw, 20px); line-height: 1.55; margin: 0; max-width: 620px; text-wrap: pretty;">Once data is destroyed, what remains still has value: ferrous and non-ferrous metals, precious metals, plastics. Paladin processes it domestically under controlled downstream handling. Export and resale chains lose track of where material ends up.</p>
-    </div>
-    <div data-reveal="1" style="aspect-ratio: 4 / 3; background: #1E3547; position: relative; overflow: hidden;"><img src="assets/recycling-rare.62bf3d81.jpeg" alt="Sorting line at a Paladin processing facility" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></div>
-  </div>
-</section>
-
-<section data-screen-label="Split" style="background: #FFFFFF; padding: clamp(64px, 8vw, 128px) 0;" data-reveal>
+<div class="hero-band" data-reveal style="background: #1E3547; padding: 84px 0;">
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
-    <div data-reveal="1" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(32px, 4vw, 64px); align-items: end; padding-bottom: 40px; border-bottom: 1px solid #1E3547;">
-      <h2 style="margin: 0; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; letter-spacing: -0.5px; font-weight: 400; max-width: 700px; text-wrap: pretty;">Destruction first, then recovery.</h2>
-      <p style="margin: 0; font-size: 16px; line-height: 1.65; font-weight: 300; color: #5A6874; max-width: 520px; text-wrap: pretty;">Recycling begins only once the data-bearing assets in a shipment have been destroyed and documented, so nothing enters the materials stream unaccounted for.</p>
+    <div class="hero-split">
+      <div>
+        <p class="kicker k-navy" style="margin: 0 0 26px;">Technology lifecycle &middot; Global logistics</p>
+        <h1 style="font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 300; color: #FFFFFF; margin: 0;">From your loading dock to ours, <span style="color: var(--ember-light);">without a hand-off</span></h1>
+        <p class="lead" style="color: var(--mist); margin: 26px 0 0;">White glove handling for assets that cannot be left to a general carrier. On-site pickup, careful packaging, compliant transport and an unbroken chain of custody, city to city or country to country.</p>
+      </div>
+      <div class="hero-slot is-holding"><span>Fleet imagery to come</span></div>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 1px; background: #F5F6F7;">
-      <div data-reveal="1" style="background: #FFFFFF; border-top: 3px solid #B8541F; padding: clamp(32px, 3.4vw, 48px) clamp(28px, 3vw, 44px) clamp(40px, 4vw, 56px) 0;">
-        <div style="display: flex; align-items: baseline; gap: 14px;">
-          <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;"><span style="width: 8px; height: 8px; background: #B8541F; flex: none;"></span>Before</span>
-          <span style="flex: 1; height: 1px; background: #FFFFFF;"></span>
-          <span style="font-size: 12px; letter-spacing: 0.8px; color: #5A6874;">01</span>
-        </div>
-        <h3 style="margin: 20px 0 14px; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.15; font-weight: 500; letter-spacing: -0.2px;">Data neutralised</h3>
-        <p style="margin: 0; font-size: 16px; line-height: 1.65; font-weight: 300; color: #5A6874; text-wrap: pretty;">Data-bearing assets are destroyed and certified per serial before anything moves into materials processing.</p>
-      </div><div data-reveal="1" style="background: #FFFFFF; border-top: 3px solid #B8541F; padding: clamp(32px, 3.4vw, 48px) clamp(28px, 3vw, 44px) clamp(40px, 4vw, 56px) clamp(28px, 3vw, 44px);">
-        <div style="display: flex; align-items: baseline; gap: 14px;">
-          <span style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;"><span style="width: 8px; height: 8px; background: #B8541F; flex: none;"></span>After</span>
-          <span style="flex: 1; height: 1px; background: #F5F6F7;"></span>
-          <span style="font-size: 12px; letter-spacing: 0.8px; color: #5A6874;">02</span>
-        </div>
-        <h3 style="margin: 20px 0 14px; font-size: clamp(24px, 2.4vw, 34px); line-height: 1.15; font-weight: 500; letter-spacing: -0.2px;">Materials recovered</h3>
-        <p style="margin: 0; font-size: 16px; line-height: 1.65; font-weight: 300; color: #5A6874; text-wrap: pretty;">What remains is separated into metals, precious metals and plastics, each routed to an audited downstream processor.</p>
+  </div>
+</div>
+<div data-reveal style="background: #162836; padding: 84px 0;">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
+    <p class="kicker k-navy">How assets move</p>
+    <h2 class="h2" style="margin-top: 22px; color: #FFFFFF;">Four ways to move a retirement</h2>
+    <p class="lead" style="color: var(--mist); margin-top: 26px;">The mode follows the volume and the sensitivity, not the other way round.</p>
+    <div class="steps" style="margin-top: 64px;">
+      <div class="step">
+        <p class="step-n">Full truck</p>
+        <h3 style="color: #FFFFFF;">Dedicated vehicle</h3>
+        <p class="body" style="color: var(--mist);">The whole trailer, one customer, no consolidation with anybody else's freight.</p>
+      </div>
+      <div class="step step-accent">
+        <p class="step-n">White glove</p>
+        <h3 style="color: #FFFFFF;">Sensitive handling</h3>
+        <p class="body" style="color: var(--mist);">Premium care for assets that need it: palletised, strapped and wrapped in black plastic so nothing is identifiable in transit.</p>
+      </div>
+      <div class="step">
+        <p class="step-n">Intermodal and LTL</p>
+        <h3 style="color: #FFFFFF;">Rail, and smaller loads</h3>
+        <p class="body" style="color: var(--mist);">Rail plus truck for long domestic hauls, and less-than-truckload for volumes that do not justify a dedicated vehicle.</p>
       </div>
     </div>
   </div>
-</section>
-
-<section id="materials" data-screen-label="Detail" style="background: #F5F6F7; padding: clamp(64px, 8vw, 128px) 0;" data-reveal>
-  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: clamp(40px, 6vw, 96px);">
-    <div data-reveal="1" style="position: sticky; top: clamp(96px, 12vh, 140px); align-self: start;">
-      <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #8F3F14;">Materials</span>
-      <h2 style="margin: 18px 0 20px; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; letter-spacing: -0.5px; font-weight: 400; text-wrap: pretty;">What comes back</h2>
-      <p style="margin: 0; font-size: 17px; line-height: 1.65; font-weight: 300; color: #5A6874; max-width: 460px; text-wrap: pretty;">Every stream is separated domestically and tracked to the processor that receives it.</p>
-      <a href="/critical-materials" style="display: inline-flex; align-items: center; gap: 12px; margin-top: 28px; color: #1E3547; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #1E3547; padding-bottom: 6px;">See critical materials</a>
-    </div>
-    <div data-reveal="1" style="border-top: 1px solid #1E3547;">
-      <div data-method="1" style="display: grid; grid-template-columns: 56px 1fr; column-gap: clamp(20px, 2.5vw, 40px); align-items: baseline; padding: clamp(24px, 2.6vw, 36px) 0; border-bottom: 1px solid #D5DBE0; transition: padding-left 220ms cubic-bezier(0.2,0.7,0.1,1);" class="h11">
-        <span style="font-size: 20px; letter-spacing: 0.8px; font-weight: 500; color: #5A6874;">01</span>
-        <div>
-          <div style="font-size: clamp(22px, 2.2vw, 32px); line-height: 1.15; font-weight: 500; letter-spacing: -0.2px;">Ferrous &amp; non-ferrous</div>
-          <div style="margin-top: 8px; font-size: 15px; line-height: 1.6; font-weight: 300; color: #5A6874; text-wrap: pretty;">Separated and sorted domestically for direct return into manufacturing supply.</div>
-        </div>
-      </div><div data-method="1" style="display: grid; grid-template-columns: 56px 1fr; column-gap: clamp(20px, 2.5vw, 40px); align-items: baseline; padding: clamp(24px, 2.6vw, 36px) 0; border-bottom: 1px solid #D5DBE0; transition: padding-left 220ms cubic-bezier(0.2,0.7,0.1,1);" class="h12">
-        <span style="font-size: 20px; letter-spacing: 0.8px; font-weight: 500; color: #5A6874;">02</span>
-        <div>
-          <div style="font-size: clamp(22px, 2.2vw, 32px); line-height: 1.15; font-weight: 500; letter-spacing: -0.2px;">Gold, silver, palladium</div>
-          <div style="margin-top: 8px; font-size: 15px; line-height: 1.6; font-weight: 300; color: #5A6874; text-wrap: pretty;">Recovered from circuit boards and connectors, which bulk shredding destroys.</div>
-        </div>
-      </div><div data-method="1" style="display: grid; grid-template-columns: 56px 1fr; column-gap: clamp(20px, 2.5vw, 40px); align-items: baseline; padding: clamp(24px, 2.6vw, 36px) 0; border-bottom: 1px solid #D5DBE0; transition: padding-left 220ms cubic-bezier(0.2,0.7,0.1,1);" class="h13">
-        <span style="font-size: 20px; letter-spacing: 0.8px; font-weight: 500; color: #5A6874;">03</span>
-        <div>
-          <div style="font-size: clamp(22px, 2.2vw, 32px); line-height: 1.15; font-weight: 500; letter-spacing: -0.2px;">Sorted for recovery</div>
-          <div style="margin-top: 8px; font-size: 15px; line-height: 1.6; font-weight: 300; color: #5A6874; text-wrap: pretty;">Housings and casings routed to controlled downstream processors, tracked the same way as everything else.</div>
-        </div>
-      </div><div data-method="1" style="display: grid; grid-template-columns: 56px 1fr; column-gap: clamp(20px, 2.5vw, 40px); align-items: baseline; padding: clamp(24px, 2.6vw, 36px) 0; border-bottom: 1px solid #D5DBE0; transition: padding-left 220ms cubic-bezier(0.2,0.7,0.1,1);" class="h11">
-        <span style="font-size: 20px; letter-spacing: 0.8px; font-weight: 500; color: #5A6874;">04</span>
-        <div>
-          <div style="font-size: clamp(22px, 2.2vw, 32px); line-height: 1.15; font-weight: 500; letter-spacing: -0.2px;">No unaccountable downstream</div>
-          <div style="margin-top: 8px; font-size: 15px; line-height: 1.6; font-weight: 300; color: #5A6874; text-wrap: pretty;">Every downstream partner is audited; nothing leaves the record once it enters intake.</div>
-        </div>
+</div>
+<div data-reveal style="background: #FFFFFF; padding: 84px 0;">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
+    <p class="kicker k-white">What sets the service apart</p>
+    <h2 class="h2" style="margin-top: 22px;">Six commitments, on every collection</h2>
+    <p class="lead" style="color: var(--slate); margin-top: 26px;">Reverse logistics is where most disposition programmes lose their audit trail. These are the points at which ours holds.</p>
+    <div class="grid" style="margin-top: 64px;">
+      <div class="cell cell-accent">
+        <h3>On time, every time</h3>
+        <p class="body-w">Reliable, on-schedule pickups, so a decommissioning programme does not slip on the collection date.</p>
+      </div>
+      <div class="cell">
+        <h3>Protected every step</h3>
+        <p class="body-w">Safe, accountable handling from the dock to the processing floor.</p>
+      </div>
+      <div class="cell">
+        <h3>Cross-border confidence</h3>
+        <p class="body-w">International shipments fully compliant, with export documentation and customs clearance handled.</p>
+      </div>
+      <div class="cell">
+        <h3>Always in the know</h3>
+        <p class="body-w">Regular updates, so the asset owner is never asking where their equipment is.</p>
+      </div>
+      <div class="cell">
+        <h3>Smarter reverse logistics</h3>
+        <p class="body-w">Routing built to cut cost and empty miles rather than simply move boxes.</p>
+      </div>
+      <div class="cell">
+        <h3>Support you can count on</h3>
+        <p class="body-w">One team accountable for the movement, not a broker passing it on.</p>
       </div>
     </div>
   </div>
-</section>
-
-<section data-screen-label="Proof" style="background: #1E3547; padding: clamp(64px, 8vw, 128px) 0;" data-reveal>
-  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: clamp(40px, 5vw, 88px); align-items: start;">
-    <div data-reveal="1" style="position: sticky; top: clamp(96px, 12vh, 140px); align-self: start;">
-      <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #E08B52;">Control</span>
-      <h2 style="margin: 18px 0 22px; color: #FFFFFF; font-size: clamp(30px, 3.6vw, 52px); line-height: 1.08; letter-spacing: -0.5px; font-weight: 300; text-wrap: pretty;">Nothing leaves the record</h2>
-      <p style="margin: 0 0 32px; color: #C3CDD6; font-size: 17px; line-height: 1.65; font-weight: 300; max-width: 520px; text-wrap: pretty;">Every downstream partner is audited, and each transfer is logged against the same chain-of-custody record the destruction certificates feed.</p>
-      <a href="/platform" style="display: inline-flex; align-items: center; gap: 12px; color: #E08B52; font-size: 14px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border-bottom: 1px solid #E08B52; padding-bottom: 6px;">See the full lifecycle</a>
+</div>
+<div data-reveal style="background: #F5F6F7; padding: 84px 0;">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;" class="closing">
+    <div style="max-width: 620px; display: flex; flex-direction: column; gap: 22px;">
+      <p class="kicker k-alt">Start here</p>
+      <h2 class="h2" style="color: var(--navy);">Tell us what needs moving</h2>
+      <p class="body" style="color: var(--slate);">Send the sites, the volumes and the dates. We will map the modes against your schedule and show you the custody record you would receive.</p>
     </div>
-    <div data-reveal="1" style="background: #FFFFFF; padding: clamp(24px, 2.6vw, 36px);">
-      <div style="display: flex; align-items: baseline; justify-content: space-between; padding-bottom: 16px; border-bottom: 1px solid #1E3547;">
-        <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #1E3547;">Downstream handling</span>
-      </div>
-      <div data-fact="1" style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: clamp(16px, 1.8vw, 22px) 0; border-bottom: 1px solid #D5DBE0;">
-        <span style="font-size: 15px; line-height: 1.5; font-weight: 300; color: #5A6874; max-width: 320px;">Processing kept in domestic facilities</span>
-        <span style="font-size: 13px; letter-spacing: 0.8px; text-transform: uppercase; color: #1E3547; white-space: nowrap;">Domestic</span>
-      </div><div data-fact="1" style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: clamp(16px, 1.8vw, 22px) 0; border-bottom: 1px solid #D5DBE0;">
-        <span style="font-size: 15px; line-height: 1.5; font-weight: 300; color: #5A6874; max-width: 320px;">Downstream partners audited before use</span>
-        <span style="font-size: 13px; letter-spacing: 0.8px; text-transform: uppercase; color: #1E3547; white-space: nowrap;">Audited</span>
-      </div><div data-fact="1" style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: clamp(16px, 1.8vw, 22px) 0; border-bottom: 1px solid #D5DBE0;">
-        <span style="font-size: 15px; line-height: 1.5; font-weight: 300; color: #5A6874; max-width: 320px;">Transfers logged against the original intake</span>
-        <span style="font-size: 13px; letter-spacing: 0.8px; text-transform: uppercase; color: #1E3547; white-space: nowrap;">Tracked</span>
-      </div><div data-fact="1" style="display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding: clamp(16px, 1.8vw, 22px) 0; border-bottom: 1px solid #D5DBE0;">
-        <span style="font-size: 15px; line-height: 1.5; font-weight: 300; color: #5A6874; max-width: 320px;">Magnet-bearing assets continue to REcapture</span>
-        <span style="font-size: 13px; letter-spacing: 0.8px; text-transform: uppercase; color: #1E3547; white-space: nowrap;">Recovered</span>
-      </div>
-    </div>
+    <a class="btn btn-on-white" href="/contact">Talk to an expert</a>
   </div>
-</section>
-
-<section data-screen-label="Contact" style="background: #F5F6F7; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);" data-reveal>
-  <div style="max-width: 1180px; margin: 0 auto; padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px); background: #1E3547; border-left: 4px solid #B8541F; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;" data-reveal>
-    <p style="color: #FFFFFF; font-weight: 300; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; margin: 0; max-width: 1180px;">Recycling is step three of five. Magnet-bearing assets continue on to REcapture.</p>
-    <a href="/critical-materials" style="flex: none; display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" class="h9">See critical materials</a>
-  </div>
-</section>
-
+</div>
 <footer style="background: var(--navy-deep); color: var(--surface);">
   <div class="wrap" style="padding-top: 64px; padding-bottom: 64px; display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap;">
     <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 18px; max-width: 320px;">
@@ -505,59 +503,6 @@ a:hover { opacity: 0.75; }
     </div>
   </div>
 </footer>
-
-<script>
-(function () {
-  var nav = document.querySelector('[data-nav]');
-  var toggle = document.querySelector('[data-nav-toggle]');
-  function applyNav() {
-    if (!nav || !toggle) return;
-    var mobile = window.innerWidth < 900;
-    toggle.style.display = mobile ? 'flex' : 'none';
-    if (!mobile) {
-      nav.dataset.open = '';
-      Object.assign(nav.style, { position: 'static', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 'clamp(14px, 1.8vw, 34px)', background: 'transparent', padding: '0', borderTop: 'none' });
-    } else if (nav.dataset.open === '1') {
-      Object.assign(nav.style, { position: 'absolute', left: '0', right: '0', top: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '18px', background: '#1E3547', padding: '24px clamp(24px,5vw,72px)', zIndex: '900', borderTop: '1px solid rgba(195,205,214,0.24)' });
-    } else {
-      nav.style.display = 'none';
-    }
-  }
-  if (toggle) toggle.addEventListener('click', function () { nav.dataset.open = nav.dataset.open === '1' ? '' : '1'; applyNav(); });
-  window.addEventListener('resize', applyNav);
-  applyNav();
-
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ease = 'cubic-bezier(0.2,0.7,0.1,1)';
-  if (!reduce) {
-    document.querySelectorAll('[data-reveal]').forEach(function (el) {
-      el.style.transition = 'opacity 480ms ' + ease + ', transform 480ms ' + ease;
-    });
-    document.querySelectorAll('[data-fact]').forEach(function (el, i) {
-      el.style.transition = 'opacity 480ms ' + ease + ' ' + (i * 70) + 'ms, transform 480ms ' + ease + ' ' + (i * 70) + 'ms';
-    });
-    document.querySelectorAll('[data-method]').forEach(function (el, i) {
-      el.style.transition = 'opacity 480ms ' + ease + ' ' + (i * 90) + 'ms, transform 480ms ' + ease + ' ' + (i * 90) + 'ms, padding-left 220ms ' + ease;
-    });
-  }
-
-  var raf = null;
-  function tick() {
-    if (reduce) return;
-    var vh = window.innerHeight;
-    document.querySelectorAll('[data-reveal],[data-fact],[data-method]').forEach(function (el) {
-      var r = el.getBoundingClientRect();
-      if (r.height === 0) return;
-      if (r.top < vh * 0.88) { el.dataset.shown = '1'; el.style.opacity = '1'; el.style.transform = 'none'; }
-      else if (!el.dataset.shown) { el.style.opacity = '0'; el.style.transform = 'translateY(28px)'; }
-    });
-  }
-  function onScroll() { if (raf) return; raf = requestAnimationFrame(function () { raf = null; tick(); }); }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  tick();
-})();
-</script>
 <script>
 /* Menu open/close by delegation from the document. Binding to the button
    itself does not survive the page runtime re-rendering the header, which is
@@ -586,9 +531,7 @@ a:hover { opacity: 0.75; }
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
 })();
-</script>
-
-<script>
+</script><script>
 /* Scroll reveal.
 
    The previous version read [data-reveal] once and bailed if nothing was there
@@ -647,9 +590,7 @@ a:hover { opacity: 0.75; }
     document.documentElement.classList.remove('js-reveal');
   }, 5000);
 })();
-</script>
-
-<script>
+</script><script>
 /* Keep one header.
 
    An earlier version also moved the header to be a child of body on every DOM
@@ -671,8 +612,7 @@ a:hover { opacity: 0.75; }
   setTimeout(dedupe, 1500);
   setTimeout(dedupe, 4000);
 })();
-</script>
-<script>
+</script><script>
 /* Mobile menu.
 
    The seven sections list in order, with One system last, because it is the
