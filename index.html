@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.66.2">
+<meta name="build-version" content="1.67.0">
 <meta name="build-date" content="2026-09-16">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -359,6 +359,16 @@
   @media (max-width: 1080px) {
     footer a, footer button { min-height: 44px; display: inline-flex; align-items: center; }
   }
+
+
+  /* No heading ends on a word by itself. balance evens the lines out instead
+     of stranding the last word. A two-word heading also has to fit its column,
+     or it breaks one word per line however the wrapping is balanced. */
+  h1, h2, h3, .h2, .figure, .strip-figure, .press-card h3, .cell h3, .step h3 {
+    text-wrap: balance !important;
+  }
+  .lead, .body, .body-w, .caption { text-wrap: pretty; }
+  .cell h3, .step h3 { font-size: clamp(19px, 1.5vw, 22px); }
 </style>
 </head>
 <body>

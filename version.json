@@ -1,5 +1,5 @@
 {
-  "version": "1.66.2",
+  "version": "1.67.0",
   "built": "2026-09-16",
-  "notes": "Four-item grids use four columns"
+  "notes": "No heading ends on a stranded word"
 }
