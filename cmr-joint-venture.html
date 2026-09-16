@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.66.1">
+<meta name="build-version" content="1.66.2">
 <meta name="build-date" content="2026-09-16">
 <meta property="og:title" content="Electronics Recycling | Paladin EnviroTech">
 <meta property="og:description" content="Domestic electronics processing with controlled downstream handling.">
@@ -350,6 +350,12 @@ a:hover { opacity: 0.75; }
     .steps, .grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
     .closing { flex-direction: column; align-items: flex-start; }
   }
+
+  /* a four-item set in a three-column grid wraps and leaves a hole, so four
+     items get their own track count */
+  .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); gap: 32px; }
+  @media (max-width: 1080px) { .grid-4 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 700px)  { .grid-4 { grid-template-columns: minmax(0,1fr); } }
 </style>
 </head>
 <body>
@@ -406,7 +412,7 @@ a:hover { opacity: 0.75; }
     <p class="kicker k-white">What comes out</p>
     <h2 class="h2" style="margin-top: 22px;">Four elements, recovered from equipment that already exists</h2>
     <p class="lead" style="color: var(--slate); margin-top: 26px;">The venture began domestic magnet recovery in August 2026, targeting the elements that matter most to motors, drives and defense.</p>
-    <div class="grid" style="margin-top: 64px;">
+    <div class="grid grid-4" style="margin-top: 64px;">
       <div class="cell cell-accent">
         <h3>Neodymium</h3>
         <p class="body-w">The primary magnet element in motors, drives and wind turbines.</p>
