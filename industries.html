@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.68.0">
+<meta name="build-version" content="1.70.1">
 <meta name="build-date" content="2026-09-16">
 <meta property="og:title" content="Industries We Serve | Paladin EnviroTech">
 <meta property="og:description" content="Hyperscale, OEM, enterprise and government programmes.">
@@ -375,6 +375,25 @@ a:hover { opacity: 0.75; }
   html:not(.js-reveal) [data-reveal] .stats > *, html:not(.js-reveal) [data-reveal] .proof > *,
   html:not(.js-reveal) [data-reveal] .press-grid > *, html:not(.js-reveal) [data-reveal] .strip > * {
     opacity: 1; transform: none; }
+
+  .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.7fr;
+               gap: 48px; align-items: start; }
+  .foot-brand { display: flex; flex-direction: column; align-items: flex-start;
+                gap: 18px; max-width: 300px; }
+  .foot-col { display: flex; flex-direction: column; gap: 12px; }
+  .foot-col a { font-size: 15px; color: var(--mist); }
+  .foot-col a:hover { color: var(--ember-light); }
+  .foot-act { display: flex; flex-direction: column; gap: 22px; }
+  .foot-sign { display: flex; flex-direction: column; gap: 12px; max-width: 320px; }
+  .foot-follow a { display: inline-flex; align-items: center; gap: 10px;
+                   font-size: 15px; color: var(--surface); }
+  .foot-follow a:hover { color: var(--ember-light); }
+  @media (max-width: 1080px) {
+    .foot-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px; }
+  }
+  @media (max-width: 640px) {
+    .foot-grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  }
 </style>
 </helmet>
 
@@ -441,7 +460,7 @@ a:hover { opacity: 0.75; }
       </div>
     </div>
     <div style="margin-top: clamp(40px, 5vw, 72px); border-top: 1px solid #D5DBE0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));">
-      <div style="padding: 40px 32px 40px 0; border-right: 1px solid #D5DBE0;"><div style="color: #5A6874; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">400</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">workstations retired across the refresh</p></div><div style="padding: 40px 32px; border-right: 1px solid #D5DBE0;"><div style="color: #5A6874; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">12</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">clinic sites collected under one manifest</p></div><div style="padding: 40px 32px; border-right: 1px solid #D5DBE0;"><div style="color: #B8541F; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">1</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">consolidated report instead of a dozen mismatched vendor files</p></div><div style="padding: 40px 0 40px 32px; "><div style="color: #B8541F; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;">0</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">gaps in the chain of custody between pickup and certificate</p></div>
+      <div style="padding: 40px 32px 40px 0; border-right: 1px solid #D5DBE0;"><div style="color: #5A6874; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;" data-count="400">400</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">workstations retired across the refresh</p></div><div style="padding: 40px 32px; border-right: 1px solid #D5DBE0;"><div style="color: #5A6874; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;" data-count="12">12</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">clinic sites collected under one manifest</p></div><div style="padding: 40px 32px; border-right: 1px solid #D5DBE0;"><div style="color: #B8541F; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;" data-count="1">1</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">consolidated report instead of a dozen mismatched vendor files</p></div><div style="padding: 40px 0 40px 32px; "><div style="color: #B8541F; font-size: clamp(44px, 4.4vw, 64px); line-height: 1.05; font-weight: 300;" data-count="0">0</div><p style="color: #5A6874; font-size: 14px; font-weight: 300; margin: 10px 0 0;">gaps in the chain of custody between pickup and certificate</p></div>
     </div>
   </div>
 </div>
@@ -465,49 +484,53 @@ a:hover { opacity: 0.75; }
 </div>
 
 <footer style="background: var(--navy-deep); color: var(--surface);">
-  <div class="wrap" style="padding-top: 64px; padding-bottom: 64px; display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap;">
-    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 18px; max-width: 320px;">
-      <img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" />
-      <p class="body" style="color: var(--mist); font-size: 15px;">Secure technology lifecycle and
-        critical-materials recovery, on one system.</p>
-    </div>
-    <div style="display: flex; gap: 64px; flex-wrap: wrap;">
-      <div style="display: flex; flex-direction: column; gap: 12px;">
+  <div class="wrap" style="padding-top: 64px; padding-bottom: 64px;">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" />
+        <p class="body" style="color: var(--mist); font-size: 15px;">Secure technology lifecycle and
+          critical-materials recovery, on one system.</p>
+      </div>
+
+      <div class="foot-col">
         <p class="kicker k-navy">Company</p>
-        <a href="/company" style="font-size: 15px; color: var(--mist);">About</a>
-        <a href="/blog" style="font-size: 15px; color: var(--mist);">Newsroom</a>
-        <a href="/contact" style="font-size: 15px; color: var(--mist);">Contact</a>
+        <a href="/company">About</a>
+        <a href="/blog">Newsroom</a>
+        <a href="/contact">Contact</a>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 260px;">
-        <p class="kicker k-navy">Keep in touch</p>
-        <p style="font-size: 15px; line-height: 1.5; color: var(--mist); margin: 0;">Occasional notes on
-          recovery, compliance and what is changing in the market.</p>
-        <div style="display: flex; gap: 0; margin-top: 4px;">
-          <label for="ftr-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Email address</label>
-          <input id="ftr-email" type="email" placeholder="Email address"
-                 style="flex: 1 1 auto; min-width: 0; background: transparent;
-                        border: 1px solid rgba(195,205,214,0.34); border-right: 0;
-                        color: var(--surface); font-family: inherit; font-size: 14px;
-                        padding: 11px 12px; outline: none;" />
-          <button type="button"
-                  style="flex: none; border: 0; cursor: pointer; font-family: inherit;
-                         font-weight: 600; font-size: 12px; letter-spacing: 1.1px; text-transform: uppercase;
-                         background: var(--ember-light); color: var(--navy-deep); padding: 11px 16px;">Sign up</button>
+
+      <div class="foot-col">
+        <p class="kicker k-navy">One System</p>
+        <a href="/platform">How it works</a>
+        <a href="/secure-itad">Secure destruction</a>
+        <a href="/network">Global network</a>
+      </div>
+
+      <div class="foot-act">
+        <div class="foot-sign">
+          <p class="kicker k-navy">Keep in touch</p>
+          <p style="font-size: 15px; line-height: 1.5; color: var(--mist); margin: 0;">Occasional notes
+            on recovery, compliance and what is changing in the market.</p>
+          <div style="display: flex; margin-top: 2px;">
+            <label for="ftr-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Email address</label>
+            <input id="ftr-email" type="email" placeholder="Email address"
+                   style="flex: 1 1 auto; min-width: 0; background: transparent;
+                          border: 1px solid rgba(195,205,214,0.34); border-right: 0;
+                          color: var(--surface); font-family: inherit; font-size: 14px;
+                          padding: 11px 12px; outline: none;" />
+            <button type="button"
+                    style="flex: none; border: 0; cursor: pointer; font-family: inherit;
+                           font-weight: 600; font-size: 12px; letter-spacing: 1.1px; text-transform: uppercase;
+                           background: var(--ember-light); color: var(--navy-deep); padding: 11px 16px;">Sign up</button>
+          </div>
         </div>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <p class="kicker k-navy">Follow</p>
-        <a href="https://www.linkedin.com/company/paladin-envirotech/"
-           style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--surface);">
-          <img src="/assets/linkedin-white.c258f40a.webp" alt="" aria-hidden="true" style="width: 22px; height: 22px; flex: none; display: block;" />
-          LinkedIn
-        </a>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <p class="kicker k-navy">One system</p>
-        <a href="/platform" style="font-size: 15px; color: var(--mist);">How it works</a>
-        <a href="/secure-itad" style="font-size: 15px; color: var(--mist);">Secure destruction</a>
-        <a href="/network" style="font-size: 15px; color: var(--mist);">Network</a>
+        <div class="foot-col foot-follow">
+          <p class="kicker k-navy">Follow</p>
+          <a href="https://www.linkedin.com/company/paladin-envirotech/">
+            <img src="/assets/linkedin-white.c258f40a.webp" alt="" aria-hidden="true" style="width: 22px; height: 22px; flex: none; display: block;" />
+            LinkedIn
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -787,6 +810,62 @@ class Component extends DCLogic {
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
   BP.addEventListener('change', function (e) { if (!e.matches) set(false); });
+})();
+</script>
+<script>
+/* Count-up.
+
+   A scroll check rather than an IntersectionObserver: the observer version
+   registered the elements but never fired its callback on the pages whose
+   content the runtime re-renders, and a rect test is verifiable at any moment
+   rather than depending on when the observer was attached.
+
+   The final value is in the markup, so a figure reads correctly with no
+   JavaScript; this only animates towards it, and does nothing under reduced
+   motion. Separate attribute from the runtime's own [data-countup]. */
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var DONE = 'data-counted';
+  function start(el) {
+    if (el.hasAttribute(DONE)) return;
+    el.setAttribute(DONE, '');
+    var target = parseFloat(el.getAttribute('data-count'));
+    if (isNaN(target)) return;
+    var prefix = el.getAttribute('data-count-prefix') || '';
+    var suffix = el.getAttribute('data-count-suffix') || '';
+    var decimals = (String(target).split('.')[1] || '').length;
+    var t0 = null, dur = 1100;
+    function frame(now) {
+      if (t0 === null) t0 = now;
+      var p = Math.min(1, (now - t0) / dur);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = prefix + (target * eased).toFixed(decimals) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = prefix + target.toFixed(decimals) + suffix;
+    }
+    requestAnimationFrame(frame);
+  }
+  function check() {
+    var vh = window.innerHeight;
+    var els = document.querySelectorAll('[data-count]:not([' + DONE + '])');
+    for (var i = 0; i < els.length; i++) {
+      var r = els[i].getBoundingClientRect();
+      if (r.height && r.top < vh * 0.9 && r.bottom > 0) start(els[i]);
+    }
+  }
+  var queued = false;
+  function onScroll() {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(function () { queued = false; check(); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', check);
+  document.addEventListener('DOMContentLoaded', check);
+  var ticks = 0;
+  var poll = setInterval(function () { check(); if (++ticks > 40) clearInterval(poll); }, 150);
+  check();
 })();
 </script>
 </body>

@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.68.0">
+<meta name="build-version" content="1.70.1">
 <meta name="build-date" content="2026-09-16">
 <meta property="og:title" content="Electronics Recycling | Paladin EnviroTech">
 <meta property="og:description" content="Domestic electronics processing with controlled downstream handling.">
@@ -403,6 +403,25 @@ a:hover { opacity: 0.75; }
   html:not(.js-reveal) [data-reveal] .stats > *, html:not(.js-reveal) [data-reveal] .proof > *,
   html:not(.js-reveal) [data-reveal] .press-grid > *, html:not(.js-reveal) [data-reveal] .strip > * {
     opacity: 1; transform: none; }
+
+  .foot-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.7fr;
+               gap: 48px; align-items: start; }
+  .foot-brand { display: flex; flex-direction: column; align-items: flex-start;
+                gap: 18px; max-width: 300px; }
+  .foot-col { display: flex; flex-direction: column; gap: 12px; }
+  .foot-col a { font-size: 15px; color: var(--mist); }
+  .foot-col a:hover { color: var(--ember-light); }
+  .foot-act { display: flex; flex-direction: column; gap: 22px; }
+  .foot-sign { display: flex; flex-direction: column; gap: 12px; max-width: 320px; }
+  .foot-follow a { display: inline-flex; align-items: center; gap: 10px;
+                   font-size: 15px; color: var(--surface); }
+  .foot-follow a:hover { color: var(--ember-light); }
+  @media (max-width: 1080px) {
+    .foot-grid { grid-template-columns: repeat(2, minmax(0,1fr)); gap: 40px; }
+  }
+  @media (max-width: 640px) {
+    .foot-grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
+  }
 </style>
 </head>
 <body>
@@ -511,49 +530,53 @@ a:hover { opacity: 0.75; }
   </div>
 </div>
 <footer style="background: var(--navy-deep); color: var(--surface);">
-  <div class="wrap" style="padding-top: 64px; padding-bottom: 64px; display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap;">
-    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 18px; max-width: 320px;">
-      <img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" />
-      <p class="body" style="color: var(--mist); font-size: 15px;">Secure technology lifecycle and
-        critical-materials recovery, on one system.</p>
-    </div>
-    <div style="display: flex; gap: 64px; flex-wrap: wrap;">
-      <div style="display: flex; flex-direction: column; gap: 12px;">
+  <div class="wrap" style="padding-top: 64px; padding-bottom: 64px;">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img data-logo src="/assets/paladin-lockup-white.a08c5ad3.webp" alt="Paladin EnviroTech" style="height: 36px; width: auto; display: block; flex: none;" />
+        <p class="body" style="color: var(--mist); font-size: 15px;">Secure technology lifecycle and
+          critical-materials recovery, on one system.</p>
+      </div>
+
+      <div class="foot-col">
         <p class="kicker k-navy">Company</p>
-        <a href="/company" style="font-size: 15px; color: var(--mist);">About</a>
-        <a href="/blog" style="font-size: 15px; color: var(--mist);">Newsroom</a>
-        <a href="/contact" style="font-size: 15px; color: var(--mist);">Contact</a>
+        <a href="/company">About</a>
+        <a href="/blog">Newsroom</a>
+        <a href="/contact">Contact</a>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 260px;">
-        <p class="kicker k-navy">Keep in touch</p>
-        <p style="font-size: 15px; line-height: 1.5; color: var(--mist); margin: 0;">Occasional notes on
-          recovery, compliance and what is changing in the market.</p>
-        <div style="display: flex; gap: 0; margin-top: 4px;">
-          <label for="ftr-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Email address</label>
-          <input id="ftr-email" type="email" placeholder="Email address"
-                 style="flex: 1 1 auto; min-width: 0; background: transparent;
-                        border: 1px solid rgba(195,205,214,0.34); border-right: 0;
-                        color: var(--surface); font-family: inherit; font-size: 14px;
-                        padding: 11px 12px; outline: none;" />
-          <button type="button"
-                  style="flex: none; border: 0; cursor: pointer; font-family: inherit;
-                         font-weight: 600; font-size: 12px; letter-spacing: 1.1px; text-transform: uppercase;
-                         background: var(--ember-light); color: var(--navy-deep); padding: 11px 16px;">Sign up</button>
+
+      <div class="foot-col">
+        <p class="kicker k-navy">One System</p>
+        <a href="/platform">How it works</a>
+        <a href="/secure-itad">Secure destruction</a>
+        <a href="/network">Global network</a>
+      </div>
+
+      <div class="foot-act">
+        <div class="foot-sign">
+          <p class="kicker k-navy">Keep in touch</p>
+          <p style="font-size: 15px; line-height: 1.5; color: var(--mist); margin: 0;">Occasional notes
+            on recovery, compliance and what is changing in the market.</p>
+          <div style="display: flex; margin-top: 2px;">
+            <label for="ftr-email" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Email address</label>
+            <input id="ftr-email" type="email" placeholder="Email address"
+                   style="flex: 1 1 auto; min-width: 0; background: transparent;
+                          border: 1px solid rgba(195,205,214,0.34); border-right: 0;
+                          color: var(--surface); font-family: inherit; font-size: 14px;
+                          padding: 11px 12px; outline: none;" />
+            <button type="button"
+                    style="flex: none; border: 0; cursor: pointer; font-family: inherit;
+                           font-weight: 600; font-size: 12px; letter-spacing: 1.1px; text-transform: uppercase;
+                           background: var(--ember-light); color: var(--navy-deep); padding: 11px 16px;">Sign up</button>
+          </div>
         </div>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <p class="kicker k-navy">Follow</p>
-        <a href="https://www.linkedin.com/company/paladin-envirotech/"
-           style="display: inline-flex; align-items: center; gap: 10px; font-size: 15px; color: var(--surface);">
-          <img src="/assets/linkedin-white.c258f40a.webp" alt="" aria-hidden="true" style="width: 22px; height: 22px; flex: none; display: block;" />
-          LinkedIn
-        </a>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
-        <p class="kicker k-navy">One system</p>
-        <a href="/platform" style="font-size: 15px; color: var(--mist);">How it works</a>
-        <a href="/secure-itad" style="font-size: 15px; color: var(--mist);">Secure destruction</a>
-        <a href="/network" style="font-size: 15px; color: var(--mist);">Network</a>
+        <div class="foot-col foot-follow">
+          <p class="kicker k-navy">Follow</p>
+          <a href="https://www.linkedin.com/company/paladin-envirotech/">
+            <img src="/assets/linkedin-white.c258f40a.webp" alt="" aria-hidden="true" style="width: 22px; height: 22px; flex: none; display: block;" />
+            LinkedIn
+          </a>
+        </div>
       </div>
     </div>
   </div>
