@@ -1,5 +1,5 @@
 {
-  "version": "1.70.1",
+  "version": "1.71.0",
   "built": "2026-09-16",
-  "notes": "Dead car scripts removed from the homepage"
+  "notes": "Callout blocks brought inside the measure; right edge aligns site-wide"
 }
