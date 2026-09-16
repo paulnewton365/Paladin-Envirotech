@@ -15,7 +15,7 @@
 <meta property="og:image" content="/assets/preview.f2a82a9e.webp">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.67.0">
+<meta name="build-version" content="1.68.0">
 <meta name="build-date" content="2026-09-16">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -343,6 +343,43 @@ a:hover { opacity: 0.75; }
   }
   .lead, .body, .body-w, .caption { text-wrap: pretty; }
   .cell h3, .step h3 { font-size: clamp(19px, 1.5vw, 22px); }
+
+  /* Components inside a band arrive just after it, one slightly behind the
+     next, so a row of cards reads as arriving rather than appearing at once.
+     The delay is capped so a six-item grid does not crawl, and the final state
+     is set by the same .is-in class, so nothing can be left hidden. */
+  [data-reveal] .grid > *, [data-reveal] .steps > *, [data-reveal] .stats > *,
+  [data-reveal] .proof > *, [data-reveal] .press-grid > *, [data-reveal] .strip > * {
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 520ms cubic-bezier(0.2,0.7,0.1,1),
+                transform 520ms cubic-bezier(0.2,0.7,0.1,1);
+  }
+  [data-reveal].is-in .grid > *, [data-reveal].is-in .steps > *, [data-reveal].is-in .stats > *,
+  [data-reveal].is-in .proof > *, [data-reveal].is-in .press-grid > *, [data-reveal].is-in .strip > * {
+    opacity: 1; transform: none;
+  }
+  [data-reveal].is-in .grid > *:nth-child(1), [data-reveal].is-in .steps > *:nth-child(1),
+  [data-reveal].is-in .stats > *:nth-child(1), [data-reveal].is-in .proof > *:nth-child(1),
+  [data-reveal].is-in .press-grid > *:nth-child(1), [data-reveal].is-in .strip > *:nth-child(1) { transition-delay: 90ms; }
+  [data-reveal].is-in .grid > *:nth-child(2), [data-reveal].is-in .steps > *:nth-child(2),
+  [data-reveal].is-in .stats > *:nth-child(2), [data-reveal].is-in .proof > *:nth-child(2),
+  [data-reveal].is-in .press-grid > *:nth-child(2), [data-reveal].is-in .strip > *:nth-child(2) { transition-delay: 170ms; }
+  [data-reveal].is-in .grid > *:nth-child(3), [data-reveal].is-in .steps > *:nth-child(3),
+  [data-reveal].is-in .stats > *:nth-child(3), [data-reveal].is-in .proof > *:nth-child(3),
+  [data-reveal].is-in .press-grid > *:nth-child(3), [data-reveal].is-in .strip > *:nth-child(3) { transition-delay: 250ms; }
+  [data-reveal].is-in .grid > *:nth-child(n+4), [data-reveal].is-in .steps > *:nth-child(n+4),
+  [data-reveal].is-in .stats > *:nth-child(n+4), [data-reveal].is-in .proof > *:nth-child(n+4),
+  [data-reveal].is-in .press-grid > *:nth-child(n+4), [data-reveal].is-in .strip > *:nth-child(n+4) { transition-delay: 330ms; }
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] .grid > *, [data-reveal] .steps > *, [data-reveal] .stats > *,
+    [data-reveal] .proof > *, [data-reveal] .press-grid > *, [data-reveal] .strip > * {
+      opacity: 1 !important; transform: none !important; transition: none !important; }
+  }
+  /* the same safety as the bands: if the script never runs, nothing is hidden */
+  html:not(.js-reveal) [data-reveal] .grid > *, html:not(.js-reveal) [data-reveal] .steps > *,
+  html:not(.js-reveal) [data-reveal] .stats > *, html:not(.js-reveal) [data-reveal] .proof > *,
+  html:not(.js-reveal) [data-reveal] .press-grid > *, html:not(.js-reveal) [data-reveal] .strip > * {
+    opacity: 1; transform: none; }
 </style>
 </helmet>
 
