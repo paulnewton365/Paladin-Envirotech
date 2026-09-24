@@ -1,5 +1,5 @@
 {
-  "version": "1.71.0",
-  "built": "2026-09-16",
-  "notes": "Callout blocks brought inside the measure; right edge aligns site-wide"
+  "version": "1.72.0",
+  "built": "2026-09-24",
+  "notes": "Network page: routes diagram now sits on the world map, pins anchored to locations, collapses to a location list below 900px"
 }

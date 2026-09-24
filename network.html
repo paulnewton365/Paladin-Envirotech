@@ -218,6 +218,64 @@ a:hover { opacity: 0.75; }
 .pal-loc-desc { margin-top: 8px; font-size: 15px; line-height: 1.6; font-weight: 300; color: #5A6874; text-wrap: pretty; }
 .pal-loc-note { margin-top: clamp(32px, 4vw, 40px); border-left: 2px solid #B8541F; padding: 4px 0 4px 20px; }
 .pal-loc-note p { margin: 0; font-size: 13px; line-height: 1.65; font-weight: 300; color: #5A6874; text-wrap: pretty; }
+/* Network map: pins anchored by percentage to the map, routes in a matching SVG.
+   Below 900px it becomes a plain two-group list. */
+.pal-net { margin: 0; }
+.pal-net-stage { position: relative; aspect-ratio: 1614 / 975; }
+.pal-net-map { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; pointer-events: none; }
+.pal-net-routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.pal-net-route { fill: none; stroke: #B8541F; stroke-width: 1.2; stroke-opacity: 0.75; vector-effect: non-scaling-stroke; transition: stroke-opacity .2s ease, stroke-width .2s ease; }
+.pal-net-hq .pal-net-dot::after { content: ""; position: absolute; inset: -7px; border: 1px solid #B8541F; border-radius: 50%; }
+.pal-net-group-name { display: none; }
+.pal-net-list { list-style: none; margin: 0; padding: 0; }
+.pal-net-site { position: absolute; width: 0; height: 0; outline: none; cursor: default; }
+.pal-net-dot { position: absolute; left: 0; top: 0; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 50%; background: #5A6874; box-shadow: 0 0 0 2px #FFFFFF; transition: transform .2s ease, background-color .2s ease; }
+.pal-net-hq .pal-net-dot { width: 12px; height: 12px; margin: -6px 0 0 -6px; background: #B8541F; }
+.pal-net-label { position: absolute; white-space: nowrap; font-size: 13px; line-height: 1; color: #5A6874;
+  text-shadow: 0 0 3px #FFFFFF, 0 0 3px #FFFFFF, 0 0 6px #FFFFFF; transition: color .2s ease; }
+.pal-net-hq .pal-net-label { font-size: 14px; font-weight: 500; color: #1E3547; }
+.pal-net-tag { margin-left: 6px; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #8F3F14; }
+.pal-net-site[data-side="r"] .pal-net-label { left: 12px; top: -6.5px; }
+.pal-net-hq[data-side="r"] .pal-net-label { left: 22px; top: -7px; }
+.pal-net-site[data-side="l"] .pal-net-label { right: 12px; top: -6.5px; }
+.pal-net-site[data-side="t"] .pal-net-label { left: 0; bottom: 12px; transform: translateX(-50%); }
+.pal-net-site[data-side="b"] .pal-net-label { left: 0; top: 12px; transform: translateX(-50%); }
+.pal-net-site[data-side="bl"] .pal-net-label { right: -10px; top: 12px; }
+/* Highlight one route on hover or keyboard focus */
+.pal-net-stage:has(.pal-net-site:is(:hover, :focus-visible)) .pal-net-route { stroke-opacity: 0.25; }
+.pal-net-stage:has(.pal-net-site[data-k="olympia"]:is(:hover, :focus-visible)) .pal-net-route[data-k="olympia"],
+.pal-net-stage:has(.pal-net-site[data-k="stcloud"]:is(:hover, :focus-visible)) .pal-net-route[data-k="stcloud"],
+.pal-net-stage:has(.pal-net-site[data-k="columbus"]:is(:hover, :focus-visible)) .pal-net-route[data-k="columbus"],
+.pal-net-stage:has(.pal-net-site[data-k="laurel"]:is(:hover, :focus-visible)) .pal-net-route[data-k="laurel"],
+.pal-net-stage:has(.pal-net-site[data-k="phoenix"]:is(:hover, :focus-visible)) .pal-net-route[data-k="phoenix"],
+.pal-net-stage:has(.pal-net-site[data-k="dfw"]:is(:hover, :focus-visible)) .pal-net-route[data-k="dfw"],
+.pal-net-stage:has(.pal-net-site[data-k="ireland"]:is(:hover, :focus-visible)) .pal-net-route[data-k="ireland"],
+.pal-net-stage:has(.pal-net-site[data-k="helmond"]:is(:hover, :focus-visible)) .pal-net-route[data-k="helmond"],
+.pal-net-stage:has(.pal-net-site[data-k="suwon"]:is(:hover, :focus-visible)) .pal-net-route[data-k="suwon"] { stroke-opacity: 1; stroke-width: 2; }
+.pal-net-site:is(:hover, :focus-visible) .pal-net-dot { transform: scale(1.35); background: #B8541F; }
+.pal-net-site:is(:hover, :focus-visible) .pal-net-label { color: #1E3547; }
+.pal-net-legend { display: flex; justify-content: flex-end; gap: 28px; margin-top: 8px; font-size: 12px; color: #5A6874; }
+.pal-net-legend span { display: inline-flex; align-items: center; gap: 10px; }
+.pal-net-key { display: inline-block; width: 36px; border-top: 1px solid rgba(184,84,31,0.6); }
+.pal-net-key-dash { border-top-style: dashed; }
+/* Arrival: routes fade in, pins settle, once the band reveals */
+html.js-reveal [data-reveal] .pal-net-route { opacity: 0; transition: opacity .9s ease .25s, stroke-opacity .2s ease, stroke-width .2s ease; }
+html.js-reveal [data-reveal].is-in .pal-net-route { opacity: 1; }
+@media (max-width: 1100px) { .pal-net-label { font-size: 12px; } .pal-net-hq .pal-net-label { font-size: 13px; } }
+@media (max-width: 900px) {
+  .pal-net-stage { aspect-ratio: auto; display: grid; gap: 32px; }
+  .pal-net-map, .pal-net-routes, .pal-net-legend { display: none; }
+  .pal-net-group-name { display: block; padding-bottom: 12px; border-bottom: 2px solid #1E3547; font-size: 12px; font-weight: 500; letter-spacing: 1.4px; text-transform: uppercase; color: #5A6874; }
+  .pal-net-site { position: static; width: auto; height: auto; display: flex; align-items: center; gap: 14px; padding: 14px 0 14px 6px; border-bottom: 1px solid #D5DBE0; }
+  .pal-net-dot, .pal-net-hq .pal-net-dot { position: relative; margin: 0; flex: none; box-shadow: none; }
+  .pal-net-hq .pal-net-dot::after { inset: -5px; }
+  .pal-net-label, .pal-net-hq .pal-net-label, .pal-net-site[data-side] .pal-net-label { position: static; transform: none; white-space: normal; font-size: 16px; line-height: 1.35; color: #1E3547; text-shadow: none; }
+  .pal-net-site:is(:hover, :focus-visible) .pal-net-dot { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pal-net-route, .pal-net-dot, .pal-net-label { transition: none !important; }
+  html.js-reveal [data-reveal] .pal-net-route { opacity: 1; }
+}
 @media (max-width: 1024px) {
   .pal-loc-cols { grid-template-columns: 1fr; gap: clamp(40px, 6vw, 56px); }
 }
@@ -441,47 +499,50 @@ a:hover { opacity: 0.75; }
 
 <div style="background: #F5F6F7; padding: clamp(40px, 5vw, 72px) 0 clamp(48px, 6vw, 80px);" data-reveal>
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
-    <svg viewBox="0 0 1200 420" style="width: 100%; height: auto; display: block;" role="img" aria-label="Paladin facility network: seven US sites, Ireland, Netherlands and South Korea, routed through Tampa headquarters">
-      <g stroke="rgba(11, 30, 49,0.10)" stroke-width="1">
-        <line x1="0" y1="105" x2="1200" y2="105"></line>
-        <line x1="0" y1="210" x2="1200" y2="210"></line>
-        <line x1="0" y1="315" x2="1200" y2="315"></line>
-        <line x1="200" y1="0" x2="200" y2="420"></line>
-        <line x1="400" y1="0" x2="400" y2="420"></line>
-        <line x1="600" y1="0" x2="600" y2="420"></line>
-        <line x1="800" y1="0" x2="800" y2="420"></line>
-        <line x1="1000" y1="0" x2="1000" y2="420"></line>
-      </g>
-      <g fill="none" stroke="#B8541F" stroke-width="1.2" stroke-opacity="0.75">
-        <path d="M 390 262 Q 250 140 122 118"></path>
-        <path d="M 390 262 Q 290 210 190 212"></path>
-        <path d="M 390 262 Q 330 240 262 232"></path>
-        <path d="M 390 262 Q 335 160 288 122"></path>
-        <path d="M 390 262 Q 370 190 352 160"></path>
-        <path d="M 390 262 Q 400 190 408 152"></path>
-        <path d="M 390 262 Q 560 60 706 100" stroke-dasharray="4 5"></path>
-        <path d="M 390 262 Q 590 70 752 126" stroke-dasharray="4 5"></path>
-        <path d="M 390 262 Q 760 20 1076 172" stroke-dasharray="4 5"></path>
-      </g>
-      <g>
-        <circle cx="122" cy="118" r="5" fill="#5A6874"></circle><text x="136" y="112" fill="#5A6874" font-size="13" font-family="inherit">Olympia, WA</text>
-        <circle cx="190" cy="212" r="5" fill="#5A6874"></circle><text x="150" y="240" fill="#5A6874" font-size="13">Phoenix, AZ</text>
-        <circle cx="262" cy="232" r="5" fill="#5A6874"></circle><text x="250" y="260" fill="#5A6874" font-size="13">Dallas / Fort Worth, TX</text>
-        <circle cx="288" cy="122" r="5" fill="#5A6874"></circle><text x="302" y="116" fill="#5A6874" font-size="13">St. Cloud, MN</text>
-        <circle cx="352" cy="160" r="5" fill="#5A6874"></circle><text x="300" y="185" fill="#5A6874" font-size="13">Columbus, OH</text>
-        <circle cx="408" cy="152" r="5" fill="#5A6874"></circle><text x="422" y="148" fill="#5A6874" font-size="13">Laurel, MD</text>
-        <circle cx="706" cy="100" r="5" fill="#5A6874"></circle><text x="660" y="82" fill="#5A6874" font-size="13">Duleek / Dublin, IE</text>
-        <circle cx="752" cy="126" r="5" fill="#5A6874"></circle><text x="766" y="132" fill="#5A6874" font-size="13">Helmond, NL</text>
-        <circle cx="1076" cy="172" r="5" fill="#5A6874"></circle><text x="1000" y="152" fill="#5A6874" font-size="13">Suwon, KR</text>
-        <circle cx="390" cy="262" r="12" fill="none" stroke="#B8541F" stroke-width="1"></circle>
-        <circle cx="390" cy="262" r="6" fill="#B8541F"></circle>
-        <text x="408" y="284" fill="#5A6874" font-size="14" font-weight="500">Tampa, FL, HQ</text>
-      </g>
-      <g>
-        <line x1="880" y1="360" x2="916" y2="360" stroke="#B8541F" stroke-width="1" stroke-opacity="0.45"></line><text x="926" y="364" fill="#5A6874" font-size="12">Domestic routing</text>
-        <line x1="1050" y1="360" x2="1086" y2="360" stroke="#B8541F" stroke-width="1" stroke-opacity="0.45" stroke-dasharray="4 5"></line><text x="1096" y="364" fill="#5A6874" font-size="12">International</text>
-      </g>
-    </svg>
+    <!-- Network map. Sites are HTML list items pinned by percentage to the map image
+         (coordinates measured on the 1614 x 975 source), so each pin stays anchored as
+         the map scales. Routes sit in an SVG sharing the same coordinate space. Below
+         900px the map, routes and legend drop away and the same list stacks as text. -->
+    <figure class="pal-net" aria-label="Paladin facility network: seven US sites, Ireland, Netherlands and South Korea, routed through Tampa headquarters">
+      <div class="pal-net-stage">
+        <img class="pal-net-map" src="assets/paladin-map.b2ba0823.webp" alt="" aria-hidden="true" width="1614" height="975" loading="lazy" decoding="async" />
+        <svg class="pal-net-routes" viewBox="0 0 1614 975" aria-hidden="true" focusable="false">
+        <path class="pal-net-route" data-k="olympia" d="M 392 474 Q 337 386 238 354"></path>
+        <path class="pal-net-route" data-k="stcloud" d="M 392 474 Q 391 415 352 370"></path>
+        <path class="pal-net-route" data-k="columbus" d="M 392 474 Q 385 436 404 402"></path>
+        <path class="pal-net-route" data-k="laurel" d="M 392 474 Q 403 434 438 410"></path>
+        <path class="pal-net-route" data-k="phoenix" d="M 392 474 Q 327 427 246 432"></path>
+        <path class="pal-net-route" data-k="dfw" d="M 392 474 Q 358 451 318 455"></path>
+        <path class="pal-net-route" data-k="ireland" d="M 392 474 Q 494 323 672 362" stroke-dasharray="4 5"></path>
+        <path class="pal-net-route" data-k="helmond" d="M 392 474 Q 546 314 752 399" stroke-dasharray="4 5"></path>
+        <path class="pal-net-route" data-k="suwon" d="M 392 474 Q 848 138 1328 438" stroke-dasharray="4 5"></path>
+        </svg>
+        <div class="pal-net-group">
+          <div class="pal-net-group-name">United States</div>
+          <ul class="pal-net-list">
+          <li class="pal-net-site pal-net-hq" data-k="tampa" data-side="r" tabindex="0" style="left: 24.29%; top: 48.62%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Tampa, FL <span class="pal-net-tag">HQ</span></span></li>
+          <li class="pal-net-site" data-k="olympia" data-side="l" tabindex="0" style="left: 14.75%; top: 36.31%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Olympia, WA</span></li>
+          <li class="pal-net-site" data-k="stcloud" data-side="t" tabindex="0" style="left: 21.81%; top: 37.95%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">St. Cloud, MN</span></li>
+          <li class="pal-net-site" data-k="columbus" data-side="l" tabindex="0" style="left: 25.03%; top: 41.23%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Columbus, OH</span></li>
+          <li class="pal-net-site" data-k="laurel" data-side="r" tabindex="0" style="left: 27.14%; top: 42.05%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Laurel, MD</span></li>
+          <li class="pal-net-site" data-k="phoenix" data-side="l" tabindex="0" style="left: 15.24%; top: 44.31%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Phoenix, AZ</span></li>
+          <li class="pal-net-site" data-k="dfw" data-side="bl" tabindex="0" style="left: 19.70%; top: 46.67%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Dallas / Fort Worth, TX</span></li>
+          </ul>
+        </div>
+        <div class="pal-net-group">
+          <div class="pal-net-group-name">International</div>
+          <ul class="pal-net-list">
+          <li class="pal-net-site" data-k="ireland" data-side="t" tabindex="0" style="left: 41.64%; top: 37.13%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Duleek / Dublin, IE</span></li>
+          <li class="pal-net-site" data-k="helmond" data-side="r" tabindex="0" style="left: 46.59%; top: 40.92%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Helmond, NL</span></li>
+          <li class="pal-net-site" data-k="suwon" data-side="r" tabindex="0" style="left: 82.28%; top: 44.92%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Suwon, KR</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pal-net-legend" aria-hidden="true">
+        <span><i class="pal-net-key"></i>Domestic routing</span>
+        <span><i class="pal-net-key pal-net-key-dash"></i>International</span>
+      </div>
+    </figure>
     <p style="margin: 16px 0 0; font-size: 13px; color: #5A6874;">Positions are schematic. Every route ends at a Paladin-operated or partner-certified facility, never a third-party broker.</p>
   </div>
 </div>
