@@ -221,7 +221,7 @@ a:hover { opacity: 0.75; }
 /* Network map: pins anchored by percentage to the map, routes in a matching SVG.
    Below 900px it becomes a plain two-group list. */
 .pal-net { margin: 0; }
-.pal-net-stage { position: relative; aspect-ratio: 1614 / 975; }
+.pal-net-stage { position: relative; aspect-ratio: 1496 / 863; }
 .pal-net-map { position: absolute; inset: 0; width: 100%; height: 100%; display: block; user-select: none; pointer-events: none; }
 .pal-net-routes { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .pal-net-route { fill: none; stroke: #B8541F; stroke-width: 1.2; stroke-opacity: 0.75; vector-effect: non-scaling-stroke; transition: stroke-opacity .2s ease, stroke-width .2s ease; }
@@ -254,13 +254,44 @@ a:hover { opacity: 0.75; }
 .pal-net-stage:has(.pal-net-site[data-k="suwon"]:is(:hover, :focus-visible)) .pal-net-route[data-k="suwon"] { stroke-opacity: 1; stroke-width: 2; }
 .pal-net-site:is(:hover, :focus-visible) .pal-net-dot { transform: scale(1.35); background: #B8541F; }
 .pal-net-site:is(:hover, :focus-visible) .pal-net-label { color: #1E3547; }
-.pal-net-legend { display: flex; justify-content: flex-end; gap: 28px; margin-top: 8px; font-size: 12px; color: #5A6874; }
+.pal-net-legend { position: absolute; left: 0; bottom: 4%; display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: #5A6874; }
 .pal-net-legend span { display: inline-flex; align-items: center; gap: 10px; }
 .pal-net-key { display: inline-block; width: 36px; border-top: 1px solid rgba(184,84,31,0.6); }
 .pal-net-key-dash { border-top-style: dashed; }
-/* Arrival: routes fade in, pins settle, once the band reveals */
-html.js-reveal [data-reveal] .pal-net-route { opacity: 0; transition: opacity .9s ease .25s, stroke-opacity .2s ease, stroke-width .2s ease; }
-html.js-reveal [data-reveal].is-in .pal-net-route { opacity: 1; }
+/* Arrival: when the map is in view (script below), the HQ settles, each route draws out from
+   Tampa, and each site pops in as its route reaches it. Each route is masked by
+   a solid copy of itself whose dash offset runs from 1 to 0, so dashed
+   international routes draw on too. Content stays visible without JS. */
+.pal-net-draw { fill: none; stroke: #FFFFFF; stroke-width: 14; stroke-linecap: round; stroke-dasharray: 1 1; stroke-dashoffset: 0;
+  transition-property: stroke-dashoffset; transition-timing-function: cubic-bezier(.45,.05,.25,1); }
+html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; transition: none; }
+.pal-net-hq { --pop: 0.05s; }
+@keyframes palNetPop { 0% { scale: 0; } 70% { scale: 1.25; } 100% { scale: 1; } }
+@keyframes palNetFade { from { opacity: 0; } to { opacity: 1; } }
+@media (min-width: 901px) {
+  html.pal-net-anim:not(.pal-net-drawn) .pal-net-dot,
+  html.pal-net-anim:not(.pal-net-drawn) .pal-net-label { opacity: 0; }
+  html.pal-net-drawn .pal-net-dot { animation: palNetPop .45s ease-out var(--pop) both; }
+  html.pal-net-drawn .pal-net-label { animation: palNetFade .4s ease var(--pop) both; }
+}
+.pal-net-draw[data-k="stcloud"] { transition-duration: 0.8s; transition-delay: 0.35s; }
+.pal-net-site[data-k="stcloud"] { --pop: 1.03s; }
+.pal-net-draw[data-k="columbus"] { transition-duration: 0.8s; transition-delay: 0.44s; }
+.pal-net-site[data-k="columbus"] { --pop: 1.12s; }
+.pal-net-draw[data-k="laurel"] { transition-duration: 0.8s; transition-delay: 0.53s; }
+.pal-net-site[data-k="laurel"] { --pop: 1.21s; }
+.pal-net-draw[data-k="dfw"] { transition-duration: 0.8s; transition-delay: 0.62s; }
+.pal-net-site[data-k="dfw"] { --pop: 1.3s; }
+.pal-net-draw[data-k="phoenix"] { transition-duration: 0.8s; transition-delay: 0.71s; }
+.pal-net-site[data-k="phoenix"] { --pop: 1.39s; }
+.pal-net-draw[data-k="olympia"] { transition-duration: 0.8s; transition-delay: 0.8s; }
+.pal-net-site[data-k="olympia"] { --pop: 1.48s; }
+.pal-net-draw[data-k="ireland"] { transition-duration: 1.3s; transition-delay: 1.0s; }
+.pal-net-site[data-k="ireland"] { --pop: 2.18s; }
+.pal-net-draw[data-k="helmond"] { transition-duration: 1.3s; transition-delay: 1.18s; }
+.pal-net-site[data-k="helmond"] { --pop: 2.36s; }
+.pal-net-draw[data-k="suwon"] { transition-duration: 1.7s; transition-delay: 1.36s; }
+.pal-net-site[data-k="suwon"] { --pop: 2.94s; }
 @media (max-width: 1100px) { .pal-net-label { font-size: 12px; } .pal-net-hq .pal-net-label { font-size: 13px; } }
 @media (max-width: 900px) {
   .pal-net-stage { aspect-ratio: auto; display: grid; gap: 32px; }
@@ -273,8 +304,9 @@ html.js-reveal [data-reveal].is-in .pal-net-route { opacity: 1; }
   .pal-net-site:is(:hover, :focus-visible) .pal-net-dot { transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pal-net-route, .pal-net-dot, .pal-net-label { transition: none !important; }
-  html.js-reveal [data-reveal] .pal-net-route { opacity: 1; }
+  .pal-net-route, .pal-net-dot, .pal-net-label, .pal-net-draw { transition: none !important; animation: none !important; }
+  html.pal-net-anim .pal-net-draw { stroke-dashoffset: 0 !important; }
+  html.pal-net-anim .pal-net-dot, html.pal-net-anim .pal-net-label { opacity: 1 !important; }
 }
 @media (max-width: 1024px) {
   .pal-loc-cols { grid-template-columns: 1fr; gap: clamp(40px, 6vw, 56px); }
@@ -497,53 +529,64 @@ html.js-reveal [data-reveal].is-in .pal-net-route { opacity: 1; }
 
 </div>
 
-<div style="background: #F5F6F7; padding: clamp(40px, 5vw, 72px) 0 clamp(48px, 6vw, 80px);" data-reveal>
+<div style="background: #F5F6F7; padding: clamp(28px, 3.5vw, 48px) 0 clamp(32px, 4vw, 52px);" data-reveal>
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
     <!-- Network map. Sites are HTML list items pinned by percentage to the map image
-         (coordinates measured on the 1614 x 975 source, thin-line version), so each pin stays anchored as
+         (coordinates in the 1614 x 975 source; the image is cropped to 45,60 1496x863 and the SVG viewBox matches), so each pin stays anchored as
          the map scales. Routes sit in an SVG sharing the same coordinate space. Below
          900px the map, routes and legend drop away and the same list stacks as text. -->
     <figure class="pal-net" aria-label="Paladin facility network: seven US sites, Ireland, Netherlands and South Korea, routed through Tampa headquarters">
       <div class="pal-net-stage">
-        <img class="pal-net-map" src="assets/paladin-map.1ef39d32.webp" alt="" aria-hidden="true" width="1614" height="975" loading="lazy" decoding="async" />
-        <svg class="pal-net-routes" viewBox="0 0 1614 975" aria-hidden="true" focusable="false">
-        <path class="pal-net-route" data-k="olympia" d="M 390 475 Q 336 390 240 358"></path>
-        <path class="pal-net-route" data-k="stcloud" d="M 390 475 Q 389 417 351 374"></path>
-        <path class="pal-net-route" data-k="columbus" d="M 390 475 Q 383 438 402 405"></path>
-        <path class="pal-net-route" data-k="laurel" d="M 390 475 Q 401 436 435 413"></path>
-        <path class="pal-net-route" data-k="phoenix" d="M 390 475 Q 326 429 248 434"></path>
-        <path class="pal-net-route" data-k="dfw" d="M 390 475 Q 357 453 318 457"></path>
-        <path class="pal-net-route" data-k="ireland" d="M 390 475 Q 500 327 678 374" stroke-dasharray="4 5"></path>
-        <path class="pal-net-route" data-k="helmond" d="M 390 475 Q 544 319 746 405" stroke-dasharray="4 5"></path>
-        <path class="pal-net-route" data-k="suwon" d="M 390 475 Q 840 149 1309 447" stroke-dasharray="4 5"></path>
+        <img class="pal-net-map" src="assets/paladin-map.166f5f17.webp" alt="" aria-hidden="true" width="1496" height="863" loading="lazy" decoding="async" />
+        <svg class="pal-net-routes" viewBox="45 60 1496 863" aria-hidden="true" focusable="false">
+        <defs>
+          <mask id="pal-net-m-olympia" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="olympia" d="M 390 475 Q 336 390 240 358" pathLength="1"></path></mask>
+          <mask id="pal-net-m-stcloud" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="stcloud" d="M 390 475 Q 389 417 351 374" pathLength="1"></path></mask>
+          <mask id="pal-net-m-columbus" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="columbus" d="M 390 475 Q 383 438 402 405" pathLength="1"></path></mask>
+          <mask id="pal-net-m-laurel" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="laurel" d="M 390 475 Q 401 436 435 413" pathLength="1"></path></mask>
+          <mask id="pal-net-m-phoenix" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="phoenix" d="M 390 475 Q 326 429 248 434" pathLength="1"></path></mask>
+          <mask id="pal-net-m-dfw" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="dfw" d="M 390 475 Q 357 453 318 457" pathLength="1"></path></mask>
+          <mask id="pal-net-m-ireland" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="ireland" d="M 390 475 Q 500 327 678 374" pathLength="1"></path></mask>
+          <mask id="pal-net-m-helmond" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="helmond" d="M 390 475 Q 544 319 746 405" pathLength="1"></path></mask>
+          <mask id="pal-net-m-suwon" maskUnits="userSpaceOnUse" x="-50" y="-50" width="1714" height="1075"><path class="pal-net-draw" data-k="suwon" d="M 390 475 Q 840 149 1309 447" pathLength="1"></path></mask>
+        </defs>
+        <path class="pal-net-route" data-k="olympia" d="M 390 475 Q 336 390 240 358" mask="url(#pal-net-m-olympia)"></path>
+        <path class="pal-net-route" data-k="stcloud" d="M 390 475 Q 389 417 351 374" mask="url(#pal-net-m-stcloud)"></path>
+        <path class="pal-net-route" data-k="columbus" d="M 390 475 Q 383 438 402 405" mask="url(#pal-net-m-columbus)"></path>
+        <path class="pal-net-route" data-k="laurel" d="M 390 475 Q 401 436 435 413" mask="url(#pal-net-m-laurel)"></path>
+        <path class="pal-net-route" data-k="phoenix" d="M 390 475 Q 326 429 248 434" mask="url(#pal-net-m-phoenix)"></path>
+        <path class="pal-net-route" data-k="dfw" d="M 390 475 Q 357 453 318 457" mask="url(#pal-net-m-dfw)"></path>
+        <path class="pal-net-route" data-k="ireland" d="M 390 475 Q 500 327 678 374" stroke-dasharray="4 5" mask="url(#pal-net-m-ireland)"></path>
+        <path class="pal-net-route" data-k="helmond" d="M 390 475 Q 544 319 746 405" stroke-dasharray="4 5" mask="url(#pal-net-m-helmond)"></path>
+        <path class="pal-net-route" data-k="suwon" d="M 390 475 Q 840 149 1309 447" stroke-dasharray="4 5" mask="url(#pal-net-m-suwon)"></path>
         </svg>
         <div class="pal-net-group">
           <div class="pal-net-group-name">United States</div>
           <ul class="pal-net-list">
-          <li class="pal-net-site pal-net-hq" data-k="tampa" data-side="r" tabindex="0" style="left: 24.16%; top: 48.72%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Tampa, FL <span class="pal-net-tag">HQ</span></span></li>
-          <li class="pal-net-site" data-k="olympia" data-side="l" tabindex="0" style="left: 14.87%; top: 36.72%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Olympia, WA</span></li>
-          <li class="pal-net-site" data-k="stcloud" data-side="t" tabindex="0" style="left: 21.75%; top: 38.36%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">St. Cloud, MN</span></li>
-          <li class="pal-net-site" data-k="columbus" data-side="l" tabindex="0" style="left: 24.91%; top: 41.54%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Columbus, OH</span></li>
-          <li class="pal-net-site" data-k="laurel" data-side="r" tabindex="0" style="left: 26.95%; top: 42.36%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Laurel, MD</span></li>
-          <li class="pal-net-site" data-k="phoenix" data-side="l" tabindex="0" style="left: 15.37%; top: 44.51%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Phoenix, AZ</span></li>
-          <li class="pal-net-site" data-k="dfw" data-side="bl" tabindex="0" style="left: 19.70%; top: 46.87%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Dallas / Fort Worth, TX</span></li>
+          <li class="pal-net-site pal-net-hq" data-k="tampa" data-side="r" tabindex="0" style="left: 23.06%; top: 48.09%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Tampa, FL <span class="pal-net-tag">HQ</span></span></li>
+          <li class="pal-net-site" data-k="olympia" data-side="l" tabindex="0" style="left: 13.03%; top: 34.53%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Olympia, WA</span></li>
+          <li class="pal-net-site" data-k="stcloud" data-side="t" tabindex="0" style="left: 20.45%; top: 36.38%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">St. Cloud, MN</span></li>
+          <li class="pal-net-site" data-k="columbus" data-side="l" tabindex="0" style="left: 23.86%; top: 39.98%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Columbus, OH</span></li>
+          <li class="pal-net-site" data-k="laurel" data-side="r" tabindex="0" style="left: 26.07%; top: 40.90%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Laurel, MD</span></li>
+          <li class="pal-net-site" data-k="phoenix" data-side="l" tabindex="0" style="left: 13.57%; top: 43.34%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Phoenix, AZ</span></li>
+          <li class="pal-net-site" data-k="dfw" data-side="bl" tabindex="0" style="left: 18.25%; top: 46.00%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Dallas / Fort Worth, TX</span></li>
           </ul>
         </div>
         <div class="pal-net-group">
           <div class="pal-net-group-name">International</div>
           <ul class="pal-net-list">
-          <li class="pal-net-site" data-k="ireland" data-side="t" tabindex="0" style="left: 42.01%; top: 38.36%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Duleek / Dublin, IE</span></li>
-          <li class="pal-net-site" data-k="helmond" data-side="r" tabindex="0" style="left: 46.22%; top: 41.54%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Helmond, NL</span></li>
-          <li class="pal-net-site" data-k="suwon" data-side="r" tabindex="0" style="left: 81.10%; top: 45.85%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Suwon, KR</span></li>
+          <li class="pal-net-site" data-k="ireland" data-side="t" tabindex="0" style="left: 42.31%; top: 36.38%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Duleek / Dublin, IE</span></li>
+          <li class="pal-net-site" data-k="helmond" data-side="r" tabindex="0" style="left: 46.86%; top: 39.98%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Helmond, NL</span></li>
+          <li class="pal-net-site" data-k="suwon" data-side="r" tabindex="0" style="left: 84.49%; top: 44.84%;"><span class="pal-net-dot" aria-hidden="true"></span><span class="pal-net-label">Suwon, KR</span></li>
           </ul>
         </div>
-      </div>
-      <div class="pal-net-legend" aria-hidden="true">
-        <span><i class="pal-net-key"></i>Domestic routing</span>
-        <span><i class="pal-net-key pal-net-key-dash"></i>International</span>
+        <div class="pal-net-legend" aria-hidden="true">
+          <span><i class="pal-net-key"></i>Domestic routing</span>
+          <span><i class="pal-net-key pal-net-key-dash"></i>International</span>
+        </div>
       </div>
     </figure>
-    <p style="margin: 16px 0 0; font-size: 13px; color: #5A6874;">Positions are schematic. Every route ends at a Paladin-operated or partner-certified facility, never a third-party broker.</p>
+    <p style="margin: 8px 0 0; font-size: 13px; color: #5A6874;">Positions are schematic. Every route ends at a Paladin-operated or partner-certified facility, never a third-party broker.</p>
   </div>
 </div>
 
@@ -823,6 +866,38 @@ class Component extends DCLogic {
 })();
 </script>
 
+<script>
+/* Network map draw-on. Runs on its own trigger rather than the band reveal,
+   because that reveal force-completes after five seconds and the routes would
+   finish drawing before anyone scrolled to them. State lives on <html>, which
+   the page runtime never re-renders, and the map is re-queried each check so a
+   re-render cannot orphan it. Without JS, or with reduced motion, the routes
+   simply show. */
+(function () {
+  var root = document.documentElement;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  root.classList.add('pal-net-anim');
+  var ticking = false;
+  function check() {
+    ticking = false;
+    var el = document.querySelector('.pal-net-stage');
+    if (!el) return;
+    var r = el.getBoundingClientRect(), vh = window.innerHeight || root.clientHeight;
+    if (r.height && r.top < vh * 0.8 && r.bottom > vh * 0.15) done();
+  }
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
+  function done() {
+    root.classList.add('pal-net-drawn');
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onScroll);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  document.addEventListener('DOMContentLoaded', check);
+  window.addEventListener('load', check);
+  check();
+})();
+</script>
 <script>
 /* Keep one header.
 
