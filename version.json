@@ -1,5 +1,5 @@
 {
-  "version": "1.73.1",
-  "built": "2026-09-24",
-  "notes": "Network map band tightened: map cropped to its landmass, legend moved onto the map, band padding reduced"
+  "version": "1.74.0",
+  "built": "2026-09-26",
+  "notes": "Component system: one button, eyebrow, section heading, stat and closing-CTA pattern across all pages; section spacing unified; content and consistency fixes from the site sweep"
 }

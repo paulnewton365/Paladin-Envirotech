@@ -11,8 +11,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.71.0">
-<meta name="build-date" content="2026-09-16">
+<meta name="build-version" content="1.74.0">
+<meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="Our Network | Paladin EnviroTech">
 <meta property="og:description" content="A hub-and-satellite footprint built for security and scale.">
 <meta property="og:image" content="/assets/preview.f2a82a9e.webp">
@@ -254,9 +254,9 @@ a:hover { opacity: 0.75; }
 .pal-net-stage:has(.pal-net-site[data-k="suwon"]:is(:hover, :focus-visible)) .pal-net-route[data-k="suwon"] { stroke-opacity: 1; stroke-width: 2; }
 .pal-net-site:is(:hover, :focus-visible) .pal-net-dot { transform: scale(1.35); background: #B8541F; }
 .pal-net-site:is(:hover, :focus-visible) .pal-net-label { color: #1E3547; }
-.pal-net-legend { position: absolute; left: 0; bottom: 4%; display: flex; flex-direction: column; gap: 10px; font-size: 12px; color: #5A6874; }
-.pal-net-legend span { display: inline-flex; align-items: center; gap: 10px; }
-.pal-net-key { display: inline-block; width: 36px; border-top: 1px solid rgba(184,84,31,0.6); }
+.pal-net-legend { position: absolute; left: 0; bottom: 4%; display: flex; flex-direction: column; gap: 14px; font-size: 14px; line-height: 1; color: #5A6874; }
+.pal-net-legend span { display: inline-flex; align-items: center; gap: 12px; }
+.pal-net-key { display: inline-block; width: 48px; border-top: 2px solid #B8541F; }
 .pal-net-key-dash { border-top-style: dashed; }
 /* Arrival: when the map is in view (script below), the HQ settles, each route draws out from
    Tampa, and each site pops in as its route reaches it. Each route is masked by
@@ -292,7 +292,7 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
 .pal-net-site[data-k="helmond"] { --pop: 2.36s; }
 .pal-net-draw[data-k="suwon"] { transition-duration: 1.7s; transition-delay: 1.36s; }
 .pal-net-site[data-k="suwon"] { --pop: 2.94s; }
-@media (max-width: 1100px) { .pal-net-label { font-size: 12px; } .pal-net-hq .pal-net-label { font-size: 13px; } }
+@media (max-width: 1100px) { .pal-net-legend { font-size: 13px; gap: 10px; } .pal-net-key { width: 40px; } .pal-net-label { font-size: 12px; } .pal-net-hq .pal-net-label { font-size: 13px; } }
 @media (max-width: 900px) {
   .pal-net-stage { aspect-ratio: auto; display: grid; gap: 32px; }
   .pal-net-map, .pal-net-routes, .pal-net-legend { display: none; }
@@ -489,12 +489,12 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: clamp(40px, 5vw, 88px); align-items: start;">
 
       <div>
-        <p class="kicker k-navy" style="margin: 0 0 26px;">Network</p>
+        <p class="kicker pal-eyebrow pal-eyebrow--navy" style="margin: 0 0 26px;">Network</p>
         <h1 style="font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 300; margin: 0; max-width: 620px; text-wrap: balance;">Every site, <span style="color: #E08B52;">one</span> operating standard.</h1>
         <p style="font-size: clamp(16px, 1.35vw, 19px); line-height: 1.6; font-weight: 300; color: #C3CDD6; margin: 28px 0 0; max-width: 46ch;">Every site runs the same controls and reporting. Certification is issued per site and per legal entity, so each location's status is shown as it stands today.</p>
         <div style="display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap;">
-          <a href="/network#sites" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #FFFFFF; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; padding: 18px 30px; transition: background-position 260ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">See every site</a>
-          <a href="/contact" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #FFFFFF; border: 1px solid #C3CDD6; padding: 18px 30px; transition: border-color 220ms, color 220ms;" style-hover="border-color: #E08B52; color: #E08B52;">Talk to an expert</a>
+          <a class="pal-btn pal-btn--dark" href="/network#sites" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #FFFFFF; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; padding: 18px 30px; transition: background-position 260ms cubic-bezier(0.2,0.7,0.1,1);">See every site</a>
+          <a class="pal-btn pal-btn--ghost-dark" href="/contact" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #FFFFFF; border: 1px solid #C3CDD6; padding: 18px 30px; transition: border-color 220ms, color 220ms;">Talk to an expert</a>
         </div>
       </div>
 
@@ -529,7 +529,7 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
 
 </div>
 
-<div style="background: #F5F6F7; padding: clamp(28px, 3.5vw, 48px) 0 clamp(32px, 4vw, 52px);" data-reveal>
+<div style="background: #F5F6F7; padding: clamp(16px, 2vw, 28px) 0;" data-reveal>
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
     <!-- Network map. Sites are HTML list items pinned by percentage to the map image
          (coordinates in the 1614 x 975 source; the image is cropped to 45,60 1496x863 and the SVG viewBox matches), so each pin stays anchored as
@@ -586,11 +586,10 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
         </div>
       </div>
     </figure>
-    <p style="margin: 8px 0 0; font-size: 13px; color: #5A6874;">Positions are schematic. Every route ends at a Paladin-operated or partner-certified facility, never a third-party broker.</p>
   </div>
 </div>
 
-<div data-reveal="1" style="background: #1E3547; padding: clamp(56px, 7vw, 104px) 0;">
+<div class="pal-section-t pal-section-b" data-reveal="1" style="background: #1E3547; padding: clamp(56px, 7vw, 104px) 0;">
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(32px, 4vw, 72px); align-items: center;">
 
     <div style="aspect-ratio: 4 / 3; background: #1E3547; position: relative; overflow: hidden;"><img src="assets/recycling-rare.62bf3d81.jpeg" alt="Sorting line at the Helmond facility" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></div>
@@ -598,28 +597,28 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
     <div>
       <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 18px;">
         <span style="width: 8px; height: 8px; background: #E08B52;"></span>
-        <span style="color: #E08B52; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Facility spotlight</span>
+        <span class="pal-eyebrow pal-eyebrow--navy" style="color: #E08B52; font-size: 13px; letter-spacing: 1px; text-transform: uppercase;">Facility spotlight</span>
       </div>
-      <h2 style="color: #FFFFFF; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.14; font-weight: 300; margin: 0 0 18px; text-wrap: balance;">Helmond, Netherlands</h2>
+      <h2 class="pal-h2" style="color: #FFFFFF; font-size: clamp(28px, 3.2vw, 44px); line-height: 1.14; font-weight: 300; margin: 0 0 18px; text-wrap: balance;">Helmond, Netherlands</h2>
       <p style="color: #C3CDD6; font-weight: 300; font-size: 17px; line-height: 27px; margin: 0 0 28px; max-width: 560px;">The European gateway for the network. Collection, dismantling and data sanitization run here for customers across the Benelux and DACH regions, on the same operating model and reporting used at every other site.</p>
 
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr)); gap: 1px; margin-bottom: clamp(28px, 3.5vw, 40px);">
         <div style="padding: 20px 24px 20px 0; border-right: 1px solid rgba(195,205,214,0.24);">
-          <div style="color: #E08B52; font-size: 28px; line-height: 1.1; font-weight: 300;">2016</div>
+          <div class="pal-stat pal-stat--sm pal-stat--dark" style="color: #E08B52; font-size: 28px; line-height: 1.1; font-weight: 300;">2016</div>
           <p style="color: #C3CDD6; font-size: 13px; font-weight: 300; margin: 8px 0 0;">operating since</p>
         </div>
         <div style="padding: 20px 24px; border-right: 1px solid rgba(195,205,214,0.24);">
-          <div style="color: #E08B52; font-size: 28px; line-height: 1.1; font-weight: 300;">R2</div>
+          <div class="pal-stat pal-stat--sm pal-stat--dark" style="color: #E08B52; font-size: 28px; line-height: 1.1; font-weight: 300;">R2</div>
           <p style="color: #C3CDD6; font-size: 13px; font-weight: 300; margin: 8px 0 0;">certified, verifiable per entity</p>
         </div>
         <div style="padding: 20px 0 20px 24px;">
-          <div style="color: #E08B52; font-size: 28px; line-height: 1.1; font-weight: 300;">3</div>
+          <div class="pal-stat pal-stat--sm pal-stat--dark" style="color: #E08B52; font-size: 28px; line-height: 1.1; font-weight: 300;">3</div>
           <p style="color: #C3CDD6; font-size: 13px; font-weight: 300; margin: 8px 0 0;">regions served from one site</p>
         </div>
       </div>
 
       <a href="/blog" style="display: block; background: #1E3547; padding: 24px 28px; border-left: 4px solid #E08B52; transition: background 220ms;" style-hover="background: #1E3547;">
-        <span style="display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #E08B52;">From the newsroom</span>
+        <span style="display: block; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #E08B52;">From the blog</span>
         <span style="display: block; margin-top: 10px; font-size: clamp(17px, 1.5vw, 21px); line-height: 1.35; font-weight: 500; color: #FFFFFF;">Inside the Helmond facility: Europe's ITAD gateway</span>
         <span style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px;">
           <span style="width: 30px; height: 30px; flex: none; background: #1E3547; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; letter-spacing: 1px;">DO</span>
@@ -633,11 +632,11 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
 </div>
 
 
-<div data-reveal="1" style="background: #FFFFFF; padding: clamp(56px, 7vw, 96px) 0 clamp(64px, 8vw, 104px);">
+<div class="pal-section-t pal-section-b" data-reveal="1" style="background: #FFFFFF; padding: clamp(56px, 7vw, 96px) 0 clamp(64px, 8vw, 104px);">
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
     <div class="pal-loc-head">
-      <div class="pal-loc-eyebrow">Footprint</div>
-      <h2>Every site, <span style="color: #B8541F;">one chain of custody.</span></h2>
+      <div class="pal-loc-eyebrow pal-eyebrow pal-eyebrow--white">Footprint</div>
+      <h2 class="pal-h2">Every site, <span style="color: #B8541F;">one chain of custody.</span></h2>
     </div>
     <div class="pal-loc-cols">
       <div>
@@ -659,10 +658,10 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
   </div>
 </div>
 
-<div data-reveal="1" style="background: #F5F6F7; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);">
-  <div style="max-width: 1100px; margin: 0 auto; background: #1E3547; border-left: 4px solid #B8541F; padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px); display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
-    <p style="color: #FFFFFF; font-weight: 300; font-size: clamp(22px, 2.4vw, 32px); line-height: 1.3; margin: 0; max-width: 1180px;">Have volume outside these regions? Tell us where, and we'll scope the nearest route.</p>
-    <a href="/contact" style="flex: none; display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Talk to an expert</a>
+<div class="pal-section-t pal-section-b" data-reveal="1" style="background: #F5F6F7; padding: clamp(56px, 7vw, 96px) 0 clamp(80px, 9vw, 128px);">
+  <div class="pal-close-card">
+    <p class="pal-close-line">Have volume outside these regions? Tell us where, and we'll scope the nearest route.</p>
+    <a class="pal-btn pal-btn--dark" href="/contact" style="flex: none; display: inline-block; padding: 20px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #E08B52 50%, #E08B52 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);">Talk to an expert</a>
   </div>
 </div>
 
@@ -678,7 +677,7 @@ html.pal-net-anim:not(.pal-net-drawn) .pal-net-draw { stroke-dashoffset: 1; tran
       <div class="foot-col">
         <p class="kicker k-navy">Company</p>
         <a href="/company">About</a>
-        <a href="/blog">Newsroom</a>
+        <a href="/blog">Blog</a>
         <a href="/contact">Contact</a>
       </div>
 
@@ -1027,5 +1026,81 @@ class Component extends DCLogic {
   BP.addEventListener('change', function (e) { if (!e.matches) set(false); });
 })();
 </script>
+<style id="pal-system">
+/* Paladin component system (v1.74)
+   One definition per component, applied by class. Loaded last on every page so
+   it wins over the older per-page rules; the doubled class selectors lift it
+   above the attribute-selector overrides in responsive.css. */
+:root { --pal-section: clamp(64px, 7vw, 96px); --pal-gutter: 40px; }
+@media (max-width: 760px) { :root { --pal-gutter: 24px; } }
+
+/* Form controls take the page type, not the browser default */
+input, select, textarea, button { font-family: inherit; }
+
+/* Section rhythm: one value, top and bottom */
+.pal-section-t.pal-section-t { padding-top: var(--pal-section) !important; }
+.pal-section-b.pal-section-b { padding-bottom: var(--pal-section) !important; }
+
+/* Eyebrow */
+.pal-eyebrow.pal-eyebrow { font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1.7px !important;
+  text-transform: uppercase !important; line-height: 1.4 !important; }
+.pal-eyebrow--navy.pal-eyebrow--navy { color: var(--ember-light) !important; }
+.pal-eyebrow--white.pal-eyebrow--white { color: var(--ember) !important; }
+.pal-eyebrow--alt.pal-eyebrow--alt { color: var(--ember-hover) !important; }
+
+/* Section heading */
+.pal-h2.pal-h2 { font-size: clamp(32px, 3.6vw, 48px) !important; font-weight: 300 !important; line-height: 1.1 !important;
+  letter-spacing: -1px !important; text-wrap: balance; }
+/* Subheads inside long-form articles */
+.pal-h2-article.pal-h2-article { font-size: clamp(24px, 2.4vw, 30px) !important; font-weight: 500 !important;
+  line-height: 1.25 !important; letter-spacing: -0.4px !important; }
+
+/* Buttons: ember on light grounds, light ember with navy text on dark grounds.
+   Both pass WCAG AA for their label size. */
+a.pal-btn.pal-btn, button.pal-btn.pal-btn {
+  display: inline-flex !important; align-items: center; justify-content: center; box-sizing: border-box;
+  min-height: 52px; padding: 0 28px !important; border: 1px solid transparent !important; border-radius: 0;
+  font-size: 13px !important; font-weight: 600 !important; letter-spacing: 1.2px !important; line-height: 1.2 !important;
+  text-transform: uppercase !important; text-decoration: none !important; white-space: nowrap; cursor: pointer;
+  background-image: none !important; transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease; }
+.pal-btn.pal-btn--light.pal-btn--light { background-color: var(--ember) !important; color: #FFFFFF !important; }
+.pal-btn.pal-btn--light.pal-btn--light:hover { background-color: var(--ember-hover) !important; }
+.pal-btn.pal-btn--dark.pal-btn--dark { background-color: var(--ember-light) !important; color: var(--navy-deep) !important; }
+.pal-btn.pal-btn--dark.pal-btn--dark:hover { background-color: #FFFFFF !important; }
+.pal-btn.pal-btn--ghost-light.pal-btn--ghost-light { background-color: transparent !important; color: var(--navy) !important; border-color: var(--slate) !important; }
+.pal-btn.pal-btn--ghost-light.pal-btn--ghost-light:hover { background-color: var(--navy) !important; color: #FFFFFF !important; border-color: var(--navy) !important; }
+.pal-btn.pal-btn--ghost-dark.pal-btn--ghost-dark { background-color: transparent !important; color: #FFFFFF !important; border-color: var(--mist) !important; }
+.pal-btn.pal-btn--ghost-dark.pal-btn--ghost-dark:hover { background-color: var(--navy-deep) !important; }
+.pal-btn.pal-btn:focus-visible { outline: 2px solid var(--ember-light); outline-offset: 3px; }
+
+/* Stat figures: two sizes, one colour per ground */
+.pal-stat.pal-stat { font-weight: 300 !important; line-height: 1 !important; }
+.pal-stat--lg.pal-stat--lg { font-size: clamp(48px, 5.5vw, 72px) !important; letter-spacing: -1.5px !important; }
+.pal-stat--sm.pal-stat--sm { font-size: clamp(30px, 3vw, 42px) !important; letter-spacing: -0.8px !important; }
+.pal-stat--light.pal-stat--light { color: var(--ember) !important; }
+.pal-stat--dark.pal-stat--dark { color: var(--ember-light) !important; }
+
+.takeover-text > .pal-btn { align-self: flex-start; }
+
+/* Closing call to action */
+.pal-close.pal-close { padding: var(--pal-section) 0 !important; }
+.pal-close-wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--pal-gutter); box-sizing: border-box; }
+.pal-close-card.pal-close-card { box-sizing: border-box; width: min(1100px, calc(100% - 2 * var(--pal-gutter))); margin: 0 auto;
+  background: var(--navy) !important; border-left: 4px solid var(--ember) !important;
+  padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px) !important;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; }
+.pal-close-wrap > .pal-close-card.pal-close-card, .pal-close-card--inset.pal-close-card--inset { width: 100%; }
+.pal-close-copy { flex: 1 1 420px; max-width: 760px; }
+.pal-close-line.pal-close-line { color: #FFFFFF !important; font-weight: 300 !important; font-size: clamp(22px, 2.4vw, 32px) !important;
+  line-height: 1.3 !important; margin: 0 !important; flex: 1 1 420px; max-width: 760px; text-wrap: pretty; }
+.pal-close-copy .pal-close-line { max-width: none; }
+.pal-close-sub { color: var(--mist); font-size: 17px; font-weight: 300; line-height: 1.55; margin: 12px 0 0; text-wrap: pretty; }
+.pal-close-actions { flex: none; display: flex; gap: 16px; flex-wrap: wrap; }
+.pal-close-card > .pal-btn { flex: none; }
+@media (max-width: 700px) {
+  a.pal-btn.pal-btn, button.pal-btn.pal-btn { white-space: normal; text-align: center; }
+  .pal-close-card > .pal-btn, .pal-close-actions, .pal-close-actions > .pal-btn { flex: 1 1 100% !important; }
+}
+</style>
 </body>
 </html>

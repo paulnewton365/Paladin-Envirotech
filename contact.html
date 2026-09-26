@@ -11,8 +11,8 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.71.0">
-<meta name="build-date" content="2026-09-16">
+<meta name="build-version" content="1.74.0">
+<meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="Talk to an Expert | Paladin EnviroTech">
 <meta property="og:description" content="Speak to a Paladin engineer about your programme.">
 <meta property="og:image" content="/assets/preview.f2a82a9e.webp">
@@ -377,7 +377,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
 
 <div style="max-width: 1180px; margin: 0 auto; padding: clamp(48px, 6vw, 88px) 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: clamp(40px, 4.5vw, 72px); align-items: start;" class="hero-band" data-reveal>
   <div>
-    <p class="kicker k-white" style="margin: 0 0 26px;">Get in touch</p>
+    <p class="kicker pal-eyebrow pal-eyebrow--white" style="margin: 0 0 26px;">Get in touch</p>
     <h1 style="font-size: 56px; line-height: 1.06; letter-spacing: -1.4px; font-weight: 300; margin: 16px 0 24px; color: #1E3547;">Talk to an expert.</h1>
     <p style="font-size: clamp(17px, 1.4vw, 20px); line-height: 1.5; margin: 0 0 40px; color: #1E3547; max-width: 480px;">Tell us what you are retiring and where it sits. You will speak with someone who runs the process.</p>
     <div style="display: flex; flex-direction: column; gap: 10px; color: #1E3547; margin-bottom: 40px;">
@@ -390,7 +390,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
       <span style="font-size: 15px; color: #1E3547;">press@paladinenvirotech.com</span>
     </div>
   </div>
-  <div style="background: #FFFFFF; border-top: 4px solid #B8541F; padding: clamp(28px, 3.5vw, 48px); display: flex; flex-direction: column; gap: 22px;">
+  <div style="background: #F5F6F7; border-top: 4px solid #B8541F; padding: clamp(28px, 3.5vw, 48px); display: flex; flex-direction: column; gap: 22px;">
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(160px, 100%), 1fr)); gap: 22px;">
       <input type="text" placeholder="Contact name" style="border: 0; border-bottom: 1px solid #D5DBE0; background: transparent; padding: 14px 0; font-size: 16px; color: #1E3547; outline: none; transition: border-color 200ms;" style-focus="border-bottom: 1px solid #1E3547;" />
       <input type="text" placeholder="Company" style="border: 0; border-bottom: 1px solid #D5DBE0; background: transparent; padding: 14px 0; font-size: 16px; color: #1E3547; outline: none; transition: border-color 200ms;" style-focus="border-bottom: 1px solid #1E3547;" />
@@ -410,7 +410,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
       <option>Press or investor enquiry</option>
     </select>
     <textarea rows="3" placeholder="Volume, timing, anything else" style="border: 0; border-bottom: 1px solid #D5DBE0; background: transparent; padding: 14px 0; font-size: 16px; color: #1E3547; resize: none; outline: none; transition: border-color 200ms;" style-focus="border-bottom: 1px solid #1E3547;"></textarea>
-    <button style="align-self: flex-start; border: 0; cursor: pointer; padding: 18px 32px; white-space: nowrap; font-size: 15px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #FFFFFF; background-image: linear-gradient(to right, #1E3547 50%, #1E3547 50%); background-size: 200% 100%; background-position: 100% 0; transition: background-position 220ms cubic-bezier(0.2,0.7,0.1,1);" style-hover="background-position: 0 0;">Send it over</button>
+    <button type="submit" class="pal-btn pal-btn--light" style="align-self: flex-start;">Send it over</button>
   </div>
 </div>
 
@@ -426,7 +426,7 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
       <div class="foot-col">
         <p class="kicker k-navy">Company</p>
         <a href="/company">About</a>
-        <a href="/blog">Newsroom</a>
+        <a href="/blog">Blog</a>
         <a href="/contact">Contact</a>
       </div>
 
@@ -726,5 +726,81 @@ class Component extends DCLogic {
   BP.addEventListener('change', function (e) { if (!e.matches) set(false); });
 })();
 </script>
+<style id="pal-system">
+/* Paladin component system (v1.74)
+   One definition per component, applied by class. Loaded last on every page so
+   it wins over the older per-page rules; the doubled class selectors lift it
+   above the attribute-selector overrides in responsive.css. */
+:root { --pal-section: clamp(64px, 7vw, 96px); --pal-gutter: 40px; }
+@media (max-width: 760px) { :root { --pal-gutter: 24px; } }
+
+/* Form controls take the page type, not the browser default */
+input, select, textarea, button { font-family: inherit; }
+
+/* Section rhythm: one value, top and bottom */
+.pal-section-t.pal-section-t { padding-top: var(--pal-section) !important; }
+.pal-section-b.pal-section-b { padding-bottom: var(--pal-section) !important; }
+
+/* Eyebrow */
+.pal-eyebrow.pal-eyebrow { font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1.7px !important;
+  text-transform: uppercase !important; line-height: 1.4 !important; }
+.pal-eyebrow--navy.pal-eyebrow--navy { color: var(--ember-light) !important; }
+.pal-eyebrow--white.pal-eyebrow--white { color: var(--ember) !important; }
+.pal-eyebrow--alt.pal-eyebrow--alt { color: var(--ember-hover) !important; }
+
+/* Section heading */
+.pal-h2.pal-h2 { font-size: clamp(32px, 3.6vw, 48px) !important; font-weight: 300 !important; line-height: 1.1 !important;
+  letter-spacing: -1px !important; text-wrap: balance; }
+/* Subheads inside long-form articles */
+.pal-h2-article.pal-h2-article { font-size: clamp(24px, 2.4vw, 30px) !important; font-weight: 500 !important;
+  line-height: 1.25 !important; letter-spacing: -0.4px !important; }
+
+/* Buttons: ember on light grounds, light ember with navy text on dark grounds.
+   Both pass WCAG AA for their label size. */
+a.pal-btn.pal-btn, button.pal-btn.pal-btn {
+  display: inline-flex !important; align-items: center; justify-content: center; box-sizing: border-box;
+  min-height: 52px; padding: 0 28px !important; border: 1px solid transparent !important; border-radius: 0;
+  font-size: 13px !important; font-weight: 600 !important; letter-spacing: 1.2px !important; line-height: 1.2 !important;
+  text-transform: uppercase !important; text-decoration: none !important; white-space: nowrap; cursor: pointer;
+  background-image: none !important; transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease; }
+.pal-btn.pal-btn--light.pal-btn--light { background-color: var(--ember) !important; color: #FFFFFF !important; }
+.pal-btn.pal-btn--light.pal-btn--light:hover { background-color: var(--ember-hover) !important; }
+.pal-btn.pal-btn--dark.pal-btn--dark { background-color: var(--ember-light) !important; color: var(--navy-deep) !important; }
+.pal-btn.pal-btn--dark.pal-btn--dark:hover { background-color: #FFFFFF !important; }
+.pal-btn.pal-btn--ghost-light.pal-btn--ghost-light { background-color: transparent !important; color: var(--navy) !important; border-color: var(--slate) !important; }
+.pal-btn.pal-btn--ghost-light.pal-btn--ghost-light:hover { background-color: var(--navy) !important; color: #FFFFFF !important; border-color: var(--navy) !important; }
+.pal-btn.pal-btn--ghost-dark.pal-btn--ghost-dark { background-color: transparent !important; color: #FFFFFF !important; border-color: var(--mist) !important; }
+.pal-btn.pal-btn--ghost-dark.pal-btn--ghost-dark:hover { background-color: var(--navy-deep) !important; }
+.pal-btn.pal-btn:focus-visible { outline: 2px solid var(--ember-light); outline-offset: 3px; }
+
+/* Stat figures: two sizes, one colour per ground */
+.pal-stat.pal-stat { font-weight: 300 !important; line-height: 1 !important; }
+.pal-stat--lg.pal-stat--lg { font-size: clamp(48px, 5.5vw, 72px) !important; letter-spacing: -1.5px !important; }
+.pal-stat--sm.pal-stat--sm { font-size: clamp(30px, 3vw, 42px) !important; letter-spacing: -0.8px !important; }
+.pal-stat--light.pal-stat--light { color: var(--ember) !important; }
+.pal-stat--dark.pal-stat--dark { color: var(--ember-light) !important; }
+
+.takeover-text > .pal-btn { align-self: flex-start; }
+
+/* Closing call to action */
+.pal-close.pal-close { padding: var(--pal-section) 0 !important; }
+.pal-close-wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--pal-gutter); box-sizing: border-box; }
+.pal-close-card.pal-close-card { box-sizing: border-box; width: min(1100px, calc(100% - 2 * var(--pal-gutter))); margin: 0 auto;
+  background: var(--navy) !important; border-left: 4px solid var(--ember) !important;
+  padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px) !important;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; }
+.pal-close-wrap > .pal-close-card.pal-close-card, .pal-close-card--inset.pal-close-card--inset { width: 100%; }
+.pal-close-copy { flex: 1 1 420px; max-width: 760px; }
+.pal-close-line.pal-close-line { color: #FFFFFF !important; font-weight: 300 !important; font-size: clamp(22px, 2.4vw, 32px) !important;
+  line-height: 1.3 !important; margin: 0 !important; flex: 1 1 420px; max-width: 760px; text-wrap: pretty; }
+.pal-close-copy .pal-close-line { max-width: none; }
+.pal-close-sub { color: var(--mist); font-size: 17px; font-weight: 300; line-height: 1.55; margin: 12px 0 0; text-wrap: pretty; }
+.pal-close-actions { flex: none; display: flex; gap: 16px; flex-wrap: wrap; }
+.pal-close-card > .pal-btn { flex: none; }
+@media (max-width: 700px) {
+  a.pal-btn.pal-btn, button.pal-btn.pal-btn { white-space: normal; text-align: center; }
+  .pal-close-card > .pal-btn, .pal-close-actions, .pal-close-actions > .pal-btn { flex: 1 1 100% !important; }
+}
+</style>
 </body>
 </html>
