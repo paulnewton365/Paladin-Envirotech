@@ -1,5 +1,5 @@
 {
-  "version": "1.74.0",
+  "version": "1.75.0",
   "built": "2026-09-26",
-  "notes": "Component system: one button, eyebrow, section heading, stat and closing-CTA pattern across all pages; section spacing unified; content and consistency fixes from the site sweep"
+  "notes": "Text-weight pilot: Platform, Company and Critical materials copy cut to word budgets; Platform lifecycle rebuilt as a diagram"
 }
