@@ -1,5 +1,5 @@
 {
-  "version": "1.82.0",
+  "version": "1.82.1",
   "built": "2026-09-26",
-  "notes": "QA and cleanup: reduced-motion industries fix, Rare Earth Freedom 250 static, a11y fixes, shared pal-system.css, dead JS/CSS/fonts/assets removed"
+  "notes": "Footer language switcher (EN/FR/DE/NL) removed"
 }
