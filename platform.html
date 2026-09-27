@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.80.0">
+<meta name="build-version" content="1.82.0">
 <meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="The Paladin System | Paladin EnviroTech">
 <meta property="og:description" content="One integrated system from pickup through final disposition.">
@@ -233,14 +233,6 @@
 .pal-lc-bracket-fill { position: absolute; left: 0; top: 12px; height: 0; width: 100%; border-top: 1.5px dashed var(--ember); transition: width .9s cubic-bezier(.6,0,.2,1); }
 .pal-lc-bracket-l { position: absolute; left: 50%; top: 5px; transform: translateX(-50%); background: #FFFFFF; padding: 0 16px; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; line-height: 14px; text-transform: uppercase; color: var(--ember-hover); white-space: nowrap; }
 .pal-lc-l1, .pal-lc-l2, .pal-lc-l3 { display: none; }
-/* controls */
-.pal-lc-controls { display: none; gap: 24px; align-items: center; margin-top: 40px; }
-html[data-pal-lc] .pal-lc-controls { display: flex; }
-.pal-lc-play { display: none; }
-html.pal-lc-paused .pal-lc-play { display: inline; }
-html.pal-lc-paused .pal-lc-pause { display: none; }
-.pal-lc-replay { background: none; border: 0; padding: 12px 0; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate); cursor: pointer; }
-.pal-lc-replay:hover, .pal-lc-replay:focus-visible { color: var(--ember-hover); }
 html[data-pal-lc="0"] .pal-lc-grid > :nth-child(2) .pal-lc-n, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(3) .pal-lc-n, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(4) .pal-lc-n { color: var(--slate); }
 html[data-pal-lc="0"] .pal-lc-grid > :nth-child(2) .pal-lc-title, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(3) .pal-lc-title, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(4) .pal-lc-title { color: var(--slate); }
 html[data-pal-lc="0"] .pal-lc-grid > :nth-child(2) .pal-lc-rec-in, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(3) .pal-lc-rec-in, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(4) .pal-lc-rec-in { opacity: 0; transform: translateY(-16px); }
@@ -288,10 +280,22 @@ html[data-pal-lc="0"] .pal-lc-link, html[data-pal-lc="1"] .pal-lc-link, html[dat
 html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-box, html[data-pal-lc="0"] .pal-lc-tick:nth-child(3) .pal-lc-box, html[data-pal-lc="0"] .pal-lc-tick:nth-child(4) .pal-lc-box, html[data-pal-lc="1"] .pal-lc-tick:nth-child(3) .pal-lc-box, html[data-pal-lc="1"] .pal-lc-tick:nth-child(4) .pal-lc-box, html[data-pal-lc="2"] .pal-lc-tick:nth-child(4) .pal-lc-box { background: transparent; border-color: var(--mist); }
 html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-check, html[data-pal-lc="0"] .pal-lc-tick:nth-child(3) .pal-lc-check, html[data-pal-lc="0"] .pal-lc-tick:nth-child(4) .pal-lc-check, html[data-pal-lc="1"] .pal-lc-tick:nth-child(3) .pal-lc-check, html[data-pal-lc="1"] .pal-lc-tick:nth-child(4) .pal-lc-check, html[data-pal-lc="2"] .pal-lc-tick:nth-child(4) .pal-lc-check { opacity: 0; }
 html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-tick-t, html[data-pal-lc="0"] .pal-lc-tick:nth-child(3) .pal-lc-tick-t, html[data-pal-lc="0"] .pal-lc-tick:nth-child(4) .pal-lc-tick-t, html[data-pal-lc="1"] .pal-lc-tick:nth-child(3) .pal-lc-tick-t, html[data-pal-lc="1"] .pal-lc-tick:nth-child(4) .pal-lc-tick-t, html[data-pal-lc="2"] .pal-lc-tick:nth-child(4) .pal-lc-tick-t { opacity: .55; }
+/* scroll-driven: a tall track with the diagram pinned under the header */
+.pal-lc-scroll { position: relative; height: calc(100vh + 4 * 50vh); }
+.pal-lc-sticky { position: sticky; top: calc(var(--pal-hdr, 84px) - var(--pal-lc-off, 0px)); height: calc(100vh - var(--pal-hdr, 84px) + var(--pal-lc-off, 0px)); display: flex; flex-direction: column; justify-content: center; }
+.pal-lc-scroll.pal-lc-offset .pal-lc-sticky { justify-content: flex-start; }
+.pal-lc-scroll:not(.pal-lc-free) .pal-lc-intro.pal-lc-intro { margin-bottom: clamp(28px, 5vh, 56px) !important; }
+.pal-lc-scroll.pal-lc-tight .pal-lc-intro p { display: none; }
+.pal-lc-scroll.pal-lc-tight .pal-lc-spine { margin-bottom: 28px; }
+.pal-lc-sticky > .pal-lc { width: 100%; }
+.pal-lc-scroll.pal-lc-free, html:not(.pal-lc-js) .pal-lc-scroll { height: auto; }
+.pal-lc-scroll.pal-lc-free .pal-lc-sticky, html:not(.pal-lc-js) .pal-lc-sticky { position: static; height: auto; display: block; }
+.pal-lc-step, .pal-lc-report { cursor: pointer; }
+.pal-lc-scroll.pal-lc-free .pal-lc-step, .pal-lc-scroll.pal-lc-free .pal-lc-report { cursor: default; }
 @media (max-width: 1100px) { .pal-lc-step { padding-right: 20px; } .pal-lc-report { padding: 24px 20px; } }
 /* Below 900px the stepper stacks and simply shows the finished file */
 @media (max-width: 900px) {
-  .pal-lc-spine, .pal-lc-bracket, .pal-lc-controls, html[data-pal-lc] .pal-lc-controls { display: none; }
+  .pal-lc-spine, .pal-lc-bracket { display: none; }
   .pal-lc-grid { grid-template-columns: 1fr; gap: 28px; }
   .pal-lc-step { padding-right: 0; gap: 16px; cursor: default; }
   .pal-lc-rec { min-height: 0; }
@@ -326,16 +330,13 @@ html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-tick-t, html[data-pal-lc
   .pal-cap-b.pal-cap-b { line-height: 23px !important; }
 }
 </style>
+<link rel="stylesheet" href="/pal-system.css" id="pal-system">
 </head>
 <body>
 <x-dc>
 <helmet>
 <style>
-@font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Light.otf") format("opentype"); font-weight: 300; font-display: swap; }
-@font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
-@font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Medium.otf") format("opentype"); font-weight: 500; font-display: swap; }
-@font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-SemiBold.otf") format("opentype"); font-weight: 600; font-display: swap; }
-html, body { margin: 0; padding: 0; background: #FFFFFF; font-family: "Restart Hard", system-ui, sans-serif; color: #1E3547; -webkit-font-smoothing: antialiased; }
+html, body { margin: 0; padding: 0; background: #FFFFFF; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #1E3547; -webkit-font-smoothing: antialiased; }
 * { box-sizing: border-box; }
 a { color: inherit; text-decoration: none; }
 a:hover { opacity: 0.75; }
@@ -594,7 +595,8 @@ a:hover { opacity: 0.75; }
 
 <div class="pal-section-t pal-section-b" style="background: #FFFFFF; padding: clamp(64px, 8vw, 128px) 0;" data-reveal>
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
-    <div data-reveal="1" style="max-width: 860px; margin-bottom: clamp(48px, 6vw, 80px);">
+    <div class="pal-lc-scroll"><div class="pal-lc-sticky">
+    <div class="pal-lc-intro" style="max-width: 860px; margin-bottom: clamp(48px, 6vw, 80px);">
       <span class="pal-eyebrow pal-eyebrow--white" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">The lifecycle</span>
       <h2 class="pal-h2" style="font-size: clamp(30px, 3.8vw, 56px); line-height: 1.14; font-weight: 500; margin: 16px 0 20px;"><span style="color: #B8541F;">The audit trail assembles</span> as the assets move.</h2>
       <p style="font-size: 17px; line-height: 27px; margin: 0; color: #5A6874;">Each step adds a record to the same file, so the report your auditor needs exists before the last truck leaves.</p>
@@ -658,7 +660,7 @@ a:hover { opacity: 0.75; }
             </div>
           </div>
         </div>
-        <div class="pal-lc-report" data-lc-step="4" role="button" tabindex="0" aria-label="Step 05: Reporting">
+        <div class="pal-lc-report" data-lc-step="4">
           <div class="pal-lc-head">
             <span class="pal-lc-n">05</span>
             <h3 class="pal-lc-title">Reporting</h3>
@@ -678,11 +680,8 @@ a:hover { opacity: 0.75; }
           <span class="pal-lc-bracket-l"><span class="pal-lc-l1">1 of 4 records</span><span class="pal-lc-l2">2 of 4 records</span><span class="pal-lc-l3">3 of 4 records</span><span class="pal-lc-l4">Four records, one file</span></span>
         </div>
       </div>
-      <div class="pal-lc-controls">
-        <button type="button" class="pal-btn pal-btn--ghost-light pal-lc-toggle" data-lc-toggle><span class="pal-lc-pause">Pause</span><span class="pal-lc-play">Play</span></button>
-        <button type="button" class="pal-lc-replay" data-lc-replay>Replay</button>
-      </div>
     </div>
+    </div></div>
   </div>
 </div>
 
@@ -1071,130 +1070,76 @@ class Component extends DCLogic {
 })();
 </script>
 <script>
-/* Platform lifecycle stepper. Steps advance every 3.6s once the diagram is on
-   screen, pause on hover or focus, and can be clicked. State is kept on <html>
-   (data-pal-lc = current step, class pal-lc-paused) so the page runtime never
-   resets it. Reduced motion or no JS leaves the finished state showing. */
+/* Platform lifecycle, driven by scroll. The diagram is pinned inside a tall
+   track; how far you have scrolled through the track sets the step
+   (html data-pal-lc = 0-4), so the file builds as you scroll and unbuilds if
+   you scroll back. Clicking a step scrolls to it. State lives on <html> so the
+   page runtime cannot reset it. Where the diagram cannot pin (phones, short
+   screens) or without JS, it shows the finished file. */
 (function () {
-  var root = document.documentElement;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var DUR = 3600, b = 0, playing = true, hover = false, visible = false, timer = null;
-  function set(v) { b = v; root.setAttribute('data-pal-lc', String(v)); }
-  function schedule() {
-    clearTimeout(timer);
-    if (!playing || hover || !visible) return;
-    timer = setTimeout(function () { set(b === 4 ? 0 : b + 1); schedule(); }, b === 4 ? DUR * 1.8 : DUR);
+  var root = document.documentElement, STEPS = 5, b = -1, pinned = false;
+  root.classList.add('pal-lc-js');
+  function els() {
+    var t = document.querySelector('.pal-lc-scroll');
+    return t ? { track: t, sticky: t.querySelector('.pal-lc-sticky') } : null;
   }
-  function setPlaying(p) { playing = p; root.classList.toggle('pal-lc-paused', !p); schedule(); }
-  set(0);
-  function check() {
-    var el = document.querySelector('.pal-lc-track');
-    if (!el) return;
-    var r = el.getBoundingClientRect(), vh = window.innerHeight || root.clientHeight;
-    var v = r.height > 0 && r.top < vh * 0.75 && r.bottom > vh * 0.2;
-    if (v !== visible) { visible = v; schedule(); }
+  function hdr() { var h = document.querySelector('header'); return h ? h.offsetHeight : 0; }
+  function set(v) { if (v !== b) { b = v; root.setAttribute('data-pal-lc', String(v)); } }
+  function measure() {
+    var e = els(); if (!e) return;
+    e.track.style.setProperty('--pal-hdr', hdr() + 'px');
+    e.track.classList.remove('pal-lc-free', 'pal-lc-tight');
+    function fits() { var h = 0; Array.prototype.forEach.call(e.sticky.children, function (c) { h += c.offsetHeight + parseFloat(getComputedStyle(c).marginBottom); }); return h <= e.sticky.clientHeight - 24; }
+    pinned = window.innerWidth > 900 && fits();
+    e.track.classList.remove('pal-lc-offset'); e.track.style.removeProperty('--pal-lc-off');
+    if (!pinned && window.innerWidth > 900) { e.track.classList.add('pal-lc-tight'); pinned = fits(); if (!pinned) e.track.classList.remove('pal-lc-tight'); }
+    // Still too tall: pin with the intro tucked above the fold, so the diagram alone stays in view
+    if (!pinned && window.innerWidth > 900) {
+      var intro = e.sticky.querySelector('.pal-lc-intro'), lc = e.sticky.querySelector('.pal-lc');
+      if (intro && lc && lc.offsetHeight <= window.innerHeight - hdr() - 24) {
+        var off = intro.offsetHeight + parseFloat(getComputedStyle(intro).marginBottom) - 32;
+        e.track.style.setProperty('--pal-lc-off', off + 'px'); e.track.classList.add('pal-lc-offset'); pinned = true;
+      }
+    }
+    e.track.classList.toggle('pal-lc-free', !pinned);
+    if (!pinned) { b = -1; root.removeAttribute('data-pal-lc'); }
+    sync();
+  }
+  function span(e) { return Math.max(1, e.track.offsetHeight - e.sticky.offsetHeight); }
+  function sync() {
+    if (!pinned) return;
+    var e = els(); if (!e) return;
+    var off = parseFloat(getComputedStyle(e.track).getPropertyValue('--pal-lc-off')) || 0;
+    var p = (hdr() - off - e.track.getBoundingClientRect().top) / span(e);
+    p = Math.min(1, Math.max(0, p));
+    set(Math.min(STEPS - 1, Math.floor(p * STEPS)));
+  }
+  function jump(n) {
+    var e = els(); if (!e || !pinned) return;
+    var off = parseFloat(getComputedStyle(e.track).getPropertyValue('--pal-lc-off')) || 0;
+    var top = e.track.getBoundingClientRect().top + window.pageYOffset - hdr() + off;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: top + span(e) * (n + 0.5) / STEPS, behavior: reduce ? 'auto' : 'smooth' });
   }
   var ticking = false;
-  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; check(); }); } }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll);
-  window.addEventListener('load', check);
-  document.addEventListener('DOMContentLoaded', check);
-  check();
+  window.addEventListener('scroll', function () {
+    if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; sync(); }); }
+  }, { passive: true });
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+  document.addEventListener('DOMContentLoaded', measure);
+  setTimeout(measure, 1200);
+  measure();
   function stepFrom(t) { var s = t.closest && t.closest('[data-lc-step]'); return s ? parseInt(s.getAttribute('data-lc-step'), 10) : -1; }
   document.addEventListener('click', function (e) {
-    if (!e.target.closest) return;
-    if (e.target.closest('[data-lc-toggle]')) { setPlaying(!playing); return; }
-    if (e.target.closest('[data-lc-replay]')) { set(0); setPlaying(true); return; }
-    if (e.target.closest('.pal-lc-link')) return;
-    var n = stepFrom(e.target);
-    if (n >= 0 && window.innerWidth > 900) { set(n); schedule(); }
+    if (!e.target.closest || e.target.closest('.pal-lc-link')) return;
+    var n = stepFrom(e.target); if (n >= 0) jump(n);
   });
   document.addEventListener('keydown', function (e) {
     if (e.key !== 'Enter' && e.key !== ' ') return;
-    var n = stepFrom(e.target);
-    if (n >= 0 && e.target.hasAttribute('data-lc-step')) { e.preventDefault(); set(n); schedule(); }
+    if (e.target.hasAttribute && e.target.hasAttribute('data-lc-step')) { e.preventDefault(); jump(stepFrom(e.target)); }
   });
-  function setHover(h) { if (h !== hover) { hover = h; schedule(); } }
-  document.addEventListener('mouseover', function (e) { setHover(!!(e.target.closest && e.target.closest('.pal-lc-track'))); });
-  document.addEventListener('focusin', function (e) { setHover(!!(e.target.closest && e.target.closest('.pal-lc-track'))); });
 })();
 </script>
-<style id="pal-system">
-/* Paladin component system (v1.74)
-   One definition per component, applied by class. Loaded last on every page so
-   it wins over the older per-page rules; the doubled class selectors lift it
-   above the attribute-selector overrides in responsive.css. */
-:root { --pal-section: clamp(64px, 7vw, 96px); --pal-gutter: 40px; }
-@media (max-width: 760px) { :root { --pal-gutter: 24px; } }
-
-/* Form controls take the page type, not the browser default */
-input, select, textarea, button { font-family: inherit; }
-
-/* Section rhythm: one value, top and bottom */
-.pal-section-t.pal-section-t { padding-top: var(--pal-section) !important; }
-.pal-section-b.pal-section-b { padding-bottom: var(--pal-section) !important; }
-
-/* Eyebrow */
-.pal-eyebrow.pal-eyebrow { font-size: 12px !important; font-weight: 600 !important; letter-spacing: 1.7px !important;
-  text-transform: uppercase !important; line-height: 1.4 !important; }
-.pal-eyebrow--navy.pal-eyebrow--navy { color: var(--ember-light) !important; }
-.pal-eyebrow--white.pal-eyebrow--white { color: var(--ember) !important; }
-.pal-eyebrow--alt.pal-eyebrow--alt { color: var(--ember-hover) !important; }
-
-/* Section heading */
-.pal-h2.pal-h2 { font-size: clamp(32px, 3.6vw, 48px) !important; font-weight: 300 !important; line-height: 1.1 !important;
-  letter-spacing: -1px !important; text-wrap: balance; }
-/* Subheads inside long-form articles */
-.pal-h2-article.pal-h2-article { font-size: clamp(24px, 2.4vw, 30px) !important; font-weight: 500 !important;
-  line-height: 1.25 !important; letter-spacing: -0.4px !important; }
-
-/* Buttons: ember on light grounds, light ember with navy text on dark grounds.
-   Both pass WCAG AA for their label size. */
-a.pal-btn.pal-btn, button.pal-btn.pal-btn {
-  display: inline-flex !important; align-items: center; justify-content: center; box-sizing: border-box;
-  min-height: 52px; padding: 0 28px !important; border: 1px solid transparent !important; border-radius: 0;
-  font-size: 13px !important; font-weight: 600 !important; letter-spacing: 1.2px !important; line-height: 1.2 !important;
-  text-transform: uppercase !important; text-decoration: none !important; white-space: nowrap; cursor: pointer;
-  background-image: none !important; transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease; }
-.pal-btn.pal-btn--light.pal-btn--light { background-color: var(--ember) !important; color: #FFFFFF !important; }
-.pal-btn.pal-btn--light.pal-btn--light:hover { background-color: var(--ember-hover) !important; }
-.pal-btn.pal-btn--dark.pal-btn--dark { background-color: var(--ember-light) !important; color: var(--navy-deep) !important; }
-.pal-btn.pal-btn--dark.pal-btn--dark:hover { background-color: #FFFFFF !important; }
-.pal-btn.pal-btn--ghost-light.pal-btn--ghost-light { background-color: transparent !important; color: var(--navy) !important; border-color: var(--slate) !important; }
-.pal-btn.pal-btn--ghost-light.pal-btn--ghost-light:hover { background-color: var(--navy) !important; color: #FFFFFF !important; border-color: var(--navy) !important; }
-.pal-btn.pal-btn--ghost-dark.pal-btn--ghost-dark { background-color: transparent !important; color: #FFFFFF !important; border-color: var(--mist) !important; }
-.pal-btn.pal-btn--ghost-dark.pal-btn--ghost-dark:hover { background-color: var(--navy-deep) !important; }
-.pal-btn.pal-btn:focus-visible { outline: 2px solid var(--ember-light); outline-offset: 3px; }
-
-/* Stat figures: two sizes, one colour per ground */
-.pal-stat.pal-stat { font-weight: 300 !important; line-height: 1 !important; }
-.pal-stat--lg.pal-stat--lg { font-size: clamp(48px, 5.5vw, 72px) !important; letter-spacing: -1.5px !important; }
-.pal-stat--sm.pal-stat--sm { font-size: clamp(30px, 3vw, 42px) !important; letter-spacing: -0.8px !important; }
-.pal-stat--light.pal-stat--light { color: var(--ember) !important; }
-.pal-stat--dark.pal-stat--dark { color: var(--ember-light) !important; }
-
-.takeover-text > .pal-btn { align-self: flex-start; }
-
-/* Closing call to action */
-.pal-close.pal-close { padding: var(--pal-section) 0 !important; }
-.pal-close-wrap { max-width: 1180px; margin: 0 auto; padding: 0 var(--pal-gutter); box-sizing: border-box; }
-.pal-close-card.pal-close-card { box-sizing: border-box; width: min(1100px, calc(100% - 2 * var(--pal-gutter))); margin: 0 auto;
-  background: var(--navy) !important; border-left: 4px solid var(--ember) !important;
-  padding: clamp(28px, 4vw, 56px) clamp(28px, 4.5vw, 64px) !important;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px 40px; flex-wrap: wrap; }
-.pal-close-wrap > .pal-close-card.pal-close-card, .pal-close-card--inset.pal-close-card--inset { width: 100%; }
-.pal-close-copy { flex: 1 1 420px; max-width: 760px; }
-.pal-close-line.pal-close-line { color: #FFFFFF !important; font-weight: 300 !important; font-size: clamp(22px, 2.4vw, 32px) !important;
-  line-height: 1.3 !important; margin: 0 !important; flex: 1 1 420px; max-width: 760px; text-wrap: pretty; }
-.pal-close-copy .pal-close-line { max-width: none; }
-.pal-close-sub { color: var(--mist); font-size: 17px; font-weight: 300; line-height: 1.55; margin: 12px 0 0; text-wrap: pretty; }
-.pal-close-actions { flex: none; display: flex; gap: 16px; flex-wrap: wrap; }
-.pal-close-card > .pal-btn { flex: none; }
-@media (max-width: 700px) {
-  a.pal-btn.pal-btn, button.pal-btn.pal-btn { white-space: normal; text-align: center; }
-  .pal-close-card > .pal-btn, .pal-close-actions, .pal-close-actions > .pal-btn { flex: 1 1 100% !important; }
-}
-</style>
 </body>
 </html>

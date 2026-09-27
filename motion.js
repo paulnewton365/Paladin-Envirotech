@@ -101,6 +101,9 @@
       settle();
       stopHeroVideo();
       stampReduced();
+      // Functional, not decorative: the sector selector must still work
+      // (it steps on scroll or click; its transitions are off under reduce).
+      try { initIndustries(); } catch (e) {}
       if (n++ < 40) setTimeout(poll, 100);
     };
     if (document.readyState === 'loading') {
@@ -262,162 +265,6 @@
       document.querySelectorAll('[data-mreveal]').forEach(function (el) {
         if (el.style.opacity === '0') { el.style.opacity = '1'; el.style.transform = 'none'; }
       });
-    }, 6000);
-  }
-
-  /* ---- Facility map ------------------------------------------------------
-     The nine routes fan out from Tampa at (390, 262) in a 1200x420 viewBox.
-     Three of them carry stroke-dasharray for the international styling, so a
-     stroke-dashoffset draw would make the dashes march rather than extend.
-     Instead the whole route group is clipped by a circle centred on Tampa
-     whose radius grows outward, which reads as routes leaving HQ and works
-     the same for solid and dashed strokes. Cities fade in as the wave passes,
-     staggered by their real distance from Tampa. */
-
-  var HQ_X = 390, HQ_Y = 262, MAX_R = 780;
-
-  function animateMap(svg) {
-    if (svg.getAttribute('data-mapped') === '1') return;
-    svg.setAttribute('data-mapped', '1');
-
-    var groups = svg.querySelectorAll('g');
-    var routes = null;
-    groups.forEach(function (g) {
-      if (!routes && g.querySelector('path')) routes = g;
-    });
-    if (!routes) return;
-
-    var NS = 'http://www.w3.org/2000/svg';
-    var clipId = 'pal-map-wipe';
-    var defs = document.createElementNS(NS, 'defs');
-    var clip = document.createElementNS(NS, 'clipPath');
-    clip.setAttribute('id', clipId);
-    clip.setAttribute('clipPathUnits', 'userSpaceOnUse');
-    var circle = document.createElementNS(NS, 'circle');
-    circle.setAttribute('cx', HQ_X);
-    circle.setAttribute('cy', HQ_Y);
-    circle.setAttribute('r', '0');
-    clip.appendChild(circle);
-    defs.appendChild(clip);
-    svg.insertBefore(defs, svg.firstChild);
-    routes.setAttribute('clip-path', 'url(#' + clipId + ')');
-
-    // Cities: every circle/text except the HQ marker at the origin.
-    var cities = [];
-    svg.querySelectorAll('circle, text').forEach(function (el) {
-      var x, y;
-      if (el.tagName.toLowerCase() === 'circle') {
-        x = parseFloat(el.getAttribute('cx'));
-        y = parseFloat(el.getAttribute('cy'));
-      } else {
-        x = parseFloat(el.getAttribute('x'));
-        y = parseFloat(el.getAttribute('y'));
-      }
-      if (isNaN(x) || isNaN(y)) return;
-      var d = Math.sqrt(Math.pow(x - HQ_X, 2) + Math.pow(y - HQ_Y, 2));
-      if (d < 30) return; // HQ marker and its label stay put
-      cities.push({ el: el, d: d });
-      el.style.opacity = '0';
-      el.style.transition = 'opacity 420ms ease-out';
-    });
-
-    /* Scroll-driven rather than timed. A timed animation can finish before the
-       reader has scrolled the map into view, so the routes appear already
-       drawn. Tying the wipe radius to scroll position means the lines always
-       flow out of Tampa as the section moves up the screen, and rewind if the
-       reader scrolls back. */
-
-    var clipId2 = clipId;
-    function draw(p) {
-      // Guard: if a React re-render dropped the injected defs, the clip would
-      // point at nothing and hide every route. Detach rather than hide.
-      if (!document.getElementById(clipId2)) {
-        routes.removeAttribute('clip-path');
-        cities.forEach(function (c) { c.el.style.opacity = '1'; });
-        return;
-      }
-      routes.setAttribute('clip-path', 'url(#' + clipId2 + ')');
-      var eased = Math.pow(p, 1.35);
-      var reached = eased * MAX_R;
-      circle.setAttribute('r', String(reached));
-      cities.forEach(function (c) {
-        c.el.style.opacity = reached > c.d - 12 ? '1' : '0';
-      });
-    }
-
-    var ticking = false;
-    function update() {
-      ticking = false;
-      var r = svg.getBoundingClientRect();
-      if (!r.height) return;
-      var vh = window.innerHeight || 800;
-      // 0 when the top of the map reaches the bottom of the viewport,
-      // 1 by the time it has travelled to just above the middle.
-      var span = vh * 0.62;
-      var p = (vh - r.top) / span;
-      if (p < 0) p = 0;
-      if (p > 1) p = 1;
-      draw(p);
-    }
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    }
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    update();
-  }
-
-  /* ---- Timeline rail -----------------------------------------------------
-     Beats reveal in sequence and a gold progress line follows scroll down the
-     rail. This lives here rather than in a script tag on the page because the
-     page is React-rendered and a tag inside the template never executes. */
-
-  function initTimeline() {
-    var rail = document.querySelector('[data-timeline-rail]');
-    if (!rail || rail.getAttribute('data-timeline-ready') === '1') return;
-    rail.setAttribute('data-timeline-ready', '1');
-
-    var progress = rail.querySelector('[data-timeline-progress]');
-    var beats = Array.prototype.slice.call(rail.querySelectorAll('[data-timeline-beat]'));
-    if (!beats.length) return;
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var i = beats.indexOf(entry.target);
-        setTimeout(function () { entry.target.classList.add('is-in'); }, Math.max(0, i) * 90);
-        io.unobserve(entry.target);
-      });
-    }, { threshold: 0.4 });
-    beats.forEach(function (b) { io.observe(b); });
-
-    var ticking = false;
-    function update() {
-      ticking = false;
-      if (!progress) return;
-      var r = rail.getBoundingClientRect();
-      if (!r.height) return;
-      var line = window.innerHeight * 0.62;
-      var p = (line - r.top) / r.height;
-      if (p < 0) p = 0;
-      if (p > 1) p = 1;
-      progress.style.height = (p * 100).toFixed(2) + '%';
-    }
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(update);
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    update();
-
-    // Failsafe: if the observer never fires, show the beats anyway.
-    setTimeout(function () {
-      beats.forEach(function (b) { b.classList.add('is-in'); });
     }, 6000);
   }
 
@@ -727,100 +574,6 @@
     if (track && pin) sync();
   }
 
-  function initMap() {
-    var svg = document.querySelector('svg[aria-label*="facility network"]');
-    if (svg) { buildMobileNetwork(svg); animateMap(svg); }
-  }
-
-  /* ---- Mobile network view ----------------------------------------------
-     The map is a 1200x420 landscape diagram. On a portrait phone it scales
-     down to roughly a third of its design size and the city labels become
-     unreadable, so below 760px it is replaced with a vertical routing spine
-     built from the SVG's own labels. Desktop is untouched, and the two views
-     cannot drift apart because the list is derived from the same source. */
-
-  function buildMobileNetwork(svg) {
-    var wrap = svg.parentElement;
-    if (!wrap || wrap.querySelector('[data-mobile-network]')) return;
-
-    // International routes are the dashed ones. Their endpoints are the three
-    // furthest cities, so classify by matching each city to the dashed paths'
-    // end coordinates rather than hard-coding names.
-    var intl = [];
-    svg.querySelectorAll('path[stroke-dasharray]').forEach(function (p) {
-      var d = p.getAttribute('d') || '';
-      var nums = d.replace(/[^0-9.\- ]/g, ' ').trim().split(/\s+/).map(parseFloat);
-      if (nums.length >= 6) intl.push({ x: nums[nums.length - 2], y: nums[nums.length - 1] });
-    });
-
-    var cities = [];
-    svg.querySelectorAll('circle').forEach(function (c) {
-      var x = parseFloat(c.getAttribute('cx')), y = parseFloat(c.getAttribute('cy'));
-      if (isNaN(x) || isNaN(y)) return;
-      if (Math.abs(x - HQ_X) < 30 && Math.abs(y - HQ_Y) < 30) return; // HQ marker
-      // nearest text label to this dot
-      var best = null, bestD = 1e9;
-      svg.querySelectorAll('text').forEach(function (t) {
-        var tx = parseFloat(t.getAttribute('x')), ty = parseFloat(t.getAttribute('y'));
-        if (isNaN(tx) || isNaN(ty)) return;
-        var d = Math.pow(tx - x, 2) + Math.pow(ty - y, 2);
-        if (d < bestD) { bestD = d; best = t; }
-      });
-      if (!best) return;
-      var name = (best.textContent || '').trim();
-      if (!name || /Tampa/.test(name)) return;
-      var isIntl = intl.some(function (p) {
-        return Math.abs(p.x - x) < 12 && Math.abs(p.y - y) < 12;
-      });
-      if (cities.some(function (c2) { return c2.name === name; })) return;
-      cities.push({ name: name, intl: isIntl });
-    });
-    if (!cities.length) return;
-
-    var domestic = cities.filter(function (c) { return !c.intl; });
-    var international = cities.filter(function (c) { return c.intl; });
-
-    var el = document.createElement('div');
-    el.setAttribute('data-mobile-network', '');
-    el.style.display = 'none';
-
-    function group(label, list) {
-      if (!list.length) return '';
-      var names = list.map(function (c) { return c.name; }).join('  \u00b7  ');
-      return '<p style="color:#5A6874;font-size:12px;letter-spacing:1px;' +
-             'text-transform:uppercase;margin:0 0 8px;">' + label +
-             ' <span style="color:#8F3F14;">' + list.length + '</span></p>' +
-             '<p style="color:#5A6874;font-size:15px;font-weight:300;line-height:1.6;' +
-             'margin:0 0 22px;padding-left:14px;' +
-             'border-left:1px solid rgba(11, 30, 49,0.16);">' + names + '</p>';
-    }
-
-    el.innerHTML =
-      '<div style="padding:4px 0 8px;">' +
-        '<p style="position:relative;padding-left:26px;margin:0 0 6px;color:#1E3547;' +
-          'font-size:17px;font-weight:500;">' +
-          '<span style="position:absolute;left:0;top:5px;width:13px;height:13px;' +
-            'border-radius:50%;background:#E08B52;"></span>' +
-          'Tampa, FL</p>' +
-        '<p style="color:#5A6874;font-size:13px;font-weight:300;margin:0 0 24px;' +
-          'padding-left:26px;">Headquarters. Every route below runs through here.</p>' +
-        group('Domestic routing', domestic) +
-        group('International', international) +
-      '</div>';
-
-    wrap.insertBefore(el, svg.nextSibling);
-
-    var mq = window.matchMedia('(max-width: 760px)');
-    function apply() {
-      var small = mq.matches;
-      svg.style.display = small ? 'none' : 'block';
-      el.style.display = small ? 'block' : 'none';
-    }
-    if (mq.addEventListener) mq.addEventListener('change', apply);
-    else if (mq.addListener) mq.addListener(apply);
-    apply();
-  }
-
   /* ---- Build stamp -------------------------------------------------------
      Reads the version stamped into the page head and renders it discreetly at
      the end of the footer so a reviewer can always say which build they are
@@ -912,13 +665,11 @@
     armReveals();
     initHeroVideo();
     initIndustries();
-    initMap();
-    initTimeline();
     initChain();
     honourHash();
     // Second pass for anything that lands after first paint (images resolving,
     // late layout). Both functions are idempotent.
-    setTimeout(function () { tagBlocks(); armReveals(); initMap(); initTimeline(); initChain(); initIndustries(); honourHash(); }, 900);
+    setTimeout(function () { tagBlocks(); armReveals(); initChain(); initIndustries(); honourHash(); }, 900);
   }
 
   if (document.readyState === 'complete') {

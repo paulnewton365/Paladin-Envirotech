@@ -15,21 +15,8 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
 
 @media (max-width: 900px) {
   /* Fixed-column grids have no auto-fit fallback, so stack them. */
-  [style*="grid-template-columns: 1fr 1fr"],
-  [style*="grid-template-columns: minmax(48px, 90px) minmax(180px, 340px) 1fr"],
-  [style*="grid-template-columns: minmax(140px, 220px) 1fr"],
-  [style*="grid-template-columns: minmax(64px, 120px) 1fr"] {
+  [style*="grid-template-columns: 1fr 1fr"] {
     grid-template-columns: 1fr !important;
-  }
-
-  /* Numbered process steps: once the number column stacks above the text it
-     inherits the grid's centred alignment. Pull it back to the left edge so
-     the number, heading and body read as one left-aligned block. */
-  [style*="grid-template-columns: minmax(48px, 90px)"] > *,
-  [style*="grid-template-columns: minmax(64px, 120px)"] > *,
-  [style*="grid-template-columns: minmax(140px, 220px)"] > * {
-    text-align: left !important;
-    justify-self: start !important;
   }
 }
 
@@ -46,33 +33,12 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
 }
 
 @media (max-width: 760px) {
-     they stack, every rule points the wrong way and leaves a stray line down
-     the right edge of the screen. Turn the divider through 90 degrees and
-     trim the padding, which is sized for a wide row, not a tall stack.
-     Note the spacing inside rgba(): that is how the browser serialises it,
-     and the selector has to match the serialised form. */
-  [style*="border-right: 1px solid rgba(255, 255, 255, 0.16)"] {
-    border-right: 0 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16) !important;
-  }
-  /* Same band pattern on light grounds. */
-  [style*="border-right: 1px solid rgb(231, 234, 238)"] {
-    border-right: 0 !important;
-    border-bottom: 1px solid rgb(231, 234, 238) !important;
-  }
-  /* The three cell paddings in these bands: left cell, middle cells, right
-     cell. Left and right carry an asymmetric inset for the vertical rules,
-     which is meaningless once stacked. */
+  /* Stat bands: cells padded for a wide row (left, middle, right) are
+     meaningless once stacked, so even them out. */
   [style*="padding: 40px 32px"],
   [style*="padding: 40px 0px 40px 32px"] {
     padding: 22px 0 !important;
   }
-  [style*="border-right: 1px solid rgba(255, 255, 255, 0.16)"]:last-child,
-  [style*="border-right: 1px solid rgb(231, 234, 238)"]:last-child {
-    border-bottom: 0 !important;
-  }
-  /* The last cell of a light band carries a left inset for its vertical rule. */
-  [style*="padding: 40px 0px 40px 32px"] { padding: 22px 0 !important; }
 }
 
 @media (max-width: 700px) {
@@ -88,18 +54,8 @@ input, select, textarea { min-width: 0 !important; max-width: 100% !important; }
   /* An image well with both aspect-ratio and a min-height derives a minimum
      WIDTH from that height: 300px at 4/3 is 400px, wider than the phone. Let
      the aspect ratio work from the available width instead. */
-  [style*="aspect-ratio: 4 / 3"][style*="min-height: 300px"],
-  [style*="aspect-ratio: 16 / 10"][style*="min-height: 300px"],
-  [style*="aspect-ratio: 21 / 9"][style*="min-height: 300px"] {
+  [style*="aspect-ratio: 4 / 3"][style*="min-height: 300px"] {
     min-height: 0 !important;
-  }
-
-  /* One CTA pair sits in a `flex: none` wrapper, so the buttons above can
-     wrap but the wrapper still sizes to their combined max-content width.
-     Serialised as `flex: 0 0 auto`, which is what this has to match. */
-  div[style*="flex: 0 0 auto"][style*="display: flex; gap: 16px"] {
-    flex: 1 1 100% !important;
-    min-width: 0 !important;
   }
 }
 

@@ -1,5 +1,5 @@
 {
-  "version": "1.80.0",
+  "version": "1.82.0",
   "built": "2026-09-26",
-  "notes": "Blog: more posts shown as a list with key images instead of cards"
+  "notes": "QA and cleanup: reduced-motion industries fix, Rare Earth Freedom 250 static, a11y fixes, shared pal-system.css, dead JS/CSS/fonts/assets removed"
 }
