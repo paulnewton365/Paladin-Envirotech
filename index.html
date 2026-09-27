@@ -18,7 +18,7 @@
 <meta property="og:type" content="website">
 <link rel="preload" as="video" href="https://paladinenvirotech.com/wp-content/uploads/2026/05/paladin_headervideo.mp4" type="video/mp4">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.75.0">
+<meta name="build-version" content="1.78.0">
 <meta name="build-date" content="2026-09-26">
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
@@ -426,6 +426,35 @@
     .foot-grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
   }
 </style>
+<style id="pal-sectors-css">
+/* Homepage sectors. Uses the site grid (3 columns, 48px gap), .cell cards and
+   the standard eyebrow, heading and lead; only the layout and the moving
+   accent are specific to this block. */
+.pal-sectors-intro { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
+.pal-sector { outline: none; transition: border-color 180ms ease; }
+.pal-sector-top { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+.pal-sector-num { flex: none; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: var(--slate); transition: color 180ms ease; }
+.pal-sector.is-active .pal-sector-num { color: var(--ember); }
+/* move the accent: while any card is hovered or focused, only that card carries it */
+.pal-sectors:has(.pal-sector:is(:hover, :focus-visible)) .pal-sector.is-active:not(:hover):not(:focus-visible) { border-top: 1px solid var(--hairline); padding-top: 26px; }
+.pal-sectors:has(.pal-sector:is(:hover, :focus-visible)) .pal-sector.is-active:not(:hover):not(:focus-visible) .pal-sector-num { color: var(--slate); }
+.pal-sector:is(:hover, :focus-visible) { border-top: 2px solid var(--ember); padding-top: 25px; }
+.pal-sector:is(:hover, :focus-visible) .pal-sector-num { color: var(--ember); }
+.pal-sector.is-active { border-top: 2px solid var(--ember); padding-top: 25px; }
+.pal-sectors-cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 20px 24px;
+  background: var(--navy); color: #FFFFFF; text-decoration: none; transition: background-color 180ms ease; }
+.pal-sectors-cta:hover { background: var(--ember); }
+.pal-sectors-cta:focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
+.pal-sectors-cta-text { display: flex; flex-direction: column; gap: 6px; }
+.pal-sectors-cta-title { font-size: 20px; line-height: 1.2; font-weight: 300; }
+.pal-sectors-cta-label { font-size: 12px; font-weight: 600; letter-spacing: 1.7px; text-transform: uppercase; color: var(--ember-light); transition: color 180ms ease; }
+.pal-sectors-cta:hover .pal-sectors-cta-label { color: #FFFFFF; }
+@media (max-width: 900px) {
+  .pal-sectors-intro { grid-row: auto; padding-bottom: 8px; }
+  .pal-sectors-intro .lead { max-width: 560px; }
+  .pal-sectors-cta { max-width: 560px; }
+}
+</style>
 </head>
 <body>
 
@@ -470,10 +499,7 @@
   <div class="wrap">
     <p class="kicker pal-eyebrow pal-eyebrow--white">Why this matters</p>
     <h2 class="h2 pal-h2" style="margin-top: 22px;">The paperwork outlives the hardware</h2>
-    <p class="lead" style="color: var(--slate); margin-top: 26px;">A retired server leaves the building in
-      an afternoon. The obligation to prove where it went, and that the data on it is gone, lasts
-      for years. Most disposal chains cannot answer that question because the asset changed hands
-      four times before it was processed.</p>
+    <p class="lead" style="color: var(--slate); margin-top: 26px;">A server leaves in an afternoon. Proof of where it went, and that its data is gone, has to last years. Most chains can&#39;t provide it: the asset changed hands four times.</p>
     <div class="stats" style="margin-top: 64px;">
       <div class="stat">
         <p class="figure pal-stat pal-stat--lg pal-stat--light" data-placeholder>00m</p>
@@ -508,7 +534,7 @@
       <div class="step step-accent">
         <p class="step-n">Step two</p>
         <h3>Destroyed and certified</h3>
-        <p class="body" style="color: var(--mist);">Data-bearing assets are neutralised first, on site or
+        <p class="body" style="color: var(--mist);">Data-bearing assets are neutralized first, on site or
           at a certified facility, and a certificate is issued against each serial number.</p>
       </div>
       <div class="step">
@@ -529,10 +555,7 @@
         <p class="kicker pal-eyebrow pal-eyebrow--alt">Scale</p>
         <h2 class="h2 pal-h2" style="margin-top: 22px;">Built for the volumes nobody else will take</h2>
       </div>
-      <p class="body-w">Exacerbated by data center demand, AI and hyperscaler growth, this is the
-        fastest-growing waste stream in the world, and much of it still ends up in landfill or
-        low-value export channels. Hyperscale decommissioning, wind assets, government refresh
-        cycles and regional mid-market intake all run on the same system and the same controls.</p>
+      <p class="body-w">E-waste is the world&#39;s fastest-growing waste stream, and much of it still ends in landfill or low-value export. Hyperscale, wind, government and regional work all run on one system.</p>
     </div>
     <div class="strip">
       <div class="strip-cell strip-accent">
@@ -560,48 +583,54 @@
 </section>
 
 <!-- INDUSTRIES -->
-<section class="sec sec-white pal-section-t pal-section-b" data-reveal>
+<section class="sec sec-white pal-section-t pal-section-b" data-reveal aria-labelledby="sectors-title">
   <div class="wrap">
-    <p class="kicker pal-eyebrow pal-eyebrow--white">Who we work with</p>
-    <h2 class="h2 pal-h2" style="margin-top: 22px;">What counts as proof changes by sector</h2>
-    <p class="lead" style="color: var(--slate); margin-top: 26px;">A hospital protecting patient records
-      and a hyperscaler closing a data center both need evidence. They need different evidence.</p>
-    <div class="grid" style="margin-top: 64px;">
-      <div class="cell cell-accent">
-        <h3>Hyperscale and data centers</h3>
-        <p class="body-w">Racks and networking gear come down on your migration schedule, with zero
-          downtime to the live environment.</p>
+    <!-- Sectors: intro and CTA hold the first column across two rows; seven
+         sector cards fill the rest. The ember rule sits on the first card and
+         moves to whichever card is hovered or focused. -->
+    <div class="grid pal-sectors">
+      <div class="pal-sectors-intro">
+        <div>
+          <p class="kicker pal-eyebrow pal-eyebrow--white">Who we work with</p>
+          <h2 class="h2 pal-h2" id="sectors-title" style="margin-top: 22px;">What counts as proof changes by sector</h2>
+          <p class="lead" style="color: var(--slate); margin-top: 26px;">A hospital protecting patient records and a hyperscaler closing a data center both need evidence. They need different evidence.</p>
+        </div>
+        <a class="pal-sectors-cta" href="/contact">
+          <span class="pal-sectors-cta-text">
+            <span class="pal-sectors-cta-title">Don&#39;t see your sector?</span>
+            <span class="pal-sectors-cta-label">Talk to an expert</span>
+          </span>
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true" focusable="false"><path d="M7 17L17 7M9 7h8v8"/></svg>
+        </a>
       </div>
-      <div class="cell">
-        <h3>Government and defense</h3>
-        <p class="body-w">Federal security standards met without slowing the refresh, and an audit
-          trail that holds up outside the agency.</p>
-      </div>
-      <div class="cell">
-        <h3>Healthcare</h3>
-        <p class="body-w">Every retired workstation and medical device destroyed and certified, from
-          one clinic to a hospital group.</p>
-      </div>
-      <div class="cell">
-        <h3>Financial services</h3>
-        <p class="body-w">Destruction across trading-floor systems and branch estates, documented to
-          satisfy the examiner first time.</p>
-      </div>
-      <div class="cell">
-        <h3>Manufacturing and industrial</h3>
-        <p class="body-w">Corporate IT and industrial control equipment retired under one security
-          protocol, at sites built for both.</p>
-      </div>
-      <div class="cell">
-        <h3>Defense and aerospace</h3>
-        <p class="body-w">Programme hardware retired to federal standards, with the documentation
-          an auditor outside the agency will accept.</p>
-      </div>
-      <div class="cell">
-        <h3>Wind and renewable energy</h3>
-        <p class="body-w">Steel, copper and rare-earth magnets recovered from a single turbine or a
-          whole farm.</p>
-      </div>
+      <article class="cell pal-sector is-active" tabindex="0">
+        <div class="pal-sector-top"><h3>Hyperscale and data centers</h3><span class="pal-sector-num">01</span></div>
+        <p class="body-w">Racks and networking gear come down on your migration schedule, with zero downtime to the live environment.</p>
+      </article>
+      <article class="cell pal-sector" tabindex="0">
+        <div class="pal-sector-top"><h3>Government and defense</h3><span class="pal-sector-num">02</span></div>
+        <p class="body-w">Federal security standards met without slowing the refresh, and an audit trail that holds up outside the agency.</p>
+      </article>
+      <article class="cell pal-sector" tabindex="0">
+        <div class="pal-sector-top"><h3>Healthcare</h3><span class="pal-sector-num">03</span></div>
+        <p class="body-w">Every retired workstation and medical device destroyed and certified, from one clinic to a hospital group.</p>
+      </article>
+      <article class="cell pal-sector" tabindex="0">
+        <div class="pal-sector-top"><h3>Financial services</h3><span class="pal-sector-num">04</span></div>
+        <p class="body-w">Destruction across trading-floor systems and branch estates, documented to satisfy the examiner first time.</p>
+      </article>
+      <article class="cell pal-sector" tabindex="0">
+        <div class="pal-sector-top"><h3>Wind and renewable energy</h3><span class="pal-sector-num">05</span></div>
+        <p class="body-w">Steel, copper and rare-earth magnets recovered from a single turbine or a whole farm.</p>
+      </article>
+      <article class="cell pal-sector" tabindex="0">
+        <div class="pal-sector-top"><h3>Manufacturing and industrial</h3><span class="pal-sector-num">06</span></div>
+        <p class="body-w">Corporate IT and industrial control equipment retired under one security protocol, at sites built for both.</p>
+      </article>
+      <article class="cell pal-sector" tabindex="0">
+        <div class="pal-sector-top"><h3>Defense and aerospace</h3><span class="pal-sector-num">07</span></div>
+        <p class="body-w">Program hardware retired to federal standards, with the documentation an auditor outside the agency will accept.</p>
+      </article>
     </div>
   </div>
 </section>
@@ -698,7 +727,7 @@
     <div class="pal-close-card">
       <div class="pal-close-copy">
         <p class="pal-close-line">Tell us what you are retiring</p>
-        <p class="pal-close-sub">We will map coverage against your sites and show you the documentation you would receive, before anything is committed.</p>
+        <p class="pal-close-sub">We&#39;ll map coverage and show you the paperwork before you commit.</p>
       </div>
       <a class="pal-btn pal-btn--dark" href="/contact">Talk to an expert</a>
     </div>

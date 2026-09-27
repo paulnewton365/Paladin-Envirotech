@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.75.0">
+<meta name="build-version" content="1.78.0">
 <meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="The Paladin System | Paladin EnviroTech">
 <meta property="og:description" content="One integrated system from pickup through final disposition.">
@@ -189,44 +189,128 @@
     [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
   }
 </style>
-<style id="pal-life-css">
-/* Platform lifecycle diagram: four steps along one line, each adding a record;
-   a bracket gathers the four records into the file, which feeds the report. */
-.pal-life { position: relative; --gap: 28px; --col5: calc((100% - 4 * var(--gap)) * 1.15 / 5.15); padding-bottom: 12px; }
-.pal-life-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 1.15fr); gap: 0 var(--gap); position: relative; }
-.pal-life-steps::before { content: ""; position: absolute; left: 6px; right: calc(var(--col5) - 7px); top: 6px; height: 2px; background: var(--ember); }
-.pal-life-step, .pal-life-report { position: relative; padding-top: 34px; display: flex; flex-direction: column; }
-.pal-life-node { position: absolute; top: 0; left: 0; width: 14px; height: 14px; border-radius: 50%; background: #FFFFFF; border: 2px solid var(--ember); box-sizing: border-box; }
-.pal-life-node--end { background: var(--ember); }
-.pal-life-n { font-size: 13px; font-weight: 600; letter-spacing: 1.2px; color: var(--ember); }
-.pal-life-title { font-size: clamp(20px, 1.8vw, 24px); line-height: 1.2; font-weight: 500; color: var(--navy); margin: 8px 0 10px; }
-.pal-life-text { font-size: 15px; line-height: 1.55; color: var(--slate); margin: 0 0 20px; text-wrap: pretty; }
-.pal-life-doc { margin-top: auto; display: flex; gap: 12px; align-items: flex-start; padding: 14px 14px 14px 12px; background: var(--surface-alt); border-left: 3px solid var(--ember); font-size: 14px; line-height: 1.4; color: var(--navy); }
-.pal-life-doc-k { display: block; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ember-hover); margin-bottom: 4px; }
-.pal-life-ico { flex: none; width: 16px; height: 20px; color: var(--ember); margin-top: 2px; }
-/* The report card sits under the end of the line and drops to meet the bracket */
-.pal-life-report { background: var(--navy); padding: 30px 28px 28px; margin: 26px 0 -40px; }
-.pal-life-report .pal-life-node { top: -26px; left: 0; }
-.pal-life-report .pal-life-n { color: var(--ember-light); }
-.pal-life-report .pal-life-title { color: #FFFFFF; }
-.pal-life-report .pal-life-text { color: var(--mist); }
-.pal-life-link { margin-top: auto; align-self: flex-start; font-size: 13px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: #FFFFFF; border-bottom: 1px solid var(--ember-light); padding-bottom: 4px; }
-.pal-life-link:hover { color: var(--ember-light); }
-.pal-life-rail { position: relative; margin-top: 18px; width: calc(100% - var(--col5) - var(--gap)); height: 22px; border: 2px dashed var(--ember); border-top: 0; box-sizing: border-box; }
-.pal-life-rail::after { content: ""; position: absolute; left: 100%; bottom: -2px; width: calc(var(--gap) - 8px); border-top: 2px dashed var(--ember); }
-.pal-life-rail::before { content: ""; position: absolute; left: calc(100% + var(--gap) - 9px); bottom: -7px; border: 6px solid transparent; border-left: 8px solid var(--ember); border-right: 0; }
-.pal-life-rail span { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); background: #FFFFFF; padding: 0 12px; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; line-height: 14px; text-transform: uppercase; color: var(--ember-hover); white-space: nowrap; }
-@media (max-width: 1100px) { .pal-life { --gap: 20px; } .pal-life-text { font-size: 14px; } .pal-life-report { padding: 28px 22px 24px; } }
+<style id="pal-lc-css">
+/* Platform lifecycle stepper (from Paladin-Lifecycle-1b, on the site system) */
+.pal-lc { --gap: 40px; }
+.pal-lc-track { position: relative; }
+.pal-lc-spine { position: relative; height: 14px; margin-bottom: 40px; }
+.pal-lc-spine::before { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 1px; background: var(--hairline); }
+.pal-lc-spine-fill { position: absolute; left: 0; top: 5px; height: 3px; width: calc(80% + 7px); background: var(--ember); transition: width .9s cubic-bezier(.6,0,.2,1); }
+.pal-lc-node { position: absolute; top: 0; width: 14px; height: 14px; box-sizing: border-box; border: 2px solid var(--ember); background: var(--ember); transition: background-color .4s .5s, border-color .4s .5s; }
+.pal-lc-node::after { position: absolute; inset: -2px; animation: palLcPulse 1.4s ease-out infinite; }
+@keyframes palLcPulse { 0% { box-shadow: 0 0 0 0 rgba(184,84,31,0.45); } 100% { box-shadow: 0 0 0 12px rgba(184,84,31,0); } }
+.pal-lc-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: stretch; }
+.pal-lc-step { display: flex; flex-direction: column; gap: 28px; padding-right: 32px; cursor: pointer; outline: none; }
+.pal-lc-step:focus-visible .pal-lc-title, .pal-lc-report:focus-visible .pal-lc-title { text-decoration: underline; text-decoration-color: var(--ember); text-underline-offset: 4px; }
+.pal-lc-head { display: flex; flex-direction: column; gap: 10px; }
+.pal-lc-n { font-size: 12px; font-weight: 600; letter-spacing: 1.2px; color: var(--ember); transition: color .4s; }
+.pal-lc-title { font-size: clamp(19px, 1.5vw, 22px); line-height: 1.2; font-weight: 300; letter-spacing: -0.4px; margin: 0; color: var(--navy); transition: color .4s; }
+.pal-lc-text { font-size: 15px; line-height: 1.55; color: var(--slate); margin: 0; text-wrap: pretty; }
+.pal-lc-step .pal-lc-text { min-height: calc(15px * 1.55 * 4); }
+.pal-lc-rec { border-top: 1px solid var(--hairline); padding-top: 18px; min-height: 96px; box-sizing: border-box; }
+.pal-lc-rec-in { display: flex; flex-direction: column; gap: 8px; transition: opacity .5s .4s, transform .7s .4s cubic-bezier(.2,.7,.2,1); }
+.pal-lc-rec-k { display: flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ember); }
+.pal-lc-check { width: 12px; height: 12px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.5; stroke-linecap: square; }
+.pal-lc-rec-v { font-size: 15px; line-height: 1.4; color: var(--navy); }
+.pal-lc-rec-v span { color: var(--slate); }
+/* Report card: grey while the file builds, navy once it is the report */
+.pal-lc-report { --rep: 1; display: flex; flex-direction: column; gap: 20px; padding: 28px; margin-top: -28px; cursor: pointer; outline: none;
+  background: var(--navy); color: #FFFFFF; transition: background-color .7s .3s, color .7s .3s; }
+.pal-lc-report .pal-lc-n { color: var(--ember-light); transition: color .5s .3s; }
+.pal-lc-report .pal-lc-title { color: inherit; }
+.pal-lc-report .pal-lc-text { color: var(--mist); transition: color .7s .3s; }
+.pal-lc-ticks { list-style: none; margin: 0; padding: 18px 0 0; border-top: 1px solid rgba(195,205,214,0.24); display: flex; flex-direction: column; gap: 10px; transition: border-color .7s .3s; }
+.pal-lc-tick { --tick: 1; display: flex; align-items: center; gap: 10px; font-size: 14px; line-height: 1.3; }
+.pal-lc-box { width: 14px; height: 14px; flex: none; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 1.5px solid var(--ember); background: var(--ember); transition: background-color .3s .9s, border-color .3s .9s; }
+.pal-lc-box .pal-lc-check { width: 10px; height: 10px; stroke: #FFFFFF; stroke-width: 3.5; transition: opacity .3s .9s; }
+.pal-lc-tick-t { transition: opacity .3s .9s; }
+.pal-lc-link { margin-top: auto; align-self: flex-start; font-size: 13px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; text-decoration: none; padding-bottom: 5px;
+  border-bottom: 2px solid var(--ember-light); color: #FFFFFF; transition: opacity .5s .8s, color .2s; }
+.pal-lc-link:hover { color: var(--ember-light); }
+/* bracket */
+.pal-lc-bracket { position: relative; height: 24px; margin-top: 28px; width: 80%; }
+.pal-lc-bracket::before { content: ""; position: absolute; left: 0; top: 0; bottom: 11px; border-left: 1.5px dashed var(--ember); }
+.pal-lc-bracket-fill { position: absolute; left: 0; top: 12px; height: 0; width: 100%; border-top: 1.5px dashed var(--ember); transition: width .9s cubic-bezier(.6,0,.2,1); }
+.pal-lc-bracket-l { position: absolute; left: 50%; top: 5px; transform: translateX(-50%); background: #FFFFFF; padding: 0 16px; font-size: 11px; font-weight: 600; letter-spacing: 1.2px; line-height: 14px; text-transform: uppercase; color: var(--ember-hover); white-space: nowrap; }
+.pal-lc-l1, .pal-lc-l2, .pal-lc-l3 { display: none; }
+/* controls */
+.pal-lc-controls { display: none; gap: 24px; align-items: center; margin-top: 40px; }
+html[data-pal-lc] .pal-lc-controls { display: flex; }
+.pal-lc-play { display: none; }
+html.pal-lc-paused .pal-lc-play { display: inline; }
+html.pal-lc-paused .pal-lc-pause { display: none; }
+.pal-lc-replay { background: none; border: 0; padding: 12px 0; font: inherit; font-size: 13px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--slate); cursor: pointer; }
+.pal-lc-replay:hover, .pal-lc-replay:focus-visible { color: var(--ember-hover); }
+html[data-pal-lc="0"] .pal-lc-grid > :nth-child(2) .pal-lc-n, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(3) .pal-lc-n, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(4) .pal-lc-n { color: var(--slate); }
+html[data-pal-lc="0"] .pal-lc-grid > :nth-child(2) .pal-lc-title, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(3) .pal-lc-title, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(4) .pal-lc-title { color: var(--slate); }
+html[data-pal-lc="0"] .pal-lc-grid > :nth-child(2) .pal-lc-rec-in, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(3) .pal-lc-rec-in, html[data-pal-lc="0"] .pal-lc-grid > :nth-child(4) .pal-lc-rec-in { opacity: 0; transform: translateY(-16px); }
+html[data-pal-lc="0"] .pal-lc-node:nth-of-type(2), html[data-pal-lc="0"] .pal-lc-node:nth-of-type(3), html[data-pal-lc="0"] .pal-lc-node:nth-of-type(4), html[data-pal-lc="0"] .pal-lc-node:nth-of-type(5) { border-color: var(--mist); background: #FFFFFF; }
+html[data-pal-lc="0"] .pal-lc-tick:nth-child(2), html[data-pal-lc="0"] .pal-lc-tick:nth-child(3), html[data-pal-lc="0"] .pal-lc-tick:nth-child(4) { --tick: 0; }
+html[data-pal-lc="0"] .pal-lc-spine-fill { width: calc(0% + 7px); }
+html[data-pal-lc="0"] .pal-lc-bracket-fill { width: 25%; }
+html[data-pal-lc="0"] .pal-lc-l4 { display: none; } html[data-pal-lc="0"] .pal-lc-l1 { display: inline; }
+html[data-pal-lc="0"] .pal-lc-report { --rep: 0; }
+html[data-pal-lc="1"] .pal-lc-grid > :nth-child(3) .pal-lc-n, html[data-pal-lc="1"] .pal-lc-grid > :nth-child(4) .pal-lc-n { color: var(--slate); }
+html[data-pal-lc="1"] .pal-lc-grid > :nth-child(3) .pal-lc-title, html[data-pal-lc="1"] .pal-lc-grid > :nth-child(4) .pal-lc-title { color: var(--slate); }
+html[data-pal-lc="1"] .pal-lc-grid > :nth-child(3) .pal-lc-rec-in, html[data-pal-lc="1"] .pal-lc-grid > :nth-child(4) .pal-lc-rec-in { opacity: 0; transform: translateY(-16px); }
+html[data-pal-lc="1"] .pal-lc-node:nth-of-type(3), html[data-pal-lc="1"] .pal-lc-node:nth-of-type(4), html[data-pal-lc="1"] .pal-lc-node:nth-of-type(5) { border-color: var(--mist); background: #FFFFFF; }
+html[data-pal-lc="1"] .pal-lc-tick:nth-child(3), html[data-pal-lc="1"] .pal-lc-tick:nth-child(4) { --tick: 0; }
+html[data-pal-lc="1"] .pal-lc-spine-fill { width: calc(20% + 7px); }
+html[data-pal-lc="1"] .pal-lc-bracket-fill { width: 50%; }
+html[data-pal-lc="1"] .pal-lc-l4 { display: none; } html[data-pal-lc="1"] .pal-lc-l2 { display: inline; }
+html[data-pal-lc="1"] .pal-lc-report { --rep: 0; }
+html[data-pal-lc="2"] .pal-lc-grid > :nth-child(4) .pal-lc-n { color: var(--slate); }
+html[data-pal-lc="2"] .pal-lc-grid > :nth-child(4) .pal-lc-title { color: var(--slate); }
+html[data-pal-lc="2"] .pal-lc-grid > :nth-child(4) .pal-lc-rec-in { opacity: 0; transform: translateY(-16px); }
+html[data-pal-lc="2"] .pal-lc-node:nth-of-type(4), html[data-pal-lc="2"] .pal-lc-node:nth-of-type(5) { border-color: var(--mist); background: #FFFFFF; }
+html[data-pal-lc="2"] .pal-lc-tick:nth-child(4) { --tick: 0; }
+html[data-pal-lc="2"] .pal-lc-spine-fill { width: calc(40% + 7px); }
+html[data-pal-lc="2"] .pal-lc-bracket-fill { width: 75%; }
+html[data-pal-lc="2"] .pal-lc-l4 { display: none; } html[data-pal-lc="2"] .pal-lc-l3 { display: inline; }
+html[data-pal-lc="2"] .pal-lc-report { --rep: 0; }
+html[data-pal-lc="3"] .pal-lc-node:nth-of-type(5) { border-color: var(--mist); background: #FFFFFF; }
+html[data-pal-lc="3"] .pal-lc-spine-fill { width: calc(60% + 7px); }
+html[data-pal-lc="3"] .pal-lc-bracket-fill { width: 100%; }
+html[data-pal-lc="3"] .pal-lc-report { --rep: 0; }
+html[data-pal-lc="0"] .pal-lc-node:nth-of-type(1)::after { content: ""; }
+html[data-pal-lc="1"] .pal-lc-node:nth-of-type(2)::after { content: ""; }
+html[data-pal-lc="2"] .pal-lc-node:nth-of-type(3)::after { content: ""; }
+html[data-pal-lc="3"] .pal-lc-node:nth-of-type(4)::after { content: ""; }
+html[data-pal-lc="4"] .pal-lc-node:nth-of-type(5)::after { content: ""; }
+/* variables applied */
+.pal-lc-report { background: var(--navy); }
+html[data-pal-lc] .pal-lc-report { transition: background-color .7s .3s, color .7s .3s; }
+html[data-pal-lc="0"] .pal-lc-report, html[data-pal-lc="1"] .pal-lc-report, html[data-pal-lc="2"] .pal-lc-report, html[data-pal-lc="3"] .pal-lc-report { background: var(--surface-alt); color: var(--navy); }
+html[data-pal-lc="0"] .pal-lc-report .pal-lc-n, html[data-pal-lc="1"] .pal-lc-report .pal-lc-n, html[data-pal-lc="2"] .pal-lc-report .pal-lc-n, html[data-pal-lc="3"] .pal-lc-report .pal-lc-n { color: var(--ember); }
+html[data-pal-lc="0"] .pal-lc-report .pal-lc-text, html[data-pal-lc="1"] .pal-lc-report .pal-lc-text, html[data-pal-lc="2"] .pal-lc-report .pal-lc-text, html[data-pal-lc="3"] .pal-lc-report .pal-lc-text { color: var(--slate); }
+html[data-pal-lc="0"] .pal-lc-ticks, html[data-pal-lc="1"] .pal-lc-ticks, html[data-pal-lc="2"] .pal-lc-ticks, html[data-pal-lc="3"] .pal-lc-ticks { border-top-color: var(--hairline); }
+html[data-pal-lc="0"] .pal-lc-link, html[data-pal-lc="1"] .pal-lc-link, html[data-pal-lc="2"] .pal-lc-link, html[data-pal-lc="3"] .pal-lc-link { opacity: .35; color: var(--navy); }
+html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-box, html[data-pal-lc="0"] .pal-lc-tick:nth-child(3) .pal-lc-box, html[data-pal-lc="0"] .pal-lc-tick:nth-child(4) .pal-lc-box, html[data-pal-lc="1"] .pal-lc-tick:nth-child(3) .pal-lc-box, html[data-pal-lc="1"] .pal-lc-tick:nth-child(4) .pal-lc-box, html[data-pal-lc="2"] .pal-lc-tick:nth-child(4) .pal-lc-box { background: transparent; border-color: var(--mist); }
+html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-check, html[data-pal-lc="0"] .pal-lc-tick:nth-child(3) .pal-lc-check, html[data-pal-lc="0"] .pal-lc-tick:nth-child(4) .pal-lc-check, html[data-pal-lc="1"] .pal-lc-tick:nth-child(3) .pal-lc-check, html[data-pal-lc="1"] .pal-lc-tick:nth-child(4) .pal-lc-check, html[data-pal-lc="2"] .pal-lc-tick:nth-child(4) .pal-lc-check { opacity: 0; }
+html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-tick-t, html[data-pal-lc="0"] .pal-lc-tick:nth-child(3) .pal-lc-tick-t, html[data-pal-lc="0"] .pal-lc-tick:nth-child(4) .pal-lc-tick-t, html[data-pal-lc="1"] .pal-lc-tick:nth-child(3) .pal-lc-tick-t, html[data-pal-lc="1"] .pal-lc-tick:nth-child(4) .pal-lc-tick-t, html[data-pal-lc="2"] .pal-lc-tick:nth-child(4) .pal-lc-tick-t { opacity: .55; }
+@media (max-width: 1100px) { .pal-lc-step { padding-right: 20px; } .pal-lc-report { padding: 24px 20px; } }
+/* Below 900px the stepper stacks and simply shows the finished file */
 @media (max-width: 900px) {
-  .pal-life { padding-bottom: 0; }
-  .pal-life-steps { grid-template-columns: 1fr; gap: 0; padding-left: 30px; }
-  .pal-life-steps::before { left: 6px; right: auto; top: 6px; bottom: 0; width: 2px; height: auto; }
-  .pal-life-step { padding-top: 0; padding-bottom: 32px; }
-  .pal-life-node { left: -30px; top: 2px; }
-  .pal-life-report { padding: 26px 22px 24px; margin: 0; }
-  .pal-life-report .pal-life-node { left: -30px; top: 30px; }
-  .pal-life-report::after { content: ""; position: absolute; left: -25px; top: 44px; bottom: 0; width: 5px; background: #FFFFFF; }
-  .pal-life-rail { display: none; }
+  .pal-lc-spine, .pal-lc-bracket, .pal-lc-controls, html[data-pal-lc] .pal-lc-controls { display: none; }
+  .pal-lc-grid { grid-template-columns: 1fr; gap: 28px; }
+  .pal-lc-step { padding-right: 0; gap: 16px; cursor: default; }
+  .pal-lc-rec { min-height: 0; }
+  .pal-lc-step .pal-lc-text { min-height: 0; }
+  .pal-lc-report { margin-top: 0; cursor: default; }
+  html[data-pal-lc] .pal-lc-grid .pal-lc-n, html[data-pal-lc] .pal-lc-step .pal-lc-n { color: var(--ember); }
+  html[data-pal-lc] .pal-lc-step .pal-lc-title { color: var(--navy); }
+  html[data-pal-lc] .pal-lc-rec-in { opacity: 1; transform: none; }
+  html[data-pal-lc] .pal-lc-report { background: var(--navy); color: #FFFFFF; }
+  html[data-pal-lc] .pal-lc-report .pal-lc-n { color: var(--ember-light); }
+  html[data-pal-lc] .pal-lc-report .pal-lc-text { color: var(--mist); }
+  html[data-pal-lc] .pal-lc-ticks { border-top-color: rgba(195,205,214,0.24); }
+  html[data-pal-lc] .pal-lc-link { opacity: 1; color: #FFFFFF; }
+  html[data-pal-lc] .pal-lc-box { background: var(--ember) !important; border-color: var(--ember) !important; }
+  html[data-pal-lc] .pal-lc-check { opacity: 1 !important; }
+  html[data-pal-lc] .pal-lc-tick-t { opacity: 1 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pal-lc *, .pal-lc-node::after { transition: none !important; animation: none !important; }
 }
 </style>
 </head>
@@ -502,48 +586,90 @@ a:hover { opacity: 0.75; }
       <h2 class="pal-h2" style="font-size: clamp(30px, 3.8vw, 56px); line-height: 1.14; font-weight: 500; margin: 16px 0 20px;"><span style="color: #B8541F;">The audit trail assembles</span> as the assets move.</h2>
       <p style="font-size: 17px; line-height: 27px; margin: 0; color: #5A6874;">Each step adds a record to the same file, so the report your auditor needs exists before the last truck leaves.</p>
     </div>
-    <div class="pal-life" data-reveal="1">
-    <!-- Lifecycle diagram: four steps along one line, each dropping a record into
-         the file; the file becomes the report in step five. Stacks below 900px. -->
-    <ol class="pal-life-steps">
-      <li class="pal-life-step">
-        <span class="pal-life-node" aria-hidden="true"></span>
-        <span class="pal-life-n">01</span>
-        <h3 class="pal-life-title">Intake</h3>
-        <p class="pal-life-text">Local hub-and-satellite sites run one operating model at every location.</p>
-        <div class="pal-life-doc"><svg class="pal-life-ico" viewBox="0 0 16 20" aria-hidden="true" focusable="false"><path d="M1 1h9l5 5v13H1z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10 1v5h5M4 10h8M4 13.5h8M4 17h5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span><span class="pal-life-doc-k">Added to the file</span>Pickup manifest, serial-scanned at the dock</span></div>
-      </li>
-      <li class="pal-life-step">
-        <span class="pal-life-node" aria-hidden="true"></span>
-        <span class="pal-life-n">02</span>
-        <h3 class="pal-life-title">Destruction</h3>
-        <p class="pal-life-text">Data-bearing assets go first, to NIST 800-88, witnessed on-site or off.</p>
-        <div class="pal-life-doc"><svg class="pal-life-ico" viewBox="0 0 16 20" aria-hidden="true" focusable="false"><path d="M1 1h9l5 5v13H1z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10 1v5h5M4 10h8M4 13.5h8M4 17h5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span><span class="pal-life-doc-k">Added to the file</span>Certificate of destruction, per serial number</span></div>
-      </li>
-      <li class="pal-life-step">
-        <span class="pal-life-node" aria-hidden="true"></span>
-        <span class="pal-life-n">03</span>
-        <h3 class="pal-life-title">Recycling</h3>
-        <p class="pal-life-text">Processed at our own domestic facilities, never through broker-led export.</p>
-        <div class="pal-life-doc"><svg class="pal-life-ico" viewBox="0 0 16 20" aria-hidden="true" focusable="false"><path d="M1 1h9l5 5v13H1z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10 1v5h5M4 10h8M4 13.5h8M4 17h5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span><span class="pal-life-doc-k">Added to the file</span>Processing record, domestic chain of custody</span></div>
-      </li>
-      <li class="pal-life-step">
-        <span class="pal-life-node" aria-hidden="true"></span>
-        <span class="pal-life-n">04</span>
-        <h3 class="pal-life-title">Recovery</h3>
-        <p class="pal-life-text">Rare-earth magnets and other materials return to domestic manufacturing at usable quality.</p>
-        <div class="pal-life-doc"><svg class="pal-life-ico" viewBox="0 0 16 20" aria-hidden="true" focusable="false"><path d="M1 1h9l5 5v13H1z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10 1v5h5M4 10h8M4 13.5h8M4 17h5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg><span><span class="pal-life-doc-k">Added to the file</span>Materials ledger, what was recovered and at what grade</span></div>
-      </li>
-      <li class="pal-life-report">
-        <span class="pal-life-node pal-life-node--end" aria-hidden="true"></span>
-        <span class="pal-life-n">05</span>
-        <h3 class="pal-life-title">Reporting</h3>
-        <p class="pal-life-text">The four records become one asset-level report, available by default.</p>
-        <a class="pal-life-link" href="/contact">See a sample report</a>
-      </li>
-    </ol>
-    <div class="pal-life-rail" aria-hidden="true"><span>Four records, one file</span></div>
-  </div>
+    <div class="pal-lc" data-reveal="1">
+      <!-- Lifecycle stepper. State lives on <html data-pal-lc="0-4"> so the page
+           runtime can never reset it; with no JS or reduced motion the markup
+           shows the finished state (every record filed, report ready). -->
+      <div class="pal-lc-track">
+        <div class="pal-lc-spine" aria-hidden="true"><i class="pal-lc-spine-fill"></i><span class="pal-lc-node" style="left: 0%;"></span><span class="pal-lc-node" style="left: 20%;"></span><span class="pal-lc-node" style="left: 40%;"></span><span class="pal-lc-node" style="left: 60%;"></span><span class="pal-lc-node" style="left: 80%;"></span></div>
+        <div class="pal-lc-grid">
+        <div class="pal-lc-step" data-lc-step="0" role="button" tabindex="0" aria-label="Step 01: Intake">
+          <div class="pal-lc-head">
+            <span class="pal-lc-n">01</span>
+            <h3 class="pal-lc-title">Intake</h3>
+            <p class="pal-lc-text">Local hub-and-satellite sites run one operating model at every location.</p>
+          </div>
+          <div class="pal-lc-rec">
+            <div class="pal-lc-rec-in">
+              <span class="pal-lc-rec-k"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg>Added to the file</span>
+              <span class="pal-lc-rec-v">Pickup manifest, <span>serial-scanned at the dock</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="pal-lc-step" data-lc-step="1" role="button" tabindex="0" aria-label="Step 02: Destruction">
+          <div class="pal-lc-head">
+            <span class="pal-lc-n">02</span>
+            <h3 class="pal-lc-title">Destruction</h3>
+            <p class="pal-lc-text">Data-bearing assets go first, to NIST 800-88, witnessed on-site or off.</p>
+          </div>
+          <div class="pal-lc-rec">
+            <div class="pal-lc-rec-in">
+              <span class="pal-lc-rec-k"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg>Added to the file</span>
+              <span class="pal-lc-rec-v">Certificate of destruction, <span>per serial number</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="pal-lc-step" data-lc-step="2" role="button" tabindex="0" aria-label="Step 03: Recycling">
+          <div class="pal-lc-head">
+            <span class="pal-lc-n">03</span>
+            <h3 class="pal-lc-title">Recycling</h3>
+            <p class="pal-lc-text">Processed at our own domestic facilities, never through broker-led export.</p>
+          </div>
+          <div class="pal-lc-rec">
+            <div class="pal-lc-rec-in">
+              <span class="pal-lc-rec-k"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg>Added to the file</span>
+              <span class="pal-lc-rec-v">Processing record, <span>domestic chain of custody</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="pal-lc-step" data-lc-step="3" role="button" tabindex="0" aria-label="Step 04: Recovery">
+          <div class="pal-lc-head">
+            <span class="pal-lc-n">04</span>
+            <h3 class="pal-lc-title">Recovery</h3>
+            <p class="pal-lc-text">Rare-earth magnets and other materials return to domestic manufacturing at usable quality.</p>
+          </div>
+          <div class="pal-lc-rec">
+            <div class="pal-lc-rec-in">
+              <span class="pal-lc-rec-k"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg>Added to the file</span>
+              <span class="pal-lc-rec-v">Materials ledger, <span>what was recovered and at what grade</span></span>
+            </div>
+          </div>
+        </div>
+        <div class="pal-lc-report" data-lc-step="4" role="button" tabindex="0" aria-label="Step 05: Reporting">
+          <div class="pal-lc-head">
+            <span class="pal-lc-n">05</span>
+            <h3 class="pal-lc-title">Reporting</h3>
+            <p class="pal-lc-text">The four records become one asset-level report, available by default.</p>
+          </div>
+          <ul class="pal-lc-ticks">
+            <li class="pal-lc-tick"><span class="pal-lc-box"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg></span><span class="pal-lc-tick-t">Pickup manifest</span></li>
+            <li class="pal-lc-tick"><span class="pal-lc-box"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg></span><span class="pal-lc-tick-t">Certificate of destruction</span></li>
+            <li class="pal-lc-tick"><span class="pal-lc-box"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg></span><span class="pal-lc-tick-t">Processing record</span></li>
+            <li class="pal-lc-tick"><span class="pal-lc-box"><svg class="pal-lc-check" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12l5 5L20 6"></path></svg></span><span class="pal-lc-tick-t">Materials ledger</span></li>
+          </ul>
+          <a class="pal-lc-link" href="/contact">See a sample report</a>
+        </div>
+        </div>
+        <div class="pal-lc-bracket" aria-hidden="true">
+          <span class="pal-lc-bracket-fill"></span>
+          <span class="pal-lc-bracket-l"><span class="pal-lc-l1">1 of 4 records</span><span class="pal-lc-l2">2 of 4 records</span><span class="pal-lc-l3">3 of 4 records</span><span class="pal-lc-l4">Four records, one file</span></span>
+        </div>
+      </div>
+      <div class="pal-lc-controls">
+        <button type="button" class="pal-btn pal-btn--ghost-light pal-lc-toggle" data-lc-toggle><span class="pal-lc-pause">Pause</span><span class="pal-lc-play">Play</span></button>
+        <button type="button" class="pal-lc-replay" data-lc-replay>Replay</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -929,6 +1055,56 @@ class Component extends DCLogic {
   });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') set(false); });
   BP.addEventListener('change', function (e) { if (!e.matches) set(false); });
+})();
+</script>
+<script>
+/* Platform lifecycle stepper. Steps advance every 3.6s once the diagram is on
+   screen, pause on hover or focus, and can be clicked. State is kept on <html>
+   (data-pal-lc = current step, class pal-lc-paused) so the page runtime never
+   resets it. Reduced motion or no JS leaves the finished state showing. */
+(function () {
+  var root = document.documentElement;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var DUR = 3600, b = 0, playing = true, hover = false, visible = false, timer = null;
+  function set(v) { b = v; root.setAttribute('data-pal-lc', String(v)); }
+  function schedule() {
+    clearTimeout(timer);
+    if (!playing || hover || !visible) return;
+    timer = setTimeout(function () { set(b === 4 ? 0 : b + 1); schedule(); }, b === 4 ? DUR * 1.8 : DUR);
+  }
+  function setPlaying(p) { playing = p; root.classList.toggle('pal-lc-paused', !p); schedule(); }
+  set(0);
+  function check() {
+    var el = document.querySelector('.pal-lc-track');
+    if (!el) return;
+    var r = el.getBoundingClientRect(), vh = window.innerHeight || root.clientHeight;
+    var v = r.height > 0 && r.top < vh * 0.75 && r.bottom > vh * 0.2;
+    if (v !== visible) { visible = v; schedule(); }
+  }
+  var ticking = false;
+  function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; check(); }); } }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', check);
+  document.addEventListener('DOMContentLoaded', check);
+  check();
+  function stepFrom(t) { var s = t.closest && t.closest('[data-lc-step]'); return s ? parseInt(s.getAttribute('data-lc-step'), 10) : -1; }
+  document.addEventListener('click', function (e) {
+    if (!e.target.closest) return;
+    if (e.target.closest('[data-lc-toggle]')) { setPlaying(!playing); return; }
+    if (e.target.closest('[data-lc-replay]')) { set(0); setPlaying(true); return; }
+    if (e.target.closest('.pal-lc-link')) return;
+    var n = stepFrom(e.target);
+    if (n >= 0 && window.innerWidth > 900) { set(n); schedule(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    var n = stepFrom(e.target);
+    if (n >= 0 && e.target.hasAttribute('data-lc-step')) { e.preventDefault(); set(n); schedule(); }
+  });
+  function setHover(h) { if (h !== hover) { hover = h; schedule(); } }
+  document.addEventListener('mouseover', function (e) { setHover(!!(e.target.closest && e.target.closest('.pal-lc-track'))); });
+  document.addEventListener('focusin', function (e) { setHover(!!(e.target.closest && e.target.closest('.pal-lc-track'))); });
 })();
 </script>
 <style id="pal-system">
