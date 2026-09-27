@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.78.0">
+<meta name="build-version" content="1.80.0">
 <meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="Industries We Serve | Paladin EnviroTech">
 <meta property="og:description" content="Hyperscale, OEM, enterprise and government programs.">
@@ -233,6 +233,22 @@ a:hover { opacity: 0.75; }
   .pal-ind { grid-template-columns: 1fr; gap: 40px; }
 }
 @media (prefers-reduced-motion: reduce) { .pal-ind-copy { animation: none; } }
+/* Pinned walkthrough */
+.pal-ind-track { position: relative; height: calc(100vh + 7 * 55vh); }
+.pal-ind-pin { position: sticky; top: var(--pal-hdr, 84px); height: calc(100vh - var(--pal-hdr, 84px)); display: flex; align-items: center; padding: clamp(20px, 4vh, 48px) 0; box-sizing: border-box; }
+.pal-ind-track .pal-ind-head-block { margin-bottom: clamp(20px, 3.5vh, 40px); }
+.pal-ind-track .pal-ind-item { padding: clamp(10px, 1.6vh, 17px) 0; }
+.pal-ind-progress { height: 2px; background: rgba(195,205,214,0.24); }
+.pal-ind-progress i { display: block; height: 100%; width: 0; background: var(--ember-light); }
+/* Fallback when the block cannot fit the screen, or no JS: an ordinary section */
+.pal-ind-track.pal-ind-free, html:not(.pal-ind-js) .pal-ind-track { height: auto; }
+.pal-ind-track.pal-ind-free .pal-ind-pin, html:not(.pal-ind-js) .pal-ind-pin { position: static; height: auto; padding: var(--pal-section, 96px) 0; }
+.pal-ind-track.pal-ind-free .pal-ind-progress, html:not(.pal-ind-js) .pal-ind-progress { display: none; }
+@media (max-width: 960px) {
+  .pal-ind-track:not(.pal-ind-free) .pal-ind-list { display: none; }
+  .pal-ind-track { height: calc(100vh + 7 * 45vh); }
+}
+
 
 .pal-ind-head-block { margin-bottom: clamp(32px, 4vw, 48px); }
 .pal-ind-head-eyebrow { display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; font-weight: 500; color: #8F3F14; }
@@ -421,8 +437,12 @@ a:hover { opacity: 0.75; }
   </div>
 </div>
 
-<div class="pal-section-t pal-section-b" style="background: #F5F6F7; padding: clamp(64px, 8vw, 112px) 0;" data-reveal>
-  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
+<!-- Pinned sector walkthrough: the tall track gives each of the eight sectors a
+     stretch of scroll; the inner block sticks under the header and the active
+     sector follows scroll position (motion.js, initIndustries). -->
+<div class="pal-ind-track" style="background: #F5F6F7;">
+ <div class="pal-ind-pin">
+  <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px; width: 100%;" data-reveal>
     <div class="pal-ind-head-block"><div class="pal-ind-head-eyebrow pal-eyebrow pal-eyebrow--alt">Industries we serve</div><h2 class="pal-ind-head-title pal-h2">Start with your sector.</h2></div>
     <div class="pal-ind" data-ind-root>
       <div class="pal-ind-list" role="tablist" aria-label="Industries" data-ind-list></div>
@@ -437,6 +457,7 @@ a:hover { opacity: 0.75; }
             </div>
           </div>
         </div>
+        <div class="pal-ind-progress" aria-hidden="true"><i data-ind-progress></i></div>
         <div class="pal-ind-bar">
           <div class="pal-ind-count" data-ind-count>01 / 08</div>
           <button class="pal-ind-nav" type="button" aria-label="Previous industry" data-ind-prev>&#8592;</button>
@@ -445,6 +466,7 @@ a:hover { opacity: 0.75; }
       </div>
     </div>
   </div>
+ </div>
 </div>
 
 <div class="pal-section-t pal-section-b" data-reveal="1" style="background: #FFFFFF; padding: clamp(64px, 8vw, 128px) 0;">

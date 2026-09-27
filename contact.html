@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.78.0">
+<meta name="build-version" content="1.80.0">
 <meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="Talk to an Expert | Paladin EnviroTech">
 <meta property="og:description" content="Speak to a Paladin engineer about your program.">
@@ -20,7 +20,6 @@
 <script src="/gate.js"></script>
 <script defer src="/motion.js"></script>
 <link rel="stylesheet" href="/responsive.css">
-<script src="./support.js"></script>
 <style>
   :root {
     --navy: #1E3547; --navy-deep: #162836;
@@ -189,10 +188,6 @@
     [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
   }
 </style>
-</head>
-<body>
-<x-dc>
-<helmet>
 <style>
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Light.otf") format("opentype"); font-weight: 300; font-display: swap; }
 @font-face { font-family: "Restart Hard"; src: url("fonts/RestartHard-Regular.otf") format("opentype"); font-weight: 400; font-display: swap; }
@@ -360,7 +355,8 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
     .foot-grid { grid-template-columns: minmax(0,1fr); gap: 32px; }
   }
 </style>
-</helmet>
+</head>
+<body>
 
 <header style="background: var(--navy); position: sticky; top: 0; z-index: 900;">
   <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; padding-top: 20px; padding-bottom: 20px;">
@@ -477,35 +473,6 @@ input, select, textarea, button { font-family: "Restart Hard", system-ui, sans-s
     </div>
   </div>
 </footer>
-</x-dc>
-<script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  componentDidMount() {
-    const nav = document.querySelector('[data-nav]');
-    const toggle = document.querySelector('[data-nav-toggle]');
-    this.applyNav = () => {
-      if (!nav || !toggle) return;
-      const mobile = window.innerWidth < 900;
-      toggle.style.display = mobile ? 'flex' : 'none';
-      if (!mobile) {
-        nav.dataset.open = '';
-        Object.assign(nav.style, { position: 'static', display: 'flex', flexDirection: 'row', alignItems: 'center', gap: 'clamp(14px, 1.8vw, 34px)', background: 'transparent', padding: '0', border: 'none', left: '', right: '', top: '' });
-      } else if (nav.dataset.open === '1') {
-        Object.assign(nav.style, { position: 'absolute', left: '0', right: '0', top: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '18px', background: '#1E3547', padding: '24px clamp(24px,5vw,72px)', zIndex: '900', borderTop: '1px solid rgba(195,205,214,0.24)' });
-      } else {
-        nav.style.display = 'none';
-      }
-    };
-    if (toggle) toggle.addEventListener('click', () => { nav.dataset.open = nav.dataset.open === '1' ? '' : '1'; this.applyNav(); });
-    window.addEventListener('resize', this.applyNav);
-    this.applyNav();
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.applyNav);
-  }
-}
-</script>
 <script>
 /* Menu open/close by delegation from the document. Binding to the button
    itself does not survive the page runtime re-rendering the header, which is

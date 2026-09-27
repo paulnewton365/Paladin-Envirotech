@@ -616,7 +616,7 @@
     root.setAttribute('data-ind-ready', '1');
 
     var ROWS = [
-      { num: "01", name: "Hyperscale & data centers", head: "A live facility can come down without going dark", body: "Racks, networking gear and backup generators come out on your schedule. Zero downtime, full hazardous-materials handling, every asset accounted for the moment it leaves the floor." },
+      { num: "01", name: "Hyperscale & data centers", head: "A live facility can come down without going dark", body: "Racks, networking gear and generators come out on your schedule: zero downtime, hazardous materials handled, every asset logged as it leaves." },
       { num: "02", name: "Government & public sector", head: "Taxpayer resources, accounted for to the last unit", body: "Federal security standards, met without slowing the refresh down, and an audit trail that holds up when someone outside your agency asks to see it." },
       { num: "03", name: "Healthcare", head: "Patient trust doesn\u2019t end when the hardware does", body: "Every retired workstation, server and medical device is HIPAA-compliant destroyed and certified, from a single clinic to a multi-hospital system." },
       { num: "04", name: "Financial services", head: "The audit you\u2019re dreading becomes routine", body: "PCI DSS-compliant destruction across trading-floor systems and branch computers, documented in a way that satisfies the examiner the first time." },
@@ -669,9 +669,62 @@
       }
     }
 
-    root.querySelector('[data-ind-prev]').addEventListener('click', function () { go(active - 1); });
-    root.querySelector('[data-ind-next]').addEventListener('click', function () { go(active + 1); });
+    /* Pinned walkthrough. The section is a tall track with a sticky block
+       inside; scroll position through the track picks the sector, so every
+       sector is shown before the page moves on. Clicking a sector or an
+       arrow scrolls to that sector's stretch, keeping the two in step. If
+       the block cannot fit the screen it falls back to an ordinary section. */
+    var track = root.closest('.pal-ind-track');
+    var pin = track && track.querySelector('.pal-ind-pin');
+    var bar = root.querySelector('[data-ind-progress]');
+    var pinned = false;
+    document.documentElement.classList.add('pal-ind-js');
+
+    function hdr() { var h = document.querySelector('header'); return h ? h.offsetHeight : 0; }
+    function measure() {
+      if (!track || !pin) return;
+      track.style.setProperty('--pal-hdr', hdr() + 'px');
+      track.classList.remove('pal-ind-free');
+      var inner = pin.firstElementChild;
+      var fits = inner && inner.scrollHeight <= pin.clientHeight + 1;
+      pinned = !!fits;
+      track.classList.toggle('pal-ind-free', !pinned);
+      sync();
+    }
+    function span() { return Math.max(1, track.offsetHeight - pin.offsetHeight); }
+    function sync() {
+      if (!pinned) { if (bar) bar.style.width = ''; return; }
+      var p = (hdr() - track.getBoundingClientRect().top) / span();
+      p = Math.min(1, Math.max(0, p));
+      if (bar) bar.style.width = (p * 100).toFixed(2) + '%';
+      var i = Math.min(ROWS.length - 1, Math.floor(p * ROWS.length));
+      if (i !== active) go(i);
+    }
+    function jump(i) {
+      if (!pinned) { go((i + ROWS.length) % ROWS.length); return; }
+      var top = track.getBoundingClientRect().top + window.pageYOffset - hdr();
+      // past either end: leave the walkthrough in that direction
+      var y = i >= ROWS.length ? top + span() + 2 : i < 0 ? top - 2 : top + span() * (i + 0.5) / ROWS.length;
+      window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    if (track && pin) {
+      var ticking = false;
+      window.addEventListener('scroll', function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; sync(); }); }
+      }, { passive: true });
+      window.addEventListener('resize', measure);
+      measure();
+      setTimeout(measure, 600);
+      // clicks on the index go through the scroll so position and sector agree
+      Array.prototype.forEach.call(items, function (el, n) {
+        el.addEventListener('click', function (e) { if (pinned) { e.stopImmediatePropagation(); jump(n); } }, true);
+      });
+    }
+
+    root.querySelector('[data-ind-prev]').addEventListener('click', function () { jump(active - 1); });
+    root.querySelector('[data-ind-next]').addEventListener('click', function () { jump(active + 1); });
     go(0);
+    if (track && pin) sync();
   }
 
   function initMap() {

@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.78.0">
+<meta name="build-version" content="1.80.0">
 <meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="The Paladin System | Paladin EnviroTech">
 <meta property="og:description" content="One integrated system from pickup through final disposition.">
@@ -311,6 +311,19 @@ html[data-pal-lc="0"] .pal-lc-tick:nth-child(2) .pal-lc-tick-t, html[data-pal-lc
 }
 @media (prefers-reduced-motion: reduce) {
   .pal-lc *, .pal-lc-node::after { transition: none !important; animation: none !important; }
+}
+</style>
+<style id="pal-caps-css">
+/* Platform capabilities: compact numbered rows on phones */
+@media (hover: none) { .pal-cap { transform: none !important; } }
+@media (max-width: 700px) {
+  .pal-caps-head.pal-caps-head { gap: 16px !important; margin-bottom: 28px !important; }
+  .pal-caps { gap: 0 !important; border-top: 1px solid var(--hairline); }
+  .pal-cap.pal-cap { display: grid !important; grid-template-columns: 34px minmax(0, 1fr); column-gap: 8px; padding: 20px 0 !important;
+    background: transparent !important; outline: 0 !important; border-bottom: 1px solid var(--hairline); }
+  .pal-cap-n.pal-cap-n { grid-row: 1 / span 2; font-weight: 600; letter-spacing: 1.2px !important; line-height: 25px; }
+  .pal-cap-t.pal-cap-t { margin: 0 0 6px !important; font-size: 19px !important; line-height: 25px !important; }
+  .pal-cap-b.pal-cap-b { line-height: 23px !important; }
 }
 </style>
 </head>
@@ -675,33 +688,33 @@ a:hover { opacity: 0.75; }
 
 <div class="pal-section-t pal-section-b" data-reveal="1" style="background: #F5F6F7; padding: clamp(64px, 8vw, 128px) 0;">
   <div style="max-width: 1180px; margin: 0 auto; padding: 0 40px;">
-    <div style="display: flex; align-items: end; justify-content: space-between; gap: 48px; flex-wrap: wrap; margin-bottom: 56px;">
+    <div class="pal-caps-head" style="display: flex; align-items: end; justify-content: space-between; gap: 48px; flex-wrap: wrap; margin-bottom: 56px;">
       <div>
         <span class="pal-eyebrow pal-eyebrow--alt" style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;">Capabilities</span>
         <h2 class="pal-h2" style="font-size: clamp(30px, 3.8vw, 56px); line-height: 1.14; letter-spacing: -0.1px; font-weight: 500; margin: 16px 0 0; max-width: 900px;">Four product lines. One system.</h2>
       </div>
       <p style="font-size: 16px; line-height: 26px; margin: 0; max-width: 380px; color: #5A6874;">Every line runs on the same controls and the same reporting, so adding a capability never means adding a new system.</p>
     </div>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 1px;">
-      <div style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
-        <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">01</span>
-        <h3 style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">REcapture</h3>
-        <p style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Domestic recovery of rare-earth magnets from retired equipment, at usable quality. <a href="/critical-materials" style="color: #1E3547; border-bottom: 1px solid #1E3547;">Learn more</a></p>
+    <div class="pal-caps" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 1px;">
+      <div class="pal-cap" style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
+        <span class="pal-cap-n" style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">01</span>
+        <h3 class="pal-cap-t" style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">REcapture</h3>
+        <p class="pal-cap-b" style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Domestic recovery of rare-earth magnets from retired equipment, at usable quality. <a href="/critical-materials" style="color: #1E3547; border-bottom: 1px solid #1E3547;">Learn more</a></p>
       </div>
-        <div style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
-        <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">02</span>
-        <h3 style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">ITAD &amp; electronics recycling</h3>
-        <p style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Certified destruction, domestic recycling and documented final disposition, delivered internationally through one system.</p>
+        <div class="pal-cap" style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
+        <span class="pal-cap-n" style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">02</span>
+        <h3 class="pal-cap-t" style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">ITAD &amp; electronics recycling</h3>
+        <p class="pal-cap-b" style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Certified destruction, domestic recycling and documented final disposition, delivered internationally through one system.</p>
       </div>
-        <div style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
-        <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">03</span>
-        <h3 style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">Chain-of-custody ERP</h3>
-        <p style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Serial-level tracking, certificates and automated settlement reporting. Built for audit from the start.</p>
+        <div class="pal-cap" style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
+        <span class="pal-cap-n" style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">03</span>
+        <h3 class="pal-cap-t" style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">Chain-of-custody ERP</h3>
+        <p class="pal-cap-b" style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Serial-level tracking, certificates and automated settlement reporting. Built for audit from the start.</p>
       </div>
-        <div style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
-        <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">04</span>
-        <h3 style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">Regional coverage</h3>
-        <p style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Secure ITAD and recycling close to where assets are generated, across regional and mid-market sites as well as large metros.</p>
+        <div class="pal-cap" style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 36px; display: flex; flex-direction: column; transition: transform 220ms cubic-bezier(0.2,0.7,0.1,1), outline-color 220ms;" style-hover="transform: translateY(-4px); outline-color: #8F3F14;">
+        <span class="pal-cap-n" style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #B8541F;">04</span>
+        <h3 class="pal-cap-t" style="font-size: clamp(19px, 1.5vw, 22px); line-height: 1.25; font-weight: 500; margin: 16px 0 12px;">Regional coverage</h3>
+        <p class="pal-cap-b" style="font-size: 15px; line-height: 25px; margin: 0; color: #5A6874;">Secure ITAD and recycling close to where assets are generated, across regional and mid-market sites as well as large metros.</p>
       </div></div>
   </div>
 </div>

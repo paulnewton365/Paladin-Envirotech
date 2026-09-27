@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="theme-color" content="#1E3547">
 <meta name="robots" content="noindex, nofollow">
-<meta name="build-version" content="1.78.0">
+<meta name="build-version" content="1.80.0">
 <meta name="build-date" content="2026-09-26">
 <meta property="og:title" content="Blog | Paladin EnviroTech">
 <meta property="og:description" content="News, insight and analysis from Paladin EnviroTech.">
@@ -188,6 +188,26 @@
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
   }
+</style>
+<style id="pal-posts-css">
+/* Blog post list */
+.pal-posts { list-style: none; margin: 24px 0 0; padding: 0; border-top: 1px solid var(--hairline); }
+.pal-post { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 32px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--hairline); }
+.pal-post-img { aspect-ratio: 16 / 10; background: var(--navy); overflow: hidden; }
+.pal-post-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.pal-post-k { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ember); }
+.pal-post-soon { padding: 3px 8px; background: var(--surface-alt); color: var(--slate); letter-spacing: 1px; font-size: 11px; }
+.pal-post-t { margin: 0 0 10px; font-size: clamp(19px, 1.7vw, 24px); line-height: 1.3; font-weight: 400; letter-spacing: -0.3px; color: var(--navy); max-width: 30em; text-wrap: balance; }
+.pal-post-m { margin: 0; font-size: 14px; color: var(--slate); }
+a.pal-post-link { display: contents; }
+.pal-post:has(a.pal-post-link):hover .pal-post-t { color: var(--ember-hover); }
+@media (max-width: 700px) {
+  .pal-post { grid-template-columns: 112px minmax(0, 1fr); gap: 16px; align-items: start; padding: 20px 0; }
+  .pal-post-img { aspect-ratio: 1 / 1; }
+  .pal-post-k { margin-bottom: 6px; gap: 8px; }
+  .pal-post-t { font-size: 17px; margin-bottom: 6px; }
+  .pal-post-m { font-size: 13px; }
+}
 </style>
 </head>
 <body>
@@ -404,21 +424,36 @@ a:hover { opacity: 0.75; }
       </div>
     </a>
     <div style="border-top: 1px solid #D5DBE0; padding-top: 48px;">
-      <span style="font-size: 13px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;">More from Paladin</span>
-      <div style="margin-top: 28px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr)); gap: 24px;">
-        <div style="background: #F5F6F7; outline: 1px solid #D5DBE0; padding: 28px; display: flex; flex-direction: column; gap: 12px; opacity: 0.6;">
-          <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;">Coming soon · Compliance</span>
-          <h3 style="font-size: 19px; line-height: 26px; font-weight: 500; margin: 0;">What NIST 800-88 actually requires, and where providers cut corners</h3><span style="font-size: 12px; letter-spacing: 0.6px; color: #5A6874; margin-top: 2px;">Jen Rivero &middot; SVP, Compliance</span>
-        </div>
-        <div style="background: #FFFFFF; outline: 1px solid #D5DBE0; padding: 28px; display: flex; flex-direction: column; gap: 12px; opacity: 0.6;">
-          <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;">Coming soon · Network</span>
-          <h3 style="font-size: 19px; line-height: 26px; font-weight: 500; margin: 0;">Inside the Helmond facility: Europe's ITAD gateway</h3><span style="font-size: 12px; letter-spacing: 0.6px; color: #5A6874; margin-top: 2px;">Dave Owens &middot; SVP, Global Recycling</span>
-        </div>
-        <div style="background: #F5F6F7; outline: 1px solid #D5DBE0; padding: 28px; display: flex; flex-direction: column; gap: 12px; opacity: 0.6;">
-          <span style="font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: #5A6874;">Coming soon · Industries</span>
-          <h3 style="font-size: 19px; line-height: 26px; font-weight: 500; margin: 0;">Wind turbine recycling: the recovery math nobody publishes</h3><span style="font-size: 12px; letter-spacing: 0.6px; color: #5A6874; margin-top: 2px;">Luke Wray &middot; SVP, Critical Materials &amp; Defense</span>
-        </div>
-      </div>
+      <p class="pal-eyebrow pal-eyebrow--white" style="margin: 0;">More from Paladin</p>
+      <!-- Post list: key image, category, title, byline. When a post goes live,
+           wrap its contents in <a class="pal-post-link" href="..."> and drop the
+           "Coming soon" tag. -->
+      <ul class="pal-posts">
+        <li class="pal-post">
+          <div class="pal-post-img"><img src="assets/rare-earth.6212779e.webp" alt="Hard drives and circuit boards awaiting destruction" loading="lazy" decoding="async" /></div>
+          <div class="pal-post-txt">
+            <p class="pal-post-k"><span>Compliance</span><span class="pal-post-soon">Coming soon</span></p>
+            <h3 class="pal-post-t">What NIST 800&#8209;88 actually requires, and where providers cut corners</h3>
+            <p class="pal-post-m">Jen Rivero <span aria-hidden="true">&middot;</span> SVP, Compliance</p>
+          </div>
+        </li>
+        <li class="pal-post">
+          <div class="pal-post-img"><img src="assets/recycling-rare.62bf3d81.jpeg" alt="Technician sorting retired electronics on a processing line" loading="lazy" decoding="async" /></div>
+          <div class="pal-post-txt">
+            <p class="pal-post-k"><span>Network</span><span class="pal-post-soon">Coming soon</span></p>
+            <h3 class="pal-post-t">Inside the Helmond facility: Europe&#39;s ITAD gateway</h3>
+            <p class="pal-post-m">Dave Owens <span aria-hidden="true">&middot;</span> SVP, Global Recycling</p>
+          </div>
+        </li>
+        <li class="pal-post">
+          <div class="pal-post-img"><img src="assets/blade-tunnel.49bd97e1.webp" alt="Wind turbine blade section on display" loading="lazy" decoding="async" /></div>
+          <div class="pal-post-txt">
+            <p class="pal-post-k"><span>Industries</span><span class="pal-post-soon">Coming soon</span></p>
+            <h3 class="pal-post-t">Wind turbine recycling: the recovery math nobody publishes</h3>
+            <p class="pal-post-m">Luke Wray <span aria-hidden="true">&middot;</span> SVP, Critical Materials &amp; Defense</p>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
